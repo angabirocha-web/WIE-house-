@@ -30,24 +30,14 @@ body{
   color:var(--text);
 }
 
-/* LOGIN */
-
 #loginScreen{
   min-height:100vh;
   display:grid;
   place-items:center;
   padding:20px;
   background:
-    radial-gradient(
-      circle at 50% 10%,
-      #9b45e8 0,
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #10071a,
-      #5c1a94
-    );
+    radial-gradient(circle at 50% 10%,#9b45e8 0,transparent 35%),
+    linear-gradient(135deg,#10071a,#5c1a94);
 }
 
 .login-box{
@@ -121,8 +111,6 @@ body{
   margin-top:10px;
   min-height:18px;
 }
-
-/* APP */
 
 #app{
   display:none;
@@ -210,8 +198,6 @@ body{
   font-weight:bold;
 }
 
-/* PÁGINAS */
-
 .page{
   display:none;
 }
@@ -219,8 +205,6 @@ body{
 .page.active{
   display:block;
 }
-
-/* ESTATÍSTICAS */
 
 .stats{
   display:grid;
@@ -249,8 +233,6 @@ body{
   color:var(--muted);
 }
 
-/* TOOLBAR */
-
 .toolbar{
   display:flex;
   gap:10px;
@@ -276,8 +258,6 @@ body{
 .toolbar button:hover{
   background:var(--p2);
 }
-
-/* TABELAS */
 
 .table-wrap{
   overflow:auto;
@@ -331,8 +311,6 @@ td{
   color:#087443;
 }
 
-/* MODAL */
-
 .modal{
   display:none;
   position:fixed;
@@ -385,8 +363,6 @@ td{
   cursor:pointer;
 }
 
-/* CHAT */
-
 .chat{
   height:430px;
   overflow:auto;
@@ -411,8 +387,6 @@ td{
   flex:1;
   max-width:none!important;
 }
-
-/* RESPONSIVO */
 
 @media(max-width:800px){
 
@@ -470,9 +444,7 @@ td{
 
 <body>
 
-<!-- =========================
-     LOGIN
-========================= -->
+<!-- LOGIN -->
 
 <div id="loginScreen">
 
@@ -512,7 +484,6 @@ td{
       class="login-btn"
       id="loginButton"
       type="button"
-      onclick="doLogin()"
     >
       ENTRAR
     </button>
@@ -527,9 +498,7 @@ td{
 </div>
 
 
-<!-- =========================
-     PAINEL
-========================= -->
+<!-- PAINEL -->
 
 <div id="app">
 
@@ -540,67 +509,35 @@ td{
       <small>ADMINISTRAÇÃO</small>
     </div>
 
-    <button
-      class="nav active"
-      data-page="home"
-      type="button"
-    >
+    <button class="nav active" data-page="home" type="button">
       🏠 &nbsp; Home
     </button>
 
-    <button
-      class="nav"
-      data-page="requests"
-      type="button"
-    >
+    <button class="nav" data-page="requests" type="button">
       📋 &nbsp; Solicitações
     </button>
 
-    <button
-      class="nav"
-      data-page="vagas"
-      type="button"
-    >
+    <button class="nav" data-page="vagas" type="button">
       🎭 &nbsp; Vagas
     </button>
 
-    <button
-      class="nav"
-      data-page="members"
-      type="button"
-    >
+    <button class="nav" data-page="members" type="button">
       👥 &nbsp; Membros
     </button>
 
-    <button
-      class="nav"
-      data-page="admins"
-      type="button"
-    >
+    <button class="nav" data-page="admins" type="button">
       🛡️ &nbsp; ADMs
     </button>
 
-    <button
-      class="nav"
-      data-page="chat"
-      type="button"
-    >
+    <button class="nav" data-page="chat" type="button">
       💬 &nbsp; Chat
     </button>
 
-    <button
-      class="nav"
-      data-page="logs"
-      type="button"
-    >
+    <button class="nav" data-page="logs" type="button">
       📜 &nbsp; Logs
     </button>
 
-    <button
-      class="logout"
-      type="button"
-      onclick="logout()"
-    >
+    <button class="logout" id="logoutButton" type="button">
       ↪ &nbsp; Sair
     </button>
 
@@ -615,20 +552,14 @@ td{
         Dashboard
       </h1>
 
-      <div
-        class="role"
-        id="who"
-      ></div>
+      <div class="role" id="who"></div>
 
     </div>
 
 
     <!-- HOME -->
 
-    <section
-      id="home"
-      class="page active"
-    >
+    <section id="home" class="page active">
 
       <div class="stats">
 
@@ -654,7 +585,6 @@ td{
 
       </div>
 
-
       <div class="panel">
 
         <h2>
@@ -674,10 +604,7 @@ td{
 
     <!-- SOLICITAÇÕES -->
 
-    <section
-      id="requests"
-      class="page"
-    >
+    <section id="requests" class="page">
 
       <div class="toolbar">
 
@@ -694,7 +621,6 @@ td{
         <table>
 
           <thead>
-
             <tr>
               <th>Nome</th>
               <th>Idade</th>
@@ -702,11 +628,9 @@ td{
               <th>Status</th>
               <th>Ação</th>
             </tr>
-
           </thead>
 
-          <tbody id="reqTable">
-          </tbody>
+          <tbody id="reqTable"></tbody>
 
         </table>
 
@@ -717,17 +641,11 @@ td{
 
     <!-- VAGAS -->
 
-    <section
-      id="vagas"
-      class="page"
-    >
+    <section id="vagas" class="page">
 
       <div class="toolbar">
 
-        <button
-          type="button"
-          onclick="openVaga()"
-        >
+        <button id="newVagaButton" type="button">
           + Nova vaga
         </button>
 
@@ -738,17 +656,14 @@ td{
         <table>
 
           <thead>
-
             <tr>
               <th>Personagem</th>
               <th>Status</th>
               <th>Ações</th>
             </tr>
-
           </thead>
 
-          <tbody id="vagaTable">
-          </tbody>
+          <tbody id="vagaTable"></tbody>
 
         </table>
 
@@ -759,10 +674,7 @@ td{
 
     <!-- MEMBROS -->
 
-    <section
-      id="members"
-      class="page"
-    >
+    <section id="members" class="page">
 
       <div class="toolbar">
 
@@ -779,18 +691,15 @@ td{
         <table>
 
           <thead>
-
             <tr>
               <th>Nome</th>
               <th>Idade</th>
               <th>Personagem</th>
               <th>Ação</th>
             </tr>
-
           </thead>
 
-          <tbody id="memTable">
-          </tbody>
+          <tbody id="memTable"></tbody>
 
         </table>
 
@@ -801,10 +710,7 @@ td{
 
     <!-- ADMS -->
 
-    <section
-      id="admins"
-      class="page"
-    >
+    <section id="admins" class="page">
 
       <div class="panel">
 
@@ -821,17 +727,11 @@ td{
 
     <!-- CHAT -->
 
-    <section
-      id="chat"
-      class="page"
-    >
+    <section id="chat" class="page">
 
       <div class="panel">
 
-        <div
-          class="chat"
-          id="chatBox"
-        ></div>
+        <div class="chat" id="chatBox"></div>
 
         <div class="toolbar">
 
@@ -842,10 +742,7 @@ td{
             type="text"
           >
 
-          <button
-            type="button"
-            onclick="sendChat()"
-          >
+          <button id="sendChatButton" type="button">
             Enviar
           </button>
 
@@ -858,27 +755,21 @@ td{
 
     <!-- LOGS -->
 
-    <section
-      id="logs"
-      class="page"
-    >
+    <section id="logs" class="page">
 
       <div class="table-wrap">
 
         <table>
 
           <thead>
-
             <tr>
               <th>Data</th>
               <th>ADM</th>
               <th>Ação</th>
             </tr>
-
           </thead>
 
-          <tbody id="logTable">
-          </tbody>
+          <tbody id="logTable"></tbody>
 
         </table>
 
@@ -891,14 +782,9 @@ td{
 </div>
 
 
-<!-- =========================
-     MODAL DE VAGA
-========================= -->
+<!-- MODAL DE VAGA -->
 
-<div
-  class="modal"
-  id="vagaModal"
->
+<div class="modal" id="vagaModal">
 
   <div class="modal-box">
 
@@ -944,18 +830,11 @@ td{
 
     <div class="modal-actions">
 
-      <button
-        type="button"
-        onclick="closeVaga()"
-      >
+      <button id="cancelVagaButton" type="button">
         Cancelar
       </button>
 
-      <button
-        class="login-btn"
-        type="button"
-        onclick="saveVaga()"
-      >
+      <button class="login-btn" id="saveVagaButton" type="button">
         Salvar
       </button>
 
@@ -966,20 +845,17 @@ td{
 </div>
 
 
-<!-- =========================
-     FIREBASE
-========================= -->
+<!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 
 
 <script>
 
-/* =========================
+/* =====================================================
    CONFIGURAÇÃO FIREBASE
-========================= */
+===================================================== */
 
 const firebaseConfig = {
   apiKey: "AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
@@ -991,98 +867,55 @@ const firebaseConfig = {
 };
 
 
-/* =========================
-   VARIÁVEIS
-========================= */
-
-let db = null;
-let firebaseReady = false;
-
-let current = null;
-
-let reqs = [];
-let vagas = [];
-let members = [];
-
-let editingVaga = null;
-
-let listenersStarted = false;
-
-
-/* =========================
+/* =====================================================
    ELEMENTOS
-========================= */
+===================================================== */
 
-const loginScreen =
-  document.getElementById("loginScreen");
+const els = {
 
-const app =
-  document.getElementById("app");
+  loginScreen: document.getElementById("loginScreen"),
+  loginName: document.getElementById("loginName"),
+  loginPass: document.getElementById("loginPass"),
+  loginButton: document.getElementById("loginButton"),
+  loginError: document.getElementById("loginError"),
 
-const loginName =
-  document.getElementById("loginName");
+  app: document.getElementById("app"),
+  who: document.getElementById("who"),
+  pageTitle: document.getElementById("pageTitle"),
 
-const loginPass =
-  document.getElementById("loginPass");
+  reqSearch: document.getElementById("reqSearch"),
+  reqTable: document.getElementById("reqTable"),
 
-const loginButton =
-  document.getElementById("loginButton");
+  vagaTable: document.getElementById("vagaTable"),
+  newVagaButton: document.getElementById("newVagaButton"),
 
-const loginError =
-  document.getElementById("loginError");
+  memSearch: document.getElementById("memSearch"),
+  memTable: document.getElementById("memTable"),
 
-const who =
-  document.getElementById("who");
+  adminList: document.getElementById("adminList"),
 
-const pageTitle =
-  document.getElementById("pageTitle");
+  chatBox: document.getElementById("chatBox"),
+  chatInput: document.getElementById("chatInput"),
+  sendChatButton: document.getElementById("sendChatButton"),
 
-const reqSearch =
-  document.getElementById("reqSearch");
+  logTable: document.getElementById("logTable"),
 
-const reqTable =
-  document.getElementById("reqTable");
+  vagaModal: document.getElementById("vagaModal"),
+  modalTitle: document.getElementById("modalTitle"),
+  vagaPersonagem: document.getElementById("vagaPersonagem"),
+  vagaFoto: document.getElementById("vagaFoto"),
+  vagaStatus: document.getElementById("vagaStatus"),
+  cancelVagaButton: document.getElementById("cancelVagaButton"),
+  saveVagaButton: document.getElementById("saveVagaButton"),
 
-const vagaTable =
-  document.getElementById("vagaTable");
+  logoutButton: document.getElementById("logoutButton")
 
-const memSearch =
-  document.getElementById("memSearch");
-
-const memTable =
-  document.getElementById("memTable");
-
-const adminList =
-  document.getElementById("adminList");
-
-const chatBox =
-  document.getElementById("chatBox");
-
-const chatInput =
-  document.getElementById("chatInput");
-
-const logTable =
-  document.getElementById("logTable");
-
-const vagaModal =
-  document.getElementById("vagaModal");
-
-const modalTitle =
-  document.getElementById("modalTitle");
-
-const vagaPersonagem =
-  document.getElementById("vagaPersonagem");
-
-const vagaFoto =
-  document.getElementById("vagaFoto");
-
-const vagaStatus =
-  document.getElementById("vagaStatus");
+};
 
 
-/* =========================
+/* =====================================================
    ADMINISTRADORES
-========================= */
+===================================================== */
 
 const ADMINS = [
 
@@ -1113,9 +946,27 @@ const ADMINS = [
 ];
 
 
-/* =========================
-   ESCAPE HTML
-========================= */
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+let db = null;
+let firebaseReady = false;
+
+let current = null;
+
+let reqs = [];
+let vagas = [];
+let members = [];
+
+let editingVaga = null;
+
+let listenersStarted = false;
+
+
+/* =====================================================
+   ESCAPAR HTML
+===================================================== */
 
 function esc(value){
 
@@ -1124,14 +975,15 @@ function esc(value){
       /[&<>"']/g,
       function(match){
 
-        return {
+        const chars = {
           "&":"&amp;",
           "<":"&lt;",
           ">":"&gt;",
           '"':"&quot;",
           "'":"&#39;"
+        };
 
-        }[match];
+        return chars[match];
 
       }
     );
@@ -1139,61 +991,91 @@ function esc(value){
 }
 
 
-/* =========================
-   FIREBASE
-========================= */
+/* =====================================================
+   INICIAR FIREBASE
+===================================================== */
 
-try{
+function initFirebase(){
 
-  if(
-    typeof firebase !== "undefined"
-  ){
+  try{
 
-    firebase.initializeApp(
-      firebaseConfig
-    );
+    if(
+      typeof firebase === "undefined"
+    ){
 
-    db = firebase.firestore();
+      console.warn(
+        "Firebase não carregou."
+      );
+
+      return;
+
+    }
+
+
+    if(
+      firebase.apps &&
+      firebase.apps.length
+    ){
+
+      db = firebase.firestore();
+
+    }else{
+
+      firebase.initializeApp(
+        firebaseConfig
+      );
+
+      db = firebase.firestore();
+
+    }
+
 
     firebaseReady = true;
 
     console.log(
-      "Firebase conectado."
+      "House WIE: Firebase conectado."
+    );
+
+
+  }catch(error){
+
+    firebaseReady = false;
+
+    console.error(
+      "House WIE: erro ao conectar ao Firebase.",
+      error
     );
 
   }
 
-}catch(error){
-
-  firebaseReady = false;
-
-  console.error(
-    "Erro ao iniciar Firebase:",
-    error
-  );
-
 }
 
 
-/* =========================
+/* =====================================================
    LOGIN
-========================= */
+===================================================== */
 
 function doLogin(){
 
-  loginError.textContent = "";
+  els.loginError.textContent = "";
+
 
   const name =
-    loginName.value
+    els.loginName.value
       .trim()
       .toLowerCase();
 
+
   const password =
-    loginPass.value;
+    els.loginPass.value;
 
-  if(!name || !password){
 
-    loginError.textContent =
+  if(
+    name === "" ||
+    password === ""
+  ){
+
+    els.loginError.textContent =
       "Digite seu nome e sua senha.";
 
     return;
@@ -1202,45 +1084,55 @@ function doLogin(){
 
 
   const found =
-    ADMINS.find(function(admin){
+    ADMINS.find(
+      function(admin){
 
-      return (
-        admin.nome.toLowerCase() === name &&
-        admin.senha === password
-      );
+        return (
+          admin.nome.toLowerCase() === name &&
+          admin.senha === password
+        );
 
-    });
+      }
+    );
 
 
   if(!found){
 
-    loginError.textContent =
+    els.loginError.textContent =
       "Nome ou senha incorretos.";
 
-    loginPass.value = "";
+    els.loginPass.value = "";
+
+    els.loginPass.focus();
 
     return;
 
   }
 
 
-  current = found;
+  /* LOGIN CORRETO */
+
+  current = {
+    nome: found.nome,
+    senha: found.senha,
+    cargo: found.cargo
+  };
 
 
   sessionStorage.setItem(
     "wieAdmin",
-    JSON.stringify(found)
+    JSON.stringify(current)
   );
 
 
-  loginScreen.style.display =
+  els.loginScreen.style.display =
     "none";
 
-  app.style.display =
+  els.app.style.display =
     "block";
 
 
-  who.textContent =
+  els.who.textContent =
     found.nome +
     " • " +
     found.cargo;
@@ -1262,15 +1154,23 @@ function doLogin(){
 }
 
 
-/* =========================
-   ENTER NO LOGIN
-========================= */
+/* =====================================================
+   EVENTO DO BOTÃO DE LOGIN
+===================================================== */
 
-loginName.addEventListener(
+els.loginButton.addEventListener(
+  "click",
+  doLogin
+);
+
+
+els.loginName.addEventListener(
   "keydown",
   function(event){
 
     if(event.key === "Enter"){
+
+      event.preventDefault();
 
       doLogin();
 
@@ -1280,11 +1180,13 @@ loginName.addEventListener(
 );
 
 
-loginPass.addEventListener(
+els.loginPass.addEventListener(
   "keydown",
   function(event){
 
     if(event.key === "Enter"){
+
+      event.preventDefault();
 
       doLogin();
 
@@ -1294,13 +1196,16 @@ loginPass.addEventListener(
 );
 
 
-/* =========================
+/* =====================================================
    LOGOUT
-========================= */
+===================================================== */
 
 function logout(){
 
-  if(current && firebaseReady){
+  if(
+    current &&
+    firebaseReady
+  ){
 
     log(
       "Saiu do painel"
@@ -1308,26 +1213,36 @@ function logout(){
 
   }
 
+
   sessionStorage.removeItem(
     "wieAdmin"
   );
 
+
   current = null;
+
 
   location.reload();
 
 }
 
 
-/* =========================
-   REGISTRAR LOG
-========================= */
+els.logoutButton.addEventListener(
+  "click",
+  logout
+);
+
+
+/* =====================================================
+   LOG
+===================================================== */
 
 function log(action){
 
   if(
     !firebaseReady ||
-    !db
+    !db ||
+    !current
   ){
 
     return;
@@ -1339,12 +1254,10 @@ function log(action){
     .add({
 
       adm:
-        current?.nome ||
-        "Sistema",
+        current.nome,
 
       cargo:
-        current?.cargo ||
-        "",
+        current.cargo,
 
       acao:
         action,
@@ -1354,132 +1267,79 @@ function log(action){
           .serverTimestamp()
 
     })
-    .catch(function(error){
+    .catch(
+      function(error){
 
-      console.error(
-        "Erro ao registrar log:",
-        error
-      );
+        console.error(
+          "Erro ao registrar log:",
+          error
+        );
 
-    });
+      }
+    );
 
 }
 
 
-/* =========================
+/* =====================================================
    NAVEGAÇÃO
-========================= */
+===================================================== */
 
 document
   .querySelectorAll(".nav")
-  .forEach(function(button){
+  .forEach(
+    function(button){
 
-    button.addEventListener(
-      "click",
-      function(){
+      button.addEventListener(
+        "click",
+        function(){
 
-        document
-          .querySelectorAll(".nav")
-          .forEach(function(item){
+          document
+            .querySelectorAll(".nav")
+            .forEach(
+              function(item){
 
-            item.classList.remove(
-              "active"
+                item.classList.remove(
+                  "active"
+                );
+
+              }
             );
 
-          });
 
-
-        button.classList.add(
-          "active"
-        );
-
-
-        document
-          .querySelectorAll(".page")
-          .forEach(function(page){
-
-            page.classList.remove(
-              "active"
-            );
-
-          });
-
-
-        const page =
-          document.getElementById(
-            button.dataset.page
-          );
-
-
-        if(page){
-
-          page.classList.add(
+          button.classList.add(
             "active"
           );
 
-        }
+
+          document
+            .querySelectorAll(".page")
+            .forEach(
+              function(page){
+
+                page.classList.remove(
+                  "active"
+                );
+
+              }
+            );
 
 
-        pageTitle.textContent =
-          button.textContent
-            .replace(
-              /[^\p{L}\p{N}\s]/gu,
-              ""
-            )
-            .trim() ||
-          "Dashboard";
-
-      }
-
-    );
-
-  });
+          const page =
+            document.getElementById(
+              button.dataset.page
+            );
 
 
-/* =========================
-   CARREGAR DADOS
-========================= */
+          if(page){
 
-function loadAll(){
+            page.classList.add(
+              "active"
+            );
 
-  if(
-    !firebaseReady ||
-    !db
-  ){
-
-    return;
-
-  }
+          }
 
 
-  if(listenersStarted){
-
-    return;
-
-  }
-
-  listenersStarted = true;
-
-
-  /* SOLICITAÇÕES */
-
-  db.collection("requests")
-    .onSnapshot(
-
-      function(snapshot){
-
-        reqs =
-          snapshot.docs;
-
-        renderRequests();
-
-        document.getElementById(
-          "sReq"
-        ).textContent =
-          reqs.length;
-
-      },
-
-      function(error){
-
- 
+          els.pageTitle.textContent =
+            button.textContent
+          
