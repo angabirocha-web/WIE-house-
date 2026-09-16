@@ -1096,7 +1096,7 @@ td{
 
 
 /* =========================
-   VACANCIES
+   VAGAS
 ========================= */
 
 .vacancies-grid{
@@ -1537,16 +1537,16 @@ td{
 <body>
 
 
-<!-- FUNDO -->
-
 <div class="background">
 
     <div class="moon"></div>
 
     <div class="orb one"></div>
+
     <div class="orb two"></div>
 
     <div class="bat one">🦇</div>
+
     <div class="bat two">🦇</div>
 
 </div>
@@ -1573,7 +1573,6 @@ id="loginScreen">
         <p class="subtitle">
             Administração • Halloween Edition
         </p>
-
 
         <div class="field">
 
@@ -1614,7 +1613,6 @@ id="loginScreen">
                     class="eye"
                     id="eyeButton"
                     onclick="togglePassword()"
-                    aria-label="Mostrar senha"
                 >
                     👁
                 </button>
@@ -1652,431 +1650,427 @@ class="dashboard"
 id="dashboard">
 
 
-    <!-- SIDEBAR -->
+<aside class="sidebar">
 
-    <aside class="sidebar">
+    <div class="logo">
 
-        <div class="logo">
+        <strong>
+            WIE
+        </strong>
 
-            <strong>
-                WIE
+        <span>
+            ADMINISTRAÇÃO 🎃
+        </span>
+
+    </div>
+
+
+    <nav class="menu">
+
+        <button
+        class="active"
+        onclick="showPage('home',this)"
+        >
+            🏠 Início
+        </button>
+
+        <button
+        onclick="showPage('requests',this)"
+        >
+            📋 Solicitações
+        </button>
+
+        <button
+        onclick="showPage('members',this)"
+        >
+            👥 Membros
+        </button>
+
+        <button
+        onclick="showPage('vacancies',this)"
+        >
+            🎭 Vagas
+        </button>
+
+        <button
+        onclick="showPage('admins',this)"
+        >
+            👑 ADMs
+        </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="user-box">
+
+            <small>
+                Conectado como
+            </small>
+
+            <strong id="logged">
+                ADM
+            </strong>
+
+        </div>
+
+
+        <button
+        class="logout"
+        onclick="logout()"
+        >
+            Sair
+        </button>
+
+    </div>
+
+</aside>
+
+
+<main class="main">
+
+
+<!-- HOME -->
+
+<section
+class="page active"
+id="page-home">
+
+    <div class="page-header">
+
+        <h2>
+            Painel da House WIE 🎃
+        </h2>
+
+        <p>
+            Gerencie solicitações, membros e vagas da house.
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="icon">
+                📋
+            </div>
+
+            <strong id="statRequests">
+                0
             </strong>
 
             <span>
-                ADMINISTRAÇÃO 🎃
+                Solicitações
             </span>
 
         </div>
 
 
-        <nav class="menu">
+        <div class="stat">
 
-            <button
-            class="active"
-            onclick="showPage('home',this)"
-            >
-                🏠 Início
-            </button>
-
-            <button
-            onclick="showPage('requests',this)"
-            >
-                📋 Solicitações
-            </button>
-
-            <button
-            onclick="showPage('members',this)"
-            >
-                👥 Membros
-            </button>
-
-            <button
-            onclick="showPage('vacancies',this)"
-            >
-                🎭 Vagas
-            </button>
-
-            <button
-            onclick="showPage('admins',this)"
-            >
-                👑 ADMs
-            </button>
-
-        </nav>
-
-
-        <div class="sidebar-bottom">
-
-            <div class="user-box">
-
-                <small>
-                    Conectado como
-                </small>
-
-                <strong id="logged">
-                    ADM
-                </strong>
-
+            <div class="icon">
+                👥
             </div>
 
+            <strong id="statMembers">
+                0
+            </strong>
 
-            <button
-            class="logout"
-            onclick="logout()"
-            >
-                Sair
-            </button>
+            <span>
+                Membros
+            </span>
 
         </div>
 
-    </aside>
 
+        <div class="stat">
 
-    <!-- CONTEÚDO -->
-
-    <main class="main">
-
-
-        <!-- INÍCIO -->
-
-        <section
-        class="page active"
-        id="page-home">
-
-            <div class="page-header">
-
-                <h2>
-                    Painel da House WIE 🎃
-                </h2>
-
-                <p>
-                    Gerencie solicitações, membros e vagas da house.
-                </p>
-
+            <div class="icon">
+                🎭
             </div>
 
+            <strong id="statVacancies">
+                0
+            </strong>
 
-            <div class="stats">
+            <span>
+                Vagas
+            </span>
 
-                <div class="stat">
-
-                    <div class="icon">
-                        📋
-                    </div>
-
-                    <strong id="statRequests">
-                        0
-                    </strong>
-
-                    <span>
-                        Solicitações
-                    </span>
-
-                </div>
+        </div>
 
 
-                <div class="stat">
+        <div class="stat">
 
-                    <div class="icon">
-                        👥
-                    </div>
-
-                    <strong id="statMembers">
-                        0
-                    </strong>
-
-                    <span>
-                        Membros
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <div class="icon">
-                        🎭
-                    </div>
-
-                    <strong id="statVacancies">
-                        0
-                    </strong>
-
-                    <span>
-                        Vagas
-                    </span>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <div class="icon">
-                        👑
-                    </div>
-
-                    <strong id="statAdmins">
-                        0
-                    </strong>
-
-                    <span>
-                        ADMs
-                    </span>
-
-                </div>
-
+            <div class="icon">
+                👑
             </div>
 
+            <strong id="statAdmins">
+                0
+            </strong>
 
-            <div class="card">
+            <span>
+                ADMs
+            </span>
 
-                <div class="card-head">
+        </div>
 
-                    <h3>
-                        Resumo
-                    </h3>
+    </div>
 
-                </div>
 
-                <div class="empty">
+    <div class="card">
 
-                    <strong>
-                        Bem-vindo à administração da WIE! 🎃
-                    </strong>
+        <div class="card-head">
 
-                    Use o menu lateral para administrar a House.
+            <h3>
+                Resumo
+            </h3>
 
-                </div>
+        </div>
 
-            </div>
+        <div class="empty">
 
-        </section>
+            <strong>
+                Bem-vindo à administração da WIE! 🎃
+            </strong>
 
+            Use o menu lateral para administrar a House.
 
-        <!-- SOLICITAÇÕES -->
+        </div>
 
-        <section
-        class="page"
-        id="page-requests">
+    </div>
 
-            <div class="page-header">
+</section>
 
-                <h2>
-                    Solicitações
-                </h2>
 
-                <p>
-                    Veja e gerencie as solicitações recebidas pela recepção.
-                </p>
+<!-- SOLICITAÇÕES -->
 
-            </div>
+<section
+class="page"
+id="page-requests">
 
+    <div class="page-header">
 
-            <div class="card">
+        <h2>
+            Solicitações
+        </h2>
 
-                <div class="card-head">
+        <p>
+            Veja e gerencie as solicitações recebidas pela recepção.
+        </p>
 
-                    <h3>
-                        Solicitações recebidas
-                    </h3>
+    </div>
 
-                    <input
-                    class="search"
-                    id="requestSearch"
-                    type="search"
-                    placeholder="Pesquisar..."
-                    oninput="filterRequests()"
-                    >
 
-                </div>
+    <div class="card">
 
+        <div class="card-head">
 
-                <div id="requestError"></div>
+            <h3>
+                Solicitações recebidas
+            </h3>
 
+            <input
+            class="search"
+            id="requestSearch"
+            type="search"
+            placeholder="Pesquisar..."
+            oninput="filterRequests()"
+            >
 
-                <div class="table-wrap">
+        </div>
 
-                    <table>
 
-                        <thead>
+        <div id="requestError"></div>
 
-                            <tr>
 
-                                <th>
-                                    Foto
-                                </th>
+        <div class="table-wrap">
 
-                                <th>
-                                    Nome
-                                </th>
+            <table>
 
-                                <th>
-                                    Idade
-                                </th>
+                <thead>
 
-                                <th>
-                                    Personagem
-                                </th>
+                    <tr>
 
-                                <th>
-                                    Obra
-                                </th>
+                        <th>
+                            Foto
+                        </th>
 
-                                <th>
-                                    Status
-                                </th>
+                        <th>
+                            Nome
+                        </th>
 
-                                <th>
-                                    Ações
-                                </th>
+                        <th>
+                            Idade
+                        </th>
 
-                            </tr>
+                        <th>
+                            Personagem
+                        </th>
 
-                        </thead>
+                        <th>
+                            Obra
+                        </th>
 
+                        <th>
+                            Status
+                        </th>
 
-                        <tbody id="requestsTable">
-                        </tbody>
+                        <th>
+                            Ações
+                        </th>
 
-                    </table>
+                    </tr>
 
-                </div>
+                </thead>
 
-            </div>
 
-        </section>
+                <tbody id="requestsTable">
+                </tbody>
 
+            </table>
 
-        <!-- MEMBROS -->
+        </div>
 
-        <section
-        class="page"
-        id="page-members">
+    </div>
 
-            <div class="page-header">
+</section>
 
-                <h2>
-                    Membros
-                </h2>
 
-                <p>
-                    Membros aprovados pela administração.
-                </p>
+<!-- MEMBROS -->
 
-            </div>
+<section
+class="page"
+id="page-members">
 
+    <div class="page-header">
 
-            <div class="card">
+        <h2>
+            Membros
+        </h2>
 
-                <div class="card-head">
+        <p>
+            Membros aprovados pela administração.
+        </p>
 
-                    <h3>
-                        Membros cadastrados
-                    </h3>
+    </div>
 
-                    <input
-                    class="search"
-                    id="memberSearch"
-                    type="search"
-                    placeholder="Pesquisar..."
-                    oninput="filterMembers()"
-                    >
 
-                </div>
+    <div class="card">
 
+        <div class="card-head">
 
-                <div id="memberError"></div>
+            <h3>
+                Membros cadastrados
+            </h3>
 
+            <input
+            class="search"
+            id="memberSearch"
+            type="search"
+            placeholder="Pesquisar..."
+            oninput="filterMembers()"
+            >
 
-                <div
-                class="members-grid"
-                id="membersGrid">
-                </div>
+        </div>
 
-            </div>
 
-        </section>
+        <div id="memberError"></div>
 
 
-        <!-- VAGAS -->
+        <div
+        class="members-grid"
+        id="membersGrid">
+        </div>
 
-        <section
-        class="page"
-        id="page-vacancies">
+    </div>
 
-            <div class="page-header">
+</section>
 
-                <h2>
-                    Vagas
-                </h2>
 
-                <p>
-                    Personagens disponíveis e ocupados na House WIE.
-                </p>
+<!-- VAGAS -->
 
-            </div>
+<section
+class="page"
+id="page-vacancies">
 
+    <div class="page-header">
 
-            <div class="card">
+        <h2>
+            Vagas
+        </h2>
 
-                <div class="card-head">
+        <p>
+            Personagens disponíveis e ocupados na House WIE.
+        </p>
 
-                    <h3>
-                        Vagas cadastradas
-                    </h3>
+    </div>
 
-                    <input
-                    class="search"
-                    id="vacancySearch"
-                    type="search"
-                    placeholder="Pesquisar..."
-                    oninput="filterVacancies()"
-                    >
 
-                </div>
+    <div class="card">
 
+        <div class="card-head">
 
-                <div id="vacancyError"></div>
+            <h3>
+                Vagas cadastradas
+            </h3>
 
+            <input
+            class="search"
+            id="vacancySearch"
+            type="search"
+            placeholder="Pesquisar..."
+            oninput="filterVacancies()"
+            >
 
-                <div
-                class="vacancies-grid"
-                id="vacanciesGrid">
-                </div>
+        </div>
 
-            </div>
 
-        </section>
+        <div id="vacancyError"></div>
 
 
-        <!-- ADMS -->
+        <div
+        class="vacancies-grid"
+        id="vacanciesGrid">
+        </div>
 
-        <section
-        class="page"
-        id="page-admins">
+    </div>
 
-            <div class="page-header">
+</section>
 
-                <h2>
-                    Administradores
-                </h2>
 
-                <p>
-                    Equipe responsável pela administração da House WIE.
-                </p>
+<!-- ADMS -->
 
-            </div>
+<section
+class="page"
+id="page-admins">
 
+    <div class="page-header">
 
-            <div
-            class="admin-grid"
-            id="adminGrid">
-            </div>
+        <h2>
+            Administradores
+        </h2>
 
-        </section>
+        <p>
+            Equipe responsável pela administração da House WIE.
+        </p>
 
+    </div>
 
-    </main>
+
+    <div
+    class="admin-grid"
+    id="adminGrid">
+    </div>
+
+</section>
+
+
+</main>
 
 </section>
 
@@ -2086,10 +2080,6 @@ class="toast"
 id="toast">
 </div>
 
-
-<!-- =========================
-     FIREBASE + SISTEMA
-========================= -->
 
 <script type="module">
 
@@ -2113,9 +2103,9 @@ from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* ==========================================
+/* =========================
    FIREBASE
-========================================== */
+========================= */
 
 const firebaseConfig = {
 
@@ -2143,43 +2133,54 @@ const firebaseConfig = {
 const app =
 initializeApp(firebaseConfig);
 
-
 const db =
 getFirestore(app);
 
 
-/* ==========================================
-   ADMS
-========================================== */
+/* =========================
+   ADMINS
+========================= */
 
 const ADMINS = {
 
     "Gojo": {
+
         password:"2707alex",
+
         role:"Dono da House"
+
     },
 
     "Tamsy": {
+
         password:"1010ka3l",
+
         role:"Sub dono da House"
+
     },
 
     "Oliver": {
+
         password:"2315oliver",
+
         role:"ADM"
+
     },
 
     "Chuuya": {
+
         password:"0734chu3ya",
+
         role:"ADM"
+
     }
 
 };
 
 
-/* ==========================================
+/* =========================
    DADOS
-========================================== */
+========================= */
 
 let requestsData = [];
 
@@ -2188,9 +2189,9 @@ let membersData = [];
 let vacanciesData = [];
 
 
-/* ==========================================
+/* =========================
    LOGIN
-========================================== */
+========================= */
 
 window.login = function(){
 
@@ -2295,9 +2296,9 @@ window.login = function(){
 };
 
 
-/* ==========================================
-   SENHA
-========================================== */
+/* =========================
+   MOSTRAR SENHA
+========================= */
 
 window.togglePassword = function(){
 
@@ -2308,7 +2309,9 @@ window.togglePassword = function(){
     document.getElementById("eyeButton");
 
 
-    if(password.type === "password"){
+    if(
+        password.type === "password"
+    ){
 
         password.type = "text";
 
@@ -2325,26 +2328,31 @@ window.togglePassword = function(){
 };
 
 
-/* ==========================================
+/* =========================
    LOGOUT
-========================================== */
+========================= */
 
 window.logout = function(){
 
-    sessionStorage.removeItem("wieAdmin");
+    sessionStorage.removeItem(
+        "wieAdmin"
+    );
 
-    sessionStorage.removeItem("wieRole");
+    sessionStorage.removeItem(
+        "wieRole"
+    );
 
     location.reload();
 
 };
 
 
-/* ==========================================
+/* =========================
    PÁGINAS
-========================================== */
+========================= */
 
-window.showPage = function(page,button){
+window.showPage =
+function(page,button){
 
     document
     .querySelectorAll(".page")
@@ -2384,11 +2392,14 @@ window.showPage = function(page,button){
 };
 
 
-/* ==========================================
+/* =========================
    TOAST
-========================================== */
+========================= */
 
-function toast(message,type="success"){
+function toast(
+    message,
+    type="success"
+){
 
     const element =
     document.getElementById("toast");
@@ -2421,9 +2432,9 @@ function toast(message,type="success"){
 }
 
 
-/* ==========================================
-   ESCAPAR HTML
-========================================== */
+/* =========================
+   SEGURANÇA HTML
+========================= */
 
 function safe(value){
 
@@ -2438,18 +2449,64 @@ function safe(value){
 
 
     return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
 
-/* ==========================================
+/* =========================
+   NORMALIZAÇÃO
+   USADA PARA ENCONTRAR
+   A VAGA CORRESPONDENTE
+========================= */
+
+function normalizar(value){
+
+    return String(
+        value || ""
+    )
+    .normalize("NFD")
+    .replace(
+        /[\u0300-\u036f]/g,
+        ""
+    )
+    .toLowerCase()
+    .trim()
+    .replace(
+        /\s+/g,
+        " "
+    );
+
+}
+
+
+/* =========================
    STATUS
-========================================== */
+========================= */
 
 function statusClass(status){
 
@@ -2503,9 +2560,9 @@ function statusText(status){
 }
 
 
-/* ==========================================
-   CARREGAR DADOS
-========================================== */
+/* =========================
+   CARREGAR TUDO
+========================= */
 
 async function loadData(){
 
@@ -2525,9 +2582,9 @@ async function loadData(){
 }
 
 
-/* ==========================================
-   REQUESTS
-========================================== */
+/* =========================
+   SOLICITAÇÕES
+========================= */
 
 async function loadRequests(){
 
@@ -2535,7 +2592,10 @@ async function loadRequests(){
 
         const snapshot =
         await getDocs(
-            collection(db,"requests")
+            collection(
+                db,
+                "requests"
+            )
         );
 
 
@@ -2556,7 +2616,6 @@ async function loadRequests(){
     }catch(error){
 
         console.error(
-            "Erro ao carregar solicitações:",
             error
         );
 
@@ -2597,8 +2656,8 @@ function renderRequests(
                             Nenhuma solicitação encontrada.
                         </strong>
 
-                        Quando alguém preencher a recepção,
-                        aparecerá aqui.
+                        Quando alguém preencher
+                        a recepção, aparecerá aqui.
 
                     </div>
 
@@ -2631,6 +2690,7 @@ function renderRequests(
             const photoHTML =
             photo
             ?
+
             `
 
                 <img
@@ -2642,7 +2702,9 @@ function renderRequests(
                 >
 
             `
+
             :
+
             `
 
                 <div class="no-photo">
@@ -2776,12 +2838,15 @@ function renderRequestsError(
 }
 
 
-/* ==========================================
+/* =========================
    APROVAR / RECUSAR
-========================================== */
+========================= */
 
 window.changeRequest =
-async function(id,status){
+async function(
+    id,
+    status
+){
 
     try{
 
@@ -2809,12 +2874,18 @@ async function(id,status){
             );
 
             return;
+
         }
 
 
         const data =
         requestSnapshot.data();
 
+
+        /*
+         * PRIMEIRO:
+         * altera o status da solicitação
+         */
 
         await updateDoc(
             requestRef,
@@ -2824,9 +2895,19 @@ async function(id,status){
         );
 
 
+        /*
+         * SE APROVADO:
+         * cria o membro
+         * e fecha a vaga correspondente
+         */
+
         if(
             status === "aprovado"
         ){
+
+            /* =========================
+               CRIAR MEMBRO
+            ========================= */
 
             await setDoc(
                 doc(
@@ -2867,29 +2948,197 @@ async function(id,status){
                 }
             );
 
+
+            /* =========================
+               FECHAR VAGA
+            ========================= */
+
+            const personagemSolicitado =
+            normalizar(
+                data.personagem
+            );
+
+
+            const obraSolicitada =
+            normalizar(
+                data.obra
+            );
+
+
+            /*
+             * Busca todas as vagas cadastradas.
+             */
+
+            const vacanciesSnapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "vacancies"
+                )
+            );
+
+
+            let vagaEncontrada = null;
+
+
+            vacanciesSnapshot.forEach(
+                vacancyDoc => {
+
+                    const vaga =
+                    vacancyDoc.data();
+
+
+                    const personagemVaga =
+                    normalizar(
+                        vaga.personagem
+                    );
+
+
+                    const obraVaga =
+                    normalizar(
+                        vaga.obra
+                    );
+
+
+                    /*
+                     * Primeiro tenta
+                     * personagem + obra.
+                     */
+
+                    if(
+                        personagemSolicitado &&
+                        obraSolicitada &&
+                        personagemVaga ===
+                        personagemSolicitado &&
+                        obraVaga ===
+                        obraSolicitada
+                    ){
+
+                        vagaEncontrada =
+                        vacancyDoc;
+
+                    }
+
+                }
+            );
+
+
+            /*
+             * Se não encontrou com
+             * personagem + obra,
+             * tenta somente personagem.
+             *
+             * Isso ajuda caso alguma
+             * vaga antiga não tenha
+             * o campo "obra".
+             */
+
+            if(!vagaEncontrada){
+
+                vacanciesSnapshot.forEach(
+                    vacancyDoc => {
+
+                        const vaga =
+                        vacancyDoc.data();
+
+
+                        const personagemVaga =
+                        normalizar(
+                            vaga.personagem
+                        );
+
+
+                        if(
+                            personagemSolicitado &&
+                            personagemVaga ===
+                            personagemSolicitado
+                        ){
+
+                            vagaEncontrada =
+                            vacancyDoc;
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            /*
+             * Só atualiza se a vaga
+             * realmente existir.
+             *
+             * Não cria vaga nova.
+             */
+
+            if(vagaEncontrada){
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "vacancies",
+                        vagaEncontrada.id
+                    ),
+
+                    {
+                        status:"fechada",
+
+                        ocupada:true,
+
+                        membro:
+                        data.nome ||
+                        "",
+
+                        requestId:
+                        id
+
+                    }
+
+                );
+
+
+                toast(
+                    "Solicitação aprovada e vaga fechada! 🎃",
+                    "success"
+                );
+
+            }else{
+
+                /*
+                 * A aprovação continua funcionando,
+                 * mas avisa que não encontrou uma
+                 * vaga correspondente.
+                 */
+
+                toast(
+                    "Solicitação aprovada! A vaga correspondente não foi encontrada.",
+                    "success"
+                );
+
+            }
+
+        }else{
+
+            toast(
+                "Solicitação recusada.",
+                "error"
+            );
+
         }
 
 
-        toast(
-
-            status === "aprovado"
-            ?
-            "Solicitação aprovada! 🎃"
-            :
-            "Solicitação recusada.",
-
-            status === "aprovado"
-            ?
-            "success"
-            :
-            "error"
-
-        );
-
+        /*
+         * Recarrega tudo para a mudança
+         * aparecer imediatamente.
+         */
 
         await loadRequests();
 
         await loadMembers();
+
+        await loadVacancies();
 
         updateStats();
 
@@ -2912,9 +3161,9 @@ async function(id,status){
 };
 
 
-/* ==========================================
-   MEMBERS
-========================================== */
+/* =========================
+   MEMBROS
+========================= */
 
 async function loadMembers(){
 
@@ -2946,7 +3195,6 @@ async function loadMembers(){
     }catch(error){
 
         console.error(
-            "Erro ao carregar membros:",
             error
         );
 
@@ -2998,6 +3246,7 @@ function renderMembers(
         `;
 
         return;
+
     }
 
 
@@ -3014,6 +3263,7 @@ function renderMembers(
             const photoHTML =
             photo
             ?
+
             `
 
                 <img
@@ -3025,7 +3275,9 @@ function renderMembers(
                 >
 
             `
+
             :
+
             `
 
                 <div class="no-photo">
@@ -3086,9 +3338,9 @@ function renderMembers(
 }
 
 
-/* ==========================================
-   VACANCIES
-========================================== */
+/* =========================
+   VAGAS
+========================= */
 
 async function loadVacancies(){
 
@@ -3120,7 +3372,6 @@ async function loadVacancies(){
     }catch(error){
 
         console.error(
-            "Erro ao carregar vagas:",
             error
         );
 
@@ -3165,14 +3416,14 @@ function renderVacancies(
                     Nenhuma vaga cadastrada.
                 </strong>
 
-                As vagas cadastradas no Firestore
-                aparecerão aqui.
+                As vagas cadastradas no Firestore aparecerão aqui.
 
             </div>
 
         `;
 
         return;
+
     }
 
 
@@ -3186,17 +3437,31 @@ function renderVacancies(
             "";
 
 
+            /*
+             * Qualquer status diferente
+             * de "fechada" continua aberta.
+             */
+
             const status =
-            data.status === "fechada"
-            ?
+            String(
+                data.status ||
+                ""
+            ).toLowerCase() ===
             "fechada"
+
+            ?
+
+            "fechada"
+
             :
+
             "aberta";
 
 
             const imageHTML =
             image
             ?
+
             `
 
                 <img
@@ -3209,7 +3474,9 @@ function renderVacancies(
                 >
 
             `
+
             :
+
             `
 
                 <div class="vacancy-no-image">
@@ -3244,12 +3511,47 @@ function renderVacancies(
 
                         </div>
 
+
                         <p>
                             ${safe(
                                 data.obra ||
                                 "Obra não informada"
                             )}
                         </p>
+
+
+                        ${
+                            status === "fechada"
+                            ?
+
+                            `
+
+                                <p
+                                style="
+                                color:#ff718d;
+                                font-weight:bold;
+                                "
+                                >
+                                    🔒 Personagem ocupado
+                                </p>
+
+                            `
+
+                            :
+
+                            `
+
+                                <p
+                                style="
+                                color:#61e6a4;
+                                font-weight:bold;
+                                "
+                                >
+                                    🟢 Personagem disponível
+                                </p>
+
+                            `
+                        }
 
                     </div>
 
@@ -3263,9 +3565,9 @@ function renderVacancies(
 }
 
 
-/* ==========================================
-   ADM GRID
-========================================== */
+/* =========================
+   ADMINS
+========================= */
 
 function renderAdmins(){
 
@@ -3334,9 +3636,9 @@ function renderAdmins(){
 }
 
 
-/* ==========================================
+/* =========================
    STATS
-========================================== */
+========================= */
 
 function updateStats(){
 
@@ -3368,9 +3670,9 @@ function updateStats(){
 }
 
 
-/* ==========================================
-   PESQUISA
-========================================== */
+/* =========================
+   FILTRO SOLICITAÇÕES
+========================= */
 
 window.filterRequests =
 function(){
@@ -3378,7 +3680,8 @@ function(){
     const term =
     document.getElementById(
         "requestSearch"
-    ).value
+    )
+    .value
     .toLowerCase()
     .trim();
 
@@ -3419,13 +3722,18 @@ function(){
 };
 
 
+/* =========================
+   FILTRO MEMBROS
+========================= */
+
 window.filterMembers =
 function(){
 
     const term =
     document.getElementById(
         "memberSearch"
-    ).value
+    )
+    .value
     .toLowerCase()
     .trim();
 
@@ -3464,13 +3772,18 @@ function(){
 };
 
 
+/* =========================
+   FILTRO VAGAS
+========================= */
+
 window.filterVacancies =
 function(){
 
     const term =
     document.getElementById(
         "vacancySearch"
-    ).value
+    )
+    .value
     .toLowerCase()
     .trim();
 
@@ -3507,9 +3820,9 @@ function(){
 };
 
 
-/* ==========================================
+/* =========================
    RESTAURAR LOGIN
-========================================== */
+========================= */
 
 const savedAdmin =
 sessionStorage.getItem(
