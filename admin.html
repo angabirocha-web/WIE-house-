@@ -151,6 +151,40 @@ border-color:var(--purple);
 
 }
 
+.password-wrap{
+
+position:relative;
+
+}
+
+.password-wrap input{
+
+padding-right:48px;
+
+}
+
+.show-password{
+
+position:absolute;
+
+right:8px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+border:0;
+
+background:transparent;
+
+cursor:pointer;
+
+font-size:18px;
+
+padding:5px;
+
+}
+
 .login-btn{
 
 width:100%;
@@ -176,6 +210,14 @@ margin-top:8px;
 .login-btn:hover{
 
 background:var(--purple2);
+
+}
+
+.login-btn:disabled{
+
+opacity:.6;
+
+cursor:not-allowed;
 
 }
 
@@ -463,6 +505,12 @@ cursor:pointer;
 
 }
 
+.toolbar button:hover{
+
+background:var(--purple2);
+
+}
+
 
 /* =========================
 TABLE
@@ -523,6 +571,12 @@ border:0;
 border-radius:9px;
 
 cursor:pointer;
+
+}
+
+.small:hover{
+
+opacity:.8;
 
 }
 
@@ -624,6 +678,14 @@ cursor:pointer;
 
 }
 
+.modal-actions .login-btn{
+
+width:auto;
+
+margin-top:0;
+
+}
+
 
 /* =========================
 CHAT
@@ -660,6 +722,31 @@ margin:8px 0;
 .msg b{
 
 color:var(--purple);
+
+}
+
+
+/* =========================
+ESTADOS
+========================= */
+
+.empty{
+
+padding:25px;
+
+text-align:center;
+
+color:var(--muted);
+
+}
+
+.loading{
+
+padding:20px;
+
+text-align:center;
+
+color:var(--muted);
 
 }
 
@@ -779,7 +866,7 @@ Painel da Administração
 </div>
 
 
-<label>
+<label for="loginName">
 
 Nome do ADM
 
@@ -788,25 +875,43 @@ Nome do ADM
 <input
 id="loginName"
 placeholder="Digite seu nome"
+autocomplete="username"
 >
 
 
-<label>
+<label for="loginPass">
 
 Senha
 
 </label>
 
+<div class="password-wrap">
+
 <input
 id="loginPass"
 type="password"
 placeholder="Digite sua senha"
+autocomplete="current-password"
 >
+
+<button
+type="button"
+class="show-password"
+onclick="togglePassword()"
+id="passwordToggle"
+>
+
+👁️
+
+</button>
+
+</div>
 
 
 <button
 class="login-btn"
 onclick="login()"
+id="loginButton"
 >
 
 ENTRAR
@@ -1092,6 +1197,20 @@ oninput="renderRequests()"
 id="reqTable"
 >
 
+<tr>
+
+<td colspan="5">
+
+<div class="loading">
+
+Carregando solicitações...
+
+</div>
+
+</td>
+
+</tr>
+
 </tbody>
 
 </table>
@@ -1149,6 +1268,20 @@ onclick="openVaga()"
 id="vagaTable"
 >
 
+<tr>
+
+<td colspan="3">
+
+<div class="loading">
+
+Carregando vagas...
+
+</div>
+
+</td>
+
+</tr>
+
 </tbody>
 
 </table>
@@ -1205,6 +1338,20 @@ oninput="renderMembers()"
 <tbody
 id="memTable"
 >
+
+<tr>
+
+<td colspan="4">
+
+<div class="loading">
+
+Carregando membros...
+
+</div>
+
+</td>
+
+</tr>
 
 </tbody>
 
@@ -1265,6 +1412,12 @@ class="chat"
 id="chatBox"
 >
 
+<div class="empty">
+
+Carregando chat...
+
+</div>
+
 </div>
 
 
@@ -1273,6 +1426,7 @@ id="chatBox"
 <input
 id="chatInput"
 placeholder="Digite uma mensagem..."
+onkeydown="if(event.key==='Enter') sendChat()"
 >
 
 
@@ -1326,6 +1480,20 @@ class="page"
 id="logTable"
 >
 
+<tr>
+
+<td colspan="3">
+
+<div class="loading">
+
+Carregando logs...
+
+</div>
+
+</td>
+
+</tr>
+
 </tbody>
 
 </table>
@@ -1364,7 +1532,7 @@ Nova vaga
 </h2>
 
 
-<label>
+<label for="vagaPersonagem">
 
 Personagem
 
@@ -1372,10 +1540,11 @@ Personagem
 
 <input
 id="vagaPersonagem"
+placeholder="Nome do personagem"
 >
 
 
-<label>
+<label for="vagaFoto">
 
 Foto do personagem
 
@@ -1387,7 +1556,7 @@ placeholder="URL da imagem"
 >
 
 
-<label>
+<label for="vagaStatus">
 
 Status
 
@@ -1453,6 +1622,10 @@ FIREBASE
 <script>
 
 
+/* =========================
+FIREBASE
+========================= */
+
 const firebaseConfig = {
 
 apiKey:
@@ -1484,19 +1657,9 @@ firebase.firestore();
 
 
 
-/*
-=========================
-ADMINISTRAÇÃO
-=========================
-
-Acesso visual inicial.
-
-Gojo = Dono
-Tamsy = Sub-dono
-Oliver = ADM
-Chuuya = ADM
-*/
-
+/* =========================
+ADMINISTRADORES
+========================= */
 
 const ADMINS = [
 
@@ -1527,6 +1690,15 @@ cargo:"ADM"
 ];
 
 
+const CARGOS_PERMITIDOS = [
+
+"Dono",
+"Sub-dono",
+"ADM"
+
+];
+
+
 let current = null;
 
 let requests = [];
@@ -1537,9 +1709,13 @@ let members = [];
 
 let editingVaga = null;
 
+let listenersStarted = false;
 
 
-/* ESCAPE */
+
+/* =========================
+ESCAPE
+========================= */
 
 function esc(value){
 
@@ -1562,7 +1738,40 @@ return {
 
 
 
-/* LOGIN */
+/* =========================
+MOSTRAR / OCULTAR SENHA
+========================= */
+
+function togglePassword(){
+
+const input =
+document.getElementById("loginPass");
+
+const button =
+document.getElementById("passwordToggle");
+
+
+if(input.type === "password"){
+
+input.type = "text";
+
+button.textContent = "🙈";
+
+}else{
+
+input.type = "password";
+
+button.textContent = "👁️";
+
+}
+
+}
+
+
+
+/* =========================
+LOGIN
+========================= */
 
 function login(){
 
@@ -1577,25 +1786,43 @@ document
 const senha =
 document
 .getElementById("loginPass")
-.value;
+.value
+.trim();
 
+
+const erro =
+document
+.getElementById("loginError");
+
+
+/*
+IMPORTANTE:
+o return fica dentro dos parênteses
+para evitar o erro de quebra de linha
+do código anterior.
+*/
 
 const adm =
 ADMINS.find(function(a){
 
-return
-a.nome.toLowerCase() === nome
-&&
-a.senha === senha;
+return (
+
+a.nome.toLowerCase() === nome &&
+
+a.senha === senha &&
+
+CARGOS_PERMITIDOS.includes(
+a.cargo
+)
+
+);
 
 });
 
 
 if(!adm){
 
-document
-.getElementById("loginError")
-.textContent =
+erro.textContent =
 "Nome ou senha incorretos.";
 
 return;
@@ -1603,12 +1830,18 @@ return;
 }
 
 
+erro.textContent = "";
+
+
 current = adm;
 
 
 sessionStorage.setItem(
+
 "wieAdmin",
+
 JSON.stringify(adm)
+
 );
 
 
@@ -1627,6 +1860,7 @@ document
 document
 .getElementById("who")
 .textContent =
+
 `${adm.nome} • ${adm.cargo}`;
 
 
@@ -1641,7 +1875,44 @@ log(
 
 
 
-/* LOGOUT */
+/* =========================
+ENTER NO LOGIN
+========================= */
+
+document
+.getElementById("loginName")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Enter"){
+
+login();
+
+}
+
+});
+
+
+document
+.getElementById("loginPass")
+.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Enter"){
+
+login();
+
+}
+
+});
+
+
+
+/* =========================
+LOGOUT
+========================= */
 
 function logout(){
 
@@ -1655,7 +1926,9 @@ location.reload();
 
 
 
-/* NAVEGAÇÃO */
+/* =========================
+NAVEGAÇÃO
+========================= */
 
 document
 .querySelectorAll(".nav")
@@ -1668,33 +1941,47 @@ document
 .querySelectorAll(".nav")
 .forEach(function(item){
 
-item.classList.remove("active");
+item.classList.remove(
+"active"
+);
 
 });
 
 
-button.classList.add("active");
+button.classList.add(
+"active"
+);
 
 
 document
 .querySelectorAll(".page")
 .forEach(function(page){
 
-page.classList.remove("active");
+page.classList.remove(
+"active"
+);
 
 });
 
 
 document
-.getElementById(button.dataset.page)
-.classList.add("active");
+.getElementById(
+button.dataset.page
+)
+.classList.add(
+"active"
+);
 
 
 document
 .getElementById("pageTitle")
 .textContent =
+
 button.textContent
-.replace(/[^\p{L}\p{N}\s]/gu,"")
+.replace(
+/[^\p{L}\p{N}\s]/gu,
+""
+)
 .trim();
 
 };
@@ -1703,7 +1990,9 @@ button.textContent
 
 
 
-/* LOGS */
+/* =========================
+LOG
+========================= */
 
 function log(acao){
 
@@ -1711,7 +2000,8 @@ if(!current)
 return;
 
 
-db.collection("logs")
+db
+.collection("logs")
 .add({
 
 adm:current.nome,
@@ -1721,15 +2011,20 @@ cargo:current.cargo,
 acao:acao,
 
 criadoEm:
+
 firebase
 .firestore
 .FieldValue
 .serverTimestamp()
 
 })
+
 .catch(function(error){
 
-console.error(error);
+console.error(
+"Erro ao registrar log:",
+error
+);
 
 });
 
@@ -1737,81 +2032,149 @@ console.error(error);
 
 
 
-/* CARREGAR DADOS */
+/* =========================
+CARREGAR DADOS
+========================= */
 
 function loadAll(){
+
+if(listenersStarted)
+return;
+
+listenersStarted = true;
+
 
 
 /* REQUESTS */
 
-db.collection("requests")
-.onSnapshot(function(snapshot){
+db
+.collection("requests")
+.onSnapshot(
+
+function(snapshot){
 
 requests =
 snapshot.docs;
 
 renderRequests();
 
+
 document
 .getElementById("sReq")
 .textContent =
 requests.length;
 
-});
+},
+
+function(error){
+
+console.error(
+"Erro nas solicitações:",
+error
+);
+
+}
+
+);
 
 
 
 /* VAGAS */
 
-db.collection("vagas")
-.onSnapshot(function(snapshot){
+db
+.collection("vagas")
+.onSnapshot(
+
+function(snapshot){
 
 vagas =
 snapshot.docs;
 
 renderVagas();
 
+
 document
 .getElementById("sChars")
 .textContent =
-vagas.filter(function(doc){
+vagas.length;
 
-return doc.data().status === "fechada";
+},
 
-}).length;
+function(error){
 
-});
+console.error(
+"Erro nas vagas:",
+error
+);
+
+}
+
+);
 
 
 
 /* MEMBERS */
 
-db.collection("members")
-.onSnapshot(function(snapshot){
+db
+.collection("members")
+.onSnapshot(
+
+function(snapshot){
 
 members =
 snapshot.docs;
 
 renderMembers();
 
+
 document
 .getElementById("sMembers")
 .textContent =
 members.length;
 
-});
+},
+
+function(error){
+
+console.error(
+"Erro nos membros:",
+error
+);
+
+}
+
+);
 
 
 
 /* CHAT */
 
-db.collection("chat")
-.orderBy("criadoEm","asc")
-.onSnapshot(function(snapshot){
+db
+.collection("chat")
+.orderBy(
+"criadoEm",
+"asc"
+)
+.onSnapshot(
 
+function(snapshot){
+
+const box =
 document
-.getElementById("chatBox")
-.innerHTML =
+.getElementById("chatBox");
+
+
+if(snapshot.empty){
+
+box.innerHTML =
+'<div class="empty">Nenhuma mensagem ainda.</div>';
+
+return;
+
+}
+
+
+box.innerHTML =
 
 snapshot.docs
 .map(function(doc){
@@ -1819,17 +2182,24 @@ snapshot.docs
 const data =
 doc.data();
 
+
 return `
 
 <div class="msg">
 
 <b>
-${esc(data.adm)}
+
+${esc(
+data.adm || "ADM"
+)}
+
 </b>
 
 <br>
 
-${esc(data.texto)}
+${esc(
+data.texto || ""
+)}
 
 </div>
 
@@ -1838,20 +2208,65 @@ ${esc(data.texto)}
 })
 .join("");
 
-});
+
+box.scrollTop =
+box.scrollHeight;
+
+},
+
+function(error){
+
+console.error(
+"Erro no chat:",
+error
+);
+
+}
+
+);
 
 
 
 /* LOGS */
 
-db.collection("logs")
-.orderBy("criadoEm","desc")
+db
+.collection("logs")
+.orderBy(
+"criadoEm",
+"desc"
+)
 .limit(50)
-.onSnapshot(function(snapshot){
+.onSnapshot(
 
+function(snapshot){
+
+const table =
 document
-.getElementById("logTable")
-.innerHTML =
+.getElementById("logTable");
+
+
+if(snapshot.empty){
+
+table.innerHTML = `
+
+<tr>
+
+<td colspan="3">
+
+Nenhum registro.
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+table.innerHTML =
 
 snapshot.docs
 .map(function(doc){
@@ -1859,29 +2274,49 @@ snapshot.docs
 const data =
 doc.data();
 
+
 const date =
+
 data.criadoEm &&
 data.criadoEm.toDate
+
 ?
-data.criadoEm.toDate()
-.toLocaleString("pt-BR")
+
+data.criadoEm
+.toDate()
+.toLocaleString(
+"pt-BR"
+)
+
 :
+
 "—";
+
 
 return `
 
 <tr>
 
 <td>
-${date}
+
+${esc(date)}
+
 </td>
 
 <td>
-${esc(data.adm)}
+
+${esc(
+data.adm || ""
+)}
+
 </td>
 
 <td>
-${esc(data.acao)}
+
+${esc(
+data.acao || ""
+)}
+
 </td>
 
 </tr>
@@ -1891,11 +2326,22 @@ ${esc(data.acao)}
 })
 .join("");
 
-});
+},
+
+function(error){
+
+console.error(
+"Erro nos logs:",
+error
+);
+
+}
+
+);
 
 
 
-/* ADM LIST */
+/* LISTA DE ADMS */
 
 document
 .getElementById("adminList")
@@ -1908,18 +2354,27 @@ return `
 
 <div
 class="panel"
-style="margin:10px 0;padding:15px"
+style="
+margin:10px 0;
+padding:15px;
+"
 >
 
 <b>
-${esc(adm.nome)}
+
+${esc(
+adm.nome
+)}
+
 </b>
 
 <br>
 
 <span class="muted">
 
-${esc(adm.cargo)}
+${esc(
+adm.cargo
+)}
 
 </span>
 
@@ -1929,6 +2384,12 @@ ${esc(adm.cargo)}
 
 })
 .join("");
+
+
+document
+.getElementById("sAdmins")
+.textContent =
+ADMINS.length;
 
 }
 
@@ -1941,6 +2402,7 @@ SOLICITAÇÕES
 function renderRequests(){
 
 const search =
+
 (
 document
 .getElementById("reqSearch")
@@ -1952,14 +2414,22 @@ document
 
 
 const filtered =
-requests.filter(function(doc){
+
+requests.filter(
+function(doc){
 
 const data =
 doc.data();
 
+
 return (
 
-`${data.nome} ${data.personagem}`
+`${data.nome || ""} ${
+data.personagem || ""
+} ${
+data.status || ""
+}`
+
 )
 .toLowerCase()
 .includes(search);
@@ -1977,24 +2447,41 @@ filtered
 const data =
 doc.data();
 
+
 return `
 
 <tr>
 
 <td>
-${esc(data.nome)}
+
+${esc(
+data.nome
+)}
+
 </td>
 
 <td>
-${esc(data.idade)}
+
+${esc(
+data.idade
+)}
+
 </td>
 
 <td>
-${esc(data.personagem)}
+
+${esc(
+data.personagem
+)}
+
 </td>
 
 <td>
-${esc(data.status)}
+
+${esc(
+data.status
+)}
+
 </td>
 
 <td>
@@ -2015,675 +2502,6 @@ Aprovar
 
 </button>
 
-
 <button
 class="small danger"
-onclick="rejectRequest('${doc.id}')"
->
-
-Recusar
-
-</button>
-
-`
-
-:
-
-"—"
-
-}
-
-</td>
-
-</tr>
-
-`;
-
-})
-.join("")
-
-||
-
-`
-
-<tr>
-
-<td colspan="5">
-
-Nenhuma solicitação encontrada.
-
-</td>
-
-</tr>
-
-`;
-
-}
-
-
-
-/* APROVAR */
-
-async function approve(id){
-
-const doc =
-requests.find(function(item){
-
-return item.id === id;
-
-});
-
-
-if(!doc)
-return;
-
-
-const data =
-doc.data();
-
-
-await db
-.collection("requests")
-.doc(id)
-.update({
-
-status:"aprovada"
-
-});
-
-
-await db
-.collection("members")
-.add({
-
-nome:data.nome,
-
-idade:data.idade,
-
-personagem:data.personagem,
-
-foto:data.foto || "",
-
-criadoEm:
-firebase
-.firestore
-.FieldValue
-.serverTimestamp()
-
-});
-
-
-log(
-"Aprovou a solicitação de " +
-data.nome
-);
-
-}
-
-
-
-/* RECUSAR */
-
-async function rejectRequest(id){
-
-await db
-.collection("requests")
-.doc(id)
-.update({
-
-status:"recusada"
-
-});
-
-
-log(
-"Recusou uma solicitação"
-);
-
-}
-
-
-
-/* =========================
-VAGAS
-========================= */
-
-function renderVagas(){
-
-document
-.getElementById("vagaTable")
-.innerHTML =
-
-vagas
-.map(function(doc){
-
-const data =
-doc.data();
-
-return `
-
-<tr>
-
-<td>
-
-${esc(data.personagem)}
-
-</td>
-
-<td>
-
-${esc(data.status)}
-
-</td>
-
-<td>
-
-
-<button
-class="small"
-onclick="editVaga('${doc.id}')"
->
-
-Editar
-
-</button>
-
-
-<button
-class="small danger"
-onclick="deleteVaga('${doc.id}')"
->
-
-Excluir
-
-</button>
-
-
-</td>
-
-</tr>
-
-`;
-
-})
-.join("")
-
-||
-
-`
-
-<tr>
-
-<td colspan="3">
-
-Nenhuma vaga cadastrada.
-
-</td>
-
-</tr>
-
-`;
-
-}
-
-
-
-/* NOVA VAGA */
-
-function openVaga(){
-
-editingVaga = null;
-
-
-document
-.getElementById("modalTitle")
-.textContent =
-"Nova vaga";
-
-
-document
-.getElementById("vagaPersonagem")
-.value =
-"";
-
-
-document
-.getElementById("vagaFoto")
-.value =
-"";
-
-
-document
-.getElementById("vagaStatus")
-.value =
-"aberta";
-
-
-document
-.getElementById("vagaModal")
-.classList.add("show");
-
-}
-
-
-
-/* EDITAR VAGA */
-
-function editVaga(id){
-
-const doc =
-vagas.find(function(item){
-
-return item.id === id;
-
-});
-
-
-if(!doc)
-return;
-
-
-const data =
-doc.data();
-
-
-editingVaga = id;
-
-
-document
-.getElementById("modalTitle")
-.textContent =
-"Editar vaga";
-
-
-document
-.getElementById("vagaPersonagem")
-.value =
-data.personagem || "";
-
-
-document
-.getElementById("vagaFoto")
-.value =
-data.foto || "";
-
-
-document
-.getElementById("vagaStatus")
-.value =
-data.status || "aberta";
-
-
-document
-.getElementById("vagaModal")
-.classList.add("show");
-
-}
-
-
-
-/* FECHAR MODAL */
-
-function closeVaga(){
-
-document
-.getElementById("vagaModal")
-.classList.remove("show");
-
-}
-
-
-
-/* SALVAR VAGA */
-
-async function saveVaga(){
-
-const personagem =
-document
-.getElementById("vagaPersonagem")
-.value
-.trim();
-
-
-const foto =
-document
-.getElementById("vagaFoto")
-.value
-.trim();
-
-
-const status =
-document
-.getElementById("vagaStatus")
-.value;
-
-
-if(!personagem){
-
-alert(
-"Digite o nome do personagem."
-);
-
-return;
-
-}
-
-
-const data = {
-
-personagem:personagem,
-
-foto:foto,
-
-status:status,
-
-atualizadoEm:
-firebase
-.firestore
-.FieldValue
-.serverTimestamp()
-
-};
-
-
-if(editingVaga){
-
-await db
-.collection("vagas")
-.doc(editingVaga)
-.update(data);
-
-
-log(
-"Editou a vaga " +
-personagem
-);
-
-}else{
-
-await db
-.collection("vagas")
-.add({
-
-...data,
-
-criadoEm:
-firebase
-.firestore
-.FieldValue
-.serverTimestamp()
-
-});
-
-
-log(
-"Criou a vaga " +
-personagem
-);
-
-}
-
-
-closeVaga();
-
-}
-
-
-
-/* EXCLUIR VAGA */
-
-async function deleteVaga(id){
-
-if(
-!confirm(
-"Tem certeza que deseja excluir esta vaga?"
-)
-)
-return;
-
-
-await db
-.collection("vagas")
-.doc(id)
-.delete();
-
-
-log(
-"Excluiu uma vaga"
-);
-
-}
-
-
-
-/* =========================
-MEMBROS
-========================= */
-
-function renderMembers(){
-
-const search =
-(
-document
-.getElementById("memSearch")
-.value
-||
-""
-)
-.toLowerCase();
-
-
-const filtered =
-members.filter(function(doc){
-
-const data =
-doc.data();
-
-return (
-
-`${data.nome} ${data.personagem}`
-)
-.toLowerCase()
-.includes(search);
-
-});
-
-
-document
-.getElementById("memTable")
-.innerHTML =
-
-filtered
-.map(function(doc){
-
-const data =
-doc.data();
-
-return `
-
-<tr>
-
-<td>
-
-${esc(data.nome)}
-
-</td>
-
-<td>
-
-${esc(data.idade)}
-
-</td>
-
-<td>
-
-${esc(data.personagem)}
-
-</td>
-
-<td>
-
-<button
-class="small danger"
-onclick="deleteMember('${doc.id}')"
->
-
-Excluir
-
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-})
-.join("")
-
-||
-
-`
-
-<tr>
-
-<td colspan="4">
-
-Nenhum membro encontrado.
-
-</td>
-
-</tr>
-
-`;
-
-}
-
-
-
-/* EXCLUIR MEMBRO */
-
-async function deleteMember(id){
-
-if(
-!confirm(
-"Tem certeza que deseja excluir este membro?"
-)
-)
-return;
-
-
-await db
-.collection("members")
-.doc(id)
-.delete();
-
-
-log(
-"Excluiu um membro"
-);
-
-}
-
-
-
-/* =========================
-CHAT
-========================= */
-
-async function sendChat(){
-
-const input =
-document
-.getElementById("chatInput");
-
-
-const texto =
-input
-.value
-.trim();
-
-
-if(!texto)
-return;
-
-
-await db
-.collection("chat")
-.add({
-
-adm:current.nome,
-
-cargo:current.cargo,
-
-texto:texto,
-
-criadoEm:
-firebase
-.firestore
-.FieldValue
-.serverTimestamp()
-
-});
-
-
-input.value = "";
-
-}
-
-
-
-/* =========================
-MANTER LOGIN
-========================= */
-
-const saved =
-sessionStorage.getItem(
-"wieAdmin"
-);
-
-
-if(saved){
-
-try{
-
-current =
-JSON.parse(saved);
-
-
-document
-.getElementById("login")
-.style.display =
-"none";
-
-
-document
-.getElementById("app")
-.style.display =
-"block";
-
-
-document
-.getElementById("who")
-.textContent =
-`${current.nome} • ${current.cargo}`;
-
-
-loadAll();
-
-
-}catch(error){
-
-sessionStorage.removeItem(
-"wieAdmin"
-);
-
-}
-
-}
-
-</script>
-
-</body>
-
-  </html>
+onclick="rejectRequest('${doc.id}'
