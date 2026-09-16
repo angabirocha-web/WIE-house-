@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>House WIE • Administração</title>
 
@@ -20,7 +19,6 @@ content="width=device-width, initial-scale=1.0">
     --purple:#8b5cf6;
     --purple2:#b98aff;
     --yellow:#ffd84d;
-    --yellow2:#fff0a6;
     --red:#ff4d6d;
     --green:#55e6a5;
     --text:#f7f1ff;
@@ -45,6 +43,11 @@ body{
     min-height:100vh;
 }
 
+button,
+input{
+    font-family:inherit;
+}
+
 /* =========================
    LOGIN
 ========================= */
@@ -60,7 +63,7 @@ body{
 .login-box{
     width:100%;
     max-width:420px;
-    background:rgba(20,11,32,.95);
+    background:rgba(20,11,32,.96);
     border:1px solid var(--border);
     border-radius:25px;
     padding:35px 28px;
@@ -79,7 +82,6 @@ body{
     justify-content:center;
     font-size:28px;
     font-weight:900;
-    color:white;
     box-shadow:0 0 35px rgba(139,92,246,.3);
 }
 
@@ -150,7 +152,6 @@ body{
 
 .login-btn:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(139,92,246,.25);
 }
 
 .login-error{
@@ -272,18 +273,10 @@ body{
     cursor:pointer;
 }
 
-/* =========================
-   MAIN
-========================= */
-
 .main{
     margin-left:245px;
     padding:28px;
     min-height:100vh;
-}
-
-.mobile-top{
-    display:none;
 }
 
 .page{
@@ -310,6 +303,12 @@ body{
     color:var(--muted);
     font-size:13px;
     margin-top:5px;
+}
+
+.header-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
 }
 
 .refresh-btn,
@@ -394,6 +393,25 @@ body{
 }
 
 /* =========================
+   SEARCH
+========================= */
+
+.search{
+    width:100%;
+    padding:13px 15px;
+    background:#0c0712;
+    border:1px solid var(--border);
+    border-radius:12px;
+    outline:none;
+    color:white;
+    margin-bottom:15px;
+}
+
+.search:focus{
+    border-color:var(--purple);
+}
+
+/* =========================
    TABLE
 ========================= */
 
@@ -404,7 +422,7 @@ body{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:850px;
+    min-width:900px;
 }
 
 th{
@@ -420,6 +438,7 @@ td{
     padding:13px 12px;
     border-bottom:1px solid rgba(255,255,255,.05);
     font-size:13px;
+    vertical-align:middle;
 }
 
 td strong{
@@ -467,7 +486,7 @@ td strong{
 
 .action{
     border:0;
-    padding:7px 9px;
+    padding:8px 10px;
     border-radius:8px;
     cursor:pointer;
     font-size:11px;
@@ -484,23 +503,14 @@ td strong{
     color:#ff8198;
 }
 
-/* =========================
-   SEARCH
-========================= */
-
-.search{
-    width:100%;
-    padding:13px 15px;
-    background:#0c0712;
-    border:1px solid var(--border);
-    border-radius:12px;
-    outline:none;
-    color:white;
-    margin-bottom:15px;
+.edit{
+    background:rgba(139,92,246,.13);
+    color:var(--purple2);
 }
 
-.search:focus{
-    border-color:var(--purple);
+.delete{
+    background:rgba(255,255,255,.07);
+    color:#d5c9df;
 }
 
 /* =========================
@@ -544,7 +554,7 @@ td strong{
 ========================= */
 
 .vacancy-section{
-    margin-bottom:28px;
+    margin-bottom:30px;
 }
 
 .section-title{
@@ -579,9 +589,7 @@ td strong{
     height:150px;
     object-fit:cover;
     display:block;
-    background:
-        radial-gradient(circle at center,rgba(139,92,246,.25),transparent 50%),
-        #0d0715;
+    background:#0d0715;
 }
 
 .vacancy-placeholder{
@@ -674,6 +682,108 @@ td strong{
 }
 
 /* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(5px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:200;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:480px;
+    background:#140b20;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:23px;
+    box-shadow:var(--shadow);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.modal-header h2{
+    font-size:19px;
+}
+
+.close-modal{
+    width:35px;
+    height:35px;
+    border:0;
+    border-radius:10px;
+    background:rgba(255,255,255,.07);
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:6px;
+}
+
+.form-group input{
+    width:100%;
+    padding:12px 13px;
+    border-radius:11px;
+    border:1px solid var(--border);
+    background:#0c0712;
+    color:white;
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:var(--purple);
+}
+
+.modal-actions{
+    display:flex;
+    gap:8px;
+    justify-content:flex-end;
+    margin-top:20px;
+}
+
+.modal-btn{
+    border:0;
+    padding:11px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:800;
+}
+
+.cancel-btn{
+    background:rgba(255,255,255,.07);
+    color:white;
+}
+
+.save-btn{
+    background:var(--purple);
+    color:white;
+}
+
+/* =========================
    TOAST
 ========================= */
 
@@ -687,13 +797,13 @@ td strong{
     padding:13px 17px;
     border-radius:13px;
     box-shadow:var(--shadow);
-    z-index:100;
+    z-index:300;
     opacity:0;
     pointer-events:none;
     transform:translateY(15px);
     transition:.25s;
     font-size:13px;
-    max-width:320px;
+    max-width:330px;
 }
 
 .toast.show{
@@ -790,6 +900,14 @@ td strong{
         grid-template-columns:1fr;
     }
 
+    .header-buttons{
+        width:100%;
+    }
+
+    .header-buttons button{
+        flex:1;
+    }
+
 }
 
 </style>
@@ -797,6 +915,7 @@ td strong{
 </head>
 
 <body>
+
 
 <!-- =========================
      LOGIN
@@ -961,6 +1080,7 @@ td strong{
 
     <main class="main">
 
+
         <!-- =====================
              HOME
         ====================== -->
@@ -1007,7 +1127,7 @@ td strong{
                     </div>
 
                     <div class="stat-label">
-                        Solicitações
+                        Pendentes
                     </div>
 
                 </div>
@@ -1034,7 +1154,7 @@ td strong{
                 <div class="stat">
 
                     <div class="stat-icon">
-                        🎭
+                        🔒
                     </div>
 
                     <div
@@ -1074,16 +1194,23 @@ td strong{
             <div class="card">
 
                 <div class="card-title">
-                    🕯️ Status da administração
+                    🕯️ Como funciona
                 </div>
 
-                <p style="color:var(--muted);font-size:13px;line-height:1.7;">
+                <p style="color:var(--muted);font-size:13px;line-height:1.8;">
 
-                    As solicitações enviadas pela recepção aparecem
-                    automaticamente em <b style="color:white;">Solicitações</b>.
-                    Quando uma ficha é aprovada, a personagem é registrada
-                    como ocupada e aparece automaticamente em
-                    <b style="color:var(--red);">Vagas Fechadas</b>.
+                    As fichas enviadas pela recepção aparecem em
+                    <b style="color:white;">Solicitações</b>.
+                    Ao clicar em <b style="color:var(--green);">Aprovar</b>,
+                    o sistema cria o membro e coloca automaticamente
+                    a personagem em
+                    <b style="color:#ff8198;">Vagas Fechadas</b>.
+
+                    <br><br>
+
+                    Depois de aprovar ou recusar, a ficha sai da lista
+                    de pendentes, mas continua salva no Firestore para
+                    manter o histórico.
 
                 </p>
 
@@ -1108,7 +1235,7 @@ td strong{
                     <h1>📩 Solicitações</h1>
 
                     <p>
-                        Fichas recebidas pela recepção.
+                        Aqui aparecem somente as fichas pendentes.
                     </p>
 
                 </div>
@@ -1151,9 +1278,7 @@ td strong{
 
                         </thead>
 
-                        <tbody id="requestsBody">
-
-                        </tbody>
+                        <tbody id="requestsBody"></tbody>
 
                     </table>
 
@@ -1230,7 +1355,7 @@ td strong{
 
                 </div>
 
-                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <div class="header-buttons">
 
                     <button
                         class="sync-btn"
@@ -1250,8 +1375,6 @@ td strong{
 
             </div>
 
-
-            <!-- ABERTAS -->
 
             <div class="vacancy-section">
 
@@ -1273,8 +1396,6 @@ td strong{
             </div>
 
 
-            <!-- FECHADAS -->
-
             <div class="vacancy-section">
 
                 <div class="section-title">
@@ -1282,7 +1403,7 @@ td strong{
                     🔒 Vagas fechadas
 
                     <small>
-                        personagens já ocupados
+                        personagens ocupados
                     </small>
 
                 </div>
@@ -1327,20 +1448,123 @@ td strong{
 
         </section>
 
+
     </main>
 
 </div>
 
+
+<!-- =========================
+     EDIT MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="editModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>✏️ Editar solicitação</h2>
+
+            <button
+                class="close-modal"
+                onclick="closeEditModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <input
+            type="hidden"
+            id="editId"
+        >
+
+
+        <div class="form-group">
+
+            <label>Nome</label>
+
+            <input
+                id="editNome"
+                type="text"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Idade</label>
+
+            <input
+                id="editIdade"
+                type="text"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Personagem</label>
+
+            <input
+                id="editPersonagem"
+                type="text"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Obra</label>
+
+            <input
+                id="editObra"
+                type="text"
+            >
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="modal-btn cancel-btn"
+                onclick="closeEditModal()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="modal-btn save-btn"
+                onclick="saveEdit()"
+            >
+                Salvar alterações
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TOAST
+========================= -->
 
 <div
     class="toast"
     id="toast"
 ></div>
 
-
-<!-- =========================
-     FIREBASE
-========================= -->
 
 <script type="module">
 
@@ -1349,11 +1573,13 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
+
 import {
     getFirestore,
     collection,
     getDocs,
     updateDoc,
+    deleteDoc,
     doc,
     setDoc,
     getDoc,
@@ -1363,7 +1589,7 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* =========================
-   FIREBASE CONFIG
+   FIREBASE
 ========================= */
 
 const firebaseConfig = {
@@ -1491,17 +1717,6 @@ function toast(message,type="success"){
 }
 
 
-function imagemOuVazio(foto){
-
-    if(!foto){
-        return "";
-    }
-
-    return String(foto);
-
-}
-
-
 /* =========================
    LOGIN
 ========================= */
@@ -1513,6 +1728,7 @@ window.togglePassword = function(){
 
     const eye =
         document.getElementById("eye");
+
 
     if(input.type === "password"){
 
@@ -1540,12 +1756,14 @@ window.login = function(){
         document.getElementById("loginPassword")
         .value;
 
+
     const foundName =
         Object.keys(ADMINS).find(
             name =>
                 normalizar(name) ===
                 normalizar(nameInput)
         );
+
 
     if(
         foundName &&
@@ -1585,23 +1803,31 @@ function openApp(){
         "loginScreen"
     ).style.display = "none";
 
+
     document.getElementById(
         "app"
     ).style.display = "block";
 
+
     const admin =
         sessionStorage.getItem("wieAdmin");
+
 
     const role =
         sessionStorage.getItem("wieRole");
 
+
     document.getElementById(
         "loggedAdmin"
-    ).textContent = admin || "ADM";
+    ).textContent =
+        admin || "ADM";
+
 
     document.getElementById(
         "loggedRole"
-    ).textContent = role || "ADM";
+    ).textContent =
+        role || "ADM";
+
 
     loadAll();
 
@@ -1630,15 +1856,18 @@ window.showPage = function(page,button){
             el.classList.remove("active");
         });
 
+
     document
         .getElementById("page-"+page)
         .classList.add("active");
+
 
     document
         .querySelectorAll(".nav button")
         .forEach(el=>{
             el.classList.remove("active");
         });
+
 
     if(button){
         button.classList.add("active");
@@ -1654,10 +1883,13 @@ window.showPage = function(page,button){
 async function loadAll(){
 
     await Promise.all([
+
         loadRequests(),
         loadMembers(),
         loadVacancies()
+
     ]);
+
 
     renderAdmins();
     updateStats();
@@ -1689,6 +1921,7 @@ async function loadRequests(){
                 collection(db,"requests")
             );
 
+
         requestsData =
             snapshot.docs.map(item=>({
 
@@ -1697,8 +1930,10 @@ async function loadRequests(){
 
             }));
 
+
         renderRequests();
         updateStats();
+
 
     }catch(error){
 
@@ -1724,6 +1959,7 @@ async function(){
 
 /* =========================
    RENDER REQUESTS
+   SOMENTE PENDENTES
 ========================= */
 
 window.renderRequests = function(){
@@ -1733,6 +1969,7 @@ window.renderRequests = function(){
             "requestsBody"
         );
 
+
     const search =
         normalizar(
             document.getElementById(
@@ -1740,8 +1977,25 @@ window.renderRequests = function(){
             )?.value
         );
 
+
     const filtered =
         requestsData.filter(data=>{
+
+            const status =
+                normalizar(data.status);
+
+
+            /* SÓ MOSTRA PENDENTES */
+
+            if(
+                status &&
+                status !== "pendente"
+            ){
+
+                return false;
+
+            }
+
 
             const text =
                 normalizar(
@@ -1753,9 +2007,11 @@ window.renderRequests = function(){
                     ].join(" ")
                 );
 
+
             return text.includes(search);
 
         });
+
 
     if(!filtered.length){
 
@@ -1771,7 +2027,7 @@ window.renderRequests = function(){
                             📭
                         </div>
 
-                        Nenhuma solicitação encontrada.
+                        Nenhuma solicitação pendente.
 
                     </div>
 
@@ -1789,11 +2045,9 @@ window.renderRequests = function(){
     body.innerHTML =
         filtered.map(data=>{
 
-            const status =
-                normalizar(data.status);
-
             const foto =
-                imagemOuVazio(data.foto);
+                data.foto || "";
+
 
             return `
 
@@ -1815,75 +2069,74 @@ window.renderRequests = function(){
 
                     </td>
 
+
                     <td>
+
                         <strong>
                             ${safe(data.nome)}
                         </strong>
+
                     </td>
+
 
                     <td>
                         ${safe(data.idade)}
                     </td>
 
+
                     <td>
                         ${safe(data.personagem)}
                     </td>
+
 
                     <td>
                         ${safe(data.obra)}
                     </td>
 
+
                     <td>
 
-                        <span class="status ${safe(status)}">
-
-                            ${
-                                status === "aprovado"
-                                ? "✓ Aprovado"
-                                :
-                                status === "recusado"
-                                ? "✕ Recusado"
-                                :
-                                "⏳ Pendente"
-                            }
-
+                        <span class="status pendente">
+                            ⏳ Pendente
                         </span>
 
                     </td>
+
 
                     <td>
 
                         <div class="actions">
 
-                            ${
-                                status !== "aprovado"
-                                ?
-                                `
-                                <button
-                                    class="action approve"
-                                    onclick="changeRequest('${safe(data.id)}','aprovado')"
-                                >
-                                    ✓ Aprovar
-                                </button>
-                                `
-                                :
-                                ""
-                            }
+                            <button
+                                class="action edit"
+                                onclick="openEditModal('${safe(data.id)}')"
+                            >
+                                ✏️ Editar
+                            </button>
 
-                            ${
-                                status !== "recusado"
-                                ?
-                                `
-                                <button
-                                    class="action reject"
-                                    onclick="changeRequest('${safe(data.id)}','recusado')"
-                                >
-                                    ✕ Recusar
-                                </button>
-                                `
-                                :
-                                ""
-                            }
+
+                            <button
+                                class="action approve"
+                                onclick="changeRequest('${safe(data.id)}','aprovado')"
+                            >
+                                ✓ Aprovar
+                            </button>
+
+
+                            <button
+                                class="action reject"
+                                onclick="changeRequest('${safe(data.id)}','recusado')"
+                            >
+                                ✕ Recusar
+                            </button>
+
+
+                            <button
+                                class="action delete"
+                                onclick="deleteRequest('${safe(data.id)}')"
+                            >
+                                🗑️ Apagar
+                            </button>
 
                         </div>
 
@@ -1899,7 +2152,7 @@ window.renderRequests = function(){
 
 
 /* =========================
-   APPROVE / REJECT
+   APROVAR / RECUSAR
 ========================= */
 
 window.changeRequest =
@@ -1910,8 +2163,10 @@ async function(id,status){
         const requestRef =
             doc(db,"requests",id);
 
+
         const requestSnapshot =
             await getDoc(requestRef);
+
 
         if(!requestSnapshot.exists()){
 
@@ -1924,63 +2179,72 @@ async function(id,status){
 
         }
 
+
         const data =
             requestSnapshot.data();
 
 
-        /* ALTERA STATUS */
-
-        await updateDoc(
-            requestRef,
-            {
-                status:status
-            }
-        );
-
-
-        /* =========================
-           APROVADO
-        ========================= */
+        /* =====================
+           APROVAR
+        ===================== */
 
         if(status === "aprovado"){
 
-            /* -------------------------
-               CRIA MEMBRO
-            ------------------------- */
-
             const memberData = {
 
-                nome:data.nome || "",
-                idade:data.idade || "",
-                personagem:data.personagem || "",
-                obra:data.obra || "",
-                foto:data.foto || "",
-                requestId:id,
+                nome:
+                    data.nome || "",
+
+                idade:
+                    data.idade || "",
+
+                personagem:
+                    data.personagem || "",
+
+                obra:
+                    data.obra || "",
+
+                foto:
+                    data.foto || "",
+
+                requestId:
+                    id,
+
                 criadoEm:
-                    data.criadoEm || serverTimestamp()
+                    data.criadoEm ||
+                    serverTimestamp()
 
             };
 
 
+            /* CRIA MEMBRO */
+
             await setDoc(
-                doc(db,"members",id),
+
+                doc(
+                    db,
+                    "members",
+                    id
+                ),
+
                 memberData,
+
                 {
                     merge:true
                 }
+
             );
 
 
-            /* -------------------------
-               PROCURA VAGA EXISTENTE
-            ------------------------- */
+            /* =====================
+               PROCURA VAGA
+            ===================== */
 
             const vacanciesSnapshot =
                 await getDocs(
                     collection(db,"vacancies")
                 );
 
-            let existingVacancy = null;
 
             const characterKey =
                 data.characterKey ||
@@ -1990,10 +2254,14 @@ async function(id,status){
                 );
 
 
+            let existingVacancy = null;
+
+
             vacanciesSnapshot.forEach(item=>{
 
                 const vacancy =
                     item.data();
+
 
                 const vacancyKey =
                     vacancy.characterKey ||
@@ -2001,6 +2269,7 @@ async function(id,status){
                         vacancy.personagem,
                         vacancy.obra
                     );
+
 
                 if(
                     vacancyKey === characterKey
@@ -2018,9 +2287,9 @@ async function(id,status){
             });
 
 
-            /* -------------------------
+            /* =====================
                FECHA VAGA EXISTENTE
-            ------------------------- */
+            ===================== */
 
             if(existingVacancy){
 
@@ -2059,7 +2328,10 @@ async function(id,status){
                             data.foto || "",
 
                         imagem:
-                            existingVacancy.data.imagem || ""
+                            existingVacancy.data.imagem || "",
+
+                        atualizadoEm:
+                            serverTimestamp()
 
                     }
 
@@ -2067,10 +2339,10 @@ async function(id,status){
 
             }
 
-            /* -------------------------
+
+            /* =====================
                CRIA VAGA FECHADA
-               SE NÃO EXISTIR
-            ------------------------- */
+            ===================== */
 
             else{
 
@@ -2121,22 +2393,52 @@ async function(id,status){
             }
 
 
+            /* ATUALIZA STATUS */
+
+            await updateDoc(
+
+                requestRef,
+
+                {
+                    status:"aprovado",
+                    aprovadoEm:
+                        serverTimestamp()
+                }
+
+            );
+
+
             toast(
-                "Solicitação aprovada! A personagem foi adicionada às vagas fechadas."
+                "✓ Aprovado! A personagem foi para Vagas Fechadas."
             );
 
         }
 
 
-        /* =========================
-           RECUSADO
-        ========================= */
+        /* =====================
+           RECUSAR
+        ===================== */
 
-        else{
+        else if(status === "recusado"){
+
+            await updateDoc(
+
+                requestRef,
+
+                {
+
+                    status:"recusado",
+
+                    recusadoEm:
+                        serverTimestamp()
+
+                }
+
+            );
+
 
             toast(
-                "Solicitação recusada.",
-                "error"
+                "Solicitação recusada."
             );
 
         }
@@ -2156,8 +2458,249 @@ async function(id,status){
             error
         );
 
+
         toast(
             "Não foi possível alterar a solicitação. Verifique as regras do Firestore.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   APAGAR SOLICITAÇÃO
+========================= */
+
+window.deleteRequest =
+async function(id){
+
+    const confirmar =
+        confirm(
+            "Tem certeza que deseja apagar esta solicitação?\n\nEssa ação não poderá ser desfeita."
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "requests",
+                id
+            )
+
+        );
+
+
+        requestsData =
+            requestsData.filter(
+                item => item.id !== id
+            );
+
+
+        renderRequests();
+        updateStats();
+
+
+        toast(
+            "🗑️ Solicitação apagada."
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        toast(
+            "Não foi possível apagar a solicitação.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   EDITAR SOLICITAÇÃO
+========================= */
+
+window.openEditModal =
+function(id){
+
+    const data =
+        requestsData.find(
+            item => item.id === id
+        );
+
+
+    if(!data){
+
+        toast(
+            "Solicitação não encontrada.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "editId"
+    ).value = id;
+
+
+    document.getElementById(
+        "editNome"
+    ).value =
+        data.nome || "";
+
+
+    document.getElementById(
+        "editIdade"
+    ).value =
+        data.idade || "";
+
+
+    document.getElementById(
+        "editPersonagem"
+    ).value =
+        data.personagem || "";
+
+
+    document.getElementById(
+        "editObra"
+    ).value =
+        data.obra || "";
+
+
+    document.getElementById(
+        "editModal"
+    ).classList.add("show");
+
+};
+
+
+window.closeEditModal =
+function(){
+
+    document.getElementById(
+        "editModal"
+    ).classList.remove("show");
+
+};
+
+
+window.saveEdit =
+async function(){
+
+    const id =
+        document.getElementById(
+            "editId"
+        ).value;
+
+
+    const nome =
+        document.getElementById(
+            "editNome"
+        ).value.trim();
+
+
+    const idade =
+        document.getElementById(
+            "editIdade"
+        ).value.trim();
+
+
+    const personagem =
+        document.getElementById(
+            "editPersonagem"
+        ).value.trim();
+
+
+    const obra =
+        document.getElementById(
+            "editObra"
+        ).value.trim();
+
+
+    if(
+        !nome ||
+        !idade ||
+        !personagem ||
+        !obra
+    ){
+
+        toast(
+            "Preencha todos os campos.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "requests",
+                id
+            ),
+
+            {
+
+                nome:nome,
+                idade:idade,
+                personagem:personagem,
+                obra:obra,
+
+                characterKey:
+                    chavePersonagem(
+                        personagem,
+                        obra
+                    ),
+
+                editadoEm:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        closeEditModal();
+
+        await loadRequests();
+
+
+        toast(
+            "✏️ Solicitação atualizada!"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        toast(
+            "Não foi possível editar a solicitação.",
             "error"
         );
 
@@ -2179,6 +2722,7 @@ async function loadMembers(){
                 collection(db,"members")
             );
 
+
         membersData =
             snapshot.docs.map(item=>({
 
@@ -2187,12 +2731,15 @@ async function loadMembers(){
 
             }));
 
+
         renderMembers();
         updateStats();
+
 
     }catch(error){
 
         console.error(error);
+
 
         toast(
             "Erro ao carregar membros.",
@@ -2219,6 +2766,7 @@ window.renderMembers = function(){
             "membersGrid"
         );
 
+
     const search =
         normalizar(
             document.getElementById(
@@ -2231,11 +2779,13 @@ window.renderMembers = function(){
         membersData.filter(data=>{
 
             return normalizar(
+
                 [
                     data.nome,
                     data.personagem,
                     data.obra
                 ].join(" ")
+
             ).includes(search);
 
         });
@@ -2270,7 +2820,8 @@ window.renderMembers = function(){
         filtered.map(data=>{
 
             const foto =
-                imagemOuVazio(data.foto);
+                data.foto || "";
+
 
             return `
 
@@ -2288,18 +2839,22 @@ window.renderMembers = function(){
                         `<div class="member-photo"></div>`
                     }
 
+
                     <h3>
                         ${safe(data.nome)}
                     </h3>
+
 
                     <p>
                         Idade: ${safe(data.idade)}
                     </p>
 
+
                     <p>
                         Personagem:
                         ${safe(data.personagem)}
                     </p>
+
 
                     <p>
                         Obra:
@@ -2328,6 +2883,7 @@ async function loadVacancies(){
                 collection(db,"vacancies")
             );
 
+
         vacanciesData =
             snapshot.docs.map(item=>({
 
@@ -2336,12 +2892,15 @@ async function loadVacancies(){
 
             }));
 
+
         renderVacancies();
         updateStats();
+
 
     }catch(error){
 
         console.error(error);
+
 
         toast(
             "Erro ao carregar vagas.",
@@ -2361,16 +2920,13 @@ async function(){
 };
 
 
-/* =========================
-   RENDER VACANCIES
-========================= */
-
 window.renderVacancies = function(){
 
     const open =
         document.getElementById(
             "openVacancies"
         );
+
 
     const closed =
         document.getElementById(
@@ -2381,11 +2937,8 @@ window.renderVacancies = function(){
     const openData =
         vacanciesData.filter(data=>{
 
-            const status =
-                normalizar(data.status);
-
             return (
-                status !== "fechada" &&
+                normalizar(data.status) !== "fechada" &&
                 data.ocupada !== true
             );
 
@@ -2395,20 +2948,15 @@ window.renderVacancies = function(){
     const closedData =
         vacanciesData.filter(data=>{
 
-            const status =
-                normalizar(data.status);
-
             return (
-                status === "fechada" ||
+                normalizar(data.status) === "fechada" ||
                 data.ocupada === true
             );
 
         });
 
 
-    /* =========================
-       ABERTAS
-    ========================= */
+    /* ABERTAS */
 
     if(!openData.length){
 
@@ -2440,9 +2988,7 @@ window.renderVacancies = function(){
     }
 
 
-    /* =========================
-       FECHADAS
-    ========================= */
+    /* FECHADAS */
 
     if(!closedData.length){
 
@@ -2496,7 +3042,9 @@ function vacancyCard(data){
             ${
                 imagem
                 ?
+
                 `
+
                 <img
                     class="vacancy-image"
                     src="${safe(imagem)}"
@@ -2512,12 +3060,17 @@ function vacancyCard(data){
                 >
                     🎭
                 </div>
+
                 `
+
                 :
+
                 `
+
                 <div class="vacancy-placeholder">
                     🎭
                 </div>
+
                 `
             }
 
@@ -2528,6 +3081,7 @@ function vacancyCard(data){
                     ${safe(data.personagem)}
                 </h3>
 
+
                 <p>
                     ${safe(data.obra)}
                 </p>
@@ -2536,16 +3090,23 @@ function vacancyCard(data){
                 ${
                     fechada
                     ?
+
                     `
+
                     <span class="vacancy-badge closed">
                         🔒 FECHADA
                     </span>
+
                     `
+
                     :
+
                     `
+
                     <span class="vacancy-badge open">
                         🟢 ABERTA
                     </span>
+
                     `
                 }
 
@@ -2553,14 +3114,21 @@ function vacancyCard(data){
                 ${
                     data.membro
                     ?
+
                     `
+
                     <p class="occupied-by">
+
                         👤 Ocupada por:
+
                         <b>
                             ${safe(data.membro)}
                         </b>
+
                     </p>
+
                     `
+
                     :
                     ""
                 }
@@ -2584,7 +3152,7 @@ async function(){
     try{
 
         toast(
-            "Sincronizando solicitações aprovadas..."
+            "🔄 Sincronizando aprovados..."
         );
 
 
@@ -2642,6 +3210,7 @@ async function(){
             const data =
                 requestDoc.data();
 
+
             const requestId =
                 requestDoc.id;
 
@@ -2671,14 +3240,13 @@ async function(){
 
 
                 if(
-                    vacancyKey === characterKey
-                    ||
-                    vacancy.requestId === requestId
-                    ||
+                    vacancyKey === characterKey ||
+                    vacancy.requestId === requestId ||
                     vacancy.id === requestId
                 ){
 
                     existing = vacancy;
+
                     break;
 
                 }
@@ -2748,9 +3316,12 @@ async function(){
                     ),
 
                     {
+
                         ...vacancyData,
+
                         criadoEm:
                             serverTimestamp()
+
                     }
 
                 );
@@ -2803,11 +3374,12 @@ async function(){
 
         await loadVacancies();
         await loadMembers();
+
         updateStats();
 
 
         toast(
-            `Sincronização concluída! ${created} vaga(s) criada(s) e ${updated} atualizada(s).`
+            `✓ Sincronização concluída! ${created} vaga(s) criada(s) e ${updated} atualizada(s).`
         );
 
 
@@ -2817,6 +3389,7 @@ async function(){
             "Erro na sincronização:",
             error
         );
+
 
         toast(
             "Erro ao sincronizar. Verifique as regras do Firestore.",
@@ -2858,9 +3431,11 @@ function renderAdmins(){
 
                     </div>
 
+
                     <h3>
                         ${safe(name)}
                     </h3>
+
 
                     <p>
                         ${safe(data.role)}
@@ -2882,10 +3457,20 @@ function renderAdmins(){
 
 function updateStats(){
 
+    /* SOMENTE PENDENTES */
+
     document.getElementById(
         "statRequests"
     ).textContent =
-        requestsData.length;
+
+        requestsData.filter(data=>{
+
+            return (
+                !data.status ||
+                normalizar(data.status) === "pendente"
+            );
+
+        }).length;
 
 
     document.getElementById(
@@ -2897,6 +3482,7 @@ function updateStats(){
     document.getElementById(
         "statVacancies"
     ).textContent =
+
         vacanciesData.filter(data=>{
 
             return (
@@ -2952,7 +3538,30 @@ document
 
 
 /* =========================
-   RESTORE SESSION
+   FECHAR MODAL CLICANDO FORA
+========================= */
+
+document
+    .getElementById("editModal")
+    .addEventListener(
+        "click",
+        event=>{
+
+            if(
+                event.target.id ===
+                "editModal"
+            ){
+
+                closeEditModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   RESTAURAR LOGIN
 ========================= */
 
 const savedAdmin =
