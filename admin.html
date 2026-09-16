@@ -12,1392 +12,702 @@ content="width=device-width, initial-scale=1.0">
 
 <style>
 
+:root{
+    --bg:#08040e;
+    --bg2:#100719;
+    --card:#140b20;
+    --card2:#1b1029;
+    --purple:#8b5cf6;
+    --purple2:#b98aff;
+    --yellow:#ffd84d;
+    --yellow2:#fff0a6;
+    --red:#ff4d6d;
+    --green:#55e6a5;
+    --text:#f7f1ff;
+    --muted:#a99bb7;
+    --border:rgba(255,255,255,.08);
+    --shadow:0 15px 45px rgba(0,0,0,.35);
+}
+
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-
-    --bg:#08040e;
-    --bg2:#10071a;
-
-    --purple:#8b5cf6;
-    --purple2:#6d28d9;
-    --purple3:#b78aff;
-
-    --yellow:#ffd84d;
-    --yellow2:#fff0a0;
-
-    --white:#ffffff;
-    --text:#f7f2ff;
-    --muted:#a89caf;
-
-    --card:rgba(24,12,38,.88);
-    --card2:rgba(38,20,57,.8);
-
-    --green:#61e6a4;
-    --red:#ff718d;
-    --orange:#ffb347;
-
-    --border:rgba(183,138,255,.18);
-
-    --shadow:0 20px 60px rgba(0,0,0,.45);
-}
-
-html{
-    scroll-behavior:smooth;
 }
 
 body{
-
-    min-height:100vh;
-
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at top left,rgba(139,92,246,.13),transparent 30%),
+        radial-gradient(circle at bottom right,rgba(255,216,77,.07),transparent 25%),
+        var(--bg);
     color:var(--text);
-
-    background:
-    radial-gradient(
-        circle at 10% 10%,
-        rgba(139,92,246,.25),
-        transparent 30%
-    ),
-
-    radial-gradient(
-        circle at 90% 85%,
-        rgba(255,216,77,.10),
-        transparent 28%
-    ),
-
-    linear-gradient(
-        145deg,
-        #08040e,
-        #130820,
-        #08040e
-    );
-
-    overflow-x:hidden;
+    min-height:100vh;
 }
-
-button,
-input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-
-/* =========================
-   FUNDO
-========================= */
-
-.background{
-
-    position:fixed;
-    inset:0;
-
-    overflow:hidden;
-
-    pointer-events:none;
-
-    z-index:0;
-}
-
-.moon{
-
-    position:absolute;
-
-    width:150px;
-    height:150px;
-
-    right:5%;
-    top:5%;
-
-    border-radius:50%;
-
-    background:#ffe56c;
-
-    box-shadow:
-    0 0 30px rgba(255,229,108,.9),
-    0 0 80px rgba(255,229,108,.25);
-
-    opacity:.82;
-
-    animation:
-    moonFloat 6s ease-in-out infinite;
-}
-
-@keyframes moonFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(12px);
-    }
-}
-
-.orb{
-
-    position:absolute;
-
-    width:280px;
-    height:280px;
-
-    border-radius:50%;
-
-    background:
-    rgba(139,92,246,.14);
-
-    filter:blur(40px);
-
-    animation:
-    orbFloat 12s ease-in-out infinite;
-}
-
-.orb.one{
-
-    left:-130px;
-    top:20%;
-}
-
-.orb.two{
-
-    right:-130px;
-    bottom:8%;
-
-    background:
-    rgba(255,216,77,.08);
-
-    animation-delay:3s;
-}
-
-@keyframes orbFloat{
-
-    0%,100%{
-        transform:translate(0,0);
-    }
-
-    50%{
-        transform:translate(35px,-35px);
-    }
-}
-
-.bat{
-
-    position:absolute;
-
-    font-size:25px;
-
-    opacity:.55;
-
-    animation:
-    batFly 13s linear infinite;
-}
-
-.bat.one{
-
-    left:-50px;
-    top:25%;
-}
-
-.bat.two{
-
-    left:-80px;
-    top:65%;
-
-    animation-delay:5s;
-}
-
-@keyframes batFly{
-
-    0%{
-        transform:translateX(0) translateY(0);
-    }
-
-    50%{
-        transform:translateX(55vw) translateY(-45px);
-    }
-
-    100%{
-        transform:translateX(110vw) translateY(20px);
-    }
-}
-
 
 /* =========================
    LOGIN
 ========================= */
 
 .login-screen{
-
-    position:relative;
-
-    z-index:5;
-
     min-height:100vh;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    padding:25px;
+    padding:20px;
 }
 
 .login-box{
-
     width:100%;
-    max-width:430px;
-
-    padding:35px;
-
-    border:
-    1px solid
-    var(--border);
-
-    border-radius:28px;
-
-    background:
-    linear-gradient(
-        145deg,
-        rgba(28,14,45,.96),
-        rgba(12,6,20,.96)
-    );
-
-    box-shadow:
-    var(--shadow),
-    0 0 50px rgba(139,92,246,.13);
-
-    backdrop-filter:blur(15px);
-
-    animation:
-    loginAppear .5s ease;
+    max-width:420px;
+    background:rgba(20,11,32,.95);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:35px 28px;
+    box-shadow:var(--shadow);
+    text-align:center;
 }
 
-@keyframes loginAppear{
-
-    from{
-        opacity:0;
-        transform:translateY(20px) scale(.98);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-.login-icon{
-
-    width:82px;
-    height:82px;
-
-    margin:0 auto 18px;
-
+.login-logo{
+    width:85px;
+    height:85px;
+    margin:0 auto 20px;
+    border-radius:24px;
+    background:linear-gradient(135deg,var(--purple),#4b207e);
     display:flex;
-
     align-items:center;
     justify-content:center;
-
-    border-radius:25px;
-
-    background:
-    linear-gradient(
-        135deg,
-        var(--purple),
-        var(--purple2)
-    );
-
-    font-size:40px;
-
-    box-shadow:
-    0 0 35px rgba(139,92,246,.35);
+    font-size:28px;
+    font-weight:900;
+    color:white;
+    box-shadow:0 0 35px rgba(139,92,246,.3);
 }
 
 .login-box h1{
-
-    text-align:center;
-
-    font-size:28px;
-
-    margin-bottom:7px;
+    font-size:27px;
+    margin-bottom:8px;
 }
 
-.login-box .subtitle{
-
-    text-align:center;
-
+.login-box p{
     color:var(--muted);
-
-    margin-bottom:28px;
-
+    margin-bottom:25px;
     font-size:14px;
 }
 
-.field{
-
+.input-group{
+    text-align:left;
     margin-bottom:16px;
 }
 
-.field label{
-
+.input-group label{
     display:block;
-
-    margin-bottom:7px;
-
     font-size:13px;
-
-    font-weight:bold;
-
-    color:#d9cbed;
+    color:var(--muted);
+    margin-bottom:7px;
 }
 
 .input-wrap{
-
     position:relative;
 }
 
-.field input{
-
+.input-wrap input{
     width:100%;
-
-    padding:14px 15px;
-
+    padding:14px 45px 14px 15px;
+    background:#0c0712;
+    border:1px solid var(--border);
     border-radius:13px;
-
-    border:
-    1px solid
-    rgba(183,138,255,.18);
-
     outline:none;
-
-    background:
-    rgba(255,255,255,.045);
-
     color:white;
-
-    transition:.2s;
-}
-
-.field input:focus{
-
-    border-color:var(--purple);
-
-    box-shadow:
-    0 0 0 3px
-    rgba(139,92,246,.12);
-}
-
-.password-input{
-
-    padding-right:50px !important;
-}
-
-.eye{
-
-    position:absolute;
-
-    right:10px;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:36px;
-    height:36px;
-
-    border:0;
-
-    background:transparent;
-
-    color:#cbb9dc;
-
-    font-size:18px;
-}
-
-.login-button{
-
-    width:100%;
-
-    margin-top:8px;
-
-    padding:15px;
-
-    border:0;
-
-    border-radius:14px;
-
-    background:
-    linear-gradient(
-        135deg,
-        var(--purple),
-        var(--purple2)
-    );
-
-    color:white;
-
-    font-weight:bold;
-
-    box-shadow:
-    0 10px 30px
-    rgba(109,40,217,.3);
-
-    transition:.2s;
-}
-
-.login-button:hover{
-
-    transform:translateY(-2px);
-
-    filter:brightness(1.08);
-}
-
-.login-button:active{
-
-    transform:translateY(0);
-}
-
-.login-error{
-
-    min-height:20px;
-
-    margin-top:12px;
-
-    text-align:center;
-
-    color:var(--red);
-
-    font-size:13px;
-}
-
-
-/* =========================
-   DASHBOARD
-========================= */
-
-.dashboard{
-
-    position:relative;
-
-    z-index:2;
-
-    display:none;
-
-    min-height:100vh;
-}
-
-.dashboard.active{
-
-    display:block;
-}
-
-.sidebar{
-
-    position:fixed;
-
-    left:0;
-    top:0;
-    bottom:0;
-
-    width:245px;
-
-    padding:22px 15px;
-
-    background:
-    rgba(10,5,17,.94);
-
-    border-right:
-    1px solid
-    var(--border);
-
-    backdrop-filter:blur(18px);
-
-    z-index:20;
-}
-
-.logo{
-
-    padding:8px 10px 25px;
-
-    text-align:center;
-}
-
-.logo strong{
-
-    display:block;
-
-    font-size:22px;
-
-    letter-spacing:2px;
-
-    color:var(--purple3);
-}
-
-.logo span{
-
-    font-size:11px;
-
-    color:var(--yellow);
-
-    letter-spacing:1px;
-}
-
-.menu{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:7px;
-}
-
-.menu button{
-
-    width:100%;
-
-    padding:13px 14px;
-
-    border:1px solid transparent;
-
-    border-radius:13px;
-
-    background:transparent;
-
-    color:#bcaec8;
-
-    text-align:left;
-
-    transition:.2s;
-}
-
-.menu button:hover{
-
-    background:
-    rgba(139,92,246,.09);
-
-    color:white;
-}
-
-.menu button.active{
-
-    background:
-    linear-gradient(
-        90deg,
-        rgba(139,92,246,.22),
-        rgba(139,92,246,.06)
-    );
-
-    border-color:
-    rgba(139,92,246,.22);
-
-    color:white;
-}
-
-.sidebar-bottom{
-
-    position:absolute;
-
-    left:15px;
-    right:15px;
-    bottom:20px;
-}
-
-.user-box{
-
-    padding:13px;
-
-    border-radius:15px;
-
-    background:
-    rgba(255,255,255,.035);
-
-    border:
-    1px solid
-    var(--border);
-
-    margin-bottom:9px;
-}
-
-.user-box small{
-
-    color:var(--muted);
-
-    display:block;
-
-    font-size:11px;
-}
-
-.user-box strong{
-
-    display:block;
-
-    margin-top:4px;
-}
-
-.logout{
-
-    width:100%;
-
-    padding:11px;
-
-    border-radius:12px;
-
-    border:
-    1px solid
-    rgba(255,113,141,.2);
-
-    background:
-    rgba(255,113,141,.07);
-
-    color:#ff9aae;
-
-    cursor:pointer;
-}
-
-.main{
-
-    margin-left:245px;
-
-    padding:28px;
-
-    min-height:100vh;
-}
-
-.page{
-
-    display:none;
-
-    animation:
-    pageIn .25s ease;
-}
-
-.page.active{
-
-    display:block;
-}
-
-@keyframes pageIn{
-
-    from{
-        opacity:0;
-        transform:translateY(8px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.page-header{
-
-    margin-bottom:25px;
-}
-
-.page-header h2{
-
-    font-size:28px;
-
-    margin-bottom:6px;
-}
-
-.page-header p{
-
-    color:var(--muted);
-
     font-size:14px;
 }
 
+.input-wrap input:focus{
+    border-color:var(--purple);
+}
+
+.eye{
+    position:absolute;
+    right:13px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:var(--muted);
+    font-size:18px;
+}
+
+.login-btn{
+    width:100%;
+    border:0;
+    padding:14px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--purple),#6631b7);
+    color:white;
+    font-weight:800;
+    cursor:pointer;
+    margin-top:5px;
+    transition:.2s;
+}
+
+.login-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(139,92,246,.25);
+}
+
+.login-error{
+    display:none;
+    color:#ff8198;
+    font-size:13px;
+    margin-top:13px;
+}
+
+/* =========================
+   APP
+========================= */
+
+#app{
+    display:none;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:245px;
+    height:100vh;
+    background:rgba(10,5,16,.97);
+    border-right:1px solid var(--border);
+    padding:22px 15px;
+    z-index:50;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:8px 10px 25px;
+}
+
+.brand-logo{
+    width:45px;
+    height:45px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--purple),#4b207e);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+}
+
+.brand-text strong{
+    display:block;
+    font-size:15px;
+}
+
+.brand-text span{
+    color:var(--yellow);
+    font-size:11px;
+}
+
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.nav button{
+    border:0;
+    background:transparent;
+    color:#b9adca;
+    padding:13px 14px;
+    border-radius:12px;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:rgba(139,92,246,.15);
+    color:white;
+}
+
+.nav button.active{
+    border-left:3px solid var(--purple);
+}
+
+.sidebar-bottom{
+    position:absolute;
+    bottom:18px;
+    left:15px;
+    right:15px;
+}
+
+.admin-mini{
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:12px;
+    border-radius:14px;
+    margin-bottom:8px;
+}
+
+.admin-mini strong{
+    display:block;
+    font-size:13px;
+}
+
+.admin-mini span{
+    color:var(--yellow);
+    font-size:11px;
+}
+
+.logout{
+    width:100%;
+    border:1px solid rgba(255,77,109,.25);
+    background:rgba(255,77,109,.07);
+    color:#ff8198;
+    padding:11px;
+    border-radius:11px;
+    cursor:pointer;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:245px;
+    padding:28px;
+    min-height:100vh;
+}
+
+.mobile-top{
+    display:none;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.page-header h1{
+    font-size:27px;
+}
+
+.page-header p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:5px;
+}
+
+.refresh-btn,
+.sync-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:white;
+    padding:11px 15px;
+    border-radius:11px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.sync-btn{
+    background:rgba(255,216,77,.08);
+    border-color:rgba(255,216,77,.2);
+    color:var(--yellow);
+}
 
 /* =========================
    STATS
 ========================= */
 
 .stats{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(4,minmax(0,1fr));
-
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
-
     margin-bottom:25px;
 }
 
 .stat{
-
-    padding:20px;
-
-    border-radius:18px;
-
     background:var(--card);
-
-    border:
-    1px solid
-    var(--border);
-
-    box-shadow:
-    0 10px 30px
-    rgba(0,0,0,.18);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:var(--shadow);
 }
 
-.stat .icon{
-
-    font-size:23px;
-
+.stat-icon{
+    font-size:22px;
     margin-bottom:12px;
 }
 
-.stat strong{
-
-    display:block;
-
-    font-size:28px;
-
-    margin-bottom:4px;
+.stat-value{
+    font-size:27px;
+    font-weight:900;
 }
 
-.stat span{
-
+.stat-label{
     color:var(--muted);
-
-    font-size:13px;
+    font-size:12px;
+    margin-top:4px;
 }
-
 
 /* =========================
    CARDS
 ========================= */
 
 .card{
-
     background:var(--card);
-
-    border:
-    1px solid
-    var(--border);
-
-    border-radius:20px;
-
-    box-shadow:
-    var(--shadow);
-
-    overflow:hidden;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:20px;
 }
 
-.card-head{
-
-    padding:18px 20px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:15px;
-
-    border-bottom:
-    1px solid
-    rgba(255,255,255,.06);
-}
-
-.card-head h3{
-
+.card-title{
     font-size:16px;
+    font-weight:800;
+    margin-bottom:16px;
 }
 
-.search{
-
-    max-width:280px;
-
-    width:100%;
-
-    padding:10px 13px;
-
-    border-radius:11px;
-
-    border:
-    1px solid
-    var(--border);
-
-    background:
-    rgba(255,255,255,.04);
-
-    color:white;
-
-    outline:none;
+.empty{
+    text-align:center;
+    padding:45px 20px;
+    color:var(--muted);
 }
+
+.empty-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+/* =========================
+   TABLE
+========================= */
 
 .table-wrap{
-
     overflow-x:auto;
 }
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
     min-width:850px;
 }
 
-th,
-td{
-
-    padding:13px 15px;
-
+th{
     text-align:left;
+    color:#8f829d;
+    font-size:11px;
+    text-transform:uppercase;
+    padding:12px;
+    border-bottom:1px solid var(--border);
+}
 
-    border-bottom:
-    1px solid
-    rgba(255,255,255,.055);
-
+td{
+    padding:13px 12px;
+    border-bottom:1px solid rgba(255,255,255,.05);
     font-size:13px;
 }
 
-th{
-
-    color:#bdaecc;
-
-    font-size:11px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.5px;
+td strong{
+    color:white;
 }
 
-td{
-
-    color:#eee7f4;
-}
-
-.photo{
-
-    width:44px;
-    height:44px;
-
+.avatar{
+    width:42px;
+    height:42px;
     object-fit:cover;
-
-    border-radius:12px;
-
-    border:
-    1px solid
-    rgba(183,138,255,.2);
-
-    background:#160c21;
+    border-radius:11px;
+    background:#21152e;
+    display:block;
 }
-
-.no-photo{
-
-    width:44px;
-    height:44px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:12px;
-
-    background:
-    rgba(139,92,246,.09);
-
-    font-size:20px;
-}
-
-
-/* =========================
-   STATUS
-========================= */
 
 .status{
-
     display:inline-flex;
-
     align-items:center;
-
-    padding:6px 10px;
-
-    border-radius:999px;
-
-    font-size:11px;
-
-    font-weight:bold;
+    padding:6px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:800;
 }
 
 .status.pendente{
-
-    background:
-    rgba(255,179,71,.1);
-
-    color:var(--orange);
+    background:rgba(255,216,77,.1);
+    color:var(--yellow);
 }
 
 .status.aprovado{
-
-    background:
-    rgba(97,230,164,.1);
-
+    background:rgba(85,230,165,.1);
     color:var(--green);
 }
 
 .status.recusado{
-
-    background:
-    rgba(255,113,141,.1);
-
-    color:var(--red);
+    background:rgba(255,77,109,.1);
+    color:#ff8198;
 }
-
-.status.aberta{
-
-    background:
-    rgba(97,230,164,.1);
-
-    color:var(--green);
-}
-
-.status.fechada{
-
-    background:
-    rgba(255,113,141,.1);
-
-    color:var(--red);
-}
-
-
-/* =========================
-   ACTIONS
-========================= */
 
 .actions{
-
     display:flex;
-
     gap:6px;
-
     flex-wrap:wrap;
 }
 
 .action{
-
     border:0;
-
-    padding:7px 10px;
-
-    border-radius:9px;
-
-    font-size:11px;
-
-    font-weight:bold;
-
+    padding:7px 9px;
+    border-radius:8px;
     cursor:pointer;
+    font-size:11px;
+    font-weight:800;
 }
 
 .approve{
-
-    background:
-    rgba(97,230,164,.12);
-
+    background:rgba(85,230,165,.12);
     color:var(--green);
 }
 
 .reject{
-
-    background:
-    rgba(255,113,141,.12);
-
-    color:var(--red);
+    background:rgba(255,77,109,.1);
+    color:#ff8198;
 }
 
+/* =========================
+   SEARCH
+========================= */
+
+.search{
+    width:100%;
+    padding:13px 15px;
+    background:#0c0712;
+    border:1px solid var(--border);
+    border-radius:12px;
+    outline:none;
+    color:white;
+    margin-bottom:15px;
+}
+
+.search:focus{
+    border-color:var(--purple);
+}
 
 /* =========================
    MEMBERS
 ========================= */
 
 .members-grid{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fill,minmax(260px,1fr));
-
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
     gap:15px;
 }
 
 .member-card{
-
-    padding:18px;
-
-    border-radius:18px;
-
     background:var(--card);
-
-    border:
-    1px solid
-    var(--border);
-
-    display:flex;
-
-    gap:14px;
-
-    align-items:center;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:18px;
 }
 
-.member-card .photo,
-.member-card .no-photo{
-
-    flex:none;
-
-    width:58px;
-    height:58px;
-
-    border-radius:15px;
+.member-photo{
+    width:65px;
+    height:65px;
+    object-fit:cover;
+    border-radius:16px;
+    background:#21152e;
+    margin-bottom:12px;
 }
 
-.member-info{
-
-    min-width:0;
+.member-card h3{
+    font-size:15px;
 }
 
-.member-info strong{
-
-    display:block;
-
-    margin-bottom:4px;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-}
-
-.member-info p{
-
+.member-card p{
     color:var(--muted);
-
     font-size:12px;
-
-    margin-top:3px;
+    margin-top:4px;
 }
-
 
 /* =========================
-   VAGAS
+   VACANCIES
 ========================= */
 
+.vacancy-section{
+    margin-bottom:28px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+    font-size:18px;
+}
+
+.section-title small{
+    color:var(--muted);
+    font-size:11px;
+    font-weight:normal;
+}
+
 .vacancies-grid{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fill,minmax(240px,1fr));
-
-    gap:16px;
-
-    padding:20px;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:15px;
 }
 
 .vacancy-card{
-
-    border-radius:18px;
-
     overflow:hidden;
-
-    background:
-    rgba(255,255,255,.035);
-
-    border:
-    1px solid
-    var(--border);
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
 }
 
 .vacancy-image{
-
     width:100%;
-
-    height:180px;
-
+    height:150px;
     object-fit:cover;
-
     display:block;
-
     background:
-    linear-gradient(
-        135deg,
-        #251237,
-        #100817
-    );
+        radial-gradient(circle at center,rgba(139,92,246,.25),transparent 50%),
+        #0d0715;
 }
 
-.vacancy-no-image{
-
+.vacancy-placeholder{
     width:100%;
-
-    height:180px;
-
+    height:150px;
     display:flex;
-
     align-items:center;
     justify-content:center;
-
-    font-size:42px;
-
     background:
-    linear-gradient(
-        135deg,
-        #251237,
-        #100817
-    );
+        radial-gradient(circle at center,rgba(139,92,246,.25),transparent 50%),
+        #0d0715;
+    font-size:40px;
 }
 
-.vacancy-body{
-
+.vacancy-info{
     padding:15px;
 }
 
-.vacancy-body h4{
-
-    font-size:16px;
-
-    margin-bottom:4px;
+.vacancy-info h3{
+    font-size:15px;
 }
 
-.vacancy-body p{
-
+.vacancy-info p{
     color:var(--muted);
-
     font-size:12px;
-
-    margin-bottom:10px;
+    margin-top:4px;
 }
 
-.vacancy-top{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:8px;
+.vacancy-badge{
+    display:inline-block;
+    margin-top:11px;
+    padding:6px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:900;
 }
 
+.vacancy-badge.open{
+    background:rgba(85,230,165,.1);
+    color:var(--green);
+}
+
+.vacancy-badge.closed{
+    background:rgba(255,77,109,.1);
+    color:#ff8198;
+}
+
+.occupied-by{
+    color:#d9cdea!important;
+    margin-top:8px!important;
+}
 
 /* =========================
-   ADMINS
+   ADM
 ========================= */
 
 .admin-grid{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fill,minmax(230px,1fr));
-
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
     gap:15px;
 }
 
 .admin-card{
-
-    padding:22px;
-
-    border-radius:20px;
-
     background:var(--card);
-
-    border:
-    1px solid
-    var(--border);
-
-    text-align:center;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:20px;
 }
 
 .admin-avatar{
-
-    width:70px;
-    height:70px;
-
-    margin:0 auto 13px;
-
-    border-radius:50%;
-
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:linear-gradient(135deg,var(--purple),#4c227c);
     display:flex;
-
     align-items:center;
     justify-content:center;
-
-    background:
-    linear-gradient(
-        135deg,
-        var(--purple),
-        var(--purple2)
-    );
-
-    font-size:28px;
-
-    box-shadow:
-    0 0 25px
-    rgba(139,92,246,.22);
+    font-weight:900;
+    margin-bottom:13px;
 }
 
 .admin-card h3{
-
-    font-size:17px;
-
-    margin-bottom:5px;
+    font-size:15px;
 }
 
 .admin-card p{
-
-    color:var(--muted);
-
+    color:var(--yellow);
     font-size:12px;
+    margin-top:4px;
 }
-
-.admin-online{
-
-    margin-top:12px;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:5px;
-
-    font-size:11px;
-
-    color:var(--green);
-}
-
-.admin-online::before{
-
-    content:"";
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:var(--green);
-
-    box-shadow:
-    0 0 8px
-    var(--green);
-}
-
-
-/* =========================
-   EMPTY / ERROR
-========================= */
-
-.empty{
-
-    padding:45px 20px;
-
-    text-align:center;
-
-    color:var(--muted);
-}
-
-.empty strong{
-
-    display:block;
-
-    color:white;
-
-    margin-bottom:5px;
-}
-
-.error-box{
-
-    margin:15px 20px;
-
-    padding:13px;
-
-    border-radius:12px;
-
-    background:
-    rgba(255,113,141,.08);
-
-    border:
-    1px solid
-    rgba(255,113,141,.18);
-
-    color:#ff9aae;
-
-    font-size:13px;
-}
-
 
 /* =========================
    TOAST
 ========================= */
 
 .toast{
-
     position:fixed;
-
     right:20px;
     bottom:20px;
-
-    z-index:100;
-
-    padding:13px 16px;
-
-    border-radius:13px;
-
-    background:
-    rgba(25,12,38,.96);
-
-    border:
-    1px solid
-    var(--border);
-
-    box-shadow:
-    var(--shadow);
-
+    background:#1a1024;
+    border:1px solid var(--border);
     color:white;
-
-    transform:
-    translateY(30px);
-
+    padding:13px 17px;
+    border-radius:13px;
+    box-shadow:var(--shadow);
+    z-index:100;
     opacity:0;
-
     pointer-events:none;
-
+    transform:translateY(15px);
     transition:.25s;
+    font-size:13px;
+    max-width:320px;
 }
 
 .toast.show{
-
-    transform:
-    translateY(0);
-
     opacity:1;
+    transform:translateY(0);
 }
 
 .toast.success{
-    border-color:rgba(97,230,164,.25);
+    border-color:rgba(85,230,165,.3);
 }
 
 .toast.error{
-    border-color:rgba(255,113,141,.25);
+    border-color:rgba(255,77,109,.3);
 }
-
 
 /* =========================
    RESPONSIVE
@@ -1406,128 +716,80 @@ td{
 @media(max-width:900px){
 
     .sidebar{
-
-        width:72px;
-
-        padding:15px 8px;
-    }
-
-    .logo strong{
-
-        font-size:15px;
-    }
-
-    .logo span{
-
-        display:none;
-    }
-
-    .menu button{
-
-        font-size:0;
-
-        text-align:center;
-
-        padding:13px 5px;
-    }
-
-    .menu button::first-letter{
-
-        font-size:20px;
-    }
-
-    .sidebar-bottom{
-
-        left:8px;
-        right:8px;
-    }
-
-    .user-box{
-
-        display:none;
-    }
-
-    .logout{
-
-        font-size:0;
-    }
-
-    .logout::before{
-
-        content:"↪";
-
-        font-size:20px;
+        width:205px;
     }
 
     .main{
-
-        margin-left:72px;
-
-        padding:20px 15px;
+        margin-left:205px;
     }
 
     .stats{
-
-        grid-template-columns:
-        repeat(2,minmax(0,1fr));
+        grid-template-columns:repeat(2,1fr);
     }
+
 }
 
-@media(max-width:560px){
+@media(max-width:650px){
 
-    .login-box{
-
-        padding:25px 20px;
-
-        border-radius:22px;
+    .sidebar{
+        position:fixed;
+        width:100%;
+        height:auto;
+        bottom:0;
+        top:auto;
+        left:0;
+        border-right:0;
+        border-top:1px solid var(--border);
+        padding:7px;
+        background:rgba(10,5,16,.98);
     }
 
-    .moon{
+    .brand,
+    .sidebar-bottom{
+        display:none;
+    }
 
-        width:100px;
-        height:100px;
+    .nav{
+        display:grid;
+        grid-template-columns:repeat(5,1fr);
+        gap:3px;
+    }
+
+    .nav button{
+        text-align:center;
+        padding:10px 3px;
+        font-size:10px;
+        border-left:0!important;
+    }
+
+    .main{
+        margin-left:0;
+        padding:18px 14px 85px;
+    }
+
+    .page-header{
+        flex-direction:column;
     }
 
     .stats{
-
-        grid-template-columns:1fr 1fr;
-
+        grid-template-columns:repeat(2,1fr);
         gap:10px;
     }
 
     .stat{
-
         padding:15px;
     }
 
-    .stat strong{
-
+    .stat-value{
         font-size:22px;
     }
 
-    .page-header h2{
-
-        font-size:23px;
-    }
-
-    .card-head{
-
-        align-items:stretch;
-
-        flex-direction:column;
-    }
-
-    .search{
-
-        max-width:none;
-    }
-
-    .vacancies-grid{
-
+    .members-grid,
+    .vacancies-grid,
+    .admin-grid{
         grid-template-columns:1fr;
-
-        padding:14px;
     }
+
 }
 
 </style>
@@ -1536,559 +798,556 @@ td{
 
 <body>
 
-
-<div class="background">
-
-    <div class="moon"></div>
-
-    <div class="orb one"></div>
-
-    <div class="orb two"></div>
-
-    <div class="bat one">🦇</div>
-
-    <div class="bat two">🦇</div>
-
-</div>
-
-
 <!-- =========================
      LOGIN
 ========================= -->
 
-<section
-class="login-screen"
-id="loginScreen">
+<div class="login-screen" id="loginScreen">
 
     <div class="login-box">
 
-        <div class="login-icon">
-            🎃
+        <div class="login-logo">
+            WIE
         </div>
 
-        <h1>
-            HOUSE WIE
-        </h1>
+        <h1>Administração WIE</h1>
 
-        <p class="subtitle">
-            Administração • Halloween Edition
+        <p>
+            Área exclusiva para a equipe da House.
         </p>
 
-        <div class="field">
+        <div class="input-group">
 
-            <label for="name">
-                Nome do ADM
-            </label>
-
-            <input
-                id="name"
-                type="text"
-                placeholder="Digite seu nome"
-                autocomplete="username"
-                onkeydown="if(event.key==='Enter') document.getElementById('password').focus()"
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label for="password">
-                Senha
-            </label>
+            <label>Nome do ADM</label>
 
             <div class="input-wrap">
 
                 <input
-                    id="password"
-                    class="password-input"
-                    type="password"
-                    placeholder="Digite sua senha"
-                    autocomplete="current-password"
-                    onkeydown="if(event.key==='Enter') login()"
+                    id="loginName"
+                    type="text"
+                    placeholder="Digite seu nome"
+                    autocomplete="off"
                 >
 
-                <button
-                    type="button"
-                    class="eye"
-                    id="eyeButton"
-                    onclick="togglePassword()"
+            </div>
+
+        </div>
+
+        <div class="input-group">
+
+            <label>Senha</label>
+
+            <div class="input-wrap">
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Digite sua senha"
                 >
-                    👁
+
+                <span
+                    class="eye"
+                    onclick="togglePassword()"
+                    id="eye"
+                >👁️</span>
+
+            </div>
+
+        </div>
+
+        <button
+            class="login-btn"
+            onclick="login()"
+        >
+            Entrar na administração
+        </button>
+
+        <div
+            class="login-error"
+            id="loginError"
+        >
+            Nome ou senha incorretos.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     APP
+========================= -->
+
+<div id="app">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                WIE
+            </div>
+
+            <div class="brand-text">
+
+                <strong>House WIE</strong>
+
+                <span>Administração</span>
+
+            </div>
+
+        </div>
+
+        <nav class="nav">
+
+            <button
+                class="active"
+                onclick="showPage('home',this)"
+            >
+                🏠 Início
+            </button>
+
+            <button
+                onclick="showPage('requests',this)"
+            >
+                📩 Solicitações
+            </button>
+
+            <button
+                onclick="showPage('members',this)"
+            >
+                👥 Membros
+            </button>
+
+            <button
+                onclick="showPage('vacancies',this)"
+            >
+                🎃 Vagas
+            </button>
+
+            <button
+                onclick="showPage('admins',this)"
+            >
+                👑 ADMs
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="admin-mini">
+
+                <strong id="loggedAdmin">
+                    —
+                </strong>
+
+                <span id="loggedRole">
+                    —
+                </span>
+
+            </div>
+
+            <button
+                class="logout"
+                onclick="logout()"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <!-- =====================
+             HOME
+        ====================== -->
+
+        <section
+            class="page active"
+            id="page-home"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>🎃 Painel WIE</h1>
+
+                    <p>
+                        Bem-vindo à administração da House WIE.
+                    </p>
+
+                </div>
+
+                <button
+                    class="refresh-btn"
+                    onclick="reloadAll()"
+                >
+                    ↻ Atualizar
                 </button>
 
             </div>
 
-        </div>
+            <div class="stats">
 
+                <div class="stat">
 
-        <button
-            type="button"
-            class="login-button"
-            onclick="login()"
-        >
-            ENTRAR
-        </button>
+                    <div class="stat-icon">
+                        📩
+                    </div>
 
+                    <div
+                        class="stat-value"
+                        id="statRequests"
+                    >
+                        0
+                    </div>
 
-        <div
-        class="login-error"
-        id="loginError">
-        </div>
+                    <div class="stat-label">
+                        Solicitações
+                    </div>
 
-    </div>
+                </div>
 
-</section>
+                <div class="stat">
 
+                    <div class="stat-icon">
+                        👥
+                    </div>
 
-<!-- =========================
-     DASHBOARD
-========================= -->
+                    <div
+                        class="stat-value"
+                        id="statMembers"
+                    >
+                        0
+                    </div>
 
-<section
-class="dashboard"
-id="dashboard">
+                    <div class="stat-label">
+                        Membros
+                    </div>
 
+                </div>
 
-<aside class="sidebar">
+                <div class="stat">
 
-    <div class="logo">
+                    <div class="stat-icon">
+                        🎭
+                    </div>
 
-        <strong>
-            WIE
-        </strong>
+                    <div
+                        class="stat-value"
+                        id="statVacancies"
+                    >
+                        0
+                    </div>
 
-        <span>
-            ADMINISTRAÇÃO 🎃
-        </span>
+                    <div class="stat-label">
+                        Vagas fechadas
+                    </div>
 
-    </div>
+                </div>
 
+                <div class="stat">
 
-    <nav class="menu">
+                    <div class="stat-icon">
+                        👑
+                    </div>
 
-        <button
-        class="active"
-        onclick="showPage('home',this)"
-        >
-            🏠 Início
-        </button>
+                    <div
+                        class="stat-value"
+                        id="statAdmins"
+                    >
+                        4
+                    </div>
 
-        <button
-        onclick="showPage('requests',this)"
-        >
-            📋 Solicitações
-        </button>
+                    <div class="stat-label">
+                        ADMs
+                    </div>
 
-        <button
-        onclick="showPage('members',this)"
-        >
-            👥 Membros
-        </button>
+                </div>
 
-        <button
-        onclick="showPage('vacancies',this)"
-        >
-            🎭 Vagas
-        </button>
-
-        <button
-        onclick="showPage('admins',this)"
-        >
-            👑 ADMs
-        </button>
-
-    </nav>
-
-
-    <div class="sidebar-bottom">
-
-        <div class="user-box">
-
-            <small>
-                Conectado como
-            </small>
-
-            <strong id="logged">
-                ADM
-            </strong>
-
-        </div>
-
-
-        <button
-        class="logout"
-        onclick="logout()"
-        >
-            Sair
-        </button>
-
-    </div>
-
-</aside>
-
-
-<main class="main">
-
-
-<!-- HOME -->
-
-<section
-class="page active"
-id="page-home">
-
-    <div class="page-header">
-
-        <h2>
-            Painel da House WIE 🎃
-        </h2>
-
-        <p>
-            Gerencie solicitações, membros e vagas da house.
-        </p>
-
-    </div>
-
-
-    <div class="stats">
-
-        <div class="stat">
-
-            <div class="icon">
-                📋
             </div>
 
-            <strong id="statRequests">
-                0
-            </strong>
+            <div class="card">
 
-            <span>
-                Solicitações
-            </span>
+                <div class="card-title">
+                    🕯️ Status da administração
+                </div>
 
-        </div>
+                <p style="color:var(--muted);font-size:13px;line-height:1.7;">
 
+                    As solicitações enviadas pela recepção aparecem
+                    automaticamente em <b style="color:white;">Solicitações</b>.
+                    Quando uma ficha é aprovada, a personagem é registrada
+                    como ocupada e aparece automaticamente em
+                    <b style="color:var(--red);">Vagas Fechadas</b>.
 
-        <div class="stat">
+                </p>
 
-            <div class="icon">
-                👥
             </div>
 
-            <strong id="statMembers">
-                0
-            </strong>
-
-            <span>
-                Membros
-            </span>
-
-        </div>
+        </section>
 
 
-        <div class="stat">
+        <!-- =====================
+             REQUESTS
+        ====================== -->
 
-            <div class="icon">
-                🎭
+        <section
+            class="page"
+            id="page-requests"
+        >
+
+            <div class="page-header">
+
+                <div>
+
+                    <h1>📩 Solicitações</h1>
+
+                    <p>
+                        Fichas recebidas pela recepção.
+                    </p>
+
+                </div>
+
+                <button
+                    class="refresh-btn"
+                    onclick="loadRequests()"
+                >
+                    ↻ Atualizar
+                </button>
+
             </div>
 
-            <strong id="statVacancies">
-                0
-            </strong>
+            <div class="card">
 
-            <span>
-                Vagas
-            </span>
+                <input
+                    class="search"
+                    id="requestSearch"
+                    placeholder="🔎 Procurar por nome, personagem ou obra..."
+                    oninput="renderRequests()"
+                >
 
-        </div>
+                <div class="table-wrap">
 
+                    <table>
 
-        <div class="stat">
+                        <thead>
 
-            <div class="icon">
-                👑
+                            <tr>
+
+                                <th>Foto</th>
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>Personagem</th>
+                                <th>Obra</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="requestsBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
             </div>
 
-            <strong id="statAdmins">
-                0
-            </strong>
-
-            <span>
-                ADMs
-            </span>
-
-        </div>
-
-    </div>
+        </section>
 
 
-    <div class="card">
+        <!-- =====================
+             MEMBERS
+        ====================== -->
 
-        <div class="card-head">
+        <section
+            class="page"
+            id="page-members"
+        >
 
-            <h3>
-                Resumo
-            </h3>
+            <div class="page-header">
 
-        </div>
+                <div>
 
-        <div class="empty">
+                    <h1>👥 Membros</h1>
 
-            <strong>
-                Bem-vindo à administração da WIE! 🎃
-            </strong>
+                    <p>
+                        Membros aprovados pela administração.
+                    </p>
 
-            Use o menu lateral para administrar a House.
+                </div>
 
-        </div>
+                <button
+                    class="refresh-btn"
+                    onclick="loadMembers()"
+                >
+                    ↻ Atualizar
+                </button>
 
-    </div>
-
-</section>
-
-
-<!-- SOLICITAÇÕES -->
-
-<section
-class="page"
-id="page-requests">
-
-    <div class="page-header">
-
-        <h2>
-            Solicitações
-        </h2>
-
-        <p>
-            Veja e gerencie as solicitações recebidas pela recepção.
-        </p>
-
-    </div>
-
-
-    <div class="card">
-
-        <div class="card-head">
-
-            <h3>
-                Solicitações recebidas
-            </h3>
+            </div>
 
             <input
-            class="search"
-            id="requestSearch"
-            type="search"
-            placeholder="Pesquisar..."
-            oninput="filterRequests()"
+                class="search"
+                id="memberSearch"
+                placeholder="🔎 Procurar membro..."
+                oninput="renderMembers()"
             >
 
-        </div>
+            <div
+                class="members-grid"
+                id="membersGrid"
+            ></div>
 
+        </section>
 
-        <div id="requestError"></div>
 
+        <!-- =====================
+             VACANCIES
+        ====================== -->
 
-        <div class="table-wrap">
+        <section
+            class="page"
+            id="page-vacancies"
+        >
 
-            <table>
+            <div class="page-header">
 
-                <thead>
+                <div>
 
-                    <tr>
+                    <h1>🎃 Vagas</h1>
 
-                        <th>
-                            Foto
-                        </th>
+                    <p>
+                        Personagens disponíveis e ocupados.
+                    </p>
 
-                        <th>
-                            Nome
-                        </th>
+                </div>
 
-                        <th>
-                            Idade
-                        </th>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
 
-                        <th>
-                            Personagem
-                        </th>
+                    <button
+                        class="sync-btn"
+                        onclick="syncApprovedRequests()"
+                    >
+                        🔄 Sincronizar aprovados
+                    </button>
 
-                        <th>
-                            Obra
-                        </th>
+                    <button
+                        class="refresh-btn"
+                        onclick="loadVacancies()"
+                    >
+                        ↻ Atualizar
+                    </button>
 
-                        <th>
-                            Status
-                        </th>
+                </div>
 
-                        <th>
-                            Ações
-                        </th>
+            </div>
 
-                    </tr>
 
-                </thead>
+            <!-- ABERTAS -->
 
+            <div class="vacancy-section">
 
-                <tbody id="requestsTable">
-                </tbody>
+                <div class="section-title">
 
-            </table>
+                    🟢 Vagas abertas
 
-        </div>
+                    <small>
+                        disponíveis para escolha
+                    </small>
 
-    </div>
+                </div>
 
-</section>
+                <div
+                    class="vacancies-grid"
+                    id="openVacancies"
+                ></div>
 
+            </div>
 
-<!-- MEMBROS -->
 
-<section
-class="page"
-id="page-members">
+            <!-- FECHADAS -->
 
-    <div class="page-header">
+            <div class="vacancy-section">
 
-        <h2>
-            Membros
-        </h2>
+                <div class="section-title">
 
-        <p>
-            Membros aprovados pela administração.
-        </p>
+                    🔒 Vagas fechadas
 
-    </div>
+                    <small>
+                        personagens já ocupados
+                    </small>
 
+                </div>
 
-    <div class="card">
+                <div
+                    class="vacancies-grid"
+                    id="closedVacancies"
+                ></div>
 
-        <div class="card-head">
+            </div>
 
-            <h3>
-                Membros cadastrados
-            </h3>
+        </section>
 
-            <input
-            class="search"
-            id="memberSearch"
-            type="search"
-            placeholder="Pesquisar..."
-            oninput="filterMembers()"
-            >
 
-        </div>
+        <!-- =====================
+             ADMINS
+        ====================== -->
 
+        <section
+            class="page"
+            id="page-admins"
+        >
 
-        <div id="memberError"></div>
+            <div class="page-header">
 
+                <div>
 
-        <div
-        class="members-grid"
-        id="membersGrid">
-        </div>
+                    <h1>👑 Administradores</h1>
 
-    </div>
+                    <p>
+                        Equipe responsável pela House WIE.
+                    </p>
 
-</section>
+                </div>
 
+            </div>
 
-<!-- VAGAS -->
+            <div
+                class="admin-grid"
+                id="adminsGrid"
+            ></div>
 
-<section
-class="page"
-id="page-vacancies">
+        </section>
 
-    <div class="page-header">
+    </main>
 
-        <h2>
-            Vagas
-        </h2>
-
-        <p>
-            Personagens disponíveis e ocupados na House WIE.
-        </p>
-
-    </div>
-
-
-    <div class="card">
-
-        <div class="card-head">
-
-            <h3>
-                Vagas cadastradas
-            </h3>
-
-            <input
-            class="search"
-            id="vacancySearch"
-            type="search"
-            placeholder="Pesquisar..."
-            oninput="filterVacancies()"
-            >
-
-        </div>
-
-
-        <div id="vacancyError"></div>
-
-
-        <div
-        class="vacancies-grid"
-        id="vacanciesGrid">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ADMS -->
-
-<section
-class="page"
-id="page-admins">
-
-    <div class="page-header">
-
-        <h2>
-            Administradores
-        </h2>
-
-        <p>
-            Equipe responsável pela administração da House WIE.
-        </p>
-
-    </div>
-
-
-    <div
-    class="admin-grid"
-    id="adminGrid">
-    </div>
-
-</section>
-
-
-</main>
-
-</section>
+</div>
 
 
 <div
-class="toast"
-id="toast">
-</div>
+    class="toast"
+    id="toast"
+></div>
 
+
+<!-- =========================
+     FIREBASE
+========================= -->
 
 <script type="module">
 
 import {
     initializeApp
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
     getFirestore,
@@ -2097,14 +1356,14 @@ import {
     updateDoc,
     doc,
     setDoc,
-    getDoc
+    getDoc,
+    serverTimestamp
 }
-from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* =========================
-   FIREBASE
+   FIREBASE CONFIG
 ========================= */
 
 const firebaseConfig = {
@@ -2130,217 +1389,229 @@ const firebaseConfig = {
 };
 
 
-const app =
-initializeApp(firebaseConfig);
+const appFirebase =
+    initializeApp(firebaseConfig);
 
 const db =
-getFirestore(app);
+    getFirestore(appFirebase);
 
 
 /* =========================
-   ADMINS
+   ADMS
 ========================= */
 
 const ADMINS = {
 
-    "Gojo": {
-
+    "Gojo":{
         password:"2707alex",
-
         role:"Dono da House"
-
     },
 
-    "Tamsy": {
-
+    "Tamsy":{
         password:"1010ka3l",
-
         role:"Sub dono da House"
-
     },
 
-    "Oliver": {
-
+    "Oliver":{
         password:"2315oliver",
-
         role:"ADM"
-
     },
 
-    "Chuuya": {
-
+    "Chuuya":{
         password:"0734chu3ya",
-
         role:"ADM"
-
     }
 
 };
 
 
 /* =========================
-   DADOS
+   DATA
 ========================= */
 
 let requestsData = [];
-
 let membersData = [];
-
 let vacanciesData = [];
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function safe(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function normalizar(value){
+
+    return String(value ?? "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .toLowerCase()
+        .trim();
+
+}
+
+
+function chavePersonagem(personagem,obra){
+
+    return (
+        normalizar(personagem) +
+        "|" +
+        normalizar(obra)
+    );
+
+}
+
+
+function toast(message,type="success"){
+
+    const el =
+        document.getElementById("toast");
+
+    el.textContent = message;
+
+    el.className =
+        "toast show " + type;
+
+    setTimeout(()=>{
+
+        el.className = "toast";
+
+    },3000);
+
+}
+
+
+function imagemOuVazio(foto){
+
+    if(!foto){
+        return "";
+    }
+
+    return String(foto);
+
+}
 
 
 /* =========================
    LOGIN
 ========================= */
 
+window.togglePassword = function(){
+
+    const input =
+        document.getElementById("loginPassword");
+
+    const eye =
+        document.getElementById("eye");
+
+    if(input.type === "password"){
+
+        input.type = "text";
+        eye.textContent = "🙈";
+
+    }else{
+
+        input.type = "password";
+        eye.textContent = "👁️";
+
+    }
+
+};
+
+
 window.login = function(){
 
     const nameInput =
-    document.getElementById("name");
+        document.getElementById("loginName")
+        .value
+        .trim();
 
-    const passwordInput =
-    document.getElementById("password");
+    const password =
+        document.getElementById("loginPassword")
+        .value;
 
-    const error =
-    document.getElementById("loginError");
-
-
-    const typedName =
-    nameInput.value.trim();
-
-    const typedPassword =
-    passwordInput.value;
-
-
-    error.textContent = "";
-
-
-    if(!typedName){
-
-        error.textContent =
-        "Digite seu nome.";
-
-        nameInput.focus();
-
-        return;
-    }
-
-
-    if(!typedPassword){
-
-        error.textContent =
-        "Digite sua senha.";
-
-        passwordInput.focus();
-
-        return;
-    }
-
-
-    const adminName =
-    Object.keys(ADMINS).find(
-        key =>
-        key.toLowerCase() ===
-        typedName.toLowerCase()
-    );
-
+    const foundName =
+        Object.keys(ADMINS).find(
+            name =>
+                normalizar(name) ===
+                normalizar(nameInput)
+        );
 
     if(
-        !adminName ||
-        ADMINS[adminName].password !== typedPassword
+        foundName &&
+        ADMINS[foundName].password === password
     ){
 
-        error.textContent =
-        "Nome ou senha incorretos.";
+        sessionStorage.setItem(
+            "wieAdmin",
+            foundName
+        );
 
-        passwordInput.value = "";
+        sessionStorage.setItem(
+            "wieRole",
+            ADMINS[foundName].role
+        );
 
-        passwordInput.focus();
+        document.getElementById(
+            "loginError"
+        ).style.display = "none";
 
-        return;
+        openApp();
+
+    }else{
+
+        document.getElementById(
+            "loginError"
+        ).style.display = "block";
+
     }
 
-
-    sessionStorage.setItem(
-        "wieAdmin",
-        adminName
-    );
+};
 
 
-    sessionStorage.setItem(
-        "wieRole",
-        ADMINS[adminName].role
-    );
-
+function openApp(){
 
     document.getElementById(
         "loginScreen"
     ).style.display = "none";
 
+    document.getElementById(
+        "app"
+    ).style.display = "block";
+
+    const admin =
+        sessionStorage.getItem("wieAdmin");
+
+    const role =
+        sessionStorage.getItem("wieRole");
 
     document.getElementById(
-        "dashboard"
-    ).classList.add("active");
-
+        "loggedAdmin"
+    ).textContent = admin || "ADM";
 
     document.getElementById(
-        "logged"
-    ).textContent =
-    adminName;
+        "loggedRole"
+    ).textContent = role || "ADM";
 
+    loadAll();
 
-    renderAdmins();
+}
 
-    loadData();
-
-};
-
-
-/* =========================
-   MOSTRAR SENHA
-========================= */
-
-window.togglePassword = function(){
-
-    const password =
-    document.getElementById("password");
-
-    const eye =
-    document.getElementById("eyeButton");
-
-
-    if(
-        password.type === "password"
-    ){
-
-        password.type = "text";
-
-        eye.textContent = "🙈";
-
-    }else{
-
-        password.type = "password";
-
-        eye.textContent = "👁";
-
-    }
-
-};
-
-
-/* =========================
-   LOGOUT
-========================= */
 
 window.logout = function(){
 
-    sessionStorage.removeItem(
-        "wieAdmin"
-    );
-
-    sessionStorage.removeItem(
-        "wieRole"
-    );
+    sessionStorage.removeItem("wieAdmin");
+    sessionStorage.removeItem("wieRole");
 
     location.reload();
 
@@ -2348,242 +1619,65 @@ window.logout = function(){
 
 
 /* =========================
-   PÁGINAS
+   NAVIGATION
 ========================= */
 
-window.showPage =
-function(page,button){
+window.showPage = function(page,button){
 
     document
-    .querySelectorAll(".page")
-    .forEach(
-        p =>
-        p.classList.remove("active")
-    );
-
-
-    const target =
-    document.getElementById(
-        "page-" + page
-    );
-
-
-    if(target){
-
-        target.classList.add("active");
-
-    }
-
+        .querySelectorAll(".page")
+        .forEach(el=>{
+            el.classList.remove("active");
+        });
 
     document
-    .querySelectorAll(".menu button")
-    .forEach(
-        b =>
-        b.classList.remove("active")
-    );
+        .getElementById("page-"+page)
+        .classList.add("active");
 
+    document
+        .querySelectorAll(".nav button")
+        .forEach(el=>{
+            el.classList.remove("active");
+        });
 
     if(button){
-
         button.classList.add("active");
-
     }
 
 };
 
 
 /* =========================
-   TOAST
+   LOAD ALL
 ========================= */
 
-function toast(
-    message,
-    type="success"
-){
-
-    const element =
-    document.getElementById("toast");
-
-
-    element.textContent =
-    message;
-
-
-    element.className =
-    "toast show " + type;
-
-
-    clearTimeout(
-        window.toastTimer
-    );
-
-
-    window.toastTimer =
-    setTimeout(
-        () => {
-
-            element.className =
-            "toast";
-
-        },
-        3000
-    );
-
-}
-
-
-/* =========================
-   SEGURANÇA HTML
-========================= */
-
-function safe(value){
-
-    if(
-        value === null ||
-        value === undefined
-    ){
-
-        return "";
-
-    }
-
-
-    return String(value)
-
-    .replaceAll(
-        "&",
-        "&amp;"
-    )
-
-    .replaceAll(
-        "<",
-        "&lt;"
-    )
-
-    .replaceAll(
-        ">",
-        "&gt;"
-    )
-
-    .replaceAll(
-        '"',
-        "&quot;"
-    )
-
-    .replaceAll(
-        "'",
-        "&#039;"
-    );
-
-}
-
-
-/* =========================
-   NORMALIZAÇÃO
-   USADA PARA ENCONTRAR
-   A VAGA CORRESPONDENTE
-========================= */
-
-function normalizar(value){
-
-    return String(
-        value || ""
-    )
-    .normalize("NFD")
-    .replace(
-        /[\u0300-\u036f]/g,
-        ""
-    )
-    .toLowerCase()
-    .trim()
-    .replace(
-        /\s+/g,
-        " "
-    );
-
-}
-
-
-/* =========================
-   STATUS
-========================= */
-
-function statusClass(status){
-
-    const value =
-    String(status || "")
-    .toLowerCase();
-
-
-    if(value === "aprovado")
-        return "aprovado";
-
-    if(value === "recusado")
-        return "recusado";
-
-    if(value === "aberta")
-        return "aberta";
-
-    if(value === "fechada")
-        return "fechada";
-
-    return "pendente";
-
-}
-
-
-function statusText(status){
-
-    const value =
-    String(status || "")
-    .toLowerCase();
-
-
-    const map = {
-
-        pendente:"Pendente",
-
-        aprovado:"Aprovado",
-
-        recusado:"Recusado",
-
-        aberta:"Aberta",
-
-        fechada:"Fechada"
-
-    };
-
-
-    return map[value] ||
-    "Pendente";
-
-}
-
-
-/* =========================
-   CARREGAR TUDO
-========================= */
-
-async function loadData(){
+async function loadAll(){
 
     await Promise.all([
-
         loadRequests(),
-
         loadMembers(),
-
         loadVacancies()
-
     ]);
 
-
+    renderAdmins();
     updateStats();
 
 }
 
 
+window.reloadAll = async function(){
+
+    toast("Atualizando dados...");
+
+    await loadAll();
+
+    toast("Dados atualizados!");
+
+};
+
+
 /* =========================
-   SOLICITAÇÕES
+   REQUESTS
 ========================= */
 
 async function loadRequests(){
@@ -2591,40 +1685,28 @@ async function loadRequests(){
     try{
 
         const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "requests"
-            )
-        );
-
+            await getDocs(
+                collection(db,"requests")
+            );
 
         requestsData =
-        snapshot.docs.map(
-            item => ({
+            snapshot.docs.map(item=>({
 
                 id:item.id,
-
                 ...item.data()
 
-            })
-        );
-
+            }));
 
         renderRequests();
+        updateStats();
 
     }catch(error){
 
-        console.error(
-            error
-        );
+        console.error(error);
 
-
-        requestsData = [];
-
-
-        renderRequestsError(
-            "Não foi possível carregar as solicitações. Verifique as regras do Firestore."
+        toast(
+            "Erro ao carregar solicitações.",
+            "error"
         );
 
     }
@@ -2632,19 +1714,52 @@ async function loadRequests(){
 }
 
 
-function renderRequests(
-    list=requestsData
-){
+window.loadRequests =
+async function(){
 
-    const table =
-    document.getElementById(
-        "requestsTable"
-    );
+    await loadRequests();
+
+};
 
 
-    if(!list.length){
+/* =========================
+   RENDER REQUESTS
+========================= */
 
-        table.innerHTML = `
+window.renderRequests = function(){
+
+    const body =
+        document.getElementById(
+            "requestsBody"
+        );
+
+    const search =
+        normalizar(
+            document.getElementById(
+                "requestSearch"
+            )?.value
+        );
+
+    const filtered =
+        requestsData.filter(data=>{
+
+            const text =
+                normalizar(
+                    [
+                        data.nome,
+                        data.personagem,
+                        data.obra,
+                        data.idade
+                    ].join(" ")
+                );
+
+            return text.includes(search);
+
+        });
+
+    if(!filtered.length){
+
+        body.innerHTML = `
 
             <tr>
 
@@ -2652,12 +1767,11 @@ function renderRequests(
 
                     <div class="empty">
 
-                        <strong>
-                            Nenhuma solicitação encontrada.
-                        </strong>
+                        <div class="empty-icon">
+                            📭
+                        </div>
 
-                        Quando alguém preencher
-                        a recepção, aparecerá aqui.
+                        Nenhuma solicitação encontrada.
 
                     </div>
 
@@ -2668,205 +1782,138 @@ function renderRequests(
         `;
 
         return;
+
     }
 
 
-    table.innerHTML =
-    list.map(
-        data => {
+    body.innerHTML =
+        filtered.map(data=>{
 
             const status =
-            statusClass(
-                data.status
-            );
+                normalizar(data.status);
 
-
-            const photo =
-            data.foto ||
-            data.imagem ||
-            "";
-
-
-            const photoHTML =
-            photo
-            ?
-
-            `
-
-                <img
-                class="photo"
-                src="${safe(photo)}"
-                alt="Foto"
-                onclick="window.open(this.src,'_blank')"
-                style="cursor:pointer"
-                >
-
-            `
-
-            :
-
-            `
-
-                <div class="no-photo">
-                    🎭
-                </div>
-
-            `;
-
-
-            let actions = `
-
-                <span
-                class="status ${status}"
-                >
-                    ${statusText(
-                        data.status
-                    )}
-                </span>
-
-            `;
-
-
-            if(
-                !data.status ||
-                data.status === "pendente"
-            ){
-
-                actions = `
-
-                    <div class="actions">
-
-                        <button
-                        class="action approve"
-                        onclick="changeRequest('${safe(data.id)}','aprovado')"
-                        >
-                            ✓ Aprovar
-                        </button>
-
-                        <button
-                        class="action reject"
-                        onclick="changeRequest('${safe(data.id)}','recusado')"
-                        >
-                            ✕ Recusar
-                        </button>
-
-                    </div>
-
-                `;
-
-            }
-
+            const foto =
+                imagemOuVazio(data.foto);
 
             return `
 
                 <tr>
 
                     <td>
-                        ${photoHTML}
+
+                        ${
+                            foto
+                            ?
+                            `<img
+                                class="avatar"
+                                src="${safe(foto)}"
+                                onerror="this.style.display='none'"
+                            >`
+                            :
+                            `<div class="avatar"></div>`
+                        }
+
                     </td>
 
                     <td>
-                        ${safe(
-                            data.nome ||
-                            "—"
-                        )}
+                        <strong>
+                            ${safe(data.nome)}
+                        </strong>
                     </td>
 
                     <td>
-                        ${safe(
-                            data.idade ||
-                            "—"
-                        )}
+                        ${safe(data.idade)}
                     </td>
 
                     <td>
-                        ${safe(
-                            data.personagem ||
-                            "—"
-                        )}
+                        ${safe(data.personagem)}
                     </td>
 
                     <td>
-                        ${safe(
-                            data.obra ||
-                            "—"
-                        )}
+                        ${safe(data.obra)}
                     </td>
 
                     <td>
 
-                        <span
-                        class="status ${status}"
-                        >
-                            ${statusText(
-                                data.status
-                            )}
+                        <span class="status ${safe(status)}">
+
+                            ${
+                                status === "aprovado"
+                                ? "✓ Aprovado"
+                                :
+                                status === "recusado"
+                                ? "✕ Recusado"
+                                :
+                                "⏳ Pendente"
+                            }
+
                         </span>
 
                     </td>
 
                     <td>
-                        ${actions}
+
+                        <div class="actions">
+
+                            ${
+                                status !== "aprovado"
+                                ?
+                                `
+                                <button
+                                    class="action approve"
+                                    onclick="changeRequest('${safe(data.id)}','aprovado')"
+                                >
+                                    ✓ Aprovar
+                                </button>
+                                `
+                                :
+                                ""
+                            }
+
+                            ${
+                                status !== "recusado"
+                                ?
+                                `
+                                <button
+                                    class="action reject"
+                                    onclick="changeRequest('${safe(data.id)}','recusado')"
+                                >
+                                    ✕ Recusar
+                                </button>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
                     </td>
 
                 </tr>
 
             `;
 
-        }
-    ).join("");
+        }).join("");
 
-}
-
-
-function renderRequestsError(
-    message
-){
-
-    document.getElementById(
-        "requestError"
-    ).innerHTML = `
-
-        <div class="error-box">
-
-            ${safe(message)}
-
-        </div>
-
-    `;
-
-}
+};
 
 
 /* =========================
-   APROVAR / RECUSAR
+   APPROVE / REJECT
 ========================= */
 
 window.changeRequest =
-async function(
-    id,
-    status
-){
+async function(id,status){
 
     try{
 
         const requestRef =
-        doc(
-            db,
-            "requests",
-            id
-        );
-
+            doc(db,"requests",id);
 
         const requestSnapshot =
-        await getDoc(
-            requestRef
-        );
+            await getDoc(requestRef);
 
-
-        if(
-            !requestSnapshot.exists()
-        ){
+        if(!requestSnapshot.exists()){
 
             toast(
                 "Solicitação não encontrada.",
@@ -2877,15 +1924,11 @@ async function(
 
         }
 
-
         const data =
-        requestSnapshot.data();
+            requestSnapshot.data();
 
 
-        /*
-         * PRIMEIRO:
-         * altera o status da solicitação
-         */
+        /* ALTERA STATUS */
 
         await updateDoc(
             requestRef,
@@ -2895,231 +1938,201 @@ async function(
         );
 
 
-        /*
-         * SE APROVADO:
-         * cria o membro
-         * e fecha a vaga correspondente
-         */
+        /* =========================
+           APROVADO
+        ========================= */
 
-        if(
-            status === "aprovado"
-        ){
+        if(status === "aprovado"){
 
-            /* =========================
-               CRIAR MEMBRO
-            ========================= */
+            /* -------------------------
+               CRIA MEMBRO
+            ------------------------- */
+
+            const memberData = {
+
+                nome:data.nome || "",
+                idade:data.idade || "",
+                personagem:data.personagem || "",
+                obra:data.obra || "",
+                foto:data.foto || "",
+                requestId:id,
+                criadoEm:
+                    data.criadoEm || serverTimestamp()
+
+            };
+
 
             await setDoc(
-                doc(
-                    db,
-                    "members",
-                    id
-                ),
+                doc(db,"members",id),
+                memberData,
                 {
-
-                    nome:
-                    data.nome ||
-                    "",
-
-                    idade:
-                    data.idade ||
-                    "",
-
-                    personagem:
-                    data.personagem ||
-                    "",
-
-                    obra:
-                    data.obra ||
-                    "",
-
-                    foto:
-                    data.foto ||
-                    data.imagem ||
-                    "",
-
-                    requestId:
-                    id,
-
-                    criadoEm:
-                    data.criadoEm ||
-                    null
-
+                    merge:true
                 }
             );
 
 
-            /* =========================
-               FECHAR VAGA
-            ========================= */
-
-            const personagemSolicitado =
-            normalizar(
-                data.personagem
-            );
-
-
-            const obraSolicitada =
-            normalizar(
-                data.obra
-            );
-
-
-            /*
-             * Busca todas as vagas cadastradas.
-             */
+            /* -------------------------
+               PROCURA VAGA EXISTENTE
+            ------------------------- */
 
             const vacanciesSnapshot =
-            await getDocs(
-                collection(
-                    db,
-                    "vacancies"
-                )
-            );
-
-
-            let vagaEncontrada = null;
-
-
-            vacanciesSnapshot.forEach(
-                vacancyDoc => {
-
-                    const vaga =
-                    vacancyDoc.data();
-
-
-                    const personagemVaga =
-                    normalizar(
-                        vaga.personagem
-                    );
-
-
-                    const obraVaga =
-                    normalizar(
-                        vaga.obra
-                    );
-
-
-                    /*
-                     * Primeiro tenta
-                     * personagem + obra.
-                     */
-
-                    if(
-                        personagemSolicitado &&
-                        obraSolicitada &&
-                        personagemVaga ===
-                        personagemSolicitado &&
-                        obraVaga ===
-                        obraSolicitada
-                    ){
-
-                        vagaEncontrada =
-                        vacancyDoc;
-
-                    }
-
-                }
-            );
-
-
-            /*
-             * Se não encontrou com
-             * personagem + obra,
-             * tenta somente personagem.
-             *
-             * Isso ajuda caso alguma
-             * vaga antiga não tenha
-             * o campo "obra".
-             */
-
-            if(!vagaEncontrada){
-
-                vacanciesSnapshot.forEach(
-                    vacancyDoc => {
-
-                        const vaga =
-                        vacancyDoc.data();
-
-
-                        const personagemVaga =
-                        normalizar(
-                            vaga.personagem
-                        );
-
-
-                        if(
-                            personagemSolicitado &&
-                            personagemVaga ===
-                            personagemSolicitado
-                        ){
-
-                            vagaEncontrada =
-                            vacancyDoc;
-
-                        }
-
-                    }
+                await getDocs(
+                    collection(db,"vacancies")
                 );
 
-            }
+            let existingVacancy = null;
+
+            const characterKey =
+                data.characterKey ||
+                chavePersonagem(
+                    data.personagem,
+                    data.obra
+                );
 
 
-            /*
-             * Só atualiza se a vaga
-             * realmente existir.
-             *
-             * Não cria vaga nova.
-             */
+            vacanciesSnapshot.forEach(item=>{
 
-            if(vagaEncontrada){
+                const vacancy =
+                    item.data();
+
+                const vacancyKey =
+                    vacancy.characterKey ||
+                    chavePersonagem(
+                        vacancy.personagem,
+                        vacancy.obra
+                    );
+
+                if(
+                    vacancyKey === characterKey
+                ){
+
+                    existingVacancy = {
+
+                        id:item.id,
+                        data:vacancy
+
+                    };
+
+                }
+
+            });
+
+
+            /* -------------------------
+               FECHA VAGA EXISTENTE
+            ------------------------- */
+
+            if(existingVacancy){
 
                 await updateDoc(
 
                     doc(
                         db,
                         "vacancies",
-                        vagaEncontrada.id
+                        existingVacancy.id
                     ),
 
                     {
-                        status:"fechada",
 
-                        ocupada:true,
+                        personagem:
+                            data.personagem || "",
+
+                        obra:
+                            data.obra || "",
+
+                        characterKey:
+                            characterKey,
+
+                        status:
+                            "fechada",
+
+                        ocupada:
+                            true,
 
                         membro:
-                        data.nome ||
-                        "",
+                            data.nome || "",
 
                         requestId:
-                        id
+                            id,
+
+                        foto:
+                            data.foto || "",
+
+                        imagem:
+                            existingVacancy.data.imagem || ""
 
                     }
 
                 );
 
+            }
 
-                toast(
-                    "Solicitação aprovada e vaga fechada! 🎃",
-                    "success"
-                );
+            /* -------------------------
+               CRIA VAGA FECHADA
+               SE NÃO EXISTIR
+            ------------------------- */
 
-            }else{
+            else{
 
-                /*
-                 * A aprovação continua funcionando,
-                 * mas avisa que não encontrou uma
-                 * vaga correspondente.
-                 */
+                await setDoc(
 
-                toast(
-                    "Solicitação aprovada! A vaga correspondente não foi encontrada.",
-                    "success"
+                    doc(
+                        db,
+                        "vacancies",
+                        id
+                    ),
+
+                    {
+
+                        personagem:
+                            data.personagem || "",
+
+                        obra:
+                            data.obra || "",
+
+                        characterKey:
+                            characterKey,
+
+                        status:
+                            "fechada",
+
+                        ocupada:
+                            true,
+
+                        membro:
+                            data.nome || "",
+
+                        requestId:
+                            id,
+
+                        foto:
+                            data.foto || "",
+
+                        imagem:
+                            "",
+
+                        criadoEm:
+                            serverTimestamp()
+
+                    }
+
                 );
 
             }
 
-        }else{
+
+            toast(
+                "Solicitação aprovada! A personagem foi adicionada às vagas fechadas."
+            );
+
+        }
+
+
+        /* =========================
+           RECUSADO
+        ========================= */
+
+        else{
 
             toast(
                 "Solicitação recusada.",
@@ -3129,15 +2142,8 @@ async function(
         }
 
 
-        /*
-         * Recarrega tudo para a mudança
-         * aparecer imediatamente.
-         */
-
         await loadRequests();
-
         await loadMembers();
-
         await loadVacancies();
 
         updateStats();
@@ -3150,7 +2156,6 @@ async function(
             error
         );
 
-
         toast(
             "Não foi possível alterar a solicitação. Verifique as regras do Firestore.",
             "error"
@@ -3162,7 +2167,7 @@ async function(
 
 
 /* =========================
-   MEMBROS
+   MEMBERS
 ========================= */
 
 async function loadMembers(){
@@ -3170,76 +2175,87 @@ async function loadMembers(){
     try{
 
         const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "members"
-            )
-        );
-
+            await getDocs(
+                collection(db,"members")
+            );
 
         membersData =
-        snapshot.docs.map(
-            item => ({
+            snapshot.docs.map(item=>({
 
                 id:item.id,
-
                 ...item.data()
 
-            })
-        );
-
+            }));
 
         renderMembers();
+        updateStats();
 
     }catch(error){
 
-        console.error(
-            error
+        console.error(error);
+
+        toast(
+            "Erro ao carregar membros.",
+            "error"
         );
-
-
-        membersData = [];
-
-
-        document.getElementById(
-            "memberError"
-        ).innerHTML = `
-
-            <div class="error-box">
-
-                Não foi possível carregar os membros.
-
-            </div>
-
-        `;
 
     }
 
 }
 
 
-function renderMembers(
-    list=membersData
-){
+window.loadMembers =
+async function(){
+
+    await loadMembers();
+
+};
+
+
+window.renderMembers = function(){
 
     const grid =
-    document.getElementById(
-        "membersGrid"
-    );
+        document.getElementById(
+            "membersGrid"
+        );
+
+    const search =
+        normalizar(
+            document.getElementById(
+                "memberSearch"
+            )?.value
+        );
 
 
-    if(!list.length){
+    const filtered =
+        membersData.filter(data=>{
+
+            return normalizar(
+                [
+                    data.nome,
+                    data.personagem,
+                    data.obra
+                ].join(" ")
+            ).includes(search);
+
+        });
+
+
+    if(!filtered.length){
 
         grid.innerHTML = `
 
-            <div class="empty">
+            <div class="card">
 
-                <strong>
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        👥
+                    </div>
+
                     Nenhum membro cadastrado.
-                </strong>
 
-                Os membros aprovados aparecerão aqui.
+                </div>
 
             </div>
 
@@ -3251,95 +2267,56 @@ function renderMembers(
 
 
     grid.innerHTML =
-    list.map(
-        data => {
+        filtered.map(data=>{
 
-            const photo =
-            data.foto ||
-            data.imagem ||
-            "";
-
-
-            const photoHTML =
-            photo
-            ?
-
-            `
-
-                <img
-                class="photo"
-                src="${safe(photo)}"
-                alt="Foto"
-                onclick="window.open(this.src,'_blank')"
-                style="cursor:pointer"
-                >
-
-            `
-
-            :
-
-            `
-
-                <div class="no-photo">
-                    👤
-                </div>
-
-            `;
-
+            const foto =
+                imagemOuVazio(data.foto);
 
             return `
 
                 <div class="member-card">
 
-                    ${photoHTML}
+                    ${
+                        foto
+                        ?
+                        `<img
+                            class="member-photo"
+                            src="${safe(foto)}"
+                            onerror="this.style.display='none'"
+                        >`
+                        :
+                        `<div class="member-photo"></div>`
+                    }
 
-                    <div class="member-info">
+                    <h3>
+                        ${safe(data.nome)}
+                    </h3>
 
-                        <strong>
-                            ${safe(
-                                data.nome ||
-                                "Sem nome"
-                            )}
-                        </strong>
+                    <p>
+                        Idade: ${safe(data.idade)}
+                    </p>
 
-                        <p>
-                            Idade:
-                            ${safe(
-                                data.idade ||
-                                "—"
-                            )}
-                        </p>
+                    <p>
+                        Personagem:
+                        ${safe(data.personagem)}
+                    </p>
 
-                        <p>
-                            Personagem:
-                            ${safe(
-                                data.personagem ||
-                                "—"
-                            )}
-                        </p>
-
-                        <p>
-                            Obra:
-                            ${safe(
-                                data.obra ||
-                                "—"
-                            )}
-                        </p>
-
-                    </div>
+                    <p>
+                        Obra:
+                        ${safe(data.obra)}
+                    </p>
 
                 </div>
 
             `;
 
-        }
-    ).join("");
+        }).join("");
 
-}
+};
 
 
 /* =========================
-   VAGAS
+   VACANCIES
 ========================= */
 
 async function loadVacancies(){
@@ -3347,222 +2324,508 @@ async function loadVacancies(){
     try{
 
         const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "vacancies"
-            )
-        );
-
+            await getDocs(
+                collection(db,"vacancies")
+            );
 
         vacanciesData =
-        snapshot.docs.map(
-            item => ({
+            snapshot.docs.map(item=>({
 
                 id:item.id,
-
                 ...item.data()
 
-            })
+            }));
+
+        renderVacancies();
+        updateStats();
+
+    }catch(error){
+
+        console.error(error);
+
+        toast(
+            "Erro ao carregar vagas.",
+            "error"
+        );
+
+    }
+
+}
+
+
+window.loadVacancies =
+async function(){
+
+    await loadVacancies();
+
+};
+
+
+/* =========================
+   RENDER VACANCIES
+========================= */
+
+window.renderVacancies = function(){
+
+    const open =
+        document.getElementById(
+            "openVacancies"
+        );
+
+    const closed =
+        document.getElementById(
+            "closedVacancies"
         );
 
 
-        renderVacancies();
+    const openData =
+        vacanciesData.filter(data=>{
+
+            const status =
+                normalizar(data.status);
+
+            return (
+                status !== "fechada" &&
+                data.ocupada !== true
+            );
+
+        });
+
+
+    const closedData =
+        vacanciesData.filter(data=>{
+
+            const status =
+                normalizar(data.status);
+
+            return (
+                status === "fechada" ||
+                data.ocupada === true
+            );
+
+        });
+
+
+    /* =========================
+       ABERTAS
+    ========================= */
+
+    if(!openData.length){
+
+        open.innerHTML = `
+
+            <div class="card">
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        🟢
+                    </div>
+
+                    Nenhuma vaga aberta cadastrada.
+
+                </div>
+
+            </div>
+
+        `;
+
+    }else{
+
+        open.innerHTML =
+            openData.map(
+                vacancyCard
+            ).join("");
+
+    }
+
+
+    /* =========================
+       FECHADAS
+    ========================= */
+
+    if(!closedData.length){
+
+        closed.innerHTML = `
+
+            <div class="card">
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        🔒
+                    </div>
+
+                    Nenhuma vaga fechada cadastrada.
+
+                </div>
+
+            </div>
+
+        `;
+
+    }else{
+
+        closed.innerHTML =
+            closedData.map(
+                vacancyCard
+            ).join("");
+
+    }
+
+};
+
+
+function vacancyCard(data){
+
+    const imagem =
+        data.imagem ||
+        data.foto ||
+        "";
+
+
+    const fechada =
+        normalizar(data.status) === "fechada" ||
+        data.ocupada === true;
+
+
+    return `
+
+        <div class="vacancy-card">
+
+            ${
+                imagem
+                ?
+                `
+                <img
+                    class="vacancy-image"
+                    src="${safe(imagem)}"
+                    onerror="
+                        this.style.display='none';
+                        this.nextElementSibling.style.display='flex';
+                    "
+                >
+
+                <div
+                    class="vacancy-placeholder"
+                    style="display:none"
+                >
+                    🎭
+                </div>
+                `
+                :
+                `
+                <div class="vacancy-placeholder">
+                    🎭
+                </div>
+                `
+            }
+
+
+            <div class="vacancy-info">
+
+                <h3>
+                    ${safe(data.personagem)}
+                </h3>
+
+                <p>
+                    ${safe(data.obra)}
+                </p>
+
+
+                ${
+                    fechada
+                    ?
+                    `
+                    <span class="vacancy-badge closed">
+                        🔒 FECHADA
+                    </span>
+                    `
+                    :
+                    `
+                    <span class="vacancy-badge open">
+                        🟢 ABERTA
+                    </span>
+                    `
+                }
+
+
+                ${
+                    data.membro
+                    ?
+                    `
+                    <p class="occupied-by">
+                        👤 Ocupada por:
+                        <b>
+                            ${safe(data.membro)}
+                        </b>
+                    </p>
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   SINCRONIZAR APROVADOS
+========================= */
+
+window.syncApprovedRequests =
+async function(){
+
+    try{
+
+        toast(
+            "Sincronizando solicitações aprovadas..."
+        );
+
+
+        const requestSnapshot =
+            await getDocs(
+                collection(db,"requests")
+            );
+
+
+        const approved =
+            requestSnapshot.docs.filter(item=>{
+
+                return normalizar(
+                    item.data().status
+                ) === "aprovado";
+
+            });
+
+
+        if(!approved.length){
+
+            toast(
+                "Não existem solicitações aprovadas para sincronizar."
+            );
+
+            return;
+
+        }
+
+
+        const vacanciesSnapshot =
+            await getDocs(
+                collection(db,"vacancies")
+            );
+
+
+        const vacancies =
+            vacanciesSnapshot.docs.map(item=>({
+
+                id:item.id,
+                ...item.data()
+
+            }));
+
+
+        let created = 0;
+        let updated = 0;
+
+
+        for(
+            const requestDoc
+            of approved
+        ){
+
+            const data =
+                requestDoc.data();
+
+            const requestId =
+                requestDoc.id;
+
+
+            const characterKey =
+                data.characterKey ||
+                chavePersonagem(
+                    data.personagem,
+                    data.obra
+                );
+
+
+            let existing = null;
+
+
+            for(
+                const vacancy
+                of vacancies
+            ){
+
+                const vacancyKey =
+                    vacancy.characterKey ||
+                    chavePersonagem(
+                        vacancy.personagem,
+                        vacancy.obra
+                    );
+
+
+                if(
+                    vacancyKey === characterKey
+                    ||
+                    vacancy.requestId === requestId
+                    ||
+                    vacancy.id === requestId
+                ){
+
+                    existing = vacancy;
+                    break;
+
+                }
+
+            }
+
+
+            const vacancyData = {
+
+                personagem:
+                    data.personagem || "",
+
+                obra:
+                    data.obra || "",
+
+                characterKey:
+                    characterKey,
+
+                status:
+                    "fechada",
+
+                ocupada:
+                    true,
+
+                membro:
+                    data.nome || "",
+
+                requestId:
+                    requestId,
+
+                foto:
+                    data.foto || "",
+
+                imagem:
+                    existing?.imagem || "",
+
+                atualizadoEm:
+                    serverTimestamp()
+
+            };
+
+
+            if(existing){
+
+                await updateDoc(
+
+                    doc(
+                        db,
+                        "vacancies",
+                        existing.id
+                    ),
+
+                    vacancyData
+
+                );
+
+                updated++;
+
+            }else{
+
+                await setDoc(
+
+                    doc(
+                        db,
+                        "vacancies",
+                        requestId
+                    ),
+
+                    {
+                        ...vacancyData,
+                        criadoEm:
+                            serverTimestamp()
+                    }
+
+                );
+
+                created++;
+
+            }
+
+
+            /* GARANTE MEMBRO */
+
+            await setDoc(
+
+                doc(
+                    db,
+                    "members",
+                    requestId
+                ),
+
+                {
+
+                    nome:
+                        data.nome || "",
+
+                    idade:
+                        data.idade || "",
+
+                    personagem:
+                        data.personagem || "",
+
+                    obra:
+                        data.obra || "",
+
+                    foto:
+                        data.foto || "",
+
+                    requestId:
+                        requestId
+
+                },
+
+                {
+                    merge:true
+                }
+
+            );
+
+        }
+
+
+        await loadVacancies();
+        await loadMembers();
+        updateStats();
+
+
+        toast(
+            `Sincronização concluída! ${created} vaga(s) criada(s) e ${updated} atualizada(s).`
+        );
+
 
     }catch(error){
 
         console.error(
+            "Erro na sincronização:",
             error
         );
 
-
-        vacanciesData = [];
-
-
-        document.getElementById(
-            "vacancyError"
-        ).innerHTML = `
-
-            <div class="error-box">
-
-                Não foi possível carregar as vagas.
-
-            </div>
-
-        `;
+        toast(
+            "Erro ao sincronizar. Verifique as regras do Firestore.",
+            "error"
+        );
 
     }
 
-}
-
-
-function renderVacancies(
-    list=vacanciesData
-){
-
-    const grid =
-    document.getElementById(
-        "vacanciesGrid"
-    );
-
-
-    if(!list.length){
-
-        grid.innerHTML = `
-
-            <div class="empty">
-
-                <strong>
-                    Nenhuma vaga cadastrada.
-                </strong>
-
-                As vagas cadastradas no Firestore aparecerão aqui.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    grid.innerHTML =
-    list.map(
-        data => {
-
-            const image =
-            data.imagem ||
-            data.foto ||
-            "";
-
-
-            /*
-             * Qualquer status diferente
-             * de "fechada" continua aberta.
-             */
-
-            const status =
-            String(
-                data.status ||
-                ""
-            ).toLowerCase() ===
-            "fechada"
-
-            ?
-
-            "fechada"
-
-            :
-
-            "aberta";
-
-
-            const imageHTML =
-            image
-            ?
-
-            `
-
-                <img
-                class="vacancy-image"
-                src="${safe(image)}"
-                alt="${safe(
-                    data.personagem ||
-                    "Personagem"
-                )}"
-                >
-
-            `
-
-            :
-
-            `
-
-                <div class="vacancy-no-image">
-                    🎭
-                </div>
-
-            `;
-
-
-            return `
-
-                <div class="vacancy-card">
-
-                    ${imageHTML}
-
-                    <div class="vacancy-body">
-
-                        <div class="vacancy-top">
-
-                            <h4>
-                                ${safe(
-                                    data.personagem ||
-                                    "Sem personagem"
-                                )}
-                            </h4>
-
-                            <span
-                            class="status ${status}"
-                            >
-                                ${statusText(status)}
-                            </span>
-
-                        </div>
-
-
-                        <p>
-                            ${safe(
-                                data.obra ||
-                                "Obra não informada"
-                            )}
-                        </p>
-
-
-                        ${
-                            status === "fechada"
-                            ?
-
-                            `
-
-                                <p
-                                style="
-                                color:#ff718d;
-                                font-weight:bold;
-                                "
-                                >
-                                    🔒 Personagem ocupado
-                                </p>
-
-                            `
-
-                            :
-
-                            `
-
-                                <p
-                                style="
-                                color:#61e6a4;
-                                font-weight:bold;
-                                "
-                                >
-                                    🟢 Personagem disponível
-                                </p>
-
-                            `
-                        }
-
-                    </div>
-
-                </div>
-
-            `;
-
-        }
-    ).join("");
-
-}
+};
 
 
 /* =========================
@@ -3572,44 +2835,27 @@ function renderVacancies(
 function renderAdmins(){
 
     const grid =
-    document.getElementById(
-        "adminGrid"
-    );
-
-
-    const names =
-    Object.keys(
-        ADMINS
-    );
-
-
-    document.getElementById(
-        "statAdmins"
-    ).textContent =
-    names.length;
+        document.getElementById(
+            "adminsGrid"
+        );
 
 
     grid.innerHTML =
-    names.map(
-        name => {
-
-            const admin =
-            ADMINS[name];
-
-
-            const first =
-            name
-            .trim()
-            .charAt(0)
-            .toUpperCase();
-
+        Object.entries(ADMINS)
+        .map(([name,data])=>{
 
             return `
 
                 <div class="admin-card">
 
                     <div class="admin-avatar">
-                        ${safe(first)}
+
+                        ${safe(
+                            name
+                            .charAt(0)
+                            .toUpperCase()
+                        )}
+
                     </div>
 
                     <h3>
@@ -3617,21 +2863,15 @@ function renderAdmins(){
                     </h3>
 
                     <p>
-                        ${safe(
-                            admin.role
-                        )}
+                        ${safe(data.role)}
                     </p>
-
-                    <div class="admin-online">
-                        Disponível
-                    </div>
 
                 </div>
 
             `;
 
-        }
-    ).join("");
+        })
+        .join("");
 
 }
 
@@ -3645,235 +2885,93 @@ function updateStats(){
     document.getElementById(
         "statRequests"
     ).textContent =
-    requestsData.length;
+        requestsData.length;
 
 
     document.getElementById(
         "statMembers"
     ).textContent =
-    membersData.length;
+        membersData.length;
 
 
     document.getElementById(
         "statVacancies"
     ).textContent =
-    vacanciesData.length;
+        vacanciesData.filter(data=>{
+
+            return (
+                normalizar(data.status) === "fechada" ||
+                data.ocupada === true
+            );
+
+        }).length;
 
 
     document.getElementById(
         "statAdmins"
     ).textContent =
-    Object.keys(
-        ADMINS
-    ).length;
+        Object.keys(ADMINS).length;
 
 }
 
 
 /* =========================
-   FILTRO SOLICITAÇÕES
+   ENTER LOGIN
 ========================= */
 
-window.filterRequests =
-function(){
+document
+    .getElementById("loginPassword")
+    .addEventListener(
+        "keydown",
+        event=>{
 
-    const term =
-    document.getElementById(
-        "requestSearch"
-    )
-    .value
-    .toLowerCase()
-    .trim();
+            if(event.key === "Enter"){
 
+                login();
 
-    const filtered =
-    requestsData.filter(
-        data => {
-
-            const text = [
-
-                data.nome,
-
-                data.idade,
-
-                data.personagem,
-
-                data.obra,
-
-                data.status
-
-            ]
-            .join(" ")
-            .toLowerCase();
-
-
-            return text.includes(
-                term
-            );
+            }
 
         }
     );
 
 
-    renderRequests(
-        filtered
-    );
+document
+    .getElementById("loginName")
+    .addEventListener(
+        "keydown",
+        event=>{
 
-};
+            if(event.key === "Enter"){
 
+                login();
 
-/* =========================
-   FILTRO MEMBROS
-========================= */
-
-window.filterMembers =
-function(){
-
-    const term =
-    document.getElementById(
-        "memberSearch"
-    )
-    .value
-    .toLowerCase()
-    .trim();
-
-
-    const filtered =
-    membersData.filter(
-        data => {
-
-            const text = [
-
-                data.nome,
-
-                data.idade,
-
-                data.personagem,
-
-                data.obra
-
-            ]
-            .join(" ")
-            .toLowerCase();
-
-
-            return text.includes(
-                term
-            );
+            }
 
         }
     );
 
 
-    renderMembers(
-        filtered
-    );
-
-};
-
-
 /* =========================
-   FILTRO VAGAS
-========================= */
-
-window.filterVacancies =
-function(){
-
-    const term =
-    document.getElementById(
-        "vacancySearch"
-    )
-    .value
-    .toLowerCase()
-    .trim();
-
-
-    const filtered =
-    vacanciesData.filter(
-        data => {
-
-            const text = [
-
-                data.personagem,
-
-                data.obra,
-
-                data.status
-
-            ]
-            .join(" ")
-            .toLowerCase();
-
-
-            return text.includes(
-                term
-            );
-
-        }
-    );
-
-
-    renderVacancies(
-        filtered
-    );
-
-};
-
-
-/* =========================
-   RESTAURAR LOGIN
+   RESTORE SESSION
 ========================= */
 
 const savedAdmin =
-sessionStorage.getItem(
-    "wieAdmin"
-);
+    sessionStorage.getItem(
+        "wieAdmin"
+    );
 
 
-if(savedAdmin){
+if(
+    savedAdmin &&
+    ADMINS[savedAdmin]
+){
 
-    if(
-        ADMINS[savedAdmin]
-    ){
-
-        document.getElementById(
-            "loginScreen"
-        ).style.display =
-        "none";
-
-
-        document.getElementById(
-            "dashboard"
-        ).classList.add(
-            "active"
-        );
-
-
-        document.getElementById(
-            "logged"
-        ).textContent =
-        savedAdmin;
-
-
-        renderAdmins();
-
-        loadData();
-
-    }else{
-
-        sessionStorage.removeItem(
-            "wieAdmin"
-        );
-
-        sessionStorage.removeItem(
-            "wieRole"
-        );
-
-    }
+    openApp();
 
 }
 
 </script>
 
 </body>
+
     </html>
