@@ -2,9 +2,7 @@
 <html lang="pt-BR">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>House WIE • Recepção</title>
@@ -22,9 +20,8 @@
     --purple-dark:#170d2b;
     --purple-light:#b78aff;
     --yellow:#ffd84d;
-    --yellow-light:#fff0a6;
     --black:#08050e;
-    --card:rgba(25,15,42,.82);
+    --card:rgba(25,15,42,.84);
     --border:rgba(183,138,255,.25);
     --text:#fff;
     --muted:#c9bfd8;
@@ -40,8 +37,6 @@ body{
         radial-gradient(circle at 50% -10%,#43216d 0%,#170d2b 35%,#08050e 75%);
     overflow-x:hidden;
 }
-
-/* FUNDO */
 
 .background{
     position:fixed;
@@ -104,8 +99,14 @@ body{
 }
 
 @keyframes twinkle{
-    from{opacity:.2;transform:scale(.7)}
-    to{opacity:1;transform:scale(1.4)}
+    from{
+        opacity:.2;
+        transform:scale(.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1.4);
+    }
 }
 
 .bat{
@@ -126,9 +127,17 @@ body{
 }
 
 @keyframes batMove{
-    0%{transform:translateX(0) translateY(0)}
-    50%{transform:translateX(55vw) translateY(45px)}
-    100%{transform:translateX(110vw) translateY(0)}
+    0%{
+        transform:translateX(0) translateY(0);
+    }
+
+    50%{
+        transform:translateX(55vw) translateY(45px);
+    }
+
+    100%{
+        transform:translateX(110vw) translateY(0);
+    }
 }
 
 .witch{
@@ -141,8 +150,13 @@ body{
 }
 
 @keyframes witchFloat{
-    0%,100%{transform:translateY(0) rotate(-3deg)}
-    50%{transform:translateY(-12px) rotate(3deg)}
+    0%,100%{
+        transform:translateY(0) rotate(-3deg);
+    }
+
+    50%{
+        transform:translateY(-12px) rotate(3deg);
+    }
 }
 
 .web{
@@ -162,15 +176,10 @@ body{
     transform:rotate(180deg);
 }
 
-/* CONTEÚDO */
-
 .page{
     position:relative;
     z-index:1;
-    width:100%;
 }
-
-/* HEADER */
 
 header{
     width:100%;
@@ -233,8 +242,6 @@ header{
     box-shadow:0 7px 20px rgba(255,216,77,.2);
 }
 
-/* HERO */
-
 .hero{
     text-align:center;
     padding:70px 20px 35px;
@@ -246,8 +253,13 @@ header{
 }
 
 @keyframes pumpkinPulse{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.08)}
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
 }
 
 .hero h1{
@@ -267,15 +279,11 @@ header{
     font-size:15px;
 }
 
-/* CONTAINER */
-
 .container{
     width:min(1050px,92%);
     margin:auto;
     padding-bottom:70px;
 }
-
-/* SEÇÕES */
 
 .section-title{
     text-align:center;
@@ -292,115 +300,10 @@ header{
     font-size:13px;
 }
 
-/* VAGAS */
-
-.vagas-wrapper{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.vagas-box{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:20px;
-    backdrop-filter:blur(18px);
-    box-shadow:0 20px 50px rgba(0,0,0,.25);
-}
-
-.vagas-box h3{
-    margin-bottom:14px;
-    font-size:17px;
-}
-
-.vagas-box.open h3{
-    color:var(--success);
-}
-
-.vagas-box.closed h3{
-    color:var(--danger);
-}
-
-.vagas-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.vaga-card{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:11px;
-    border-radius:15px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.06);
-}
-
-.vaga-image{
-    width:52px;
-    height:52px;
-    flex:none;
-    border-radius:12px;
-    object-fit:cover;
-    background:rgba(255,255,255,.07);
-}
-
-.vaga-info{
-    min-width:0;
-    flex:1;
-}
-
-.vaga-info strong{
-    display:block;
-    font-size:14px;
-}
-
-.vaga-info span{
-    display:block;
-    color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
-}
-
-.vaga-button{
-    border:0;
-    border-radius:10px;
-    padding:8px 10px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:bold;
-    background:var(--purple);
-    color:white;
-}
-
-.vaga-button:hover{
-    filter:brightness(1.15);
-}
-
-.closed-card{
-    opacity:.7;
-}
-
-.closed-label{
-    font-size:10px;
-    font-weight:bold;
-    color:var(--danger);
-    white-space:nowrap;
-}
-
-.empty{
-    color:#9d93ac;
-    font-size:12px;
-    text-align:center;
-    padding:15px 5px;
-}
-
-/* FORM */
+/* FICHA */
 
 .form-area{
-    margin-top:30px;
+    margin-top:10px;
     display:flex;
     justify-content:center;
 }
@@ -555,7 +458,111 @@ header{
     border:1px solid rgba(125,255,178,.18);
 }
 
-/* RODAPÉ */
+/* VAGAS */
+
+.vagas-wrapper{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:10px;
+}
+
+.vagas-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:20px;
+    backdrop-filter:blur(18px);
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.vagas-box h3{
+    margin-bottom:14px;
+    font-size:17px;
+}
+
+.vagas-box.open h3{
+    color:var(--success);
+}
+
+.vagas-box.closed h3{
+    color:var(--danger);
+}
+
+.vagas-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.vaga-card{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:11px;
+    border-radius:15px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.vaga-image{
+    width:52px;
+    height:52px;
+    flex:none;
+    border-radius:12px;
+    object-fit:cover;
+    background:rgba(255,255,255,.07);
+}
+
+.vaga-info{
+    min-width:0;
+    flex:1;
+}
+
+.vaga-info strong{
+    display:block;
+    font-size:14px;
+}
+
+.vaga-info span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
+}
+
+.vaga-button{
+    border:0;
+    border-radius:10px;
+    padding:8px 10px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:bold;
+    background:var(--purple);
+    color:white;
+}
+
+.vaga-button:hover{
+    filter:brightness(1.15);
+}
+
+.closed-card{
+    opacity:.7;
+}
+
+.closed-label{
+    font-size:10px;
+    font-weight:bold;
+    color:var(--danger);
+    white-space:nowrap;
+}
+
+.empty{
+    color:#9d93ac;
+    font-size:12px;
+    text-align:center;
+    padding:15px 5px;
+}
 
 footer{
     text-align:center;
@@ -564,8 +571,6 @@ footer{
     padding:20px;
     border-top:1px solid rgba(255,255,255,.06);
 }
-
-/* RESPONSIVO */
 
 @media(max-width:760px){
 
@@ -602,7 +607,6 @@ footer{
     .form-card{
         padding:21px;
     }
-
 }
 
 @media(max-width:420px){
@@ -622,7 +626,6 @@ footer{
     .vaga-button{
         padding:7px 8px;
     }
-
 }
 
 </style>
@@ -688,8 +691,7 @@ footer{
 
     <p>
         Seja bem-vindo à nossa recepção!
-        Escolha seu personagem, preencha sua ficha
-        e faça parte da House WIE. 🕸️
+        Preencha sua ficha e faça parte da House WIE. 🕸️
     </p>
 
 </section>
@@ -698,212 +700,215 @@ footer{
 <main class="container">
 
 
-    <!-- VAGAS -->
+<!-- FICHA PRIMEIRO -->
 
-    <div class="section-title">
+<div class="section-title">
 
-        <h2>🎭 Vagas da House</h2>
+    <h2>📝 Faça sua ficha</h2>
 
-        <p>
-            Confira os personagens disponíveis e os que já estão ocupados.
-        </p>
+    <p>
+        Preencha os dados abaixo para entrar na House.
+    </p>
 
-    </div>
-
-
-    <div class="vagas-wrapper">
+</div>
 
 
-        <div class="vagas-box open">
+<div class="form-area">
 
-            <h3>🟢 Vagas abertas</h3>
+    <div class="form-card">
 
-            <div id="vagasAbertas" class="vagas-list">
+        <div class="form-header">
 
-                <div class="empty">
-                    Carregando vagas...
-                </div>
+            <div class="form-icon">🕯️</div>
 
-            </div>
+            <h2>Ficha de Recepção</h2>
 
-        </div>
-
-
-        <div class="vagas-box closed">
-
-            <h3>🔒 Vagas fechadas</h3>
-
-            <div id="vagasFechadas" class="vagas-list">
-
-                <div class="empty">
-                    Carregando vagas...
-                </div>
-
-            </div>
+            <p>
+                Sua ficha será enviada para a administração
+                analisar sua entrada.
+            </p>
 
         </div>
 
 
-    </div>
+        <div id="message" class="message"></div>
 
 
-    <!-- FICHA -->
-
-    <div class="section-title">
-
-        <h2>📝 Faça sua ficha</h2>
-
-        <p>
-            Preencha os dados abaixo para entrar na House.
-        </p>
-
-    </div>
+        <form id="fichaForm">
 
 
-    <div class="form-area">
+            <div class="form-group">
 
-        <div class="form-card">
+                <label for="nome">
+                    👤 Nome
+                </label>
 
-
-            <div class="form-header">
-
-                <div class="form-icon">🕯️</div>
-
-                <h2>Ficha de Recepção</h2>
-
-                <p>
-                    Sua ficha será enviada para a administração
-                    analisar sua entrada.
-                </p>
-
-            </div>
-
-
-            <div id="message" class="message"></div>
-
-
-            <form id="fichaForm">
-
-
-                <div class="form-group">
-
-                    <label for="nome">
-                        👤 Nome
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nome"
-                        placeholder="Digite seu nome"
-                        maxlength="60"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="idade">
-                        🎂 Idade
-                    </label>
-
-                    <input
-                        type="number"
-                        id="idade"
-                        placeholder="Digite sua idade"
-                        min="1"
-                        max="100"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="personagem">
-                        🎭 Personagem
-                    </label>
-
-                    <input
-                        type="text"
-                        id="personagem"
-                        placeholder="Ex.: Gojo"
-                        maxlength="60"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="obra">
-                        📚 Obra
-                    </label>
-
-                    <input
-                        type="text"
-                        id="obra"
-                        placeholder="Ex.: Jujutsu Kaisen"
-                        maxlength="80"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        🖼️ Foto do personagem
-                    </label>
-
-                    <div class="photo-box">
-
-                        <input
-                            type="file"
-                            id="foto"
-                            accept="image/*"
-                            required
-                        >
-
-                        <img
-                            id="preview"
-                            class="preview"
-                            alt="Prévia da foto"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="submit"
-                    id="submitBtn"
+                <input
+                    type="text"
+                    id="nome"
+                    placeholder="Digite seu nome"
+                    maxlength="60"
+                    required
                 >
-                    🎃 Enviar ficha
-                </button>
-
-
-            </form>
-
-
-            <div class="notice">
-
-                🔐 Seus dados da ficha são enviados apenas para
-                a administração da House. Não colocamos seus dados
-                pessoais na área pública do site.
 
             </div>
 
 
+            <div class="form-group">
+
+                <label for="idade">
+                    🎂 Idade
+                </label>
+
+                <input
+                    type="number"
+                    id="idade"
+                    placeholder="Digite sua idade"
+                    min="1"
+                    max="100"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="personagem">
+                    🎭 Personagem
+                </label>
+
+                <input
+                    type="text"
+                    id="personagem"
+                    placeholder="Ex.: Gojo"
+                    maxlength="60"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="obra">
+                    📚 Obra
+                </label>
+
+                <input
+                    type="text"
+                    id="obra"
+                    placeholder="Ex.: Jujutsu Kaisen"
+                    maxlength="80"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    🖼️ Foto do personagem
+                </label>
+
+                <div class="photo-box">
+
+                    <input
+                        type="file"
+                        id="foto"
+                        accept="image/*"
+                        required
+                    >
+
+                    <img
+                        id="preview"
+                        class="preview"
+                        alt="Prévia da foto"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit"
+                id="submitBtn"
+            >
+                🎃 Enviar ficha
+            </button>
+
+
+        </form>
+
+
+        <div class="notice">
+
+            🔐 Os dados da ficha são enviados apenas
+            para a administração da House.
+
         </div>
 
     </div>
+
+</div>
+
+
+<!-- VAGAS EMBAIXO DA FICHA -->
+
+<div class="section-title">
+
+    <h2>🎭 Vagas da House</h2>
+
+    <p>
+        Confira os personagens disponíveis e os que já estão ocupados.
+    </p>
+
+</div>
+
+
+<div class="vagas-wrapper">
+
+
+    <div class="vagas-box open">
+
+        <h3>🟢 Vagas abertas</h3>
+
+        <div
+            id="vagasAbertas"
+            class="vagas-list"
+        >
+
+            <div class="empty">
+                Carregando vagas...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="vagas-box closed">
+
+        <h3>🔒 Vagas fechadas</h3>
+
+        <div
+            id="vagasFechadas"
+            class="vagas-list"
+        >
+
+            <div class="empty">
+                Carregando vagas...
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
 
 
 </main>
@@ -930,25 +935,26 @@ import {
     getDocs,
     addDoc,
     doc,
-    getDoc,
     runTransaction,
+    updateDoc,
+    deleteDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
+    apiKey:"AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
 
-    authDomain: "house-wie-6c8f9.firebaseapp.com",
+    authDomain:"house-wie-6c8f9.firebaseapp.com",
 
-    projectId: "house-wie-6c8f9",
+    projectId:"house-wie-6c8f9",
 
-    storageBucket: "house-wie-6c8f9.firebasestorage.app",
+    storageBucket:"house-wie-6c8f9.firebasestorage.app",
 
-    messagingSenderId: "241202380170",
+    messagingSenderId:"241202380170",
 
-    appId: "1:241202380170:web:b7df00f3faa8ae7afedc73"
+    appId:"1:241202380170:web:b7df00f3faa8ae7afedc73"
 
 };
 
@@ -958,11 +964,61 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-/*
-==================================================
- NORMALIZAÇÃO
-==================================================
-*/
+/* =========================
+   ELEMENTOS
+========================= */
+
+const form =
+    document.getElementById("fichaForm");
+
+const nomeInput =
+    document.getElementById("nome");
+
+const idadeInput =
+    document.getElementById("idade");
+
+const personagemInput =
+    document.getElementById("personagem");
+
+const obraInput =
+    document.getElementById("obra");
+
+const fotoInput =
+    document.getElementById("foto");
+
+const preview =
+    document.getElementById("preview");
+
+const message =
+    document.getElementById("message");
+
+const submitBtn =
+    document.getElementById("submitBtn");
+
+const abertas =
+    document.getElementById("vagasAbertas");
+
+const fechadas =
+    document.getElementById("vagasFechadas");
+
+
+let vagasAtuais = [];
+
+
+/* =========================
+   NORMALIZAÇÃO
+
+   O sistema compara:
+
+   PERSONAGEM + OBRA
+
+   Exemplo:
+
+   Gojo + Jujutsu Kaisen
+   ≠
+   Gojo + outra obra
+
+========================= */
 
 function normalizar(texto){
 
@@ -987,46 +1043,32 @@ function chavePersonagem(personagem,obra){
 }
 
 
-/*
-==================================================
- ELEMENTOS
-==================================================
-*/
+/* =========================
+   ESCAPE
+========================= */
 
-const form = document.getElementById("fichaForm");
+function escapeHtml(valor){
 
-const nomeInput = document.getElementById("nome");
-const idadeInput = document.getElementById("idade");
-const personagemInput = document.getElementById("personagem");
-const obraInput = document.getElementById("obra");
-const fotoInput = document.getElementById("foto");
+    return String(valor || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
-const preview = document.getElementById("preview");
-
-const message = document.getElementById("message");
-
-const submitBtn = document.getElementById("submitBtn");
-
-const abertas = document.getElementById("vagasAbertas");
-const fechadas = document.getElementById("vagasFechadas");
+}
 
 
-/*
-==================================================
- MENSAGENS
-==================================================
-*/
+/* =========================
+   MENSAGEM
+========================= */
 
 function mostrarMensagem(texto,tipo){
 
     message.textContent = texto;
 
-    message.className = "message " + tipo;
-
-    window.scrollTo({
-        top:document.querySelector(".form-card").offsetTop - 100,
-        behavior:"smooth"
-    });
+    message.className =
+        "message " + tipo;
 
 }
 
@@ -1040,178 +1082,244 @@ function limparMensagem(){
 }
 
 
-/*
-==================================================
- FOTO / COMPRESSÃO
-==================================================
-*/
+/* =========================
+   PRÉVIA DA FOTO
+========================= */
 
-fotoInput.addEventListener("change",()=>{
+fotoInput.addEventListener(
+    "change",
+    ()=>{
 
-    const arquivo = fotoInput.files[0];
+        const arquivo =
+            fotoInput.files[0];
 
-    if(!arquivo){
+        if(!arquivo){
 
-        preview.style.display = "none";
+            preview.src = "";
 
-        preview.src = "";
+            preview.style.display = "none";
 
-        return;
+            return;
 
-    }
-
-    if(!arquivo.type.startsWith("image/")){
-
-        fotoInput.value = "";
-
-        mostrarMensagem(
-            "❌ Selecione uma imagem válida.",
-            "error"
-        );
-
-        return;
-
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = e => {
-
-        preview.src = e.target.result;
-
-        preview.style.display = "block";
-
-    };
-
-    reader.readAsDataURL(arquivo);
-
-});
+        }
 
 
-function comprimirImagem(file){
+        if(!arquivo.type.startsWith("image/")){
 
-    return new Promise((resolve,reject)=>{
+            fotoInput.value = "";
 
-        const reader = new FileReader();
+            mostrarMensagem(
+                "❌ Selecione uma imagem válida.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const reader =
+            new FileReader();
+
 
         reader.onload = event => {
 
-            const img = new Image();
+            preview.src =
+                event.target.result;
 
-            img.onload = ()=>{
-
-                const max = 600;
-
-                let width = img.width;
-                let height = img.height;
-
-                if(width > height){
-
-                    if(width > max){
-
-                        height = Math.round(height * max / width);
-
-                        width = max;
-
-                    }
-
-                }else{
-
-                    if(height > max){
-
-                        width = Math.round(width * max / height);
-
-                        height = max;
-
-                    }
-
-                }
-
-                const canvas = document.createElement("canvas");
-
-                canvas.width = width;
-
-                canvas.height = height;
-
-                const ctx = canvas.getContext("2d");
-
-                ctx.drawImage(
-                    img,
-                    0,
-                    0,
-                    width,
-                    height
-                );
-
-                canvas.toBlob(
-                    blob => {
-
-                        if(!blob){
-
-                            reject(
-                                new Error("Não foi possível comprimir a imagem.")
-                            );
-
-                            return;
-
-                        }
-
-                        const finalReader = new FileReader();
-
-                        finalReader.onload = ()=>{
-                            resolve(finalReader.result);
-                        };
-
-                        finalReader.onerror = reject;
-
-                        finalReader.readAsDataURL(blob);
-
-                    },
-                    "image/jpeg",
-                    .65
-                );
-
-            };
-
-            img.onerror = reject;
-
-            img.src = event.target.result;
+            preview.style.display =
+                "block";
 
         };
 
-        reader.onerror = reject;
 
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(arquivo);
 
-    });
+    }
+);
+
+
+/* =========================
+   COMPRIMIR FOTO
+========================= */
+
+function comprimirImagem(file){
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                event => {
+
+                    const img =
+                        new Image();
+
+
+                    img.onload = ()=>{
+
+                        const max = 600;
+
+                        let width =
+                            img.width;
+
+                        let height =
+                            img.height;
+
+
+                        if(width > height){
+
+                            if(width > max){
+
+                                height =
+                                    Math.round(
+                                        height * max / width
+                                    );
+
+                                width = max;
+
+                            }
+
+                        }else{
+
+                            if(height > max){
+
+                                width =
+                                    Math.round(
+                                        width * max / height
+                                    );
+
+                                height = max;
+
+                            }
+
+                        }
+
+
+                        const canvas =
+                            document.createElement(
+                                "canvas"
+                            );
+
+
+                        canvas.width =
+                            width;
+
+                        canvas.height =
+                            height;
+
+
+                        const ctx =
+                            canvas.getContext(
+                                "2d"
+                            );
+
+
+                        ctx.drawImage(
+                            img,
+                            0,
+                            0,
+                            width,
+                            height
+                        );
+
+
+                        canvas.toBlob(
+                            blob => {
+
+                                if(!blob){
+
+                                    reject(
+                                        new Error(
+                                            "PHOTO_ERROR"
+                                        )
+                                    );
+
+                                    return;
+
+                                }
+
+
+                                const finalReader =
+                                    new FileReader();
+
+
+                                finalReader.onload =
+                                    ()=>{
+                                        resolve(
+                                            finalReader.result
+                                        );
+                                    };
+
+
+                                finalReader.onerror =
+                                    reject;
+
+
+                                finalReader.readAsDataURL(
+                                    blob
+                                );
+
+                            },
+                            "image/jpeg",
+                            .65
+                        );
+
+                    };
+
+
+                    img.onerror =
+                        reject;
+
+                    img.src =
+                        event.target.result;
+
+                };
+
+
+            reader.onerror =
+                reject;
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
 
 }
 
 
-/*
-==================================================
- VAGAS
-==================================================
-*/
-
-let vagasAtuais = [];
-
+/* =========================
+   CARREGAR VAGAS
+========================= */
 
 async function carregarVagas(){
 
     try{
 
-        const snapshot = await getDocs(
-            collection(db,"vacancies")
-        );
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "vacancies"
+                )
+            );
+
 
         vagasAtuais = [];
+
 
         snapshot.forEach(item=>{
 
             vagasAtuais.push({
+
                 id:item.id,
+
                 ...item.data()
+
             });
 
         });
@@ -1223,11 +1331,13 @@ async function carregarVagas(){
 
         console.error(error);
 
+
         abertas.innerHTML = `
             <div class="empty">
                 Não foi possível carregar as vagas.
             </div>
         `;
+
 
         fechadas.innerHTML = `
             <div class="empty">
@@ -1240,23 +1350,35 @@ async function carregarVagas(){
 }
 
 
+/* =========================
+   IMAGEM DA VAGA
+========================= */
+
 function imagemHtml(vaga){
 
     if(!vaga.imagem){
 
         return `
-            <div class="vaga-image"
-                 style="display:flex;align-items:center;justify-content:center;font-size:22px;">
+            <div
+                class="vaga-image"
+                style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:22px;
+                "
+            >
                 🎭
             </div>
         `;
 
     }
 
+
     return `
         <img
             class="vaga-image"
-            src="${vaga.imagem}"
+            src="${escapeHtml(vaga.imagem)}"
             alt=""
         >
     `;
@@ -1264,11 +1386,19 @@ function imagemHtml(vaga){
 }
 
 
+/* =========================
+   CARD ABERTO
+========================= */
+
 function criarCardAberto(vaga){
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
-    card.className = "vaga-card";
+
+    card.className =
+        "vaga-card";
+
 
     card.innerHTML = `
 
@@ -1276,34 +1406,57 @@ function criarCardAberto(vaga){
 
         <div class="vaga-info">
 
-            <strong>${escapeHtml(vaga.personagem || "Personagem")}</strong>
+            <strong>
+                ${escapeHtml(
+                    vaga.personagem ||
+                    "Personagem"
+                )}
+            </strong>
 
-            <span>${escapeHtml(vaga.obra || "Obra não informada")}</span>
+            <span>
+                ${escapeHtml(
+                    vaga.obra ||
+                    "Obra não informada"
+                )}
+            </span>
 
         </div>
 
-        <button class="vaga-button" type="button">
+        <button
+            class="vaga-button"
+            type="button"
+        >
             Escolher
         </button>
 
     `;
 
 
-    card.querySelector("button").addEventListener("click",()=>{
+    card
+        .querySelector("button")
+        .addEventListener(
+            "click",
+            ()=>{
 
-        personagemInput.value = vaga.personagem || "";
+                personagemInput.value =
+                    vaga.personagem || "";
 
-        obraInput.value = vaga.obra || "";
+                obraInput.value =
+                    vaga.obra || "";
 
-        document.querySelector(".form-card")
-            .scrollIntoView({
-                behavior:"smooth",
-                block:"center"
-            });
 
-        personagemInput.focus();
+                document
+                    .querySelector(".form-card")
+                    .scrollIntoView({
+                        behavior:"smooth",
+                        block:"center"
+                    });
 
-    });
+
+                personagemInput.focus();
+
+            }
+        );
 
 
     return card;
@@ -1311,11 +1464,19 @@ function criarCardAberto(vaga){
 }
 
 
+/* =========================
+   CARD FECHADO
+========================= */
+
 function criarCardFechado(vaga){
 
-    const card = document.createElement("div");
+    const card =
+        document.createElement("div");
 
-    card.className = "vaga-card closed-card";
+
+    card.className =
+        "vaga-card closed-card";
+
 
     card.innerHTML = `
 
@@ -1323,9 +1484,19 @@ function criarCardFechado(vaga){
 
         <div class="vaga-info">
 
-            <strong>${escapeHtml(vaga.personagem || "Personagem")}</strong>
+            <strong>
+                ${escapeHtml(
+                    vaga.personagem ||
+                    "Personagem"
+                )}
+            </strong>
 
-            <span>${escapeHtml(vaga.obra || "Obra não informada")}</span>
+            <span>
+                ${escapeHtml(
+                    vaga.obra ||
+                    "Obra não informada"
+                )}
+            </span>
 
         </div>
 
@@ -1335,10 +1506,15 @@ function criarCardFechado(vaga){
 
     `;
 
+
     return card;
 
 }
 
+
+/* =========================
+   RENDERIZAR VAGAS
+========================= */
 
 function renderizarVagas(){
 
@@ -1347,14 +1523,26 @@ function renderizarVagas(){
     fechadas.innerHTML = "";
 
 
-    const abertasArray = vagasAtuais.filter(vaga =>
-        String(vaga.status || "aberta").toLowerCase() === "aberta"
-    );
+    const abertasArray =
+        vagasAtuais.filter(
+            vaga =>
+                String(
+                    vaga.status ||
+                    "aberta"
+                ).toLowerCase()
+                === "aberta"
+        );
 
 
-    const fechadasArray = vagasAtuais.filter(vaga =>
-        String(vaga.status || "").toLowerCase() === "fechada"
-    );
+    const fechadasArray =
+        vagasAtuais.filter(
+            vaga =>
+                String(
+                    vaga.status ||
+                    ""
+                ).toLowerCase()
+                === "fechada"
+        );
 
 
     if(abertasArray.length === 0){
@@ -1401,87 +1589,85 @@ function renderizarVagas(){
 }
 
 
-/*
-==================================================
- ESCAPE
-==================================================
-*/
+/* =========================
+   ENCONTRAR VAGA
 
-function escapeHtml(valor){
+   IMPORTANTE:
 
-    return String(valor || "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+   Só bloqueia se:
+
+   personagem + obra
+
+   forem iguais.
+
+========================= */
+
+function encontrarVaga(
+    personagem,
+    obra
+){
+
+    const chave =
+        chavePersonagem(
+            personagem,
+            obra
+        );
+
+
+    return vagasAtuais.find(
+        vaga => {
+
+            return chavePersonagem(
+                vaga.personagem,
+                vaga.obra
+            ) === chave;
+
+        }
+    );
 
 }
 
 
-/*
-==================================================
- VERIFICAÇÃO DE VAGA FECHADA
-==================================================
-*/
+/* =========================
+   RESERVAR PERSONAGEM
 
-function encontrarVaga(personagem,obra){
+   A reserva usa o ID:
 
-    const chave = chavePersonagem(
-        personagem,
-        obra
-    );
+   personagem___obra
 
-    return vagasAtuais.find(vaga => {
+   Isso impede duas fichas
+   de pegarem a mesma combinação.
 
-        return chavePersonagem(
-            vaga.personagem,
-            vaga.obra
-        ) === chave;
+========================= */
 
-    });
+async function reservarPersonagem(
+    personagem,
+    obra
+){
 
-}
-
-
-/*
-==================================================
- BLOQUEIO DO PERSONAGEM + OBRA
-==================================================
-
-A reserva usa:
-
-characterLocks/{personagem + obra}
-
-Assim:
-
-Gojo + Jujutsu Kaisen
-é diferente de
-Gojo + outra obra.
-
-==================================================
-*/
+    const chave =
+        chavePersonagem(
+            personagem,
+            obra
+        );
 
 
-async function reservarPersonagem(personagem,obra,requestId){
-
-    const chave = chavePersonagem(
-        personagem,
-        obra
-    );
-
-    const lockRef = doc(
-        db,
-        "characterLocks",
-        chave
-    );
+    const lockRef =
+        doc(
+            db,
+            "characterLocks",
+            chave
+        );
 
 
     await runTransaction(
         db,
         async transaction => {
 
-            const lock = await transaction.get(lockRef);
+            const lock =
+                await transaction.get(
+                    lockRef
+                );
 
 
             if(lock.exists()){
@@ -1496,276 +1682,316 @@ async function reservarPersonagem(personagem,obra,requestId){
             transaction.set(
                 lockRef,
                 {
-                    personagem:personagem.trim(),
-                    obra:obra.trim(),
-                    requestId:requestId || "",
-                    criadoEm:serverTimestamp()
+
+                    personagem:
+                        personagem.trim(),
+
+                    obra:
+                        obra.trim(),
+
+                    criadoEm:
+                        serverTimestamp()
+
                 }
             );
 
         }
     );
+
+
+    return chave;
 
 }
 
 
-/*
-==================================================
- ENVIO DA FICHA
-==================================================
-*/
+/* =========================
+   ENVIAR FICHA
+========================= */
 
-form.addEventListener("submit",async event=>{
+form.addEventListener(
+    "submit",
+    async event => {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    limparMensagem();
-
-
-    const nome = nomeInput.value.trim();
-
-    const idade = idadeInput.value.trim();
-
-    const personagem = personagemInput.value.trim();
-
-    const obra = obraInput.value.trim();
-
-    const foto = fotoInput.files[0];
+        limparMensagem();
 
 
-    if(!nome || !idade || !personagem || !obra || !foto){
+        const nome =
+            nomeInput.value.trim();
 
-        mostrarMensagem(
-            "❌ Preencha todos os campos e envie a foto do personagem.",
-            "error"
-        );
+        const idade =
+            idadeInput.value.trim();
 
-        return;
+        const personagem =
+            personagemInput.value.trim();
 
-    }
+        const obra =
+            obraInput.value.trim();
 
-
-    const vaga = encontrarVaga(
-        personagem,
-        obra
-    );
-
-
-    if(
-        vaga &&
-        String(vaga.status || "").toLowerCase() === "fechada"
-    ){
-
-        mostrarMensagem(
-            `🔒 A combinação "${personagem} — ${obra}" já está fechada e não pode ser escolhida.`,
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    submitBtn.disabled = true;
-
-    submitBtn.textContent = "🎃 Enviando...";
-
-
-    let reservado = false;
-
-    let requestId = "";
-
-
-    try{
-
-        /*
-        Reserva o personagem + obra
-        antes de criar a ficha.
-        */
-
-        await reservarPersonagem(
-            personagem,
-            obra,
-            ""
-        );
-
-        reservado = true;
-
-
-        /*
-        Comprime a foto para manter
-        a ficha leve.
-        */
-
-        const fotoData = await comprimirImagem(
-            foto
-        );
-
-
-        /*
-        Evita documentos gigantes
-        no Firestore.
-        */
-
-        if(fotoData.length > 850000){
-
-            throw new Error(
-                "PHOTO_TOO_LARGE"
-            );
-
-        }
-
-
-        /*
-        Cria a solicitação.
-        */
-
-        const ref = await addDoc(
-            collection(db,"requests"),
-            {
-                nome:nome,
-                idade:idade,
-                personagem:personagem,
-                obra:obra,
-                foto:fotoData,
-                status:"pendente",
-                characterKey:chavePersonagem(
-                    personagem,
-                    obra
-                ),
-                criadoEm:serverTimestamp()
-            }
-        );
-
-
-        requestId = ref.id;
-
-
-        /*
-        Atualiza o bloqueio com o ID
-        da solicitação.
-        */
-
-        const lockRef = doc(
-            db,
-            "characterLocks",
-            chavePersonagem(
-                personagem,
-                obra
-            )
-        );
-
-
-        await import(
-            "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"
-        ).then(async module=>{
-
-            await module.updateDoc(
-                lockRef,
-                {
-                    requestId:requestId
-                }
-            );
-
-        });
-
-
-        form.reset();
-
-        preview.style.display = "none";
-
-        preview.src = "";
-
-
-        mostrarMensagem(
-            "🎃 Ficha enviada com sucesso! Agora aguarde a administração analisar sua entrada.",
-            "success"
-        );
-
-
-    }catch(error){
-
-        console.error(error);
+        const foto =
+            fotoInput.files[0];
 
 
         if(
-            error.message === "CHARACTER_ALREADY_RESERVED"
+            !nome ||
+            !idade ||
+            !personagem ||
+            !obra ||
+            !foto
         ){
 
             mostrarMensagem(
-                `🔒 O personagem "${personagem}" da obra "${obra}" já está ocupado ou possui uma ficha em análise. Escolha outra combinação.`,
+                "❌ Preencha todos os campos e envie a foto do personagem.",
                 "error"
             );
 
-        }else if(
-            error.message === "PHOTO_TOO_LARGE"
-        ){
-
-            mostrarMensagem(
-                "❌ A imagem ficou muito grande. Escolha outra foto com menor resolução.",
-                "error"
-            );
-
-        }else{
-
-            mostrarMensagem(
-                "❌ Não foi possível enviar sua ficha. Tente novamente.",
-                "error"
-            );
+            return;
 
         }
 
+
         /*
-        Se a ficha falhou depois de reservar,
-        libera o personagem para tentar novamente.
+        Primeiro verifica uma
+        vaga fechada.
         */
 
-        if(reservado && !requestId){
+        const vaga =
+            encontrarVaga(
+                personagem,
+                obra
+            );
 
-            try{
 
-                const module = await import(
-                    "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js"
+        if(
+            vaga &&
+            String(
+                vaga.status || ""
+            ).toLowerCase()
+            === "fechada"
+        ){
+
+            mostrarMensagem(
+                `🔒 ${personagem} — ${obra} já está fechado e não pode ser escolhido.`,
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        submitBtn.disabled =
+            true;
+
+        submitBtn.textContent =
+            "🎃 Enviando...";
+
+
+        let reservaCriada =
+            false;
+
+        let chaveReserva =
+            "";
+
+
+        try{
+
+            /*
+            Reserva a combinação
+            Personagem + Obra.
+            */
+
+            chaveReserva =
+                await reservarPersonagem(
+                    personagem,
+                    obra
                 );
 
-                await module.deleteDoc(
-                    doc(
-                        db,
-                        "characterLocks",
-                        chavePersonagem(
-                            personagem,
-                            obra
-                        )
-                    )
+            reservaCriada =
+                true;
+
+
+            /*
+            Comprime a foto.
+            */
+
+            const fotoData =
+                await comprimirImagem(
+                    foto
                 );
 
-            }catch(e){
 
-                console.error(
-                    "Não foi possível liberar a reserva:",
-                    e
+            /*
+            Evita documento muito grande.
+            */
+
+            if(
+                fotoData.length >
+                850000
+            ){
+
+                throw new Error(
+                    "PHOTO_TOO_LARGE"
                 );
 
             }
 
+
+            /*
+            Cria a ficha.
+            */
+
+            const requestRef =
+                await addDoc(
+                    collection(
+                        db,
+                        "requests"
+                    ),
+                    {
+
+                        nome:
+                            nome,
+
+                        idade:
+                            idade,
+
+                        personagem:
+                            personagem,
+
+                        obra:
+                            obra,
+
+                        foto:
+                            fotoData,
+
+                        status:
+                            "pendente",
+
+                        characterKey:
+                            chaveReserva,
+
+                        criadoEm:
+                            serverTimestamp()
+
+                    }
+                );
+
+
+            /*
+            Guarda o ID da ficha
+            na reserva.
+            */
+
+            await updateDoc(
+                doc(
+                    db,
+                    "characterLocks",
+                    chaveReserva
+                ),
+                {
+                    requestId:
+                        requestRef.id
+                }
+            );
+
+
+            form.reset();
+
+            preview.src = "";
+
+            preview.style.display =
+                "none";
+
+
+            mostrarMensagem(
+                "🎃 Ficha enviada com sucesso! Aguarde a administração analisar sua entrada.",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            if(
+                error.message ===
+                "CHARACTER_ALREADY_RESERVED"
+            ){
+
+                mostrarMensagem(
+                    `🔒 ${personagem} — ${obra} já está ocupado ou possui uma ficha em análise. Escolha outra combinação.`,
+                    "error"
+                );
+
+            }else if(
+                error.message ===
+                "PHOTO_TOO_LARGE"
+            ){
+
+                mostrarMensagem(
+                    "❌ A foto ficou muito grande. Escolha uma imagem menor.",
+                    "error"
+                );
+
+            }else{
+
+                mostrarMensagem(
+                    "❌ Não foi possível enviar sua ficha. Tente novamente.",
+                    "error"
+                );
+
+            }
+
+
+            /*
+            Se a ficha não foi criada,
+            libera a reserva.
+            */
+
+            if(
+                reservaCriada
+            ){
+
+                try{
+
+                    await deleteDoc(
+                        doc(
+                            db,
+                            "characterLocks",
+                            chaveReserva
+                        )
+                    );
+
+                }catch(e){
+
+                    console.error(
+                        "Erro ao liberar reserva:",
+                        e
+                    );
+
+                }
+
+            }
+
+        }finally{
+
+            submitBtn.disabled =
+                false;
+
+            submitBtn.textContent =
+                "🎃 Enviar ficha";
+
         }
 
-    }finally{
-
-        submitBtn.disabled = false;
-
-        submitBtn.textContent = "🎃 Enviar ficha";
-
     }
+);
 
-});
 
-
-/*
-==================================================
- INICIALIZAÇÃO
-==================================================
-*/
+/* =========================
+   INICIAR
+========================= */
 
 carregarVagas();
 
@@ -1773,4 +1999,4 @@ carregarVagas();
 
 </body>
 
-    </html>
+        </html>
