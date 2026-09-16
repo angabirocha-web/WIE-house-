@@ -1,1617 +1,973 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>House WIE — Administração</title>
 
 <style>
-
 :root{
-
---purple:#7b2bc4;
---purple2:#a94ff0;
---yellow:#ffd21c;
-
---dark:#10071a;
---side:#190a29;
-
---bg:#f3ecf8;
---white:#ffffff;
-
---text:#241332;
---muted:#806d8d;
-
---line:#e2d5e9;
-
+  --p:#7b2bc4;
+  --p2:#a94ff0;
+  --y:#ffd21c;
+  --dark:#10071a;
+  --side:#190a29;
+  --bg:#f3ecf8;
+  --white:#fff;
+  --text:#241332;
+  --muted:#806d8d;
+  --line:#e2d5e9;
 }
 
 *{
-box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 body{
-
-margin:0;
-
-font-family:Arial,sans-serif;
-
-background:var(--bg);
-
-color:var(--text);
-
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
+/* LOGIN */
 
-/* =========================
-LOGIN
-========================= */
-
-#login{
-
-min-height:100vh;
-
-display:grid;
-
-place-items:center;
-
-padding:20px;
-
-background:
-
-radial-gradient(
-circle at 50% 10%,
-#9b45e8 0,
-transparent 35%
-),
-
-linear-gradient(
-135deg,
-#10071a,
-#5c1a94
-);
-
+#loginScreen{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      #9b45e8 0,
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #10071a,
+      #5c1a94
+    );
 }
 
 .login-box{
-
-width:min(430px,100%);
-
-background:white;
-
-border-radius:28px;
-
-padding:34px;
-
-box-shadow:
-0 25px 70px #0006;
-
-text-align:center;
-
+  width:min(430px,100%);
+  background:#fff;
+  border-radius:28px;
+  padding:34px;
+  box-shadow:0 25px 70px #0006;
+  text-align:center;
 }
 
 .login-logo{
-
-font-size:29px;
-
-font-weight:900;
-
-color:#241332;
-
+  font-size:29px;
+  font-weight:900;
+  color:#241332;
 }
 
 .login-logo span{
-
-color:var(--purple);
-
+  color:var(--p);
 }
 
 .login-sub{
-
-color:var(--muted);
-
-margin-bottom:24px;
-
+  color:var(--muted);
+  margin-bottom:24px;
 }
 
 .login-box label{
-
-display:block;
-
-text-align:left;
-
-font-weight:bold;
-
-margin:12px 0 6px;
-
+  display:block;
+  text-align:left;
+  font-weight:bold;
+  margin:12px 0 6px;
 }
 
 .login-box input{
-
-width:100%;
-
-padding:13px;
-
-border:1px solid var(--line);
-
-border-radius:12px;
-
-outline:none;
-
+  width:100%;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  outline:none;
+  font-size:15px;
 }
 
 .login-box input:focus{
-
-border-color:var(--purple);
-
-}
-
-.password-wrap{
-
-position:relative;
-
-}
-
-.password-wrap input{
-
-padding-right:48px;
-
-}
-
-.show-password{
-
-position:absolute;
-
-right:8px;
-
-top:50%;
-
-transform:translateY(-50%);
-
-border:0;
-
-background:transparent;
-
-cursor:pointer;
-
-font-size:18px;
-
-padding:5px;
-
+  border-color:var(--p);
 }
 
 .login-btn{
-
-width:100%;
-
-padding:14px;
-
-background:var(--purple);
-
-color:white;
-
-border:0;
-
-border-radius:12px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-margin-top:8px;
-
+  width:100%;
+  padding:14px;
+  background:var(--p);
+  color:white;
+  border:0;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:8px;
 }
 
 .login-btn:hover{
-
-background:var(--purple2);
-
+  background:var(--p2);
 }
 
 .login-btn:disabled{
-
-opacity:.6;
-
-cursor:not-allowed;
-
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .error{
-
-color:#c22b48;
-
-font-size:13px;
-
-margin-top:10px;
-
+  color:#c22b48;
+  font-size:13px;
+  margin-top:10px;
+  min-height:18px;
 }
 
-
-/* =========================
-APP
-========================= */
+/* APP */
 
 #app{
-
-display:none;
-
-min-height:100vh;
-
+  display:none;
+  min-height:100vh;
 }
 
-
-/* =========================
-SIDEBAR
-========================= */
-
 .side{
-
-position:fixed;
-
-left:0;
-
-top:0;
-
-bottom:0;
-
-width:245px;
-
-background:var(--side);
-
-color:white;
-
-padding:22px 15px;
-
-z-index:5;
-
-border-right:1px solid #402054;
-
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:245px;
+  background:var(--side);
+  color:#fff;
+  padding:22px 15px;
+  z-index:5;
+  border-right:1px solid #402054;
 }
 
 .brand{
-
-font-weight:900;
-
-font-size:21px;
-
-padding:5px 10px 25px;
-
+  font-weight:900;
+  font-size:21px;
+  padding:5px 10px 25px;
 }
 
 .brand span{
-
-color:var(--yellow);
-
+  color:var(--y);
 }
 
 .brand small{
-
-display:block;
-
-font-size:10px;
-
-color:#bca6c9;
-
-margin-top:4px;
-
+  display:block;
+  font-size:10px;
+  color:#bca6c9;
+  margin-top:4px;
 }
 
 .side button{
-
-display:block;
-
-width:100%;
-
-text-align:left;
-
-background:transparent;
-
-color:#eadff0;
-
-margin:4px 0;
-
-padding:12px;
-
-border:0;
-
-border-radius:12px;
-
-cursor:pointer;
-
-font-weight:bold;
-
+  display:block;
+  width:100%;
+  text-align:left;
+  background:transparent;
+  color:#eadff0;
+  margin:4px 0;
+  padding:12px;
+  border:0;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
 .side button:hover,
 .side button.active{
-
-background:var(--purple);
-
-color:white;
-
+  background:var(--p);
+  color:#fff;
 }
 
 .logout{
-
-margin-top:25px!important;
-
-color:#ffd0d8!important;
-
+  margin-top:25px!important;
+  color:#ffd0d8!important;
 }
 
-
-/* =========================
-MAIN
-========================= */
-
 .main{
-
-margin-left:245px;
-
-padding:28px;
-
+  margin-left:245px;
+  padding:28px;
 }
 
 .top{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-gap:15px;
-
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
 }
 
 .top h1{
-
-margin:0;
-
-color:#241332;
-
+  margin:0;
+  color:#241332;
 }
 
 .role{
-
-background:white;
-
-border:1px solid var(--line);
-
-padding:10px 14px;
-
-border-radius:12px;
-
-color:var(--purple);
-
-font-weight:bold;
-
+  background:#fff;
+  border:1px solid var(--line);
+  padding:10px 14px;
+  border-radius:12px;
+  color:var(--p);
+  font-weight:bold;
 }
 
-
-/* =========================
-PAGES
-========================= */
+/* PÁGINAS */
 
 .page{
-
-display:none;
-
+  display:none;
 }
 
 .page.active{
-
-display:block;
-
+  display:block;
 }
 
-
-/* =========================
-STATS
-========================= */
+/* ESTATÍSTICAS */
 
 .stats{
-
-display:grid;
-
-grid-template-columns:
-repeat(4,1fr);
-
-gap:16px;
-
-margin:25px 0;
-
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin:25px 0;
 }
 
 .stat,
 .panel{
-
-background:white;
-
-border:1px solid var(--line);
-
-border-radius:20px;
-
-padding:20px;
-
-box-shadow:
-0 10px 30px #5c1a9412;
-
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 10px 30px #5c1a9412;
 }
 
 .stat b{
-
-display:block;
-
-font-size:30px;
-
-color:var(--purple);
-
-margin-top:8px;
-
+  display:block;
+  font-size:30px;
+  color:var(--p);
+  margin-top:8px;
 }
 
 .muted{
-
-color:var(--muted);
-
+  color:var(--muted);
 }
 
-
-/* =========================
-TOOLBAR
-========================= */
+/* TOOLBAR */
 
 .toolbar{
-
-display:flex;
-
-gap:10px;
-
-flex-wrap:wrap;
-
-margin:18px 0;
-
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:18px 0;
 }
 
 .toolbar input{
-
-max-width:300px;
-
-margin:0;
-
+  max-width:300px;
+  margin:0;
 }
 
 .toolbar button{
-
-padding:11px 15px;
-
-border:0;
-
-border-radius:11px;
-
-background:var(--purple);
-
-color:white;
-
-font-weight:bold;
-
-cursor:pointer;
-
+  padding:11px 15px;
+  border:0;
+  border-radius:11px;
+  background:var(--p);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 .toolbar button:hover{
-
-background:var(--purple2);
-
+  background:var(--p2);
 }
 
-
-/* =========================
-TABLE
-========================= */
+/* TABELAS */
 
 .table-wrap{
-
-overflow:auto;
-
-background:white;
-
-border-radius:18px;
-
-border:1px solid var(--line);
-
+  overflow:auto;
+  background:#fff;
+  border-radius:18px;
+  border:1px solid var(--line);
 }
 
 table{
-
-width:100%;
-
-border-collapse:collapse;
-
+  width:100%;
+  border-collapse:collapse;
 }
 
 th,
 td{
-
-padding:14px;
-
-text-align:left;
-
-border-bottom:
-1px solid #eee7f2;
-
+  padding:14px;
+  text-align:left;
+  border-bottom:1px solid #eee7f2;
 }
 
 th{
+  color:#352043;
+}
 
-color:#352043;
-
+td{
+  vertical-align:middle;
 }
 
 .small{
-
-padding:8px 11px;
-
-font-size:12px;
-
-background:#f0e5f7;
-
-color:var(--purple);
-
-margin:2px;
-
-border:0;
-
-border-radius:9px;
-
-cursor:pointer;
-
+  padding:8px 11px;
+  font-size:12px;
+  background:#f0e5f7;
+  color:var(--p);
+  margin:2px;
+  border:0;
+  border-radius:9px;
+  cursor:pointer;
 }
 
 .small:hover{
-
-opacity:.8;
-
+  opacity:.85;
 }
 
 .danger{
-
-background:#ffecef;
-
-color:#c21f39;
-
+  background:#ffecef;
+  color:#c21f39;
 }
 
 .success{
-
-background:#e9fff1;
-
-color:#087443;
-
+  background:#e9fff1;
+  color:#087443;
 }
 
-
-/* =========================
-MODAL
-========================= */
+/* MODAL */
 
 .modal{
-
-display:none;
-
-position:fixed;
-
-inset:0;
-
-background:#10071a99;
-
-z-index:20;
-
-place-items:center;
-
-padding:20px;
-
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#10071a99;
+  z-index:20;
+  place-items:center;
+  padding:20px;
 }
 
 .modal.show{
-
-display:grid;
-
+  display:grid;
 }
 
 .modal-box{
+  width:min(520px,100%);
+  background:#fff;
+  border-radius:22px;
+  padding:25px;
+  max-height:90vh;
+  overflow:auto;
+}
 
-width:min(520px,100%);
-
-background:white;
-
-border-radius:22px;
-
-padding:25px;
-
-max-height:90vh;
-
-overflow:auto;
-
+.modal-box label{
+  display:block;
+  font-weight:bold;
+  margin-top:8px;
 }
 
 .modal-box input,
 .modal-box select{
-
-width:100%;
-
-padding:13px;
-
-border:1px solid var(--line);
-
-border-radius:11px;
-
-margin:6px 0 13px;
-
+  width:100%;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  margin:6px 0 13px;
+  font-size:15px;
 }
 
 .modal-actions{
-
-display:flex;
-
-justify-content:flex-end;
-
-gap:8px;
-
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
 }
 
 .modal-actions button{
-
-padding:11px 15px;
-
-border:0;
-
-border-radius:10px;
-
-cursor:pointer;
-
+  padding:11px 15px;
+  border:0;
+  border-radius:10px;
+  cursor:pointer;
 }
 
-.modal-actions .login-btn{
-
-width:auto;
-
-margin-top:0;
-
-}
-
-
-/* =========================
-CHAT
-========================= */
+/* CHAT */
 
 .chat{
-
-height:430px;
-
-overflow:auto;
-
-background:#f7f1fa;
-
-border-radius:16px;
-
-padding:15px;
-
+  height:430px;
+  overflow:auto;
+  background:#f7f1fa;
+  border-radius:16px;
+  padding:15px;
 }
 
 .msg{
-
-background:white;
-
-border:1px solid var(--line);
-
-padding:10px;
-
-border-radius:14px;
-
-margin:8px 0;
-
+  background:#fff;
+  border:1px solid var(--line);
+  padding:10px;
+  border-radius:14px;
+  margin:8px 0;
 }
 
 .msg b{
-
-color:var(--purple);
-
+  color:var(--p);
 }
 
-
-/* =========================
-ESTADOS
-========================= */
-
-.empty{
-
-padding:25px;
-
-text-align:center;
-
-color:var(--muted);
-
+.chat-input{
+  flex:1;
+  max-width:none!important;
 }
 
-.loading{
-
-padding:20px;
-
-text-align:center;
-
-color:var(--muted);
-
-}
-
-
-/* =========================
-CELULAR
-========================= */
+/* RESPONSIVO */
 
 @media(max-width:800px){
 
-.side{
+  .side{
+    width:72px;
+  }
 
-width:72px;
+  .brand{
+    font-size:0;
+  }
 
+  .brand:after{
+    content:"W";
+    font-size:24px;
+    color:#fff;
+  }
+
+  .brand small{
+    display:none;
+  }
+
+  .side button{
+    font-size:0;
+    text-align:center;
+  }
+
+  .side button:before{
+    content:"•";
+    font-size:22px;
+  }
+
+  .main{
+    margin-left:72px;
+    padding:18px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
-
-.brand{
-
-font-size:0;
-
-}
-
-.brand:after{
-
-content:"W";
-
-font-size:24px;
-
-color:white;
-
-}
-
-.brand small{
-
-display:none;
-
-}
-
-.side button{
-
-font-size:0;
-
-text-align:center;
-
-}
-
-.side button:before{
-
-content:"•";
-
-font-size:22px;
-
-}
-
-.main{
-
-margin-left:72px;
-
-padding:18px;
-
-}
-
-.stats{
-
-grid-template-columns:
-repeat(2,1fr);
-
-}
-
-}
-
 
 @media(max-width:500px){
 
-.stats{
+  .stats{
+    grid-template-columns:1fr;
+  }
 
-grid-template-columns:1fr;
-
+  .top{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 }
-
-.top{
-
-align-items:flex-start;
-
-flex-direction:column;
-
-}
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
 <!-- =========================
-LOGIN
+     LOGIN
 ========================= -->
 
-<div id="login">
+<div id="loginScreen">
 
-<div class="login-box">
+  <div class="login-box">
 
-<div class="login-logo">
+    <div class="login-logo">
+      HOUSE <span>WIE</span> 🎃
+    </div>
 
-HOUSE <span>WIE</span> 🎃
+    <div class="login-sub">
+      Painel da Administração • Halloween
+    </div>
 
-</div>
+    <label for="loginName">
+      Nome do ADM
+    </label>
 
-<div class="login-sub">
+    <input
+      id="loginName"
+      type="text"
+      placeholder="Digite seu nome"
+      autocomplete="username"
+    >
 
-Painel da Administração
+    <label for="loginPass">
+      Senha
+    </label>
 
-</div>
+    <input
+      id="loginPass"
+      type="password"
+      placeholder="Digite sua senha"
+      autocomplete="current-password"
+    >
 
+    <button
+      class="login-btn"
+      id="loginButton"
+      type="button"
+      onclick="doLogin()"
+    >
+      ENTRAR
+    </button>
 
-<label for="loginName">
+    <div
+      class="error"
+      id="loginError"
+    ></div>
 
-Nome do ADM
-
-</label>
-
-<input
-id="loginName"
-placeholder="Digite seu nome"
-autocomplete="username"
->
-
-
-<label for="loginPass">
-
-Senha
-
-</label>
-
-<div class="password-wrap">
-
-<input
-id="loginPass"
-type="password"
-placeholder="Digite sua senha"
-autocomplete="current-password"
->
-
-<button
-type="button"
-class="show-password"
-onclick="togglePassword()"
-id="passwordToggle"
->
-
-👁️
-
-</button>
+  </div>
 
 </div>
-
-
-<button
-class="login-btn"
-onclick="login()"
-id="loginButton"
->
-
-ENTRAR
-
-</button>
-
-
-<div
-class="error"
-id="loginError"
-></div>
-
-</div>
-
-</div>
-
 
 
 <!-- =========================
-APP
+     PAINEL
 ========================= -->
 
 <div id="app">
 
+  <aside class="side">
 
-<aside class="side">
+    <div class="brand">
+      HOUSE <span>WIE</span>
+      <small>ADMINISTRAÇÃO</small>
+    </div>
+
+    <button
+      class="nav active"
+      data-page="home"
+      type="button"
+    >
+      🏠 &nbsp; Home
+    </button>
+
+    <button
+      class="nav"
+      data-page="requests"
+      type="button"
+    >
+      📋 &nbsp; Solicitações
+    </button>
+
+    <button
+      class="nav"
+      data-page="vagas"
+      type="button"
+    >
+      🎭 &nbsp; Vagas
+    </button>
+
+    <button
+      class="nav"
+      data-page="members"
+      type="button"
+    >
+      👥 &nbsp; Membros
+    </button>
+
+    <button
+      class="nav"
+      data-page="admins"
+      type="button"
+    >
+      🛡️ &nbsp; ADMs
+    </button>
+
+    <button
+      class="nav"
+      data-page="chat"
+      type="button"
+    >
+      💬 &nbsp; Chat
+    </button>
+
+    <button
+      class="nav"
+      data-page="logs"
+      type="button"
+    >
+      📜 &nbsp; Logs
+    </button>
+
+    <button
+      class="logout"
+      type="button"
+      onclick="logout()"
+    >
+      ↪ &nbsp; Sair
+    </button>
+
+  </aside>
 
 
-<div class="brand">
+  <main class="main">
 
-HOUSE <span>WIE</span>
+    <div class="top">
 
-<small>
+      <h1 id="pageTitle">
+        Dashboard
+      </h1>
 
-ADMINISTRAÇÃO
+      <div
+        class="role"
+        id="who"
+      ></div>
 
-</small>
+    </div>
+
+
+    <!-- HOME -->
+
+    <section
+      id="home"
+      class="page active"
+    >
+
+      <div class="stats">
+
+        <div class="stat">
+          Membros
+          <b id="sMembers">0</b>
+        </div>
+
+        <div class="stat">
+          Personagens
+          <b id="sChars">0</b>
+        </div>
+
+        <div class="stat">
+          Solicitações
+          <b id="sReq">0</b>
+        </div>
+
+        <div class="stat">
+          ADMs
+          <b id="sAdmins">4</b>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h2>
+          Bem-vindo à administração 💜💛
+        </h2>
+
+        <p class="muted">
+          Gerencie a House WIE por aqui:
+          fichas, vagas, membros, equipe,
+          chat e registros.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOLICITAÇÕES -->
+
+    <section
+      id="requests"
+      class="page"
+    >
+
+      <div class="toolbar">
+
+        <input
+          id="reqSearch"
+          placeholder="Pesquisar..."
+          type="text"
+        >
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Nome</th>
+              <th>Idade</th>
+              <th>Personagem</th>
+              <th>Status</th>
+              <th>Ação</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="reqTable">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- VAGAS -->
+
+    <section
+      id="vagas"
+      class="page"
+    >
+
+      <div class="toolbar">
+
+        <button
+          type="button"
+          onclick="openVaga()"
+        >
+          + Nova vaga
+        </button>
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Personagem</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="vagaTable">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- MEMBROS -->
+
+    <section
+      id="members"
+      class="page"
+    >
+
+      <div class="toolbar">
+
+        <input
+          id="memSearch"
+          placeholder="Pesquisar..."
+          type="text"
+        >
+
+      </div>
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Nome</th>
+              <th>Idade</th>
+              <th>Personagem</th>
+              <th>Ação</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="memTable">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- ADMS -->
+
+    <section
+      id="admins"
+      class="page"
+    >
+
+      <div class="panel">
+
+        <h2>
+          Equipe da House WIE
+        </h2>
+
+        <div id="adminList"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CHAT -->
+
+    <section
+      id="chat"
+      class="page"
+    >
+
+      <div class="panel">
+
+        <div
+          class="chat"
+          id="chatBox"
+        ></div>
+
+        <div class="toolbar">
+
+          <input
+            id="chatInput"
+            class="chat-input"
+            placeholder="Digite uma mensagem..."
+            type="text"
+          >
+
+          <button
+            type="button"
+            onclick="sendChat()"
+          >
+            Enviar
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- LOGS -->
+
+    <section
+      id="logs"
+      class="page"
+    >
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>Data</th>
+              <th>ADM</th>
+              <th>Ação</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="logTable">
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
 
 </div>
-
-
-<button
-class="nav active"
-data-page="home"
->
-
-🏠 &nbsp; Home
-
-</button>
-
-
-<button
-class="nav"
-data-page="requests"
->
-
-📋 &nbsp; Solicitações
-
-</button>
-
-
-<button
-class="nav"
-data-page="vagas"
->
-
-🎭 &nbsp; Vagas
-
-</button>
-
-
-<button
-class="nav"
-data-page="members"
->
-
-👥 &nbsp; Membros
-
-</button>
-
-
-<button
-class="nav"
-data-page="admins"
->
-
-🛡️ &nbsp; ADMs
-
-</button>
-
-
-<button
-class="nav"
-data-page="chat"
->
-
-💬 &nbsp; Chat
-
-</button>
-
-
-<button
-class="nav"
-data-page="logs"
->
-
-📜 &nbsp; Logs
-
-</button>
-
-
-<button
-class="logout"
-onclick="logout()"
->
-
-↪ &nbsp; Sair
-
-</button>
-
-
-</aside>
-
-
-
-<main class="main">
-
-
-<div class="top">
-
-<h1 id="pageTitle">
-
-Dashboard
-
-</h1>
-
-
-<div
-class="role"
-id="who"
-></div>
-
-</div>
-
 
 
 <!-- =========================
-HOME
-========================= -->
-
-<section
-id="home"
-class="page active"
->
-
-
-<div class="stats">
-
-
-<div class="stat">
-
-Membros
-
-<b id="sMembers">
-
-0
-
-</b>
-
-</div>
-
-
-<div class="stat">
-
-Personagens
-
-<b id="sChars">
-
-0
-
-</b>
-
-</div>
-
-
-<div class="stat">
-
-Solicitações
-
-<b id="sReq">
-
-0
-
-</b>
-
-</div>
-
-
-<div class="stat">
-
-ADMs
-
-<b id="sAdmins">
-
-4
-
-</b>
-
-</div>
-
-
-</div>
-
-
-<div class="panel">
-
-<h2>
-
-Bem-vindo à administração 💜💛
-
-</h2>
-
-<p class="muted">
-
-Gerencie a House WIE por aqui:
-fichas, vagas, membros, equipe,
-chat e registros.
-
-</p>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================
-SOLICITAÇÕES
-========================= -->
-
-<section
-id="requests"
-class="page"
->
-
-
-<div class="toolbar">
-
-<input
-id="reqSearch"
-placeholder="Pesquisar solicitação..."
-oninput="renderRequests()"
->
-
-</div>
-
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Nome</th>
-
-<th>Idade</th>
-
-<th>Personagem</th>
-
-<th>Status</th>
-
-<th>Ação</th>
-
-</tr>
-
-</thead>
-
-
-<tbody
-id="reqTable"
->
-
-<tr>
-
-<td colspan="5">
-
-<div class="loading">
-
-Carregando solicitações...
-
-</div>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================
-VAGAS
-========================= -->
-
-<section
-id="vagas"
-class="page"
->
-
-
-<div class="toolbar">
-
-<button
-onclick="openVaga()"
->
-
-+ Nova vaga
-
-</button>
-
-</div>
-
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Personagem</th>
-
-<th>Status</th>
-
-<th>Ações</th>
-
-</tr>
-
-</thead>
-
-
-<tbody
-id="vagaTable"
->
-
-<tr>
-
-<td colspan="3">
-
-<div class="loading">
-
-Carregando vagas...
-
-</div>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================
-MEMBROS
-========================= -->
-
-<section
-id="members"
-class="page"
->
-
-
-<div class="toolbar">
-
-<input
-id="memSearch"
-placeholder="Pesquisar membro..."
-oninput="renderMembers()"
->
-
-</div>
-
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Nome</th>
-
-<th>Idade</th>
-
-<th>Personagem</th>
-
-<th>Ação</th>
-
-</tr>
-
-</thead>
-
-
-<tbody
-id="memTable"
->
-
-<tr>
-
-<td colspan="4">
-
-<div class="loading">
-
-Carregando membros...
-
-</div>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================
-ADMS
-========================= -->
-
-<section
-id="admins"
-class="page"
->
-
-
-<div class="panel">
-
-<h2>
-
-Equipe da House WIE
-
-</h2>
-
-
-<div id="adminList">
-
-</div>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =========================
-CHAT
-========================= -->
-
-<section
-id="chat"
-class="page"
->
-
-
-<div class="panel">
-
-
-<div
-class="chat"
-id="chatBox"
->
-
-<div class="empty">
-
-Carregando chat...
-
-</div>
-
-</div>
-
-
-<div class="toolbar">
-
-<input
-id="chatInput"
-placeholder="Digite uma mensagem..."
-onkeydown="if(event.key==='Enter') sendChat()"
->
-
-
-<button
-onclick="sendChat()"
->
-
-Enviar
-
-</button>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
-LOGS
-========================= -->
-
-<section
-id="logs"
-class="page"
->
-
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Data</th>
-
-<th>ADM</th>
-
-<th>Ação</th>
-
-</tr>
-
-</thead>
-
-
-<tbody
-id="logTable"
->
-
-<tr>
-
-<td colspan="3">
-
-<div class="loading">
-
-Carregando logs...
-
-</div>
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-
-</section>
-
-
-</main>
-
-</div>
-
-
-
-<!-- =========================
-MODAL VAGA
+     MODAL DE VAGA
 ========================= -->
 
 <div
-class="modal"
-id="vagaModal"
+  class="modal"
+  id="vagaModal"
 >
 
+  <div class="modal-box">
 
-<div class="modal-box">
+    <h2 id="modalTitle">
+      Nova vaga
+    </h2>
 
+    <label for="vagaPersonagem">
+      Personagem
+    </label>
 
-<h2
-id="modalTitle"
->
+    <input
+      id="vagaPersonagem"
+      type="text"
+      placeholder="Nome do personagem"
+    >
 
-Nova vaga
+    <label for="vagaFoto">
+      Foto (URL)
+    </label>
 
-</h2>
+    <input
+      id="vagaFoto"
+      type="url"
+      placeholder="https://..."
+    >
 
+    <label for="vagaStatus">
+      Status
+    </label>
 
-<label for="vagaPersonagem">
+    <select id="vagaStatus">
 
-Personagem
+      <option value="aberta">
+        Aberta
+      </option>
 
-</label>
+      <option value="fechada">
+        Fechada
+      </option>
 
-<input
-id="vagaPersonagem"
-placeholder="Nome do personagem"
->
+    </select>
 
+    <div class="modal-actions">
 
-<label for="vagaFoto">
+      <button
+        type="button"
+        onclick="closeVaga()"
+      >
+        Cancelar
+      </button>
 
-Foto do personagem
+      <button
+        class="login-btn"
+        type="button"
+        onclick="saveVaga()"
+      >
+        Salvar
+      </button>
 
-</label>
+    </div>
 
-<input
-id="vagaFoto"
-placeholder="URL da imagem"
->
-
-
-<label for="vagaStatus">
-
-Status
-
-</label>
-
-<select
-id="vagaStatus"
->
-
-<option value="aberta">
-
-Aberta
-
-</option>
-
-<option value="fechada">
-
-Fechada
-
-</option>
-
-</select>
-
-
-<div class="modal-actions">
-
-<button
-onclick="closeVaga()"
->
-
-Cancelar
-
-</button>
-
-
-<button
-class="login-btn"
-onclick="saveVaga()"
->
-
-Salvar
-
-</button>
+  </div>
 
 </div>
-
-
-</div>
-
-</div>
-
 
 
 <!-- =========================
-FIREBASE
+     FIREBASE
 ========================= -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
@@ -1621,90 +977,31 @@ FIREBASE
 
 <script>
 
-
 /* =========================
-FIREBASE
+   CONFIGURAÇÃO FIREBASE
 ========================= */
 
 const firebaseConfig = {
-
-apiKey:
-"AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
-
-authDomain:
-"house-wie-6c8f9.firebaseapp.com",
-
-projectId:
-"house-wie-6c8f9",
-
-storageBucket:
-"house-wie-6c8f9.firebasestorage.app",
-
-messagingSenderId:
-"241202380170",
-
-appId:
-"1:241202380170:web:b7df00f3faa8ae7afedc73"
-
+  apiKey: "AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
+  authDomain: "house-wie-6c8f9.firebaseapp.com",
+  projectId: "house-wie-6c8f9",
+  storageBucket: "house-wie-6c8f9.firebasestorage.app",
+  messagingSenderId: "241202380170",
+  appId: "1:241202380170:web:b7df00f3faa8ae7afedc73"
 };
 
 
-firebase.initializeApp(firebaseConfig);
-
-
-const db =
-firebase.firestore();
-
-
-
 /* =========================
-ADMINISTRADORES
+   VARIÁVEIS
 ========================= */
 
-const ADMINS = [
-
-{
-nome:"Gojo",
-senha:"2707alex",
-cargo:"Dono"
-},
-
-{
-nome:"Tamsy",
-senha:"1010ka3l",
-cargo:"Sub-dono"
-},
-
-{
-nome:"Oliver",
-senha:"2315oliver",
-cargo:"ADM"
-},
-
-{
-nome:"Chuuya",
-senha:"0734chu3ya",
-cargo:"ADM"
-}
-
-];
-
-
-const CARGOS_PERMITIDOS = [
-
-"Dono",
-"Sub-dono",
-"ADM"
-
-];
-
+let db = null;
+let firebaseReady = false;
 
 let current = null;
 
-let requests = [];
-
+let reqs = [];
 let vagas = [];
-
 let members = [];
 
 let editingVaga = null;
@@ -1712,796 +1009,477 @@ let editingVaga = null;
 let listenersStarted = false;
 
 
+/* =========================
+   ELEMENTOS
+========================= */
+
+const loginScreen =
+  document.getElementById("loginScreen");
+
+const app =
+  document.getElementById("app");
+
+const loginName =
+  document.getElementById("loginName");
+
+const loginPass =
+  document.getElementById("loginPass");
+
+const loginButton =
+  document.getElementById("loginButton");
+
+const loginError =
+  document.getElementById("loginError");
+
+const who =
+  document.getElementById("who");
+
+const pageTitle =
+  document.getElementById("pageTitle");
+
+const reqSearch =
+  document.getElementById("reqSearch");
+
+const reqTable =
+  document.getElementById("reqTable");
+
+const vagaTable =
+  document.getElementById("vagaTable");
+
+const memSearch =
+  document.getElementById("memSearch");
+
+const memTable =
+  document.getElementById("memTable");
+
+const adminList =
+  document.getElementById("adminList");
+
+const chatBox =
+  document.getElementById("chatBox");
+
+const chatInput =
+  document.getElementById("chatInput");
+
+const logTable =
+  document.getElementById("logTable");
+
+const vagaModal =
+  document.getElementById("vagaModal");
+
+const modalTitle =
+  document.getElementById("modalTitle");
+
+const vagaPersonagem =
+  document.getElementById("vagaPersonagem");
+
+const vagaFoto =
+  document.getElementById("vagaFoto");
+
+const vagaStatus =
+  document.getElementById("vagaStatus");
+
 
 /* =========================
-ESCAPE
+   ADMINISTRADORES
+========================= */
+
+const ADMINS = [
+
+  {
+    nome: "Gojo",
+    senha: "2707alex",
+    cargo: "Dono"
+  },
+
+  {
+    nome: "Tamsy",
+    senha: "1010ka3l",
+    cargo: "Sub-dono"
+  },
+
+  {
+    nome: "Oliver",
+    senha: "2315oliver",
+    cargo: "ADM"
+  },
+
+  {
+    nome: "Chuuya",
+    senha: "0734chu3ya",
+    cargo: "ADM"
+  }
+
+];
+
+
+/* =========================
+   ESCAPE HTML
 ========================= */
 
 function esc(value){
 
-return String(value ?? "")
-.replace(/[&<>"']/g,function(char){
+  return String(value ?? "")
+    .replace(
+      /[&<>"']/g,
+      function(match){
 
-return {
+        return {
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#39;"
 
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
+        }[match];
 
-}[char];
-
-});
+      }
+    );
 
 }
 
 
-
 /* =========================
-MOSTRAR / OCULTAR SENHA
+   FIREBASE
 ========================= */
 
-function togglePassword(){
+try{
 
-const input =
-document.getElementById("loginPass");
+  if(
+    typeof firebase !== "undefined"
+  ){
 
-const button =
-document.getElementById("passwordToggle");
+    firebase.initializeApp(
+      firebaseConfig
+    );
 
+    db = firebase.firestore();
 
-if(input.type === "password"){
+    firebaseReady = true;
 
-input.type = "text";
+    console.log(
+      "Firebase conectado."
+    );
 
-button.textContent = "🙈";
+  }
 
-}else{
+}catch(error){
 
-input.type = "password";
+  firebaseReady = false;
 
-button.textContent = "👁️";
+  console.error(
+    "Erro ao iniciar Firebase:",
+    error
+  );
 
 }
-
-}
-
 
 
 /* =========================
-LOGIN
+   LOGIN
 ========================= */
 
-function login(){
+function doLogin(){
 
-const nome =
-document
-.getElementById("loginName")
-.value
-.trim()
-.toLowerCase();
+  loginError.textContent = "";
 
+  const name =
+    loginName.value
+      .trim()
+      .toLowerCase();
 
-const senha =
-document
-.getElementById("loginPass")
-.value
-.trim();
+  const password =
+    loginPass.value;
 
+  if(!name || !password){
 
-const erro =
-document
-.getElementById("loginError");
+    loginError.textContent =
+      "Digite seu nome e sua senha.";
 
+    return;
 
-/*
-IMPORTANTE:
-o return fica dentro dos parênteses
-para evitar o erro de quebra de linha
-do código anterior.
-*/
-
-const adm =
-ADMINS.find(function(a){
-
-return (
-
-a.nome.toLowerCase() === nome &&
-
-a.senha === senha &&
-
-CARGOS_PERMITIDOS.includes(
-a.cargo
-)
-
-);
-
-});
+  }
 
 
-if(!adm){
+  const found =
+    ADMINS.find(function(admin){
 
-erro.textContent =
-"Nome ou senha incorretos.";
+      return (
+        admin.nome.toLowerCase() === name &&
+        admin.senha === password
+      );
 
-return;
-
-}
-
-
-erro.textContent = "";
+    });
 
 
-current = adm;
+  if(!found){
+
+    loginError.textContent =
+      "Nome ou senha incorretos.";
+
+    loginPass.value = "";
+
+    return;
+
+  }
 
 
-sessionStorage.setItem(
-
-"wieAdmin",
-
-JSON.stringify(adm)
-
-);
+  current = found;
 
 
-document
-.getElementById("login")
-.style.display =
-"none";
+  sessionStorage.setItem(
+    "wieAdmin",
+    JSON.stringify(found)
+  );
 
 
-document
-.getElementById("app")
-.style.display =
-"block";
+  loginScreen.style.display =
+    "none";
+
+  app.style.display =
+    "block";
 
 
-document
-.getElementById("who")
-.textContent =
-
-`${adm.nome} • ${adm.cargo}`;
-
-
-loadAll();
+  who.textContent =
+    found.nome +
+    " • " +
+    found.cargo;
 
 
-log(
-"Entrou no painel"
-);
+  renderAdmins();
+
+
+  if(firebaseReady){
+
+    loadAll();
+
+    log(
+      "Entrou no painel"
+    );
+
+  }
 
 }
-
 
 
 /* =========================
-ENTER NO LOGIN
+   ENTER NO LOGIN
 ========================= */
 
-document
-.getElementById("loginName")
-.addEventListener(
-"keydown",
-function(event){
+loginName.addEventListener(
+  "keydown",
+  function(event){
 
-if(event.key === "Enter"){
+    if(event.key === "Enter"){
 
-login();
+      doLogin();
 
-}
+    }
 
-});
+  }
+);
 
 
-document
-.getElementById("loginPass")
-.addEventListener(
-"keydown",
-function(event){
+loginPass.addEventListener(
+  "keydown",
+  function(event){
 
-if(event.key === "Enter"){
+    if(event.key === "Enter"){
 
-login();
+      doLogin();
 
-}
+    }
 
-});
-
+  }
+);
 
 
 /* =========================
-LOGOUT
+   LOGOUT
 ========================= */
 
 function logout(){
 
-sessionStorage.removeItem(
-"wieAdmin"
-);
+  if(current && firebaseReady){
 
-location.reload();
+    log(
+      "Saiu do painel"
+    );
 
-}
+  }
 
+  sessionStorage.removeItem(
+    "wieAdmin"
+  );
 
+  current = null;
 
-/* =========================
-NAVEGAÇÃO
-========================= */
-
-document
-.querySelectorAll(".nav")
-.forEach(function(button){
-
-button.onclick =
-function(){
-
-document
-.querySelectorAll(".nav")
-.forEach(function(item){
-
-item.classList.remove(
-"active"
-);
-
-});
-
-
-button.classList.add(
-"active"
-);
-
-
-document
-.querySelectorAll(".page")
-.forEach(function(page){
-
-page.classList.remove(
-"active"
-);
-
-});
-
-
-document
-.getElementById(
-button.dataset.page
-)
-.classList.add(
-"active"
-);
-
-
-document
-.getElementById("pageTitle")
-.textContent =
-
-button.textContent
-.replace(
-/[^\p{L}\p{N}\s]/gu,
-""
-)
-.trim();
-
-};
-
-});
-
-
-
-/* =========================
-LOG
-========================= */
-
-function log(acao){
-
-if(!current)
-return;
-
-
-db
-.collection("logs")
-.add({
-
-adm:current.nome,
-
-cargo:current.cargo,
-
-acao:acao,
-
-criadoEm:
-
-firebase
-.firestore
-.FieldValue
-.serverTimestamp()
-
-})
-
-.catch(function(error){
-
-console.error(
-"Erro ao registrar log:",
-error
-);
-
-});
+  location.reload();
 
 }
 
 
+/* =========================
+   REGISTRAR LOG
+========================= */
+
+function log(action){
+
+  if(
+    !firebaseReady ||
+    !db
+  ){
+
+    return;
+
+  }
+
+
+  db.collection("logs")
+    .add({
+
+      adm:
+        current?.nome ||
+        "Sistema",
+
+      cargo:
+        current?.cargo ||
+        "",
+
+      acao:
+        action,
+
+      criadoEm:
+        firebase.firestore.FieldValue
+          .serverTimestamp()
+
+    })
+    .catch(function(error){
+
+      console.error(
+        "Erro ao registrar log:",
+        error
+      );
+
+    });
+
+}
+
 
 /* =========================
-CARREGAR DADOS
+   NAVEGAÇÃO
+========================= */
+
+document
+  .querySelectorAll(".nav")
+  .forEach(function(button){
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        document
+          .querySelectorAll(".nav")
+          .forEach(function(item){
+
+            item.classList.remove(
+              "active"
+            );
+
+          });
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        document
+          .querySelectorAll(".page")
+          .forEach(function(page){
+
+            page.classList.remove(
+              "active"
+            );
+
+          });
+
+
+        const page =
+          document.getElementById(
+            button.dataset.page
+          );
+
+
+        if(page){
+
+          page.classList.add(
+            "active"
+          );
+
+        }
+
+
+        pageTitle.textContent =
+          button.textContent
+            .replace(
+              /[^\p{L}\p{N}\s]/gu,
+              ""
+            )
+            .trim() ||
+          "Dashboard";
+
+      }
+
+    );
+
+  });
+
+
+/* =========================
+   CARREGAR DADOS
 ========================= */
 
 function loadAll(){
 
-if(listenersStarted)
-return;
+  if(
+    !firebaseReady ||
+    !db
+  ){
 
-listenersStarted = true;
+    return;
 
+  }
 
 
-/* REQUESTS */
+  if(listenersStarted){
 
-db
-.collection("requests")
-.onSnapshot(
+    return;
 
-function(snapshot){
+  }
 
-requests =
-snapshot.docs;
+  listenersStarted = true;
 
-renderRequests();
 
+  /* SOLICITAÇÕES */
 
-document
-.getElementById("sReq")
-.textContent =
-requests.length;
+  db.collection("requests")
+    .onSnapshot(
 
-},
+      function(snapshot){
 
-function(error){
+        reqs =
+          snapshot.docs;
 
-console.error(
-"Erro nas solicitações:",
-error
-);
+        renderRequests();
 
-}
+        document.getElementById(
+          "sReq"
+        ).textContent =
+          reqs.length;
 
-);
+      },
 
+      function(error){
 
-
-/* VAGAS */
-
-db
-.collection("vagas")
-.onSnapshot(
-
-function(snapshot){
-
-vagas =
-snapshot.docs;
-
-renderVagas();
-
-
-document
-.getElementById("sChars")
-.textContent =
-vagas.length;
-
-},
-
-function(error){
-
-console.error(
-"Erro nas vagas:",
-error
-);
-
-}
-
-);
-
-
-
-/* MEMBERS */
-
-db
-.collection("members")
-.onSnapshot(
-
-function(snapshot){
-
-members =
-snapshot.docs;
-
-renderMembers();
-
-
-document
-.getElementById("sMembers")
-.textContent =
-members.length;
-
-},
-
-function(error){
-
-console.error(
-"Erro nos membros:",
-error
-);
-
-}
-
-);
-
-
-
-/* CHAT */
-
-db
-.collection("chat")
-.orderBy(
-"criadoEm",
-"asc"
-)
-.onSnapshot(
-
-function(snapshot){
-
-const box =
-document
-.getElementById("chatBox");
-
-
-if(snapshot.empty){
-
-box.innerHTML =
-'<div class="empty">Nenhuma mensagem ainda.</div>';
-
-return;
-
-}
-
-
-box.innerHTML =
-
-snapshot.docs
-.map(function(doc){
-
-const data =
-doc.data();
-
-
-return `
-
-<div class="msg">
-
-<b>
-
-${esc(
-data.adm || "ADM"
-)}
-
-</b>
-
-<br>
-
-${esc(
-data.texto || ""
-)}
-
-</div>
-
-`;
-
-})
-.join("");
-
-
-box.scrollTop =
-box.scrollHeight;
-
-},
-
-function(error){
-
-console.error(
-"Erro no chat:",
-error
-);
-
-}
-
-);
-
-
-
-/* LOGS */
-
-db
-.collection("logs")
-.orderBy(
-"criadoEm",
-"desc"
-)
-.limit(50)
-.onSnapshot(
-
-function(snapshot){
-
-const table =
-document
-.getElementById("logTable");
-
-
-if(snapshot.empty){
-
-table.innerHTML = `
-
-<tr>
-
-<td colspan="3">
-
-Nenhum registro.
-
-</td>
-
-</tr>
-
-`;
-
-return;
-
-}
-
-
-table.innerHTML =
-
-snapshot.docs
-.map(function(doc){
-
-const data =
-doc.data();
-
-
-const date =
-
-data.criadoEm &&
-data.criadoEm.toDate
-
-?
-
-data.criadoEm
-.toDate()
-.toLocaleString(
-"pt-BR"
-)
-
-:
-
-"—";
-
-
-return `
-
-<tr>
-
-<td>
-
-${esc(date)}
-
-</td>
-
-<td>
-
-${esc(
-data.adm || ""
-)}
-
-</td>
-
-<td>
-
-${esc(
-data.acao || ""
-)}
-
-</td>
-
-</tr>
-
-`;
-
-})
-.join("");
-
-},
-
-function(error){
-
-console.error(
-"Erro nos logs:",
-error
-);
-
-}
-
-);
-
-
-
-/* LISTA DE ADMS */
-
-document
-.getElementById("adminList")
-.innerHTML =
-
-ADMINS
-.map(function(adm){
-
-return `
-
-<div
-class="panel"
-style="
-margin:10px 0;
-padding:15px;
-"
->
-
-<b>
-
-${esc(
-adm.nome
-)}
-
-</b>
-
-<br>
-
-<span class="muted">
-
-${esc(
-adm.cargo
-)}
-
-</span>
-
-</div>
-
-`;
-
-})
-.join("");
-
-
-document
-.getElementById("sAdmins")
-.textContent =
-ADMINS.length;
-
-}
-
-
-
-/* =========================
-SOLICITAÇÕES
-========================= */
-
-function renderRequests(){
-
-const search =
-
-(
-document
-.getElementById("reqSearch")
-.value
-||
-""
-)
-.toLowerCase();
-
-
-const filtered =
-
-requests.filter(
-function(doc){
-
-const data =
-doc.data();
-
-
-return (
-
-`${data.nome || ""} ${
-data.personagem || ""
-} ${
-data.status || ""
-}`
-
-)
-.toLowerCase()
-.includes(search);
-
-});
-
-
-document
-.getElementById("reqTable")
-.innerHTML =
-
-filtered
-.map(function(doc){
-
-const data =
-doc.data();
-
-
-return `
-
-<tr>
-
-<td>
-
-${esc(
-data.nome
-)}
-
-</td>
-
-<td>
-
-${esc(
-data.idade
-)}
-
-</td>
-
-<td>
-
-${esc(
-data.personagem
-)}
-
-</td>
-
-<td>
-
-${esc(
-data.status
-)}
-
-</td>
-
-<td>
-
-${
-data.status === "pendente"
-
-?
-
-`
-
-<button
-class="small success"
-onclick="approve('${doc.id}')"
->
-
-Aprovar
-
-</button>
-
-<button
-class="small danger"
-onclick="rejectRequest('${doc.id}'
+ 
