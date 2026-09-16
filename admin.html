@@ -311,8 +311,7 @@ input{
     flex-wrap:wrap;
 }
 
-.refresh-btn,
-.sync-btn{
+.refresh-btn{
     border:1px solid var(--border);
     background:var(--card);
     color:white;
@@ -320,12 +319,6 @@ input{
     border-radius:11px;
     cursor:pointer;
     font-weight:700;
-}
-
-.sync-btn{
-    background:rgba(255,216,77,.08);
-    border-color:rgba(255,216,77,.2);
-    color:var(--yellow);
 }
 
 /* =========================
@@ -513,6 +506,16 @@ td strong{
     color:#d5c9df;
 }
 
+.open-action{
+    background:rgba(85,230,165,.12);
+    color:var(--green);
+}
+
+.close-action{
+    background:rgba(255,216,77,.10);
+    color:var(--yellow);
+}
+
 /* =========================
    MEMBERS
 ========================= */
@@ -573,7 +576,7 @@ td strong{
 
 .vacancies-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
     gap:15px;
 }
 
@@ -640,6 +643,18 @@ td strong{
 .occupied-by{
     color:#d9cdea!important;
     margin-top:8px!important;
+}
+
+.vacancy-actions{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    padding:0 15px 15px;
+}
+
+.vacancy-actions .action{
+    flex:1;
+    min-width:70px;
 }
 
 /* =========================
@@ -709,6 +724,8 @@ td strong{
     border-radius:20px;
     padding:23px;
     box-shadow:var(--shadow);
+    max-height:90vh;
+    overflow-y:auto;
 }
 
 .modal-header{
@@ -1201,16 +1218,19 @@ td strong{
 
                     As fichas enviadas pela recepção aparecem em
                     <b style="color:white;">Solicitações</b>.
-                    Ao clicar em <b style="color:var(--green);">Aprovar</b>,
-                    o sistema cria o membro e coloca automaticamente
-                    a personagem em
-                    <b style="color:#ff8198;">Vagas Fechadas</b>.
 
                     <br><br>
 
-                    Depois de aprovar ou recusar, a ficha sai da lista
-                    de pendentes, mas continua salva no Firestore para
-                    manter o histórico.
+                    Ao <b style="color:var(--green);">aprovar</b>
+                    uma solicitação, o sistema cadastra o membro.
+                    A vaga não é alterada automaticamente.
+
+                    <br><br>
+
+                    O gerenciamento de personagens fica separado em
+                    <b style="color:white;">🎃 Vagas</b>, onde os ADMs
+                    podem editar, remover, abrir ou fechar cada vaga
+                    manualmente.
 
                 </p>
 
@@ -1350,31 +1370,22 @@ td strong{
                     <h1>🎃 Vagas</h1>
 
                     <p>
-                        Personagens disponíveis e ocupados.
+                        Gerencie manualmente as vagas da House.
                     </p>
 
                 </div>
 
-                <div class="header-buttons">
-
-                    <button
-                        class="sync-btn"
-                        onclick="syncApprovedRequests()"
-                    >
-                        🔄 Sincronizar aprovados
-                    </button>
-
-                    <button
-                        class="refresh-btn"
-                        onclick="loadVacancies()"
-                    >
-                        ↻ Atualizar
-                    </button>
-
-                </div>
+                <button
+                    class="refresh-btn"
+                    onclick="loadVacancies()"
+                >
+                    ↻ Atualizar
+                </button>
 
             </div>
 
+
+            <!-- ABERTAS -->
 
             <div class="vacancy-section">
 
@@ -1396,6 +1407,8 @@ td strong{
             </div>
 
 
+            <!-- FECHADAS -->
+
             <div class="vacancy-section">
 
                 <div class="section-title">
@@ -1403,7 +1416,7 @@ td strong{
                     🔒 Vagas fechadas
 
                     <small>
-                        personagens ocupados
+                        personagens indisponíveis
                     </small>
 
                 </div>
@@ -1455,7 +1468,7 @@ td strong{
 
 
 <!-- =========================
-     EDIT MODAL
+     EDIT REQUEST MODAL
 ========================= -->
 
 <div
@@ -1478,12 +1491,10 @@ td strong{
 
         </div>
 
-
         <input
             type="hidden"
             id="editId"
         >
-
 
         <div class="form-group">
 
@@ -1496,7 +1507,6 @@ td strong{
 
         </div>
 
-
         <div class="form-group">
 
             <label>Idade</label>
@@ -1507,7 +1517,6 @@ td strong{
             >
 
         </div>
-
 
         <div class="form-group">
 
@@ -1520,7 +1529,6 @@ td strong{
 
         </div>
 
-
         <div class="form-group">
 
             <label>Obra</label>
@@ -1531,7 +1539,6 @@ td strong{
             >
 
         </div>
-
 
         <div class="modal-actions">
 
@@ -1547,6 +1554,94 @@ td strong{
                 onclick="saveEdit()"
             >
                 Salvar alterações
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     VACANCY MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="vacancyModal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>🎃 Editar vaga</h2>
+
+            <button
+                class="close-modal"
+                onclick="closeVacancyModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <input
+            type="hidden"
+            id="vacancyEditId"
+        >
+
+        <div class="form-group">
+
+            <label>Personagem</label>
+
+            <input
+                id="vacancyPersonagem"
+                type="text"
+                placeholder="Nome do personagem"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Obra</label>
+
+            <input
+                id="vacancyObra"
+                type="text"
+                placeholder="Anime, série, jogo..."
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Imagem da vaga</label>
+
+            <input
+                id="vacancyImagem"
+                type="text"
+                placeholder="Cole aqui o link da imagem"
+            >
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button
+                class="modal-btn cancel-btn"
+                onclick="closeVacancyModal()"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="modal-btn save-btn"
+                onclick="saveVacancyEdit()"
+            >
+                Salvar vaga
             </button>
 
         </div>
@@ -1582,7 +1677,6 @@ import {
     deleteDoc,
     doc,
     setDoc,
-    getDoc,
     serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -1870,7 +1964,9 @@ window.showPage = function(page,button){
 
 
     if(button){
+
         button.classList.add("active");
+
     }
 
 };
@@ -1957,11 +2053,6 @@ async function(){
 };
 
 
-/* =========================
-   RENDER REQUESTS
-   SOMENTE PENDENTES
-========================= */
-
 window.renderRequests = function(){
 
     const body =
@@ -1984,8 +2075,6 @@ window.renderRequests = function(){
             const status =
                 normalizar(data.status);
 
-
-            /* SÓ MOSTRA PENDENTES */
 
             if(
                 status &&
@@ -2165,10 +2254,18 @@ async function(id,status){
 
 
         const requestSnapshot =
-            await getDoc(requestRef);
+            await getDocs(
+                collection(db,"requests")
+            );
 
 
-        if(!requestSnapshot.exists()){
+        const found =
+            requestSnapshot.docs.find(
+                item => item.id === id
+            );
+
+
+        if(!found){
 
             toast(
                 "Solicitação não encontrada.",
@@ -2181,7 +2278,7 @@ async function(id,status){
 
 
         const data =
-            requestSnapshot.data();
+            found.data();
 
 
         /* =====================
@@ -2189,6 +2286,19 @@ async function(id,status){
         ===================== */
 
         if(status === "aprovado"){
+
+            const confirmar =
+                confirm(
+                    "Aprovar esta solicitação?\n\nO membro será cadastrado, mas nenhuma vaga será fechada automaticamente."
+                );
+
+
+            if(!confirmar){
+
+                return;
+
+            }
+
 
             const memberData = {
 
@@ -2217,8 +2327,6 @@ async function(id,status){
             };
 
 
-            /* CRIA MEMBRO */
-
             await setDoc(
 
                 doc(
@@ -2236,180 +2344,23 @@ async function(id,status){
             );
 
 
-            /* =====================
-               PROCURA VAGA
-            ===================== */
-
-            const vacanciesSnapshot =
-                await getDocs(
-                    collection(db,"vacancies")
-                );
-
-
-            const characterKey =
-                data.characterKey ||
-                chavePersonagem(
-                    data.personagem,
-                    data.obra
-                );
-
-
-            let existingVacancy = null;
-
-
-            vacanciesSnapshot.forEach(item=>{
-
-                const vacancy =
-                    item.data();
-
-
-                const vacancyKey =
-                    vacancy.characterKey ||
-                    chavePersonagem(
-                        vacancy.personagem,
-                        vacancy.obra
-                    );
-
-
-                if(
-                    vacancyKey === characterKey
-                ){
-
-                    existingVacancy = {
-
-                        id:item.id,
-                        data:vacancy
-
-                    };
-
-                }
-
-            });
-
-
-            /* =====================
-               FECHA VAGA EXISTENTE
-            ===================== */
-
-            if(existingVacancy){
-
-                await updateDoc(
-
-                    doc(
-                        db,
-                        "vacancies",
-                        existingVacancy.id
-                    ),
-
-                    {
-
-                        personagem:
-                            data.personagem || "",
-
-                        obra:
-                            data.obra || "",
-
-                        characterKey:
-                            characterKey,
-
-                        status:
-                            "fechada",
-
-                        ocupada:
-                            true,
-
-                        membro:
-                            data.nome || "",
-
-                        requestId:
-                            id,
-
-                        foto:
-                            data.foto || "",
-
-                        imagem:
-                            existingVacancy.data.imagem || "",
-
-                        atualizadoEm:
-                            serverTimestamp()
-
-                    }
-
-                );
-
-            }
-
-
-            /* =====================
-               CRIA VAGA FECHADA
-            ===================== */
-
-            else{
-
-                await setDoc(
-
-                    doc(
-                        db,
-                        "vacancies",
-                        id
-                    ),
-
-                    {
-
-                        personagem:
-                            data.personagem || "",
-
-                        obra:
-                            data.obra || "",
-
-                        characterKey:
-                            characterKey,
-
-                        status:
-                            "fechada",
-
-                        ocupada:
-                            true,
-
-                        membro:
-                            data.nome || "",
-
-                        requestId:
-                            id,
-
-                        foto:
-                            data.foto || "",
-
-                        imagem:
-                            "",
-
-                        criadoEm:
-                            serverTimestamp()
-
-                    }
-
-                );
-
-            }
-
-
-            /* ATUALIZA STATUS */
-
             await updateDoc(
 
                 requestRef,
 
                 {
                     status:"aprovado",
+
                     aprovadoEm:
                         serverTimestamp()
+
                 }
 
             );
 
 
             toast(
-                "✓ Aprovado! A personagem foi para Vagas Fechadas."
+                "✓ Solicitação aprovada e membro cadastrado!"
             );
 
         }
@@ -2420,6 +2371,19 @@ async function(id,status){
         ===================== */
 
         else if(status === "recusado"){
+
+            const confirmar =
+                confirm(
+                    "Recusar esta solicitação?"
+                );
+
+
+            if(!confirmar){
+
+                return;
+
+            }
+
 
             await updateDoc(
 
@@ -2446,7 +2410,6 @@ async function(id,status){
 
         await loadRequests();
         await loadMembers();
-        await loadVacancies();
 
         updateStats();
 
@@ -2920,6 +2883,10 @@ async function(){
 };
 
 
+/* =========================
+   RENDER VACANCIES
+========================= */
+
 window.renderVacancies = function(){
 
     const open =
@@ -2934,13 +2901,21 @@ window.renderVacancies = function(){
         );
 
 
+    /*
+       A VAGA É CONTROLADA PELO STATUS.
+
+       Se status for "fechada" -> fechada.
+       Qualquer outro status -> aberta.
+
+       ocupada NÃO muda mais o estado
+       automaticamente.
+    */
+
     const openData =
         vacanciesData.filter(data=>{
 
-            return (
-                normalizar(data.status) !== "fechada" &&
-                data.ocupada !== true
-            );
+            return normalizar(data.status)
+                !== "fechada";
 
         });
 
@@ -2948,15 +2923,15 @@ window.renderVacancies = function(){
     const closedData =
         vacanciesData.filter(data=>{
 
-            return (
-                normalizar(data.status) === "fechada" ||
-                data.ocupada === true
-            );
+            return normalizar(data.status)
+                === "fechada";
 
         });
 
 
-    /* ABERTAS */
+    /* =====================
+       ABERTAS
+    ===================== */
 
     if(!openData.length){
 
@@ -2981,14 +2956,16 @@ window.renderVacancies = function(){
     }else{
 
         open.innerHTML =
-            openData.map(
-                vacancyCard
-            ).join("");
+            openData
+            .map(vacancyCard)
+            .join("");
 
     }
 
 
-    /* FECHADAS */
+    /* =====================
+       FECHADAS
+    ===================== */
 
     if(!closedData.length){
 
@@ -3013,26 +2990,27 @@ window.renderVacancies = function(){
     }else{
 
         closed.innerHTML =
-            closedData.map(
-                vacancyCard
-            ).join("");
+            closedData
+            .map(vacancyCard)
+            .join("");
 
     }
 
 };
 
 
+/* =========================
+   VACANCY CARD
+========================= */
+
 function vacancyCard(data){
 
     const imagem =
-        data.imagem ||
-        data.foto ||
-        "";
+        data.imagem || "";
 
 
     const fechada =
-        normalizar(data.status) === "fechada" ||
-        data.ocupada === true;
+        normalizar(data.status) === "fechada";
 
 
     return `
@@ -3092,21 +3070,17 @@ function vacancyCard(data){
                     ?
 
                     `
-
                     <span class="vacancy-badge closed">
                         🔒 FECHADA
                     </span>
-
                     `
 
                     :
 
                     `
-
                     <span class="vacancy-badge open">
                         🟢 ABERTA
                     </span>
-
                     `
                 }
 
@@ -3116,22 +3090,70 @@ function vacancyCard(data){
                     ?
 
                     `
-
                     <p class="occupied-by">
 
-                        👤 Ocupada por:
+                        👤 Membro:
 
                         <b>
                             ${safe(data.membro)}
                         </b>
 
                     </p>
-
                     `
 
                     :
                     ""
                 }
+
+            </div>
+
+
+            <!-- =================
+                 AÇÕES DA VAGA
+            ================= -->
+
+            <div class="vacancy-actions">
+
+                <button
+                    class="action edit"
+                    onclick="openVacancyModal('${safe(data.id)}')"
+                >
+                    ✏️ Editar
+                </button>
+
+
+                ${
+                    fechada
+                    ?
+
+                    `
+                    <button
+                        class="action open-action"
+                        onclick="toggleVacancy('${safe(data.id)}','aberta')"
+                    >
+                        🟢 Abrir
+                    </button>
+                    `
+
+                    :
+
+                    `
+                    <button
+                        class="action close-action"
+                        onclick="toggleVacancy('${safe(data.id)}','fechada')"
+                    >
+                        🔒 Fechar
+                    </button>
+                    `
+                }
+
+
+                <button
+                    class="action delete"
+                    onclick="deleteVacancy('${safe(data.id)}')"
+                >
+                    🗑️ Remover
+                </button>
 
             </div>
 
@@ -3143,256 +3165,394 @@ function vacancyCard(data){
 
 
 /* =========================
-   SINCRONIZAR APROVADOS
+   ABRIR / FECHAR VAGA
 ========================= */
 
-window.syncApprovedRequests =
-async function(){
+window.toggleVacancy =
+async function(id,status){
 
-    try{
-
-        toast(
-            "🔄 Sincronizando aprovados..."
+    const vaga =
+        vacanciesData.find(
+            item => item.id === id
         );
 
 
-        const requestSnapshot =
-            await getDocs(
-                collection(db,"requests")
-            );
+    if(!vaga){
+
+        toast(
+            "Vaga não encontrada.",
+            "error"
+        );
+
+        return;
+
+    }
 
 
-        const approved =
-            requestSnapshot.docs.filter(item=>{
-
-                return normalizar(
-                    item.data().status
-                ) === "aprovado";
-
-            });
+    const texto =
+        status === "fechada"
+        ?
+        "Deseja fechar esta vaga?"
+        :
+        "Deseja abrir esta vaga?";
 
 
-        if(!approved.length){
+    if(!confirm(texto)){
 
-            toast(
-                "Não existem solicitações aprovadas para sincronizar."
-            );
+        return;
 
-            return;
-
-        }
+    }
 
 
-        const vacanciesSnapshot =
-            await getDocs(
-                collection(db,"vacancies")
-            );
+    try{
 
+        await updateDoc(
 
-        const vacancies =
-            vacanciesSnapshot.docs.map(item=>({
+            doc(
+                db,
+                "vacancies",
+                id
+            ),
 
-                id:item.id,
-                ...item.data()
-
-            }));
-
-
-        let created = 0;
-        let updated = 0;
-
-
-        for(
-            const requestDoc
-            of approved
-        ){
-
-            const data =
-                requestDoc.data();
-
-
-            const requestId =
-                requestDoc.id;
-
-
-            const characterKey =
-                data.characterKey ||
-                chavePersonagem(
-                    data.personagem,
-                    data.obra
-                );
-
-
-            let existing = null;
-
-
-            for(
-                const vacancy
-                of vacancies
-            ){
-
-                const vacancyKey =
-                    vacancy.characterKey ||
-                    chavePersonagem(
-                        vacancy.personagem,
-                        vacancy.obra
-                    );
-
-
-                if(
-                    vacancyKey === characterKey ||
-                    vacancy.requestId === requestId ||
-                    vacancy.id === requestId
-                ){
-
-                    existing = vacancy;
-
-                    break;
-
-                }
-
-            }
-
-
-            const vacancyData = {
-
-                personagem:
-                    data.personagem || "",
-
-                obra:
-                    data.obra || "",
-
-                characterKey:
-                    characterKey,
+            {
 
                 status:
-                    "fechada",
-
-                ocupada:
-                    true,
-
-                membro:
-                    data.nome || "",
-
-                requestId:
-                    requestId,
-
-                foto:
-                    data.foto || "",
-
-                imagem:
-                    existing?.imagem || "",
+                    status,
 
                 atualizadoEm:
                     serverTimestamp()
 
-            };
-
-
-            if(existing){
-
-                await updateDoc(
-
-                    doc(
-                        db,
-                        "vacancies",
-                        existing.id
-                    ),
-
-                    vacancyData
-
-                );
-
-                updated++;
-
-            }else{
-
-                await setDoc(
-
-                    doc(
-                        db,
-                        "vacancies",
-                        requestId
-                    ),
-
-                    {
-
-                        ...vacancyData,
-
-                        criadoEm:
-                            serverTimestamp()
-
-                    }
-
-                );
-
-                created++;
-
             }
 
+        );
 
-            /* GARANTE MEMBRO */
 
-            await setDoc(
+        /*
+           Atualiza imediatamente
+           sem precisar recarregar tudo.
+        */
 
-                doc(
-                    db,
-                    "members",
-                    requestId
-                ),
+        vaga.status =
+            status;
 
-                {
 
-                    nome:
-                        data.nome || "",
+        renderVacancies();
+        updateStats();
 
-                    idade:
-                        data.idade || "",
 
-                    personagem:
-                        data.personagem || "",
+        if(status === "fechada"){
 
-                    obra:
-                        data.obra || "",
+            toast(
+                "🔒 Vaga fechada!"
+            );
 
-                    foto:
-                        data.foto || "",
+        }else{
 
-                    requestId:
-                        requestId
-
-                },
-
-                {
-                    merge:true
-                }
-
+            toast(
+                "🟢 Vaga aberta!"
             );
 
         }
 
 
-        await loadVacancies();
-        await loadMembers();
+    }catch(error){
 
+        console.error(error);
+
+
+        toast(
+            "Não foi possível alterar a vaga.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   REMOVER VAGA
+========================= */
+
+window.deleteVacancy =
+async function(id){
+
+    const vaga =
+        vacanciesData.find(
+            item => item.id === id
+        );
+
+
+    if(!vaga){
+
+        toast(
+            "Vaga não encontrada.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+
+            "🗑️ REMOVER VAGA\n\n" +
+
+            "Personagem: " +
+            (vaga.personagem || "Sem nome") +
+
+            "\nObra: " +
+            (vaga.obra || "Sem obra") +
+
+            "\n\nEssa vaga será apagada permanentemente do Firestore.\n\nDeseja continuar?"
+
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "vacancies",
+                id
+            )
+
+        );
+
+
+        vacanciesData =
+            vacanciesData.filter(
+                item => item.id !== id
+            );
+
+
+        renderVacancies();
         updateStats();
 
 
         toast(
-            `✓ Sincronização concluída! ${created} vaga(s) criada(s) e ${updated} atualizada(s).`
+            "🗑️ Vaga removida!"
         );
 
 
     }catch(error){
 
-        console.error(
-            "Erro na sincronização:",
-            error
-        );
+        console.error(error);
 
 
         toast(
-            "Erro ao sincronizar. Verifique as regras do Firestore.",
+            "Não foi possível remover a vaga.",
+            "error"
+        );
+
+    }
+
+};
+
+
+/* =========================
+   EDITAR VAGA
+========================= */
+
+window.openVacancyModal =
+function(id){
+
+    const vaga =
+        vacanciesData.find(
+            item => item.id === id
+        );
+
+
+    if(!vaga){
+
+        toast(
+            "Vaga não encontrada.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "vacancyEditId"
+    ).value =
+        id;
+
+
+    document.getElementById(
+        "vacancyPersonagem"
+    ).value =
+        vaga.personagem || "";
+
+
+    document.getElementById(
+        "vacancyObra"
+    ).value =
+        vaga.obra || "";
+
+
+    document.getElementById(
+        "vacancyImagem"
+    ).value =
+        vaga.imagem || "";
+
+
+    document.getElementById(
+        "vacancyModal"
+    ).classList.add("show");
+
+};
+
+
+window.closeVacancyModal =
+function(){
+
+    document.getElementById(
+        "vacancyModal"
+    ).classList.remove("show");
+
+};
+
+
+window.saveVacancyEdit =
+async function(){
+
+    const id =
+        document.getElementById(
+            "vacancyEditId"
+        ).value;
+
+
+    const personagem =
+        document.getElementById(
+            "vacancyPersonagem"
+        ).value.trim();
+
+
+    const obra =
+        document.getElementById(
+            "vacancyObra"
+        ).value.trim();
+
+
+    const imagem =
+        document.getElementById(
+            "vacancyImagem"
+        ).value.trim();
+
+
+    if(
+        !personagem ||
+        !obra
+    ){
+
+        toast(
+            "Preencha personagem e obra.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        await updateDoc(
+
+            doc(
+                db,
+                "vacancies",
+                id
+            ),
+
+            {
+
+                personagem:
+                    personagem,
+
+                obra:
+                    obra,
+
+                characterKey:
+                    chavePersonagem(
+                        personagem,
+                        obra
+                    ),
+
+                imagem:
+                    imagem,
+
+                atualizadoEm:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        const index =
+            vacanciesData.findIndex(
+                item => item.id === id
+            );
+
+
+        if(index !== -1){
+
+            vacanciesData[index] = {
+
+                ...vacanciesData[index],
+
+                personagem:
+                    personagem,
+
+                obra:
+                    obra,
+
+                imagem:
+                    imagem,
+
+                characterKey:
+                    chavePersonagem(
+                        personagem,
+                        obra
+                    )
+
+            };
+
+        }
+
+
+        closeVacancyModal();
+
+        renderVacancies();
+
+
+        toast(
+            "✏️ Vaga atualizada!"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        toast(
+            "Não foi possível editar a vaga.",
             "error"
         );
 
@@ -3457,8 +3617,6 @@ function renderAdmins(){
 
 function updateStats(){
 
-    /* SOMENTE PENDENTES */
-
     document.getElementById(
         "statRequests"
     ).textContent =
@@ -3479,6 +3637,11 @@ function updateStats(){
         membersData.length;
 
 
+    /*
+       AGORA O CONTADOR DE VAGAS
+       USA SOMENTE O STATUS.
+    */
+
     document.getElementById(
         "statVacancies"
     ).textContent =
@@ -3486,8 +3649,8 @@ function updateStats(){
         vacanciesData.filter(data=>{
 
             return (
-                normalizar(data.status) === "fechada" ||
-                data.ocupada === true
+                normalizar(data.status)
+                === "fechada"
             );
 
         }).length;
@@ -3538,7 +3701,7 @@ document
 
 
 /* =========================
-   FECHAR MODAL CLICANDO FORA
+   FECHAR MODAL SOLICITAÇÃO
 ========================= */
 
 document
@@ -3561,23 +3724,50 @@ document
 
 
 /* =========================
-   RESTAURAR LOGIN
+   FECHAR MODAL VAGA
 ========================= */
 
-const savedAdmin =
-    sessionStorage.getItem(
-        "wieAdmin"
+document
+    .getElementById("vacancyModal")
+    .addEventListener(
+        "click",
+        event=>{
+
+            if(
+                event.target.id ===
+                "vacancyModal"
+            ){
+
+                closeVacancyModal();
+
+            }
+
+        }
     );
 
 
-if(
-    savedAdmin &&
-    ADMINS[savedAdmin]
-){
+/* =========================
+   SEM LOGIN AUTOMÁTICO
+========================= */
 
-    openApp();
+/*
+   Não restauramos mais a sessão
+   automaticamente.
 
-}
+   Sempre que admin.html for aberto,
+   o ADM deverá colocar nome + senha.
+*/
+
+sessionStorage.removeItem("wieAdmin");
+sessionStorage.removeItem("wieRole");
+
+document.getElementById(
+    "loginScreen"
+).style.display = "flex";
+
+document.getElementById(
+    "app"
+).style.display = "none";
 
 </script>
 
