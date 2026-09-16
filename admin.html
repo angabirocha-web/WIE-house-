@@ -93,6 +93,7 @@ button{
     cursor:pointer;
 }
 
+
 /* =========================
    FUNDO
 ========================= */
@@ -230,6 +231,7 @@ button{
         transform:translateX(110vw) translateY(20px);
     }
 }
+
 
 /* =========================
    LOGIN
@@ -477,6 +479,7 @@ button{
     font-size:13px;
 }
 
+
 /* =========================
    DASHBOARD
 ========================= */
@@ -714,6 +717,7 @@ button{
     font-size:14px;
 }
 
+
 /* =========================
    STATS
 ========================= */
@@ -769,6 +773,7 @@ button{
 
     font-size:13px;
 }
+
 
 /* =========================
    CARDS
@@ -912,6 +917,7 @@ td{
     font-size:20px;
 }
 
+
 /* =========================
    STATUS
 ========================= */
@@ -971,6 +977,7 @@ td{
     color:var(--red);
 }
 
+
 /* =========================
    ACTIONS
 ========================= */
@@ -1014,6 +1021,7 @@ td{
 
     color:var(--red);
 }
+
 
 /* =========================
    MEMBERS
@@ -1085,6 +1093,7 @@ td{
 
     margin-top:3px;
 }
+
 
 /* =========================
    VACANCIES
@@ -1186,6 +1195,7 @@ td{
 
     gap:8px;
 }
+
 
 /* =========================
    ADMINS
@@ -1289,6 +1299,7 @@ td{
     var(--green);
 }
 
+
 /* =========================
    EMPTY / ERROR
 ========================= */
@@ -1330,6 +1341,7 @@ td{
 
     font-size:13px;
 }
+
 
 /* =========================
    TOAST
@@ -1385,6 +1397,7 @@ td{
 .toast.error{
     border-color:rgba(255,113,141,.25);
 }
+
 
 /* =========================
    RESPONSIVE
@@ -1523,6 +1536,7 @@ td{
 
 <body>
 
+
 <!-- FUNDO -->
 
 <div class="background">
@@ -1618,10 +1632,11 @@ id="loginScreen">
             ENTRAR
         </button>
 
+
         <div
-            class="login-error"
-            id="loginError"
-        ></div>
+        class="login-error"
+        id="loginError">
+        </div>
 
     </div>
 
@@ -1657,32 +1672,32 @@ id="dashboard">
         <nav class="menu">
 
             <button
-                class="active"
-                onclick="showPage('home',this)"
+            class="active"
+            onclick="showPage('home',this)"
             >
                 🏠 Início
             </button>
 
             <button
-                onclick="showPage('requests',this)"
+            onclick="showPage('requests',this)"
             >
                 📋 Solicitações
             </button>
 
             <button
-                onclick="showPage('members',this)"
+            onclick="showPage('members',this)"
             >
                 👥 Membros
             </button>
 
             <button
-                onclick="showPage('vacancies',this)"
+            onclick="showPage('vacancies',this)"
             >
                 🎭 Vagas
             </button>
 
             <button
-                onclick="showPage('admins',this)"
+            onclick="showPage('admins',this)"
             >
                 👑 ADMs
             </button>
@@ -1704,9 +1719,10 @@ id="dashboard">
 
             </div>
 
+
             <button
-                class="logout"
-                onclick="logout()"
+            class="logout"
+            onclick="logout()"
             >
                 Sair
             </button>
@@ -1721,9 +1737,7 @@ id="dashboard">
     <main class="main">
 
 
-        <!-- =====================
-             INÍCIO
-        ====================== -->
+        <!-- INÍCIO -->
 
         <section
         class="page active"
@@ -1839,9 +1853,7 @@ id="dashboard">
         </section>
 
 
-        <!-- =====================
-             SOLICITAÇÕES
-        ====================== -->
+        <!-- SOLICITAÇÕES -->
 
         <section
         class="page"
@@ -1869,17 +1881,18 @@ id="dashboard">
                     </h3>
 
                     <input
-                        class="search"
-                        id="requestSearch"
-                        type="search"
-                        placeholder="Pesquisar..."
-                        oninput="filterRequests()"
+                    class="search"
+                    id="requestSearch"
+                    type="search"
+                    placeholder="Pesquisar..."
+                    oninput="filterRequests()"
                     >
 
                 </div>
 
 
                 <div id="requestError"></div>
+
 
                 <div class="table-wrap">
 
@@ -1921,8 +1934,8 @@ id="dashboard">
 
                         </thead>
 
-                        <tbody id="requestsTable">
 
+                        <tbody id="requestsTable">
                         </tbody>
 
                     </table>
@@ -1934,9 +1947,7 @@ id="dashboard">
         </section>
 
 
-        <!-- =====================
-             MEMBROS
-        ====================== -->
+        <!-- MEMBROS -->
 
         <section
         class="page"
@@ -1964,11 +1975,11 @@ id="dashboard">
                     </h3>
 
                     <input
-                        class="search"
-                        id="memberSearch"
-                        type="search"
-                        placeholder="Pesquisar..."
-                        oninput="filterMembers()"
+                    class="search"
+                    id="memberSearch"
+                    type="search"
+                    placeholder="Pesquisar..."
+                    oninput="filterMembers()"
                     >
 
                 </div>
@@ -1976,10 +1987,10 @@ id="dashboard">
 
                 <div id="memberError"></div>
 
+
                 <div
                 class="members-grid"
                 id="membersGrid">
-
                 </div>
 
             </div>
@@ -1987,9 +1998,7 @@ id="dashboard">
         </section>
 
 
-        <!-- =====================
-             VAGAS
-        ====================== -->
+        <!-- VAGAS -->
 
         <section
         class="page"
@@ -2017,11 +2026,11 @@ id="dashboard">
                     </h3>
 
                     <input
-                        class="search"
-                        id="vacancySearch"
-                        type="search"
-                        placeholder="Pesquisar..."
-                        oninput="filterVacancies()"
+                    class="search"
+                    id="vacancySearch"
+                    type="search"
+                    placeholder="Pesquisar..."
+                    oninput="filterVacancies()"
                     >
 
                 </div>
@@ -2029,10 +2038,10 @@ id="dashboard">
 
                 <div id="vacancyError"></div>
 
+
                 <div
                 class="vacancies-grid"
                 id="vacanciesGrid">
-
                 </div>
 
             </div>
@@ -2040,9 +2049,7 @@ id="dashboard">
         </section>
 
 
-        <!-- =====================
-             ADMS
-        ====================== -->
+        <!-- ADMS -->
 
         <section
         class="page"
@@ -2064,7 +2071,6 @@ id="dashboard">
             <div
             class="admin-grid"
             id="adminGrid">
-
             </div>
 
         </section>
@@ -2144,29 +2150,27 @@ getFirestore(app);
 
 /* ==========================================
    ADMS
-   COLOQUE AQUI OS NOMES E SENHAS
-   QUE VOCÊ JÁ USA NA WIE
 ========================================== */
 
 const ADMINS = {
 
-    "SEU_NOME": {
-        password:"SUA_SENHA",
+    "Gojo": {
+        password:"2707alex",
         role:"Dono da House"
     },
 
-    "ADM_2": {
-        password:"SENHA_2",
-        role:"Sub dono"
+    "Tamsy": {
+        password:"1010ka3l",
+        role:"Sub dono da House"
     },
 
-    "ADM_3": {
-        password:"SENHA_3",
+    "Oliver": {
+        password:"2315oliver",
         role:"ADM"
     },
 
-    "ADM_4": {
-        password:"SENHA_4",
+    "Chuuya": {
+        password:"0734chu3ya",
         role:"ADM"
     }
 
@@ -2232,11 +2236,6 @@ window.login = function(){
     }
 
 
-    /*
-      Aceita o nome sem diferenciar
-      maiúsculas e minúsculas.
-    */
-
     const adminName =
     Object.keys(ADMINS).find(
         key =>
@@ -2260,10 +2259,6 @@ window.login = function(){
         return;
     }
 
-
-    /*
-      LOGIN IMEDIATO
-    */
 
     sessionStorage.setItem(
         "wieAdmin",
@@ -2415,8 +2410,10 @@ function toast(message,type="success"){
     window.toastTimer =
     setTimeout(
         () => {
+
             element.className =
             "toast";
+
         },
         3000
     );
@@ -2430,8 +2427,10 @@ function toast(message,type="success"){
 
 function safe(value){
 
-    if(value === null ||
-       value === undefined){
+    if(
+        value === null ||
+        value === undefined
+    ){
 
         return "";
 
@@ -2543,8 +2542,11 @@ async function loadRequests(){
         requestsData =
         snapshot.docs.map(
             item => ({
+
                 id:item.id,
+
                 ...item.data()
+
             })
         );
 
@@ -2561,6 +2563,7 @@ async function loadRequests(){
 
         requestsData = [];
 
+
         renderRequestsError(
             "Não foi possível carregar as solicitações. Verifique as regras do Firestore."
         );
@@ -2570,7 +2573,9 @@ async function loadRequests(){
 }
 
 
-function renderRequests(list=requestsData){
+function renderRequests(
+    list=requestsData
+){
 
     const table =
     document.getElementById(
@@ -2581,14 +2586,26 @@ function renderRequests(list=requestsData){
     if(!list.length){
 
         table.innerHTML = `
+
             <tr>
+
                 <td colspan="7">
+
                     <div class="empty">
-                        <strong>Nenhuma solicitação encontrada.</strong>
-                        Quando alguém preencher a recepção, aparecerá aqui.
+
+                        <strong>
+                            Nenhuma solicitação encontrada.
+                        </strong>
+
+                        Quando alguém preencher a recepção,
+                        aparecerá aqui.
+
                     </div>
+
                 </td>
+
             </tr>
+
         `;
 
         return;
@@ -2596,127 +2613,164 @@ function renderRequests(list=requestsData){
 
 
     table.innerHTML =
-    list.map(data => {
+    list.map(
+        data => {
 
-        const status =
-        statusClass(data.status);
-
-
-        const photo =
-        data.foto ||
-        data.imagem ||
-        "";
+            const status =
+            statusClass(
+                data.status
+            );
 
 
-        const photoHTML =
-        photo
-        ?
-        `
-            <img
+            const photo =
+            data.foto ||
+            data.imagem ||
+            "";
+
+
+            const photoHTML =
+            photo
+            ?
+            `
+
+                <img
                 class="photo"
                 src="${safe(photo)}"
                 alt="Foto"
                 onclick="window.open(this.src,'_blank')"
                 style="cursor:pointer"
-            >
-        `
-        :
-        `
-            <div class="no-photo">
-                🎭
-            </div>
-        `;
+                >
+
+            `
+            :
+            `
+
+                <div class="no-photo">
+                    🎭
+                </div>
+
+            `;
 
 
-        let actions = `
-            <span class="status ${status}">
-                ${statusText(data.status)}
-            </span>
-        `;
+            let actions = `
+
+                <span
+                class="status ${status}"
+                >
+                    ${statusText(
+                        data.status
+                    )}
+                </span>
+
+            `;
 
 
-        if(
-            !data.status ||
-            data.status === "pendente"
-        ){
+            if(
+                !data.status ||
+                data.status === "pendente"
+            ){
 
-            actions = `
-                <div class="actions">
+                actions = `
 
-                    <button
+                    <div class="actions">
+
+                        <button
                         class="action approve"
                         onclick="changeRequest('${safe(data.id)}','aprovado')"
-                    >
-                        ✓ Aprovar
-                    </button>
+                        >
+                            ✓ Aprovar
+                        </button>
 
-                    <button
+                        <button
                         class="action reject"
                         onclick="changeRequest('${safe(data.id)}','recusado')"
-                    >
-                        ✕ Recusar
-                    </button>
+                        >
+                            ✕ Recusar
+                        </button>
 
-                </div>
+                    </div>
+
+                `;
+
+            }
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        ${photoHTML}
+                    </td>
+
+                    <td>
+                        ${safe(
+                            data.nome ||
+                            "—"
+                        )}
+                    </td>
+
+                    <td>
+                        ${safe(
+                            data.idade ||
+                            "—"
+                        )}
+                    </td>
+
+                    <td>
+                        ${safe(
+                            data.personagem ||
+                            "—"
+                        )}
+                    </td>
+
+                    <td>
+                        ${safe(
+                            data.obra ||
+                            "—"
+                        )}
+                    </td>
+
+                    <td>
+
+                        <span
+                        class="status ${status}"
+                        >
+                            ${statusText(
+                                data.status
+                            )}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${actions}
+                    </td>
+
+                </tr>
+
             `;
 
         }
-
-
-        return `
-
-            <tr>
-
-                <td>
-                    ${photoHTML}
-                </td>
-
-                <td>
-                    ${safe(data.nome || "—")}
-                </td>
-
-                <td>
-                    ${safe(data.idade || "—")}
-                </td>
-
-                <td>
-                    ${safe(data.personagem || "—")}
-                </td>
-
-                <td>
-                    ${safe(data.obra || "—")}
-                </td>
-
-                <td>
-
-                    <span
-                    class="status ${status}">
-                        ${statusText(data.status)}
-                    </span>
-
-                </td>
-
-                <td>
-                    ${actions}
-                </td>
-
-            </tr>
-
-        `;
-
-    }).join("");
+    ).join("");
 
 }
 
 
-function renderRequestsError(message){
+function renderRequestsError(
+    message
+){
 
     document.getElementById(
         "requestError"
     ).innerHTML = `
+
         <div class="error-box">
+
             ${safe(message)}
+
         </div>
+
     `;
 
 }
@@ -2745,7 +2799,9 @@ async function(id,status){
         );
 
 
-        if(!requestSnapshot.exists()){
+        if(
+            !requestSnapshot.exists()
+        ){
 
             toast(
                 "Solicitação não encontrada.",
@@ -2768,12 +2824,9 @@ async function(id,status){
         );
 
 
-        /*
-          Quando aprovado,
-          cria/atualiza o membro.
-        */
-
-        if(status === "aprovado"){
+        if(
+            status === "aprovado"
+        ){
 
             await setDoc(
                 doc(
@@ -2784,26 +2837,32 @@ async function(id,status){
                 {
 
                     nome:
-                    data.nome || "",
+                    data.nome ||
+                    "",
 
                     idade:
-                    data.idade || "",
+                    data.idade ||
+                    "",
 
                     personagem:
-                    data.personagem || "",
+                    data.personagem ||
+                    "",
 
                     obra:
-                    data.obra || "",
+                    data.obra ||
+                    "",
 
                     foto:
                     data.foto ||
                     data.imagem ||
                     "",
 
-                    requestId:id,
+                    requestId:
+                    id,
 
                     criadoEm:
-                    data.criadoEm || null
+                    data.criadoEm ||
+                    null
 
                 }
             );
@@ -2812,16 +2871,19 @@ async function(id,status){
 
 
         toast(
+
             status === "aprovado"
             ?
             "Solicitação aprovada! 🎃"
             :
             "Solicitação recusada.",
+
             status === "aprovado"
             ?
             "success"
             :
             "error"
+
         );
 
 
@@ -2860,15 +2922,21 @@ async function loadMembers(){
 
         const snapshot =
         await getDocs(
-            collection(db,"members")
+            collection(
+                db,
+                "members"
+            )
         );
 
 
         membersData =
         snapshot.docs.map(
             item => ({
+
                 id:item.id,
+
                 ...item.data()
+
             })
         );
 
@@ -2885,12 +2953,17 @@ async function loadMembers(){
 
         membersData = [];
 
+
         document.getElementById(
             "memberError"
         ).innerHTML = `
+
             <div class="error-box">
+
                 Não foi possível carregar os membros.
+
             </div>
+
         `;
 
     }
@@ -2898,7 +2971,9 @@ async function loadMembers(){
 }
 
 
-function renderMembers(list=membersData){
+function renderMembers(
+    list=membersData
+){
 
     const grid =
     document.getElementById(
@@ -2909,10 +2984,17 @@ function renderMembers(list=membersData){
     if(!list.length){
 
         grid.innerHTML = `
+
             <div class="empty">
-                <strong>Nenhum membro cadastrado.</strong>
+
+                <strong>
+                    Nenhum membro cadastrado.
+                </strong>
+
                 Os membros aprovados aparecerão aqui.
+
             </div>
+
         `;
 
         return;
@@ -2920,68 +3002,86 @@ function renderMembers(list=membersData){
 
 
     grid.innerHTML =
-    list.map(data => {
+    list.map(
+        data => {
 
-        const photo =
-        data.foto ||
-        data.imagem ||
-        "";
+            const photo =
+            data.foto ||
+            data.imagem ||
+            "";
 
 
-        const photoHTML =
-        photo
-        ?
-        `
-            <img
+            const photoHTML =
+            photo
+            ?
+            `
+
+                <img
                 class="photo"
                 src="${safe(photo)}"
                 alt="Foto"
                 onclick="window.open(this.src,'_blank')"
                 style="cursor:pointer"
-            >
-        `
-        :
-        `
-            <div class="no-photo">
-                👤
-            </div>
-        `;
+                >
+
+            `
+            :
+            `
+
+                <div class="no-photo">
+                    👤
+                </div>
+
+            `;
 
 
-        return `
+            return `
 
-            <div class="member-card">
+                <div class="member-card">
 
-                ${photoHTML}
+                    ${photoHTML}
 
-                <div class="member-info">
+                    <div class="member-info">
 
-                    <strong>
-                        ${safe(data.nome || "Sem nome")}
-                    </strong>
+                        <strong>
+                            ${safe(
+                                data.nome ||
+                                "Sem nome"
+                            )}
+                        </strong>
 
-                    <p>
-                        Idade:
-                        ${safe(data.idade || "—")}
-                    </p>
+                        <p>
+                            Idade:
+                            ${safe(
+                                data.idade ||
+                                "—"
+                            )}
+                        </p>
 
-                    <p>
-                        Personagem:
-                        ${safe(data.personagem || "—")}
-                    </p>
+                        <p>
+                            Personagem:
+                            ${safe(
+                                data.personagem ||
+                                "—"
+                            )}
+                        </p>
 
-                    <p>
-                        Obra:
-                        ${safe(data.obra || "—")}
-                    </p>
+                        <p>
+                            Obra:
+                            ${safe(
+                                data.obra ||
+                                "—"
+                            )}
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </div>
+            `;
 
-        `;
-
-    }).join("");
+        }
+    ).join("");
 
 }
 
@@ -2996,15 +3096,21 @@ async function loadVacancies(){
 
         const snapshot =
         await getDocs(
-            collection(db,"vacancies")
+            collection(
+                db,
+                "vacancies"
+            )
         );
 
 
         vacanciesData =
         snapshot.docs.map(
             item => ({
+
                 id:item.id,
+
                 ...item.data()
+
             })
         );
 
@@ -3021,12 +3127,17 @@ async function loadVacancies(){
 
         vacanciesData = [];
 
+
         document.getElementById(
             "vacancyError"
         ).innerHTML = `
+
             <div class="error-box">
+
                 Não foi possível carregar as vagas.
+
             </div>
+
         `;
 
     }
@@ -3034,7 +3145,9 @@ async function loadVacancies(){
 }
 
 
-function renderVacancies(list=vacanciesData){
+function renderVacancies(
+    list=vacanciesData
+){
 
     const grid =
     document.getElementById(
@@ -3045,10 +3158,18 @@ function renderVacancies(list=vacanciesData){
     if(!list.length){
 
         grid.innerHTML = `
+
             <div class="empty">
-                <strong>Nenhuma vaga cadastrada.</strong>
-                As vagas cadastradas no Firestore aparecerão aqui.
+
+                <strong>
+                    Nenhuma vaga cadastrada.
+                </strong>
+
+                As vagas cadastradas no Firestore
+                aparecerão aqui.
+
             </div>
+
         `;
 
         return;
@@ -3056,84 +3177,88 @@ function renderVacancies(list=vacanciesData){
 
 
     grid.innerHTML =
-    list.map(data => {
+    list.map(
+        data => {
 
-        /*
-          Aceita tanto "imagem"
-          quanto "foto", evitando
-          quebrar vagas antigas.
-        */
-
-        const image =
-        data.imagem ||
-        data.foto ||
-        "";
+            const image =
+            data.imagem ||
+            data.foto ||
+            "";
 
 
-        const status =
-        data.status === "fechada"
-        ?
-        "fechada"
-        :
-        "aberta";
+            const status =
+            data.status === "fechada"
+            ?
+            "fechada"
+            :
+            "aberta";
 
 
-        const imageHTML =
-        image
-        ?
-        `
-            <img
+            const imageHTML =
+            image
+            ?
+            `
+
+                <img
                 class="vacancy-image"
                 src="${safe(image)}"
-                alt="${safe(data.personagem || "Personagem")}"
-            >
-        `
-        :
-        `
-            <div class="vacancy-no-image">
-                🎭
-            </div>
-        `;
+                alt="${safe(
+                    data.personagem ||
+                    "Personagem"
+                )}"
+                >
+
+            `
+            :
+            `
+
+                <div class="vacancy-no-image">
+                    🎭
+                </div>
+
+            `;
 
 
-        return `
+            return `
 
-            <div class="vacancy-card">
+                <div class="vacancy-card">
 
-                ${imageHTML}
+                    ${imageHTML}
 
-                <div class="vacancy-body">
+                    <div class="vacancy-body">
 
-                    <div class="vacancy-top">
+                        <div class="vacancy-top">
 
-                        <h4>
+                            <h4>
+                                ${safe(
+                                    data.personagem ||
+                                    "Sem personagem"
+                                )}
+                            </h4>
+
+                            <span
+                            class="status ${status}"
+                            >
+                                ${statusText(status)}
+                            </span>
+
+                        </div>
+
+                        <p>
                             ${safe(
-                                data.personagem ||
-                                "Sem personagem"
+                                data.obra ||
+                                "Obra não informada"
                             )}
-                        </h4>
-
-                        <span
-                        class="status ${status}">
-                            ${statusText(status)}
-                        </span>
+                        </p>
 
                     </div>
 
-                    <p>
-                        ${safe(
-                            data.obra ||
-                            "Obra não informada"
-                        )}
-                    </p>
-
                 </div>
 
-            </div>
+            `;
 
-        `;
-
-    }).join("");
+        }
+    ).join("");
 
 }
 
@@ -3151,7 +3276,9 @@ function renderAdmins(){
 
 
     const names =
-    Object.keys(ADMINS);
+    Object.keys(
+        ADMINS
+    );
 
 
     document.getElementById(
@@ -3161,44 +3288,48 @@ function renderAdmins(){
 
 
     grid.innerHTML =
-    names.map(name => {
+    names.map(
+        name => {
 
-        const admin =
-        ADMINS[name];
-
-
-        const first =
-        name
-        .trim()
-        .charAt(0)
-        .toUpperCase();
+            const admin =
+            ADMINS[name];
 
 
-        return `
+            const first =
+            name
+            .trim()
+            .charAt(0)
+            .toUpperCase();
 
-            <div class="admin-card">
 
-                <div class="admin-avatar">
-                    ${safe(first)}
+            return `
+
+                <div class="admin-card">
+
+                    <div class="admin-avatar">
+                        ${safe(first)}
+                    </div>
+
+                    <h3>
+                        ${safe(name)}
+                    </h3>
+
+                    <p>
+                        ${safe(
+                            admin.role
+                        )}
+                    </p>
+
+                    <div class="admin-online">
+                        Disponível
+                    </div>
+
                 </div>
 
-                <h3>
-                    ${safe(name)}
-                </h3>
+            `;
 
-                <p>
-                    ${safe(admin.role)}
-                </p>
-
-                <div class="admin-online">
-                    Disponível
-                </div>
-
-            </div>
-
-        `;
-
-    }).join("");
+        }
+    ).join("");
 
 }
 
@@ -3230,7 +3361,9 @@ function updateStats(){
     document.getElementById(
         "statAdmins"
     ).textContent =
-    Object.keys(ADMINS).length;
+    Object.keys(
+        ADMINS
+    ).length;
 
 }
 
@@ -3251,31 +3384,37 @@ function(){
 
 
     const filtered =
-    requestsData.filter(data => {
+    requestsData.filter(
+        data => {
 
-        const text = [
+            const text = [
 
-            data.nome,
+                data.nome,
 
-            data.idade,
+                data.idade,
 
-            data.personagem,
+                data.personagem,
 
-            data.obra,
+                data.obra,
 
-            data.status
+                data.status
 
-        ]
-        .join(" ")
-        .toLowerCase();
-
-
-        return text.includes(term);
-
-    });
+            ]
+            .join(" ")
+            .toLowerCase();
 
 
-    renderRequests(filtered);
+            return text.includes(
+                term
+            );
+
+        }
+    );
+
+
+    renderRequests(
+        filtered
+    );
 
 };
 
@@ -3292,29 +3431,35 @@ function(){
 
 
     const filtered =
-    membersData.filter(data => {
+    membersData.filter(
+        data => {
 
-        const text = [
+            const text = [
 
-            data.nome,
+                data.nome,
 
-            data.idade,
+                data.idade,
 
-            data.personagem,
+                data.personagem,
 
-            data.obra
+                data.obra
 
-        ]
-        .join(" ")
-        .toLowerCase();
-
-
-        return text.includes(term);
-
-    });
+            ]
+            .join(" ")
+            .toLowerCase();
 
 
-    renderMembers(filtered);
+            return text.includes(
+                term
+            );
+
+        }
+    );
+
+
+    renderMembers(
+        filtered
+    );
 
 };
 
@@ -3331,27 +3476,33 @@ function(){
 
 
     const filtered =
-    vacanciesData.filter(data => {
+    vacanciesData.filter(
+        data => {
 
-        const text = [
+            const text = [
 
-            data.personagem,
+                data.personagem,
 
-            data.obra,
+                data.obra,
 
-            data.status
+                data.status
 
-        ]
-        .join(" ")
-        .toLowerCase();
-
-
-        return text.includes(term);
-
-    });
+            ]
+            .join(" ")
+            .toLowerCase();
 
 
-    renderVacancies(filtered);
+            return text.includes(
+                term
+            );
+
+        }
+    );
+
+
+    renderVacancies(
+        filtered
+    );
 
 };
 
@@ -3361,26 +3512,28 @@ function(){
 ========================================== */
 
 const savedAdmin =
-sessionStorage.getItem("wieAdmin");
+sessionStorage.getItem(
+    "wieAdmin"
+);
 
 
 if(savedAdmin){
 
-    /*
-      Só restaura se o nome ainda
-      existir na lista de ADMs.
-    */
-
-    if(ADMINS[savedAdmin]){
+    if(
+        ADMINS[savedAdmin]
+    ){
 
         document.getElementById(
             "loginScreen"
-        ).style.display = "none";
+        ).style.display =
+        "none";
 
 
         document.getElementById(
             "dashboard"
-        ).classList.add("active");
+        ).classList.add(
+            "active"
+        );
 
 
         document.getElementById(
