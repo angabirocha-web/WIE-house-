@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>House WIE • Administração</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(133,48,255,.28),transparent 28%),
+        radial-gradient(circle at 90% 80%,rgba(255,214,54,.12),transparent 25%),
+        linear-gradient(145deg,#08040e,#130820,#090511);
+}
+
+/* =========================
+   FUNDO
+========================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+
+.moon{
+    position:absolute;
+    width:160px;
+    height:160px;
+    right:5%;
+    top:5%;
+    border-radius:50%;
+    background:#ffe76a;
+    box-shadow:
+        0 0 30px #ffe76a,
+        0 0 70px rgba(255,220,70,.3);
+    opacity:.8;
+    animation:moon 6s ease-in-out infinite;
+}
+
+@keyframes moon{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(10px)}
+}
+
+.orb{
+    position:absolute;
+    width:270px;
+    height:270px;
+    border-radius:50%;
+    background:rgba(141,50,255,.14);
+    filter:blur(35px);
+    animation:float 12s ease-in-out infinite;
+}
+
+.orb.a{
+    left:-120px;
+    top:20%;
+}
+
+.orb.b{
+    right:-130px;
+    bottom:10%;
+    background:rgba(255,214,53,.08);
+    animation-delay:3s;
+}
+
+@keyframes float{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(30px,-35px)}
+}
+
+.bat{
+    position:absolute;
+    font-size:25px;
+    opacity:.6;
+    animation:batFly 12s linear infinite;
+}
+
+.bat.one{
+    left:-50px;
+    top:25%;
+}
+
+.bat.two{
+    left:-80px;
+    top:65%;
+    animation-delay:5s;
+}
+
+@keyframes batFly{
+    from{
+        transform:translateX(-100px) translateY(0);
+    }
+    50%{
+        transform:translateX(55vw) translateY(-50px);
+    }
+    to{
+        transform:translateX(110vw) translateY(20px);
+    }
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login{
+    min-height:100vh;
+    position:relative;
+    z-index:2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.login-card{
+    width:min(420px,100%);
+    padding:35px 28px;
+    border-radius:26px;
+    border:1px solid rgba(179,104,255,.22);
+    background:rgba(17,9,27,.78);
+    backdrop-filter:blur(20px);
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.45),
+        0 0 35px rgba(129,43,255,.08);
+    text-align:center;
+    animation:appear .7s ease;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(25px) scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.pumpkin{
+    font-size:55px;
+    display:inline-block;
+    filter:drop-shadow(0 0 15px rgba(255,190,30,.35));
+    animation:pump 3s infinite ease-in-out;
+}
+
+@keyframes pump{
+    0%,100%{transform:rotate(-3deg) translateY(0)}
+    50%{transform:rotate(3deg) translateY(-8px)}
+}
+
+.login-card h1{
+    margin-top:10px;
+    font-size:28px;
+}
+
+.login-card h1 span{
+    color:#ffe45b;
+}
+
+.login-card p{
+    color:#92879e;
+    font-size:13px;
+    margin:9px 0 25px;
+}
+
+.input{
+    width:100%;
+    padding:14px;
+    margin-bottom:13px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:13px;
+    outline:none;
+    color:#fff;
+    background:rgba(255,255,255,.045);
+}
+
+.input::placeholder{
+    color:#6d6375;
+}
+
+.input:focus{
+    border-color:#9d50ff;
+    box-shadow:0 0 0 3px rgba(157,80,255,.1);
+}
+
+.password{
+    position:relative;
+}
+
+.password .input{
+    padding-right:50px;
+}
+
+.eye{
+    position:absolute;
+    right:14px;
+    top:13px;
+    border:0;
+    background:none;
+    color:#aaa;
+    cursor:pointer;
+    font-size:17px;
+}
+
+.login-btn{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:15px;
+    cursor:pointer;
+    font-weight:900;
+    color:#191020;
+    background:linear-gradient(135deg,#ffe85b,#ffc928);
+    transition:.25s;
+}
+
+.login-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(255,210,45,.25);
+}
+
+.error{
+    display:none;
+    margin-top:13px;
+    color:#ff839d;
+    font-size:12px;
+}
+
+/* =========================
+   PAINEL
+========================= */
+
+.dashboard{
+    display:none;
+    position:relative;
+    z-index:1;
+    min-height:100vh;
+}
+
+.sidebar{
+    position:fixed;
+    z-index:10;
+    top:0;
+    bottom:0;
+    left:0;
+    width:245px;
+    padding:24px 15px;
+    background:rgba(8,4,14,.88);
+    backdrop-filter:blur(20px);
+    border-right:1px solid rgba(172,91,255,.15);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:0 9px;
+    margin-bottom:30px;
+}
+
+.brand-logo{
+    width:47px;
+    height:47px;
+    border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:20px;
+    background:linear-gradient(135deg,#913cff,#501490);
+    box-shadow:0 0 20px rgba(145,60,255,.25);
+}
+
+.brand strong{
+    display:block;
+    font-size:16px;
+}
+
+.brand span{
+    color:#ffe45b;
+    font-size:10px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.menu button{
+    width:100%;
+    border:0;
+    padding:13px;
+    border-radius:13px;
+    text-align:left;
+    color:#a69aaa;
+    background:transparent;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.menu button:hover,
+.menu button.active{
+    color:#fff;
+    background:rgba(145,60,255,.15);
+    box-shadow:inset 2px 0 #ffe45b;
+}
+
+.logout{
+    position:absolute;
+    left:15px;
+    right:15px;
+    bottom:20px;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid rgba(255,90,120,.15);
+    color:#ff829a;
+    background:rgba(255,90,120,.05);
+    cursor:pointer;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:245px;
+    padding:28px;
+}
+
+.top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:28px;
+}
+
+.top-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.mobile-menu{
+    display:none;
+    width:42px;
+    height:42px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:12px;
+    color:#fff;
+    background:rgba(255,255,255,.05);
+    cursor:pointer;
+}
+
+.top h1{
+    font-size:28px;
+}
+
+.top p{
+    color:#887e92;
+    margin-top:5px;
+    font-size:13px;
+}
+
+.logged{
+    padding:9px 13px;
+    border-radius:20px;
+    color:#ffe45b;
+    border:1px solid rgba(255,220,70,.15);
+    background:rgba(255,220,70,.05);
+    font-size:12px;
+}
+
+/* =========================
+   PÁGINAS
+========================= */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    border-radius:19px;
+    border:1px solid rgba(174,94,255,.14);
+    background:rgba(255,255,255,.045);
+    backdrop-filter:blur(12px);
+    padding:20px;
+}
+
+.stat-label{
+    color:#8f8499;
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.stat-number{
+    font-size:30px;
+    font-weight:900;
+    color:#ffe45b;
+}
+
+/* =========================
+   PAINEL CARD
+========================= */
+
+.panel{
+    margin-bottom:18px;
+}
+
+.panel-title{
+    font-size:17px;
+    font-weight:900;
+    margin-bottom:13px;
+}
+
+.panel-subtitle{
+    color:#83798b;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+/* =========================
+   TABELA
+========================= */
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    min-width:700px;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:14px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+    text-align:left;
+    font-size:12px;
+}
+
+th{
+    color:#d8cfe0;
+}
+
+td{
+    color:#a49aaa;
+}
+
+.status{
+    display:inline-block;
+    padding:6px 9px;
+    border-radius:20px;
+    font-size:10px;
+}
+
+.pending{
+    color:#ffe45b;
+    background:rgba(255,220,70,.08);
+}
+
+.approved{
+    color:#69e5a5;
+    background:rgba(105,229,165,.08);
+}
+
+.rejected{
+    color:#ff819a;
+    background:rgba(255,129,154,.08);
+}
+
+.actions{
+    display:flex;
+    gap:6px;
+}
+
+.action{
+    border:0;
+    padding:7px 9px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.ok{
+    color:#69e5a5;
+    background:rgba(105,229,165,.08);
+}
+
+.no{
+    color:#ff819a;
+    background:rgba(255,129,154,.08);
+}
+
+/* =========================
+   ADM CARDS
+========================= */
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:13px;
+}
+
+.admin-card{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    background:linear-gradient(135deg,#913cff,#501490);
+}
+
+.admin-card strong{
+    font-size:13px;
+}
+
+.admin-card small{
+    display:block;
+    color:#887e92;
+    margin-top:4px;
+    font-size:11px;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+    text-align:center;
+    padding:35px 15px;
+    color:#766d7c;
+    font-size:13px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        padding:20px;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:550px){
+
+    .top h1{
+        font-size:21px;
+    }
+
+    .logged{
+        display:none;
+    }
+
+    .stats{
+        gap:9px;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    .stat-number{
+        font-size:25px;
+    }
+
+    .moon{
+        width:100px;
+        height:100px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+
+    <div class="moon"></div>
+
+    <div class="orb a"></div>
+    <div class="orb b"></div>
+
+    <div class="bat one">🦇</div>
+    <div class="bat two">🦇</div>
+
+</div>
+
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section
+    class="login"
+    id="loginScreen"
+>
+
+    <div class="login-card">
+
+        <div class="pumpkin">
+            🎃
+        </div>
+
+        <h1>
+            House <span>WIE</span>
+        </h1>
+
+        <p>
+            Área exclusiva da administração
+        </p>
+
+
+        <input
+            class="input"
+            id="name"
+            type="text"
+            placeholder="Nome do ADM"
+            autocomplete="off"
+        >
+
+
+        <div class="password">
+
+            <input
+                class="input"
+                id="password"
+                type="password"
+                placeholder="Senha"
+                autocomplete="off"
+            >
+
+            <button
+                class="eye"
+                onclick="togglePassword()"
+                type="button"
+            >
+                👁
+            </button>
+
+        </div>
+
+
+        <button
+            class="login-btn"
+            onclick="login()"
+        >
+            👑 Entrar na administração
+        </button>
+
+
+        <div
+            class="error"
+            id="error"
+        >
+            Nome ou senha incorretos.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<section
+    class="dashboard"
+    id="dashboard"
+>
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                W
+            </div>
+
+            <div>
+
+                <strong>HOUSE WIE</strong>
+
+                <span>
+                    HALLOWEEN 🎃
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <button
+                class="active"
+                onclick="showPage('home',this)"
+            >
+                🏠 Início
+            </button>
+
+            <button
+                onclick="showPage('requests',this)"
+            >
+                📋 Solicitações
+            </button>
+
+            <button
+                onclick="showPage('members',this)"
+            >
+                👥 Membros
+            </button>
+
+            <button
+                onclick="showPage('vacancies',this)"
+            >
+                🎭 Vagas
+            </button>
+
+            <button
+                onclick="showPage('admins',this)"
+            >
+                👑 ADMs
+            </button>
+
+        </nav>
+
+
+        <button
+            class="logout"
+            onclick="logout()"
+        >
+            ↩ Sair
+        </button>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="top">
+
+            <div class="top-left">
+
+                <button
+                    class="mobile-menu"
+                    onclick="toggleSidebar()"
+                >
+                    ☰
+                </button>
+
+                <div>
+
+                    <h1 id="pageTitle">
+                        Início 🎃
+                    </h1>
+
+                    <p>
+                        Painel de administração da House WIE
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="logged"
+                id="logged"
+            >
+                ADM
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             INÍCIO
+        ========================= -->
+
+        <section
+            class="page active"
+            id="home"
+        >
+
+            <div class="stats">
+
+                <div class="card">
+
+                    <div class="stat-label">
+                        Solicitações
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="requestCount"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="stat-label">
+                        Membros
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="memberCount"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="stat-label">
+                        Vagas
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="vacancyCount"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="stat-label">
+                        ADMs
+                    </div>
+
+                    <div
+                        class="stat-number"
+                    >
+                        4
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card panel">
+
+                <div class="panel-title">
+                    🕸️ Central da House WIE
+                </div>
+
+                <div class="panel-subtitle">
+                    Tudo o que a administração precisa em um só lugar.
+                </div>
+
+                <p style="
+                    color:#968b9e;
+                    font-size:13px;
+                    line-height:1.7;
+                ">
+                    Use o menu lateral para visualizar as fichas recebidas,
+                    consultar os membros, acompanhar as vagas e visualizar
+                    a equipe administrativa.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SOLICITAÇÕES
+        ========================= -->
+
+        <section
+            class="page"
+            id="requests"
+        >
+
+            <div class="card">
+
+                <div class="panel-title">
+                    📋 Solicitações recebidas
+                </div>
+
+                <div class="panel-subtitle">
+                    Fichas enviadas pela recepção.
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>Personagem</th>
+                                <th>Universo</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="requestsTable">
+
+                            <tr>
+
+                                <td colspan="6">
+
+                                    <div class="empty">
+                                        Carregando...
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MEMBROS
+        ========================= -->
+
+        <section
+            class="page"
+            id="members"
+        >
+
+            <div class="card">
+
+                <div class="panel-title">
+                    👥 Membros
+                </div>
+
+                <div class="panel-subtitle">
+                    Membros registrados na house.
+                </div>
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>Personagem</th>
+                                <th>Universo</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="membersTable">
+
+                            <tr>
+
+                                <td colspan="4">
+
+                                    <div class="empty">
+                                        Nenhum membro encontrado.
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             VAGAS
+        ========================= -->
+
+        <section
+            class="page"
+            id="vacancies"
+        >
+
+            <div class="card">
+
+                <div class="panel-title">
+                    🎭 Vagas
+                </div>
+
+                <div class="panel-subtitle">
+                    Personagens registrados na house.
+                </div>
+
+                <div id="vacanciesList">
+
+                    <div class="empty">
+                        Nenhuma vaga encontrada.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ADMS
+        ========================= -->
+
+        <section
+            class="page"
+            id="admins"
+        >
+
+            <div class="admin-grid">
+
+                <div class="card admin-card">
+
+                    <div class="avatar">
+                        G
+                    </div>
+
+                    <div>
+
+                        <strong>Gojo</strong>
+
+                        <small>
+                            Dono da House
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card admin-card">
+
+                    <div class="avatar">
+                        T
+                    </div>
+
+                    <div>
+
+                        <strong>Tamsy</strong>
+
+                        <small>
+                            Sub dono
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card admin-card">
+
+                    <div class="avatar">
+                        O
+                    </div>
+
+                    <div>
+
+                        <strong>Oliver</strong>
+
+                        <small>
+                            ADM
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card admin-card">
+
+                    <div class="avatar">
+                        C
+                    </div>
+
+                    <div>
+
+                        <strong>Chuuya</strong>
+
+                        <small>
+                            ADM
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</section>
+
+
+<script type="module">
+
+/* =========================
+   LOGIN DOS ADMS
+========================= */
+
+const ADMINS = {
+
+    Gojo:{
+        password:"2707alex",
+        role:"Dono da House"
+    },
+
+    Tamsy:{
+        password:"1010ka3l",
+        role:"Sub dono"
+    },
+
+    Oliver:{
+        password:"2315oliver",
+        role:"ADM"
+    },
+
+    Chuuya:{
+        password:"0734chu3ya",
+        role:"ADM"
+    }
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.login = function(){
+
+    const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+    const admin =
+        ADMINS[name];
+
+    const error =
+        document
+        .getElementById("error");
+
+
+    if(
+        admin &&
+        admin.password === password
+    ){
+
+        sessionStorage.setItem(
+            "wieAdmin",
+            name
+        );
+
+
+        document
+        .getElementById("loginScreen")
+        .style.display="none";
+
+
+        document
+        .getElementById("dashboard")
+        .style.display="block";
+
+
+        document
+        .getElementById("logged")
+        .textContent =
+            "👑 " +
+            name +
+            " • " +
+            admin.role;
+
+
+        error.style.display="none";
+
+        loadData();
+
+    }else{
+
+        error.style.display="block";
+
+    }
+
+};
+
+
+/* =========================
+   ENTER
+========================= */
+
+document
+.getElementById("password")
+.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key==="Enter"){
+            login();
+        }
+
+    }
+);
+
+
+/* =========================
+   OLHO
+========================= */
+
+window.togglePassword = function(){
+
+    const input =
+        document
+        .getElementById("password");
+
+    input.type =
+        input.type === "password"
+        ? "text"
+        : "password";
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logout = function(){
+
+    sessionStorage.removeItem(
+        "wieAdmin"
+    );
+
+    location.reload();
+
+};
+
+
+/* =========================
+   MENU
+========================= */
+
+window.toggleSidebar = function(){
+
+    document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+};
+
+
+window.showPage = function(page,button){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(
+        p=>p.classList.remove("active")
+    );
+
+
+    document
+    .getElementById(page)
+    .classList.add("active");
+
+
+    document
+    .querySelectorAll(".menu button")
+    .forEach(
+        b=>b.classList.remove("active")
+    );
+
+
+    button.classList.add("active");
+
+
+    const titles={
+
+        home:"Início 🎃",
+
+        requests:"Solicitações 📋",
+
+        members:"Membros 👥",
+
+        vacancies:"Vagas 🎭",
+
+        admins:"ADMs 👑"
+
+    };
+
+
+    document
+    .getElementById("pageTitle")
+    .textContent=titles[page];
+
+
+    document
+    .getElementById("sidebar")
+    .classList.remove("open");
+
+};
+
+
+/* =========================
+   FIREBASE
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
+
+    authDomain:
+    "house-wie-6c8f9.firebaseapp.com",
+
+    projectId:
+    "house-wie-6c8f9",
+
+    storageBucket:
+    "house-wie-6c8f9.firebasestorage.app",
+
+    messagingSenderId:
+    "241202380170",
+
+    appId:
+    "1:241202380170:web:b7df00f3faa8ae7afedc73"
+
+};
+
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    updateDoc,
+    doc
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+/* =========================
+   DADOS
+========================= */
+
+async function loadData(){
+
+    try{
+
+        const requests =
+            await getDocs(
+                collection(db,"requests")
+            );
+
+        const members =
+            await getDocs(
+                collection(db,"members")
+            );
+
+        const vacancies =
+            await getDocs(
+                collection(db,"vacancies")
+            );
+
+
+        document
+        .getElementById("requestCount")
+        .textContent =
+            requests.size;
+
+
+        document
+        .getElementById("memberCount")
+        .textContent =
+            members.size;
+
+
+        document
+        .getElementById("vacancyCount")
+        .textContent =
+            vacancies.size;
+
+
+        renderRequests(requests);
+
+        renderMembers(members);
+
+        renderVacancies(vacancies);
+
+
+    }catch(error){
+
+        console.error(
+            "Erro Firebase:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================
+   REQUESTS
+========================= */
+
+function renderRequests(snapshot){
+
+    const table =
+        document
+        .getElementById("requestsTable");
+
+
+    if(snapshot.empty){
+
+        table.innerHTML=`
+
+            <tr>
+
+                <td colspan="6">
+
+                    <div class="empty">
+                        Nenhuma solicitação recebida.
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML="";
+
+
+    snapshot.forEach(item=>{
+
+        const data =
+            item.data();
+
+        const status =
+            data.status ||
+            "pendente";
+
+
+        const tr =
+            document.createElement("tr");
+
+
+        tr.innerHTML=`
+
+            <td>
+                ${safe(data.nome)}
+            </td>
+
+            <td>
+                ${safe(data.idade)}
+            </td>
+
+            <td>
+                ${safe(data.personagem)}
+            </td>
+
+            <td>
+                ${safe(data.universo)}
+            </td>
+
+            <td>
+
+                <span class="status ${getStatusClass(status)}">
+
+                    ${safe(status)}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <div class="actions">
+
+                    <button
+                        class="action ok"
+                        data-id="${item.id}"
+                        data-status="aprovado"
+                    >
+                        ✓ Aprovar
+                    </button>
+
+                    <button
+                        class="action no"
+                        data-id="${item.id}"
+                        data-status="recusado"
+                    >
+                        ✕ Recusar
+                    </button>
+
+                </div>
+
+            </td>
+
+        `;
+
+
+        table.appendChild(tr);
+
+    });
+
+
+    table
+    .querySelectorAll(".action")
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            async()=>{
+
+                await changeRequest(
+                    button.dataset.id,
+                    button.dataset.status
+                );
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =========================
+   ALTERAR STATUS
+========================= */
+
+async function changeRequest(
+    id,
+    status
+){
+
+    try{
+
+        await updateDoc(
+            doc(
+                db,
+                "requests",
+                id
+            ),
+            {
+                status:status
+            }
+        );
+
+
+        loadData();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Não foi possível alterar a solicitação."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   MEMBROS
+========================= */
+
+function renderMembers(snapshot){
+
+    const table =
+        document
+        .getElementById("membersTable");
+
+
+    if(snapshot.empty){
+
+        table.innerHTML=`
+
+            <tr>
+
+                <td colspan="4">
+
+                    <div class="empty">
+                        Nenhum membro cadastrado.
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML="";
+
+
+    snapshot.forEach(item=>{
+
+        const data =
+            item.data();
+
+
+        const tr =
+            document.createElement("tr");
+
+
+        tr.innerHTML=`
+
+            <td>
+                ${safe(data.nome)}
+            </td>
+
+            <td>
+                ${safe(data.idade)}
+            </td>
+
+            <td>
+                ${safe(data.personagem)}
+            </td>
+
+            <td>
+                ${safe(data.universo)}
+            </td>
+
+        `;
+
+
+        table.appendChild(tr);
+
+    });
+
+}
+
+
+/* =========================
+   VAGAS
+========================= */
+
+function renderVacancies(snapshot){
+
+    const container =
+        document
+        .getElementById("vacanciesList");
+
+
+    if(snapshot.empty){
+
+        container.innerHTML=`
+
+            <div class="empty">
+                Nenhuma vaga cadastrada.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML="";
+
+
+    snapshot.forEach(item=>{
+
+        const data =
+            item.data();
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className="card";
+
+        card.style.marginBottom="10px";
+
+
+        card.innerHTML=`
+
+            <strong>
+                🎭 ${safe(
+                    data.personagem ||
+                    data.nome ||
+                    "Personagem"
+                )}
+            </strong>
+
+            <div style="
+                color:#887e92;
+                margin-top:6px;
+                font-size:11px;
+            ">
+
+                ${safe(
+                    data.universo || ""
+                )}
+
+            </div>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   SEGURANÇA HTML
+========================= */
+
+function safe(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+        return "";
+    }
+
+
+    return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+function getStatusClass(status){
+
+    if(status==="aprovado"){
+        return "approved";
+    }
+
+    if(status==="recusado"){
+        return "rejected";
+    }
+
+    return "pending";
+
+}
+
+
+/* =========================
+   RECUPERAR LOGIN
+========================= */
+
+const savedAdmin =
+    sessionStorage.getItem(
+        "wieAdmin"
+    );
+
+
+if(
+    savedAdmin &&
+    ADMINS[savedAdmin]
+){
+
+    document
+    .getElementById("loginScreen")
+    .style.display="none";
+
+
+    document
+    .getElementById("dashboard")
+    .style.display="block";
+
+
+    document
+    .getElementById("logged")
+    .textContent =
+        "👑 " +
+        savedAdmin +
+        " • " +
+        ADMINS[savedAdmin].role;
+
+
+    loadData();
+
+}
+
+</script>
+
+</body>
+  </html>
