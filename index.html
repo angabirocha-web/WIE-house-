@@ -1,928 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>House WIE • Recepção</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --purple:#8b5cf6;
-    --purple-dark:#170d2b;
-    --purple-light:#b78aff;
-    --yellow:#ffd84d;
-    --black:#08050e;
-    --card:rgba(25,15,42,.84);
-    --border:rgba(183,138,255,.25);
-    --text:#fff;
-    --muted:#c9bfd8;
-    --danger:#ff5c7c;
-    --success:#7dffb2;
-}
-
-body{
-    min-height:100vh;
-    font-family:Arial,Helvetica,sans-serif;
-    color:var(--text);
-    background:
-        radial-gradient(circle at 50% -10%,#43216d 0%,#170d2b 35%,#08050e 75%);
-    overflow-x:hidden;
-}
-
-.background{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:0;
-}
-
-.moon{
-    position:absolute;
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    background:#fff3bd;
-    right:9%;
-    top:70px;
-    box-shadow:
-        0 0 25px #fff0a6,
-        0 0 70px rgba(255,216,77,.45);
-    animation:moonFloat 5s ease-in-out infinite;
-}
-
-@keyframes moonFloat{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(10px)}
-}
-
-.orb{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(45px);
-    opacity:.4;
-}
-
-.orb.one{
-    width:230px;
-    height:230px;
-    background:#7c3aed;
-    left:-80px;
-    top:200px;
-}
-
-.orb.two{
-    width:260px;
-    height:260px;
-    background:#facc15;
-    right:-100px;
-    bottom:50px;
-    opacity:.15;
-}
-
-.star{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:white;
-    border-radius:50%;
-    animation:twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle{
-    from{
-        opacity:.2;
-        transform:scale(.7);
-    }
-    to{
-        opacity:1;
-        transform:scale(1.4);
-    }
-}
-
-.bat{
-    position:absolute;
-    font-size:42px;
-    animation:batMove 9s linear infinite;
-}
-
-.bat.one{
-    top:110px;
-    left:-80px;
-}
-
-.bat.two{
-    top:360px;
-    right:-80px;
-    animation-delay:4s;
-}
-
-@keyframes batMove{
-    0%{
-        transform:translateX(0) translateY(0);
-    }
-
-    50%{
-        transform:translateX(55vw) translateY(45px);
-    }
-
-    100%{
-        transform:translateX(110vw) translateY(0);
-    }
-}
-
-.witch{
-    position:absolute;
-    left:4%;
-    top:120px;
-    font-size:70px;
-    animation:witchFloat 4s ease-in-out infinite;
-    filter:drop-shadow(0 0 12px rgba(183,138,255,.5));
-}
-
-@keyframes witchFloat{
-    0%,100%{
-        transform:translateY(0) rotate(-3deg);
-    }
-
-    50%{
-        transform:translateY(-12px) rotate(3deg);
-    }
-}
-
-.web{
-    position:absolute;
-    font-size:85px;
-    opacity:.7;
-}
-
-.web.one{
-    left:-12px;
-    top:-8px;
-}
-
-.web.two{
-    right:-12px;
-    bottom:-8px;
-    transform:rotate(180deg);
-}
-
-.page{
-    position:relative;
-    z-index:1;
-}
-
-header{
-    width:100%;
-    padding:18px 6%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    background:rgba(8,5,14,.55);
-    backdrop-filter:blur(16px);
-    position:sticky;
-    top:0;
-    z-index:20;
-}
-
-.logo-area{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.logo{
-    width:45px;
-    height:45px;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:900;
-    font-size:20px;
-    color:#160c25;
-    background:linear-gradient(135deg,var(--yellow),#fff0a6);
-    box-shadow:0 0 18px rgba(255,216,77,.25);
-}
-
-.logo-text strong{
-    display:block;
-    font-size:17px;
-    letter-spacing:2px;
-}
-
-.logo-text span{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.admin-link{
-    text-decoration:none;
-    color:#160c25;
-    background:var(--yellow);
-    padding:11px 17px;
-    border-radius:12px;
-    font-size:13px;
-    font-weight:bold;
-    transition:.2s;
-}
-
-.admin-link:hover{
-    transform:translateY(-2px);
-    box-shadow:0 7px 20px rgba(255,216,77,.2);
-}
-
-.hero{
-    text-align:center;
-    padding:70px 20px 35px;
-}
-
-.pumpkin{
-    font-size:55px;
-    animation:pumpkinPulse 2.2s ease-in-out infinite;
-}
-
-@keyframes pumpkinPulse{
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.08);
-    }
-}
-
-.hero h1{
-    margin-top:8px;
-    font-size:clamp(38px,8vw,68px);
-    letter-spacing:4px;
-    background:linear-gradient(90deg,#fff,var(--yellow),#c9a3ff);
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.hero p{
-    max-width:620px;
-    margin:15px auto 0;
-    color:var(--muted);
-    line-height:1.6;
-    font-size:15px;
-}
-
-.container{
-    width:min(1050px,92%);
-    margin:auto;
-    padding-bottom:70px;
-}
-
-.section-title{
-    text-align:center;
-    margin:30px 0 18px;
-}
-
-.section-title h2{
-    font-size:24px;
-}
-
-.section-title p{
-    color:var(--muted);
-    margin-top:6px;
-    font-size:13px;
-}
-
-/* FICHA */
-
-.form-area{
-    margin-top:10px;
-    display:flex;
-    justify-content:center;
-}
-
-.form-card{
-    width:min(510px,100%);
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:25px;
-    padding:27px;
-    backdrop-filter:blur(20px);
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.35),
-        0 0 35px rgba(139,92,246,.08);
-}
-
-.form-header{
-    text-align:center;
-    margin-bottom:24px;
-}
-
-.form-icon{
-    font-size:35px;
-}
-
-.form-header h2{
-    margin-top:5px;
-    font-size:23px;
-}
-
-.form-header p{
-    color:var(--muted);
-    font-size:12px;
-    line-height:1.5;
-    margin-top:7px;
-}
-
-.form-group{
-    margin-bottom:16px;
-}
-
-.form-group label{
-    display:block;
-    margin-bottom:7px;
-    font-size:12px;
-    font-weight:bold;
-    color:#eee6fa;
-}
-
-.form-group input{
-    width:100%;
-    border:1px solid rgba(183,138,255,.22);
-    background:rgba(5,3,10,.55);
-    color:white;
-    border-radius:13px;
-    padding:13px 14px;
-    outline:none;
-    font-size:13px;
-    transition:.2s;
-}
-
-.form-group input:focus{
-    border-color:var(--purple-light);
-    box-shadow:0 0 0 3px rgba(139,92,246,.1);
-}
-
-.form-group input::placeholder{
-    color:#81768f;
-}
-
-.photo-box{
-    border:1px dashed rgba(255,216,77,.35);
-    background:rgba(255,216,77,.035);
-    border-radius:15px;
-    padding:15px;
-    text-align:center;
-}
-
-.photo-box input{
-    border:0;
-    padding:5px;
-    background:transparent;
-}
-
-.preview{
-    width:110px;
-    height:110px;
-    border-radius:16px;
-    object-fit:cover;
-    margin:10px auto 0;
-    display:none;
-    border:2px solid rgba(255,216,77,.35);
-}
-
-.submit{
-    width:100%;
-    border:0;
-    border-radius:14px;
-    padding:15px;
-    cursor:pointer;
-    color:#160c25;
-    background:linear-gradient(135deg,var(--yellow),#fff0a6);
-    font-weight:900;
-    font-size:14px;
-    transition:.2s;
-}
-
-.submit:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 30px rgba(255,216,77,.2);
-}
-
-.submit:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-    transform:none;
-}
-
-.notice{
-    margin-top:16px;
-    padding:12px;
-    border-radius:12px;
-    background:rgba(139,92,246,.08);
-    border:1px solid rgba(139,92,246,.13);
-    color:#bfb3cc;
-    font-size:11px;
-    line-height:1.5;
-    text-align:center;
-}
-
-.message{
-    display:none;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:14px;
-    text-align:center;
-    font-size:13px;
-    line-height:1.5;
-}
-
-.message.error{
-    display:block;
-    color:#ffd5dd;
-    background:rgba(255,92,124,.1);
-    border:1px solid rgba(255,92,124,.2);
-}
-
-.message.success{
-    display:block;
-    color:#d5ffe5;
-    background:rgba(125,255,178,.08);
-    border:1px solid rgba(125,255,178,.18);
-}
-
-/* VAGAS */
-
-.vagas-wrapper{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-    margin-top:10px;
-}
-
-.vagas-box{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:20px;
-    backdrop-filter:blur(18px);
-    box-shadow:0 20px 50px rgba(0,0,0,.25);
-}
-
-.vagas-box h3{
-    margin-bottom:14px;
-    font-size:17px;
-}
-
-.vagas-box.open h3{
-    color:var(--success);
-}
-
-.vagas-box.closed h3{
-    color:var(--danger);
-}
-
-.vagas-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.vaga-card{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:11px;
-    border-radius:15px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.06);
-}
-
-.vaga-image{
-    width:52px;
-    height:52px;
-    flex:none;
-    border-radius:12px;
-    object-fit:cover;
-    background:rgba(255,255,255,.07);
-}
-
-.vaga-info{
-    min-width:0;
-    flex:1;
-}
-
-.vaga-info strong{
-    display:block;
-    font-size:14px;
-}
-
-.vaga-info span{
-    display:block;
-    color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
-}
-
-.vaga-button{
-    border:0;
-    border-radius:10px;
-    padding:8px 10px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:bold;
-    background:var(--purple);
-    color:white;
-}
-
-.vaga-button:hover{
-    filter:brightness(1.15);
-}
-
-.closed-card{
-    opacity:.7;
-}
-
-.closed-label{
-    font-size:10px;
-    font-weight:bold;
-    color:var(--danger);
-    white-space:nowrap;
-}
-
-.empty{
-    color:#9d93ac;
-    font-size:12px;
-    text-align:center;
-    padding:15px 5px;
-}
-
-footer{
-    text-align:center;
-    color:#746b7f;
-    font-size:11px;
-    padding:20px;
-    border-top:1px solid rgba(255,255,255,.06);
-}
-
-@media(max-width:760px){
-
-    header{
-        padding:14px 4%;
-    }
-
-    .admin-link{
-        padding:9px 11px;
-        font-size:11px;
-    }
-
-    .hero{
-        padding-top:55px;
-    }
-
-    .moon{
-        width:95px;
-        height:95px;
-        right:3%;
-        top:90px;
-    }
-
-    .witch{
-        left:-12px;
-        top:150px;
-        font-size:48px;
-    }
-
-    .vagas-wrapper{
-        grid-template-columns:1fr;
-    }
-
-    .form-card{
-        padding:21px;
-    }
-}
-
-@media(max-width:420px){
-
-    .logo-text span{
-        display:none;
-    }
-
-    .hero h1{
-        font-size:38px;
-    }
-
-    .vaga-card{
-        align-items:flex-start;
-    }
-
-    .vaga-button{
-        padding:7px 8px;
-    }
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="background">
-
-    <div class="moon"></div>
-
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-
-    <div class="witch">🧙‍♀️</div>
-
-    <div class="web one">🕸️</div>
-    <div class="web two">🕸️</div>
-
-    <div class="bat one">🦇</div>
-    <div class="bat two">🦇</div>
-
-    <span class="star" style="left:8%;top:20%;"></span>
-    <span class="star" style="left:18%;top:45%;animation-delay:.5s"></span>
-    <span class="star" style="left:30%;top:16%;animation-delay:1s"></span>
-    <span class="star" style="left:45%;top:32%;animation-delay:.2s"></span>
-    <span class="star" style="left:58%;top:12%;animation-delay:.8s"></span>
-    <span class="star" style="left:70%;top:38%;animation-delay:.4s"></span>
-    <span class="star" style="left:82%;top:25%;animation-delay:1.2s"></span>
-    <span class="star" style="left:92%;top:50%;animation-delay:.7s"></span>
-
-</div>
-
-
-<div class="page">
-
-<header>
-
-    <div class="logo-area">
-
-        <div class="logo">W</div>
-
-        <div class="logo-text">
-            <strong>HOUSE WIE</strong>
-            <span>Halloween Edition 🎃</span>
-        </div>
-
-    </div>
-
-    <a class="admin-link" href="admin.html">
-        👑 Administração
-    </a>
-
-</header>
-
-
-<section class="hero">
-
-    <div class="pumpkin">🎃</div>
-
-    <h1>HOUSE WIE</h1>
-
-    <p>
-        Seja bem-vindo à nossa recepção!
-        Preencha sua ficha e faça parte da House WIE. 🕸️
-    </p>
-
-</section>
-
-
-<main class="container">
-
-
-<!-- FICHA PRIMEIRO -->
-
-<div class="section-title">
-
-    <h2>📝 Faça sua ficha</h2>
-
-    <p>
-        Preencha os dados abaixo para entrar na House.
-    </p>
-
-</div>
-
-
-<div class="form-area">
-
-    <div class="form-card">
-
-        <div class="form-header">
-
-            <div class="form-icon">🕯️</div>
-
-            <h2>Ficha de Recepção</h2>
-
-            <p>
-                Sua ficha será enviada para a administração
-                analisar sua entrada.
-            </p>
-
-        </div>
-
-
-        <div id="message" class="message"></div>
-
-
-        <form id="fichaForm">
-
-
-            <div class="form-group">
-
-                <label for="nome">
-                    👤 Nome
-                </label>
-
-                <input
-                    type="text"
-                    id="nome"
-                    placeholder="Digite seu nome"
-                    maxlength="60"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="idade">
-                    🎂 Idade
-                </label>
-
-                <input
-                    type="number"
-                    id="idade"
-                    placeholder="Digite sua idade"
-                    min="1"
-                    max="100"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="personagem">
-                    🎭 Personagem
-                </label>
-
-                <input
-                    type="text"
-                    id="personagem"
-                    placeholder="Ex.: Gojo"
-                    maxlength="60"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="obra">
-                    📚 Obra
-                </label>
-
-                <input
-                    type="text"
-                    id="obra"
-                    placeholder="Ex.: Jujutsu Kaisen"
-                    maxlength="80"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    🖼️ Foto do personagem
-                </label>
-
-                <div class="photo-box">
-
-                    <input
-                        type="file"
-                        id="foto"
-                        accept="image/*"
-                        required
-                    >
-
-                    <img
-                        id="preview"
-                        class="preview"
-                        alt="Prévia da foto"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="submit"
-                id="submitBtn"
-            >
-                🎃 Enviar ficha
-            </button>
-
-
-        </form>
-
-
-        <div class="notice">
-
-            🔐 Os dados da ficha são enviados apenas
-            para a administração da House.
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- VAGAS EMBAIXO DA FICHA -->
-
-<div class="section-title">
-
-    <h2>🎭 Vagas da House</h2>
-
-    <p>
-        Confira os personagens disponíveis e os que já estão ocupados.
-    </p>
-
-</div>
-
-
-<div class="vagas-wrapper">
-
-
-    <div class="vagas-box open">
-
-        <h3>🟢 Vagas abertas</h3>
-
-        <div
-            id="vagasAbertas"
-            class="vagas-list"
-        >
-
-            <div class="empty">
-                Carregando vagas...
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="vagas-box closed">
-
-        <h3>🔒 Vagas fechadas</h3>
-
-        <div
-            id="vagasFechadas"
-            class="vagas-list"
-        >
-
-            <div class="empty">
-                Carregando vagas...
-            </div>
-
-        </div>
-
-    </div>
-
-
-</div>
-
-
-</main>
-
-
-<footer>
-
-    HOUSE WIE • Recepção 🎃🕸️
-
-</footer>
-
-</div>
-
-
 <script type="module">
 
 import {
@@ -934,10 +9,6 @@ import {
     collection,
     getDocs,
     addDoc,
-    doc,
-    runTransaction,
-    updateDoc,
-    deleteDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
@@ -1004,20 +75,11 @@ const fechadas =
 
 let vagasAtuais = [];
 
+let vagasCarregadas = false;
+
 
 /* =========================
    NORMALIZAÇÃO
-
-   O sistema compara:
-
-   PERSONAGEM + OBRA
-
-   Exemplo:
-
-   Gojo + Jujutsu Kaisen
-   ≠
-   Gojo + outra obra
-
 ========================= */
 
 function normalizar(texto){
@@ -1032,7 +94,7 @@ function normalizar(texto){
 }
 
 
-function chavePersonagem(personagem,obra){
+function chavePersonagem(personagem, obra){
 
     return (
         normalizar(personagem)
@@ -1108,6 +170,10 @@ fotoInput.addEventListener(
 
             fotoInput.value = "";
 
+            preview.src = "";
+
+            preview.style.display = "none";
+
             mostrarMensagem(
                 "❌ Selecione uma imagem válida.",
                 "error"
@@ -1152,136 +218,138 @@ function comprimirImagem(file){
                 new FileReader();
 
 
-            reader.onload =
-                event => {
+            reader.onload = event => {
 
-                    const img =
-                        new Image();
-
-
-                    img.onload = ()=>{
-
-                        const max = 600;
-
-                        let width =
-                            img.width;
-
-                        let height =
-                            img.height;
+                const img =
+                    new Image();
 
 
-                        if(width > height){
+                img.onload = ()=>{
 
-                            if(width > max){
+                    const max = 500;
 
-                                height =
-                                    Math.round(
-                                        height * max / width
-                                    );
+                    let width =
+                        img.width;
 
-                                width = max;
+                    let height =
+                        img.height;
 
-                            }
 
-                        }else{
+                    if(width > height){
 
-                            if(height > max){
+                        if(width > max){
 
-                                width =
-                                    Math.round(
-                                        width * max / height
-                                    );
+                            height =
+                                Math.round(
+                                    height * max / width
+                                );
 
-                                height = max;
-
-                            }
+                            width = max;
 
                         }
 
+                    }else{
 
-                        const canvas =
-                            document.createElement(
-                                "canvas"
-                            );
+                        if(height > max){
 
-
-                        canvas.width =
-                            width;
-
-                        canvas.height =
-                            height;
-
-
-                        const ctx =
-                            canvas.getContext(
-                                "2d"
-                            );
-
-
-                        ctx.drawImage(
-                            img,
-                            0,
-                            0,
-                            width,
-                            height
-                        );
-
-
-                        canvas.toBlob(
-                            blob => {
-
-                                if(!blob){
-
-                                    reject(
-                                        new Error(
-                                            "PHOTO_ERROR"
-                                        )
-                                    );
-
-                                    return;
-
-                                }
-
-
-                                const finalReader =
-                                    new FileReader();
-
-
-                                finalReader.onload =
-                                    ()=>{
-                                        resolve(
-                                            finalReader.result
-                                        );
-                                    };
-
-
-                                finalReader.onerror =
-                                    reject;
-
-
-                                finalReader.readAsDataURL(
-                                    blob
+                            width =
+                                Math.round(
+                                    width * max / height
                                 );
 
-                            },
-                            "image/jpeg",
-                            .65
+                            height = max;
+
+                        }
+
+                    }
+
+
+                    const canvas =
+                        document.createElement(
+                            "canvas"
                         );
 
-                    };
+
+                    canvas.width =
+                        width;
+
+                    canvas.height =
+                        height;
 
 
-                    img.onerror =
-                        reject;
+                    const ctx =
+                        canvas.getContext("2d");
 
-                    img.src =
-                        event.target.result;
+
+                    ctx.drawImage(
+                        img,
+                        0,
+                        0,
+                        width,
+                        height
+                    );
+
+
+                    canvas.toBlob(
+                        blob => {
+
+                            if(!blob){
+
+                                reject(
+                                    new Error(
+                                        "PHOTO_ERROR"
+                                    )
+                                );
+
+                                return;
+
+                            }
+
+
+                            const finalReader =
+                                new FileReader();
+
+
+                            finalReader.onload =
+                                ()=>{
+                                    resolve(
+                                        finalReader.result
+                                    );
+                                };
+
+
+                            finalReader.onerror =
+                                reject;
+
+
+                            finalReader.readAsDataURL(
+                                blob
+                            );
+
+                        },
+                        "image/jpeg",
+                        .55
+                    );
 
                 };
 
 
+                img.onerror =
+                    ()=>reject(
+                        new Error("PHOTO_ERROR")
+                    );
+
+
+                img.src =
+                    event.target.result;
+
+            };
+
+
             reader.onerror =
-                reject;
+                ()=>reject(
+                    new Error("PHOTO_ERROR")
+                );
 
 
             reader.readAsDataURL(file);
@@ -1325,11 +393,19 @@ async function carregarVagas(){
         });
 
 
+        vagasCarregadas = true;
+
         renderizarVagas();
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "Erro ao carregar vagas:",
+            error
+        );
+
+
+        vagasCarregadas = false;
 
 
         abertas.innerHTML = `
@@ -1591,15 +667,6 @@ function renderizarVagas(){
 
 /* =========================
    ENCONTRAR VAGA
-
-   IMPORTANTE:
-
-   Só bloqueia se:
-
-   personagem + obra
-
-   forem iguais.
-
 ========================= */
 
 function encontrarVaga(
@@ -1624,82 +691,6 @@ function encontrarVaga(
 
         }
     );
-
-}
-
-
-/* =========================
-   RESERVAR PERSONAGEM
-
-   A reserva usa o ID:
-
-   personagem___obra
-
-   Isso impede duas fichas
-   de pegarem a mesma combinação.
-
-========================= */
-
-async function reservarPersonagem(
-    personagem,
-    obra
-){
-
-    const chave =
-        chavePersonagem(
-            personagem,
-            obra
-        );
-
-
-    const lockRef =
-        doc(
-            db,
-            "characterLocks",
-            chave
-        );
-
-
-    await runTransaction(
-        db,
-        async transaction => {
-
-            const lock =
-                await transaction.get(
-                    lockRef
-                );
-
-
-            if(lock.exists()){
-
-                throw new Error(
-                    "CHARACTER_ALREADY_RESERVED"
-                );
-
-            }
-
-
-            transaction.set(
-                lockRef,
-                {
-
-                    personagem:
-                        personagem.trim(),
-
-                    obra:
-                        obra.trim(),
-
-                    criadoEm:
-                        serverTimestamp()
-
-                }
-            );
-
-        }
-    );
-
-
-    return chave;
 
 }
 
@@ -1752,31 +743,42 @@ form.addEventListener(
 
 
         /*
-        Primeiro verifica uma
-        vaga fechada.
+        Verifica se a combinação
+        Personagem + Obra já está
+        em uma vaga fechada.
+
+        Exemplo:
+
+        Gojo + Jujutsu Kaisen
+        bloqueia apenas essa combinação.
         */
 
-        const vaga =
-            encontrarVaga(
-                personagem,
-                obra
-            );
+
+        if(vagasCarregadas){
+
+            const vaga =
+                encontrarVaga(
+                    personagem,
+                    obra
+                );
 
 
-        if(
-            vaga &&
-            String(
-                vaga.status || ""
-            ).toLowerCase()
-            === "fechada"
-        ){
+            if(
+                vaga &&
+                String(
+                    vaga.status || ""
+                ).toLowerCase()
+                === "fechada"
+            ){
 
-            mostrarMensagem(
-                `🔒 ${personagem} — ${obra} já está fechado e não pode ser escolhido.`,
-                "error"
-            );
+                mostrarMensagem(
+                    `🔒 ${personagem} — ${obra} já está fechado e não pode ser escolhido.`,
+                    "error"
+                );
 
-            return;
+                return;
+
+            }
 
         }
 
@@ -1788,32 +790,11 @@ form.addEventListener(
             "🎃 Enviando...";
 
 
-        let reservaCriada =
-            false;
-
-        let chaveReserva =
-            "";
-
-
         try{
 
             /*
-            Reserva a combinação
-            Personagem + Obra.
-            */
-
-            chaveReserva =
-                await reservarPersonagem(
-                    personagem,
-                    obra
-                );
-
-            reservaCriada =
-                true;
-
-
-            /*
-            Comprime a foto.
+            Comprime a foto antes
+            de enviar para o Firebase.
             */
 
             const fotoData =
@@ -1823,12 +804,13 @@ form.addEventListener(
 
 
             /*
-            Evita documento muito grande.
+            Limite de segurança
+            para o documento do Firestore.
             */
 
             if(
                 fotoData.length >
-                850000
+                600000
             ){
 
                 throw new Error(
@@ -1839,62 +821,57 @@ form.addEventListener(
 
 
             /*
-            Cria a ficha.
+            Cria a ficha diretamente
+            na coleção requests.
+
+            NÃO existe mais:
+            characterLocks
+            transaction
+            updateDoc
+            deleteDoc
             */
 
-            const requestRef =
-                await addDoc(
-                    collection(
-                        db,
-                        "requests"
-                    ),
-                    {
-
-                        nome:
-                            nome,
-
-                        idade:
-                            idade,
-
-                        personagem:
-                            personagem,
-
-                        obra:
-                            obra,
-
-                        foto:
-                            fotoData,
-
-                        status:
-                            "pendente",
-
-                        characterKey:
-                            chaveReserva,
-
-                        criadoEm:
-                            serverTimestamp()
-
-                    }
-                );
-
-
-            /*
-            Guarda o ID da ficha
-            na reserva.
-            */
-
-            await updateDoc(
-                doc(
+            await addDoc(
+                collection(
                     db,
-                    "characterLocks",
-                    chaveReserva
+                    "requests"
                 ),
                 {
-                    requestId:
-                        requestRef.id
+
+                    nome:
+                        nome,
+
+                    idade:
+                        idade,
+
+                    personagem:
+                        personagem,
+
+                    obra:
+                        obra,
+
+                    foto:
+                        fotoData,
+
+                    status:
+                        "pendente",
+
+                    characterKey:
+                        chavePersonagem(
+                            personagem,
+                            obra
+                        ),
+
+                    criadoEm:
+                        serverTimestamp()
+
                 }
             );
 
+
+            /*
+            Limpa a ficha.
+            */
 
             form.reset();
 
@@ -1912,26 +889,29 @@ form.addEventListener(
 
         }catch(error){
 
-            console.error(error);
+            console.error(
+                "Erro ao enviar ficha:",
+                error
+            );
 
 
             if(
-                error.message ===
-                "CHARACTER_ALREADY_RESERVED"
-            ){
-
-                mostrarMensagem(
-                    `🔒 ${personagem} — ${obra} já está ocupado ou possui uma ficha em análise. Escolha outra combinação.`,
-                    "error"
-                );
-
-            }else if(
                 error.message ===
                 "PHOTO_TOO_LARGE"
             ){
 
                 mostrarMensagem(
-                    "❌ A foto ficou muito grande. Escolha uma imagem menor.",
+                    "❌ A foto ficou muito grande. Escolha outra imagem.",
+                    "error"
+                );
+
+            }else if(
+                error.message ===
+                "PHOTO_ERROR"
+            ){
+
+                mostrarMensagem(
+                    "❌ Não foi possível processar a foto. Tente outra imagem.",
                     "error"
                 );
 
@@ -1941,37 +921,6 @@ form.addEventListener(
                     "❌ Não foi possível enviar sua ficha. Tente novamente.",
                     "error"
                 );
-
-            }
-
-
-            /*
-            Se a ficha não foi criada,
-            libera a reserva.
-            */
-
-            if(
-                reservaCriada
-            ){
-
-                try{
-
-                    await deleteDoc(
-                        doc(
-                            db,
-                            "characterLocks",
-                            chaveReserva
-                        )
-                    );
-
-                }catch(e){
-
-                    console.error(
-                        "Erro ao liberar reserva:",
-                        e
-                    );
-
-                }
 
             }
 
@@ -1995,8 +944,4 @@ form.addEventListener(
 
 carregarVagas();
 
-</script>
-
-</body>
-
-        </html>
+    </script>
