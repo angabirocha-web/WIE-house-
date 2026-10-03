@@ -10,32 +10,33 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
     rel="stylesheet"
   >
 
   <style>
+
     :root {
-      --bg: #0b0709;
-      --bg2: #120b0f;
+      --bg: #10070e;
+      --bg2: #190a14;
 
-      --panel: rgba(28, 13, 19, .88);
-      --panel2: rgba(45, 18, 28, .82);
+      --panel: rgba(38, 11, 26, .92);
+      --panel2: rgba(54, 14, 36, .78);
 
-      --red: #c92f55;
-      --red-dark: #7d1735;
-      --pink: #f06b91;
-      --pink-soft: #ff9fba;
+      --pink: #ff5d9e;
+      --pink2: #ff8fbd;
+      --red: #d52f61;
 
-      --white: #fff5f8;
-      --muted: #c7aab4;
+      --white: #fff4f8;
+      --muted: #c9a7b7;
 
-      --green: #72d49a;
-      --yellow: #e9c66b;
-      --danger: #e85b68;
+      --green: #72e6a0;
+      --yellow: #ffd66f;
+      --blue: #79baff;
+      --danger: #ff7188;
 
-      --border: rgba(255, 145, 175, .18);
-      --shadow: 0 20px 60px rgba(0, 0, 0, .45);
+      --border: rgba(255, 143, 189, .18);
+      --border2: rgba(255, 255, 255, .07);
     }
 
     * {
@@ -50,12 +51,26 @@
 
     body {
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(201, 47, 85, .14), transparent 30%),
-        radial-gradient(circle at 85% 80%, rgba(240, 107, 145, .10), transparent 30%),
-        linear-gradient(135deg, var(--bg), var(--bg2));
+      font-family: "DM Sans", sans-serif;
       color: var(--white);
-      font-family: Inter, sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(255, 93, 158, .14),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 85%,
+          rgba(213, 47, 97, .12),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          var(--bg),
+          var(--bg2)
+        );
+
       overflow-x: hidden;
     }
 
@@ -64,362 +79,310 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .25;
+
       background:
-        linear-gradient(90deg, transparent 49%, rgba(255,255,255,.018) 50%, transparent 51%),
-        linear-gradient(transparent 49%, rgba(255,255,255,.018) 50%, transparent 51%);
-      background-size: 70px 70px;
-      animation: backgroundMove 18s linear infinite;
+        radial-gradient(
+          circle at 20% 70%,
+          rgba(255, 93, 158, .06),
+          transparent 20%
+        ),
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(255, 143, 189, .05),
+          transparent 22%
+        );
+
+      animation: backgroundMove 12s ease-in-out infinite alternate;
     }
 
     @keyframes backgroundMove {
       from {
-        transform: translate(0, 0);
+        transform: scale(1);
       }
 
       to {
-        transform: translate(70px, 70px);
+        transform: scale(1.08);
       }
     }
 
     button,
     input,
-    textarea,
-    select {
-      font: inherit;
+    select,
+    textarea {
+      font-family: inherit;
     }
 
     button {
       cursor: pointer;
     }
 
-    .hidden {
-      display: none !important;
-    }
+    /* =====================================================
+       TOPBAR
+    ===================================================== */
 
-    /* =========================
-       LOGIN
-    ========================= */
-
-    #loginScreen {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 25px;
-    }
-
-    .login-card {
-      width: min(440px, 100%);
-      padding: 42px 32px;
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      background: linear-gradient(
-        145deg,
-        rgba(45, 18, 28, .95),
-        rgba(18, 9, 14, .95)
-      );
-      box-shadow: var(--shadow);
-      text-align: center;
-      backdrop-filter: blur(20px);
-      animation: loginAppear .7s ease;
-    }
-
-    @keyframes loginAppear {
-      from {
-        opacity: 0;
-        transform: translateY(25px) scale(.97);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .login-logo {
-      width: 78px;
-      height: 78px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(145deg, var(--red), var(--red-dark));
-      box-shadow: 0 0 35px rgba(201, 47, 85, .35);
-      font-family: Cinzel, serif;
-      font-size: 27px;
-      font-weight: 700;
-    }
-
-    .login-card h1 {
-      font-family: Cinzel, serif;
-      font-size: 27px;
-      margin-bottom: 8px;
-    }
-
-    .login-card p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
-
-    /* =========================
-       INPUTS
-    ========================= */
-
-    .field {
-      margin-bottom: 16px;
-      text-align: left;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 7px;
-      color: var(--pink-soft);
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 13px 14px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      outline: none;
-      background: rgba(10, 6, 9, .75);
-      color: var(--white);
-      transition: .2s;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: var(--pink);
-      box-shadow: 0 0 0 3px rgba(240, 107, 145, .08);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    option {
-      background: #1b0c12;
-      color: white;
-    }
-
-    /* =========================
-       BUTTONS
-    ========================= */
-
-    .button {
-      border: none;
-      border-radius: 12px;
-      padding: 12px 17px;
-      font-weight: 700;
-      transition: .2s;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button.primary {
-      color: white;
-      background: linear-gradient(135deg, var(--red), var(--red-dark));
-      box-shadow: 0 8px 25px rgba(201, 47, 85, .22);
-    }
-
-    .button.secondary {
-      color: var(--white);
-      background: rgba(255,255,255,.07);
-      border: 1px solid var(--border);
-    }
-
-    .button.danger {
-      color: white;
-      background: rgba(232, 91, 104, .16);
-      border: 1px solid rgba(232, 91, 104, .25);
-    }
-
-    .button.success {
-      color: white;
-      background: rgba(114, 212, 154, .16);
-      border: 1px solid rgba(114, 212, 154, .25);
-    }
-
-    .button.small {
-      padding: 8px 11px;
-      font-size: 12px;
-      border-radius: 9px;
-    }
-
-    .button.full {
-      width: 100%;
-    }
-
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    /* =========================
-       ADMIN LAYOUT
-    ========================= */
-
-    #adminApp {
-      min-height: 100vh;
-    }
-
-    .admin-layout {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      position: fixed;
-      z-index: 50;
-      left: 0;
+    .topbar {
+      position: sticky;
       top: 0;
-      width: 245px;
-      height: 100vh;
-      padding: 25px 16px;
+      z-index: 100;
+
+      height: 72px;
+
       display: flex;
-      flex-direction: column;
-      background: rgba(15, 7, 11, .94);
-      border-right: 1px solid var(--border);
-      backdrop-filter: blur(20px);
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 24px;
+
+      background:
+        rgba(15, 5, 11, .88);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+      backdrop-filter: blur(18px);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 0 10px 25px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 20px;
+      gap: 11px;
     }
 
-    .brand-icon {
+    .brand-logo {
       width: 42px;
       height: 42px;
-      border-radius: 12px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 13px;
+
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      font-weight: 700;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--pink),
+          var(--red)
+        );
+
+      box-shadow:
+        0 10px 30px rgba(255,93,158,.22);
+    }
+
+    .brand-text strong {
+      display: block;
+
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .top-right {
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: linear-gradient(145deg, var(--red), var(--red-dark));
-      font-family: Cinzel, serif;
-      font-weight: 700;
+      gap: 14px;
     }
 
-    .brand strong {
-      display: block;
-      font-family: Cinzel, serif;
-      font-size: 15px;
-    }
+    .online-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
 
-    .brand small {
       color: var(--muted);
       font-size: 10px;
     }
 
-    .side-menu {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .online-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 12px rgba(114,230,160,.7);
     }
 
-    .side-link {
-      width: 100%;
-      padding: 12px 13px;
-      border: 1px solid transparent;
-      border-radius: 11px;
-      background: transparent;
-      color: var(--muted);
-      text-align: left;
+    .site-button {
+      padding: 9px 13px;
+
+      border-radius: 10px;
+
+      color: var(--white);
+
+      border:
+        1px solid var(--border2);
+
+      background:
+        rgba(255,255,255,.035);
+
+      font-size: 10px;
+      font-weight: 700;
+
+      text-decoration: none;
+
       transition: .2s;
     }
 
-    .side-link:hover,
-    .side-link.active {
-      color: white;
-      background: rgba(201, 47, 85, .13);
-      border-color: var(--border);
+    .site-button:hover {
+      background:
+        rgba(255,93,158,.09);
+
+      border-color:
+        rgba(255,143,189,.3);
     }
 
-    .side-link.active {
-      box-shadow: inset 3px 0 var(--pink);
-    }
+    /* =====================================================
+       LAYOUT
+    ===================================================== */
 
-    .sidebar-bottom {
-      margin-top: auto;
-    }
-
-    .logged-user {
-      padding: 14px;
-      margin-bottom: 10px;
-      border-radius: 13px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid var(--border);
-    }
-
-    .logged-user strong {
-      display: block;
-      font-size: 13px;
-    }
-
-    .logged-user span {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .admin-main {
-      width: calc(100% - 245px);
-      margin-left: 245px;
-      padding: 25px;
-    }
-
-    .admin-topbar {
+    .layout {
       display: flex;
-      justify-content: space-between;
+      min-height: calc(100vh - 72px);
+
+      position: relative;
+      z-index: 2;
+    }
+
+    .sidebar {
+      width: 225px;
+      flex-shrink: 0;
+
+      padding: 21px 13px;
+
+      border-right:
+        1px solid rgba(255,255,255,.05);
+
+      background:
+        rgba(18, 6, 13, .72);
+    }
+
+    .nav-title {
+      color: #806370;
+
+      font-size: 9px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+
+      padding: 0 11px;
+      margin-bottom: 9px;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav button {
+      width: 100%;
+
+      display: flex;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 25px;
-    }
+      gap: 9px;
 
-    .admin-topbar h1 {
-      font-family: Cinzel, serif;
-      font-size: 25px;
-    }
+      padding: 11px;
 
-    .admin-topbar p {
+      border-radius: 11px;
+      border: 1px solid transparent;
+
+      background: transparent;
       color: var(--muted);
-      margin-top: 5px;
-      font-size: 13px;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      text-align: left;
+
+      transition: .2s;
     }
 
-    /* =========================
-       SECTIONS
-    ========================= */
+    .nav button:hover {
+      color: white;
+      background: rgba(255,255,255,.035);
+    }
 
-    .admin-section {
+    .nav button.active {
+      color: white;
+
+      background:
+        rgba(255,93,158,.10);
+
+      border-color:
+        rgba(255,143,189,.13);
+    }
+
+    .nav-icon {
+      width: 26px;
+      height: 26px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 8px;
+
+      background:
+        rgba(255,255,255,.035);
+
+      font-size: 12px;
+    }
+
+    .notification {
+      margin-left: auto;
+
+      min-width: 19px;
+      height: 19px;
+
+      padding: 0 5px;
+
       display: none;
-      animation: sectionAppear .3s ease;
+      place-items: center;
+
+      border-radius: 999px;
+
+      background: var(--red);
+      color: white;
+
+      font-size: 8px;
+      font-weight: 800;
     }
 
-    .admin-section.active {
+    .notification.show {
+      display: grid;
+    }
+
+    .main {
+      flex: 1;
+      min-width: 0;
+
+      padding: 27px;
+    }
+
+    .page {
+      display: none;
+
+      animation:
+        pageIn .25s ease;
+    }
+
+    .page.active {
       display: block;
     }
 
-    @keyframes sectionAppear {
+    @keyframes pageIn {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(5px);
       }
 
       to {
@@ -428,258 +391,722 @@
       }
     }
 
-    /* =========================
-       STATS
-    ========================= */
+    /* =====================================================
+       HEADER
+    ===================================================== */
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-
-    .stat-card {
-      padding: 20px;
-      border-radius: 17px;
-      border: 1px solid var(--border);
-      background: linear-gradient(
-        145deg,
-        rgba(44, 18, 27, .82),
-        rgba(23, 11, 16, .88)
-      );
-      box-shadow: var(--shadow);
-    }
-
-    .stat-card span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .stat-card strong {
-      display: block;
-      margin-top: 8px;
-      font-family: Cinzel, serif;
-      font-size: 29px;
-    }
-
-    /* =========================
-       PANELS
-    ========================= */
-
-    .panel-card {
-      padding: 20px;
-      margin-bottom: 18px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(29, 13, 19, .72);
-      box-shadow: var(--shadow);
-    }
-
-    .panel-title {
+    .page-header {
       display: flex;
+      align-items: flex-end;
       justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 17px;
-    }
 
-    .panel-title h2 {
-      font-family: Cinzel, serif;
-      font-size: 18px;
-    }
-
-    .panel-title span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* =========================
-       REQUESTS
-    ========================= */
-
-    .request-list,
-    .vacancy-list,
-    .member-list,
-    .log-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .request-card,
-    .admin-vacancy-card,
-    .member-card,
-    .log-card {
-      padding: 16px;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      background: rgba(12, 7, 10, .58);
-    }
-
-    .request-head,
-    .vacancy-head,
-    .member-head {
-      display: flex;
-      justify-content: space-between;
       gap: 15px;
-      align-items: flex-start;
+
+      margin-bottom: 21px;
     }
 
-    .request-head h3,
-    .vacancy-head h3,
-    .member-head h3 {
-      font-size: 15px;
+    .page-header h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    /* =====================================================
+       STATS
+    ===================================================== */
+
+    .stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 13px;
+
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      padding: 17px;
+
+      border-radius: 16px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(48,13,33,.88),
+          rgba(26,8,19,.9)
+        );
+    }
+
+    .stat-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+    }
+
+    .stat-icon {
+      width: 28px;
+      height: 28px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 9px;
+
+      background:
+        rgba(255,93,158,.08);
+    }
+
+    .stat-number {
+      display: block;
+
+      margin-top: 11px;
+
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    /* =====================================================
+       PANELS
+    ===================================================== */
+
+    .panel {
+      padding: 19px;
+
+      margin-bottom: 17px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 17px;
+
+      background:
+        rgba(31,9,21,.82);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-bottom: 15px;
+    }
+
+    .panel-header h2 {
+      font-size: 14px;
+    }
+
+    .panel-header p {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
+
+    .btn {
+      border:
+        1px solid rgba(255,255,255,.08);
+
+      border-radius: 10px;
+
+      padding: 9px 12px;
+
+      color: var(--white);
+
+      background:
+        rgba(255,255,255,.04);
+
+      font-size: 10px;
+      font-weight: 800;
+
+      transition: .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background:
+        rgba(255,255,255,.07);
+    }
+
+    .btn-primary {
+      border-color: transparent;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--pink),
+          var(--red)
+        );
+    }
+
+    .btn-success {
+      color: #b9ffd0;
+
+      border-color:
+        rgba(114,230,160,.17);
+
+      background:
+        rgba(114,230,160,.07);
+    }
+
+    .btn-danger {
+      color: #ffc2cc;
+
+      border-color:
+        rgba(255,113,136,.17);
+
+      background:
+        rgba(255,113,136,.07);
+    }
+
+    .btn-blue {
+      color: #bddcff;
+
+      border-color:
+        rgba(121,186,255,.17);
+
+      background:
+        rgba(121,186,255,.07);
+    }
+
+    .btn-yellow {
+      color: #ffe3a0;
+
+      border-color:
+        rgba(255,214,111,.16);
+
+      background:
+        rgba(255,214,111,.06);
+    }
+
+    /* =====================================================
+       REQUESTS
+    ===================================================== */
+
+    .request-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .request-card {
+      display: grid;
+
+      grid-template-columns:
+        64px minmax(0, 1fr) auto;
+
+      align-items: center;
+
+      gap: 14px;
+
+      padding: 14px;
+
+      border-radius: 14px;
+
+      border:
+        1px solid rgba(255,255,255,.06);
+
+      background:
+        rgba(255,255,255,.025);
+    }
+
+    .request-photo {
+      width: 64px;
+      height: 64px;
+
+      object-fit: cover;
+
+      border-radius: 13px;
+
+      border:
+        1px solid var(--border);
+
+      background: #170811;
+    }
+
+    .request-info h3 {
+      font-size: 13px;
       margin-bottom: 4px;
     }
 
-    .muted {
+    .request-info p {
       color: var(--muted);
-      font-size: 12px;
-    }
 
-    .request-info,
-    .vacancy-info,
-    .member-info {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 7px 18px;
-      margin: 14px 0;
-    }
-
-    .info-item {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .info-item strong {
-      color: var(--white);
-      font-weight: 600;
-    }
-
-    .status {
-      display: inline-flex;
-      padding: 5px 9px;
-      border-radius: 999px;
       font-size: 10px;
-      font-weight: 700;
+      line-height: 1.65;
     }
 
-    .status.open {
-      color: var(--green);
-      background: rgba(114, 212, 154, .10);
+    .request-info strong {
+      color: #f6d7e4;
     }
 
-    .status.closed {
-      color: var(--danger);
-      background: rgba(232, 91, 104, .10);
-    }
-
-    .status.pending {
-      color: var(--yellow);
-      background: rgba(233, 198, 107, .10);
-    }
-
-    .status.approved {
-      color: var(--green);
-      background: rgba(114, 212, 154, .10);
-    }
-
-    .status.rejected {
-      color: var(--danger);
-      background: rgba(232, 91, 104, .10);
-    }
-
-    /* =========================
-       VACANCY PHOTO
-    ========================= */
-
-    .vacancy-character {
+    .request-actions {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+
+      margin-bottom: 14px;
+    }
+
+    .search {
+      flex: 1;
+
+      min-width: 0;
+
+      padding: 11px 13px;
+
+      color: white;
+
+      outline: none;
+
+      border:
+        1px solid rgba(255,255,255,.07);
+
+      border-radius: 11px;
+
+      background:
+        rgba(255,255,255,.035);
+
+      font-size: 11px;
+    }
+
+    .search:focus {
+      border-color:
+        rgba(255,93,158,.45);
+    }
+
+    /* =====================================================
+       VACANCIES
+    ===================================================== */
+
+    .vacancy-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fill, minmax(205px, 1fr));
+
+      gap: 13px;
+    }
+
+    .vacancy-card {
+      overflow: hidden;
+
+      border:
+        1px solid rgba(255,255,255,.06);
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,.025);
+    }
+
+    .vacancy-image {
+      width: 100%;
+      height: 165px;
+
+      display: block;
+
+      object-fit: cover;
+
+      background: #160811;
+    }
+
+    .vacancy-body {
+      padding: 13px;
+    }
+
+    .vacancy-body h3 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .vacancy-body p {
+      color: var(--muted);
+      font-size: 10px;
+      margin-bottom: 9px;
+    }
+
+    .vacancy-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    /* =====================================================
+       MEMBERS
+    ===================================================== */
+
+    .member-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fill, minmax(190px, 1fr));
+
       gap: 12px;
     }
 
-    .character-image {
-      width: 55px;
-      height: 55px;
-      object-fit: cover;
-      border-radius: 13px;
-      border: 1px solid var(--border);
-      background: #170a10;
+    .member-card {
+      padding: 14px;
+
+      border:
+        1px solid rgba(255,255,255,.06);
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,.025);
     }
 
-    /* =========================
-       CHAT
-    ========================= */
+    .member-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-    .chat-card {
-      min-height: 430px;
+    .member-photo {
+      width: 52px;
+      height: 52px;
+
+      object-fit: cover;
+
+      border-radius: 13px;
+
+      border:
+        1px solid var(--border);
+
+      background: #170811;
+    }
+
+    .member-info h3 {
+      font-size: 13px;
+    }
+
+    .member-info p {
+      color: var(--pink2);
+
+      font-size: 10px;
+
+      margin-top: 3px;
+    }
+
+    .member-details {
+      margin-top: 11px;
+      padding-top: 10px;
+
+      border-top:
+        1px solid rgba(255,255,255,.05);
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.7;
+    }
+
+    /* =====================================================
+       TABLE
+    ===================================================== */
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+
+      border-collapse: collapse;
+    }
+
+    th {
+      padding: 10px;
+
+      color: #947180;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+      text-align: left;
+
+      font-size: 8px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    td {
+      padding: 11px 10px;
+
+      color: #e8ceda;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.045);
+
+      font-size: 10px;
+    }
+
+    /* =====================================================
+       BADGES
+    ===================================================== */
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+
+      padding: 5px 8px;
+
+      border-radius: 999px;
+
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .badge-open {
+      color: #baffd0;
+      background: rgba(114,230,160,.08);
+    }
+
+    .badge-closed {
+      color: #ffc0ca;
+      background: rgba(255,113,136,.08);
+    }
+
+    .badge-pending {
+      color: #ffe3a0;
+      background: rgba(255,214,111,.08);
+    }
+
+    .badge-approved {
+      color: #baffd0;
+      background: rgba(114,230,160,.08);
+    }
+
+    .badge-rejected {
+      color: #ffc0ca;
+      background: rgba(255,113,136,.08);
+    }
+
+    /* =====================================================
+       CHAT
+    ===================================================== */
+
+    .chat {
+      height: 520px;
+
       display: flex;
       flex-direction: column;
     }
 
     .chat-messages {
       flex: 1;
-      min-height: 300px;
-      max-height: 500px;
+
       overflow-y: auto;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 9px;
+
       padding: 12px;
+
+      border:
+        1px solid rgba(255,255,255,.05);
+
       border-radius: 14px;
-      background: rgba(5, 3, 4, .45);
-      border: 1px solid var(--border);
-      margin-bottom: 12px;
+
+      background:
+        rgba(0,0,0,.12);
     }
 
-    .chat-message {
-      max-width: 80%;
-      padding: 10px 12px;
-      margin-bottom: 10px;
-      border-radius: 13px;
-      background: rgba(255,255,255,.055);
-      border: 1px solid var(--border);
+    .message {
+      max-width: 78%;
+
+      padding: 9px 11px;
+
+      border-radius: 12px;
+
+      background:
+        rgba(255,255,255,.045);
     }
 
-    .chat-message strong {
+    .message.me {
+      align-self: flex-end;
+
+      background:
+        rgba(255,93,158,.10);
+
+      border:
+        1px solid rgba(255,93,158,.12);
+    }
+
+    .message strong {
       display: block;
-      color: var(--pink-soft);
-      font-size: 12px;
-      margin-bottom: 4px;
+
+      color: var(--pink2);
+
+      font-size: 9px;
+
+      margin-bottom: 3px;
     }
 
-    .chat-message p {
-      font-size: 13px;
+    .message p {
+      color: #ead2dc;
+
+      font-size: 10px;
       line-height: 1.5;
     }
 
-    .chat-message small {
+    .message small {
       display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 9px;
+
+      margin-top: 4px;
+
+      color: #806472;
+
+      font-size: 7px;
     }
 
     .chat-form {
       display: flex;
-      gap: 8px;
+      gap: 7px;
+
+      margin-top: 9px;
     }
 
     .chat-form input {
       flex: 1;
+
+      min-width: 0;
+
+      padding: 11px;
+
+      outline: none;
+
+      border:
+        1px solid rgba(255,255,255,.07);
+
+      border-radius: 11px;
+
+      color: white;
+
+      background:
+        rgba(255,255,255,.035);
+
+      font-size: 10px;
     }
 
-    /* =========================
+    /* =====================================================
+       LOGS
+    ===================================================== */
+
+    .log-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .log-item {
+      padding: 11px 13px;
+
+      border:
+        1px solid rgba(255,255,255,.05);
+
+      border-radius: 11px;
+
+      background:
+        rgba(255,255,255,.025);
+    }
+
+    .log-item strong {
+      font-size: 10px;
+    }
+
+    .log-item p {
+      color: var(--muted);
+
+      margin-top: 3px;
+
+      font-size: 9px;
+    }
+
+    .log-item small {
+      display: block;
+
+      margin-top: 5px;
+
+      color: #806472;
+
+      font-size: 7px;
+    }
+
+    /* =====================================================
+       EMPTY
+    ===================================================== */
+
+    .empty {
+      padding: 35px 20px;
+
+      text-align: center;
+
+      color: #876875;
+
+      border:
+        1px dashed rgba(255,255,255,.08);
+
+      border-radius: 14px;
+
+      font-size: 11px;
+    }
+
+    /* =====================================================
        MODAL
-    ========================= */
+    ===================================================== */
 
     .modal {
       position: fixed;
       inset: 0;
-      z-index: 100;
+
+      z-index: 500;
+
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      background: rgba(0,0,0,.72);
+
+      padding: 18px;
+
+      background:
+        rgba(5,2,5,.72);
+
       backdrop-filter: blur(8px);
     }
 
@@ -687,669 +1114,782 @@
       display: flex;
     }
 
-    .modal-box {
-      width: min(570px, 100%);
+    .modal-card {
+      width: min(550px, 100%);
       max-height: 90vh;
+
       overflow-y: auto;
-      padding: 25px;
+
+      padding: 23px;
+
+      border:
+        1px solid var(--border);
+
       border-radius: 20px;
-      border: 1px solid var(--border);
-      background: linear-gradient(
-        145deg,
-        #281019,
-        #11090d
-      );
-      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+
+      background:
+        linear-gradient(
+          145deg,
+          #3b1028,
+          #190813
+        );
+
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.5);
     }
 
     .modal-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      justify-content: space-between;
+
+      margin-bottom: 18px;
     }
 
     .modal-header h2 {
-      font-family: Cinzel, serif;
-      font-size: 19px;
+      font-family: "Playfair Display", serif;
+      font-size: 21px;
     }
 
-    .close-modal {
-      width: 35px;
-      height: 35px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: rgba(255,255,255,.05);
-      color: white;
-    }
+    .close {
+      width: 30px;
+      height: 30px;
 
-    /* =========================
-       EMPTY
-    ========================= */
-
-    .empty-state {
-      padding: 35px 15px;
-      text-align: center;
-      color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: 14px;
-    }
-
-    .empty-state strong {
-      display: block;
-      color: var(--white);
-      margin-bottom: 5px;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    #toastContainer {
-      position: fixed;
-      z-index: 999;
-      right: 20px;
-      bottom: 20px;
       display: grid;
-      gap: 10px;
-      width: min(360px, calc(100% - 40px));
+      place-items: center;
+
+      border: none;
+      border-radius: 9px;
+
+      color: var(--muted);
+
+      background:
+        rgba(255,255,255,.05);
     }
+
+    .form-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+      gap: 12px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      color: #f4d6e2;
+
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .form-field input,
+    .form-field select {
+      width: 100%;
+
+      padding: 11px;
+
+      color: white;
+
+      outline: none;
+
+      border:
+        1px solid rgba(255,255,255,.08);
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,.04);
+
+      font-size: 10px;
+    }
+
+    .form-field select option {
+      color: white;
+      background: #260d1b;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 7px;
+
+      margin-top: 18px;
+    }
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
 
     .toast {
-      padding: 14px 16px;
-      border: 1px solid var(--border);
+      position: fixed;
+
+      right: 20px;
+      bottom: 20px;
+
+      z-index: 1000;
+
+      max-width: 340px;
+
+      padding: 13px 16px;
+
       border-radius: 13px;
-      background: #211017;
-      box-shadow: var(--shadow);
-      animation: toastIn .25s ease;
-      font-size: 13px;
+
+      color: white;
+
+      background:
+        #311021;
+
+      border:
+        1px solid var(--border);
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
+
+      font-size: 10px;
+
+      opacity: 0;
+      transform: translateY(10px);
+
+      pointer-events: none;
+
+      transition: .25s;
     }
 
-    @keyframes toastIn {
-      from {
-        opacity: 0;
-        transform: translateX(15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
 
     @media (max-width: 900px) {
-      .sidebar {
-        width: 205px;
-      }
-
-      .admin-main {
-        width: calc(100% - 205px);
-        margin-left: 205px;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 700px) {
-      .admin-layout {
-        display: block;
-      }
 
       .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        min-height: auto;
+        width: 70px;
+        padding: 16px 8px;
       }
 
-      .side-menu {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+      .nav-title,
+      .nav button span:not(.nav-icon),
+      .notification {
+        display: none;
       }
 
-      .sidebar-bottom {
-        margin-top: 15px;
+      .nav button {
+        justify-content: center;
       }
 
-      .admin-main {
-        width: 100%;
-        margin-left: 0;
-        padding: 16px;
+      .main {
+        padding: 20px;
       }
 
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .stats {
+        grid-template-columns:
+          repeat(2, minmax(0,1fr));
       }
 
-      .request-info,
-      .vacancy-info,
-      .member-info {
-        grid-template-columns: 1fr;
-      }
-
-      .chat-form {
-        flex-direction: column;
-      }
     }
 
-    @media (max-width: 450px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 650px) {
+
+      .topbar {
+        padding: 0 13px;
       }
 
-      .side-menu {
-        grid-template-columns: 1fr;
+      .brand-text {
+        display: none;
       }
 
-      .admin-topbar {
+      .online-status {
+        display: none;
+      }
+
+      .main {
+        padding: 15px;
+      }
+
+      .page-header {
         align-items: flex-start;
         flex-direction: column;
       }
 
-      .button-group {
-        width: 100%;
+      .stats {
+        grid-template-columns: 1fr 1fr;
       }
+
+      .request-card {
+        grid-template-columns:
+          52px minmax(0,1fr);
+      }
+
+      .request-photo {
+        width: 52px;
+        height: 52px;
+      }
+
+      .request-actions {
+        grid-column: 1 / -1;
+        justify-content: stretch;
+      }
+
+      .request-actions .btn {
+        flex: 1;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-field.full {
+        grid-column: auto;
+      }
+
     }
+
   </style>
 </head>
 
 <body>
 
-  <!-- =========================
-       LOGIN
-  ========================= -->
+  <!-- =====================================================
+       TOPBAR
+  ===================================================== -->
 
-  <section id="loginScreen">
+  <header class="topbar">
 
-    <div class="login-card">
+    <div class="brand">
 
-      <div class="login-logo">
+      <div class="brand-logo">
         W
       </div>
 
-      <h1>House WIE</h1>
-
-      <p>
-        Painel administrativo da House.
-        Entre com seu código de administração.
-      </p>
-
-      <div class="field">
-        <label for="adminCode">Código de acesso</label>
-
-        <input
-          id="adminCode"
-          type="password"
-          placeholder="Digite seu código"
-          autocomplete="off"
-        >
+      <div class="brand-text">
+        <strong>House WIE</strong>
+        <span>Painel administrativo</span>
       </div>
-
-      <button
-        class="button primary full"
-        id="loginButton"
-      >
-        Entrar na administração
-      </button>
-
-      <p
-        id="loginError"
-        class="hidden"
-        style="color:#e85b68;margin-top:15px;margin-bottom:0;"
-      >
-        Código de acesso inválido.
-      </p>
 
     </div>
 
-  </section>
+    <div class="top-right">
+
+      <div class="online-status">
+        <span class="online-dot"></span>
+        Sistema online
+      </div>
+
+      <a
+        href="index.html"
+        class="site-button"
+      >
+        Ver recepção
+      </a>
+
+    </div>
+
+  </header>
 
 
-  <!-- =========================
-       ADMIN APP
-  ========================= -->
+  <!-- =====================================================
+       LAYOUT
+  ===================================================== -->
 
-  <section id="adminApp" class="hidden">
+  <div class="layout">
 
-    <div class="admin-layout">
+    <!-- SIDEBAR -->
 
-      <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-      <aside class="sidebar">
+      <div class="nav-title">
+        Painel
+      </div>
 
-        <div class="brand">
+      <nav class="nav">
 
-          <div class="brand-icon">
-            W
-          </div>
+        <button
+          class="active"
+          data-page="home"
+        >
+          <span class="nav-icon">⌂</span>
+          <span>Início</span>
+        </button>
+
+        <button
+          data-page="requests"
+          id="requestsNav"
+        >
+          <span class="nav-icon">✦</span>
+          <span>Solicitações</span>
+          <b
+            class="notification"
+            id="requestBadge"
+          ></b>
+        </button>
+
+        <button
+          data-page="vacancies"
+        >
+          <span class="nav-icon">♢</span>
+          <span>Vagas</span>
+        </button>
+
+        <button
+          data-page="members"
+        >
+          <span class="nav-icon">♧</span>
+          <span>Membros</span>
+        </button>
+
+        <button
+          data-page="chat"
+        >
+          <span class="nav-icon">♡</span>
+          <span>Chat ADM</span>
+        </button>
+
+        <button
+          data-page="logs"
+        >
+          <span class="nav-icon">☷</span>
+          <span>Logs</span>
+        </button>
+
+      </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+      <!-- =================================================
+           HOME
+      ================================================= -->
+
+      <section
+        class="page active"
+        id="page-home"
+      >
+
+        <div class="page-header">
 
           <div>
-            <strong>House WIE</strong>
-            <small>Administração</small>
+            <h1>Olá, administração. ♡</h1>
+
+            <p>
+              Gerencie a House WIE por aqui.
+            </p>
           </div>
+
+          <button
+            class="btn btn-primary"
+            onclick="openPage('requests')"
+          >
+            Ver solicitações
+          </button>
 
         </div>
 
 
-        <nav class="side-menu">
+        <div class="stats">
 
-          <button
-            class="side-link active"
-            data-section="dashboard"
-          >
-            ◈ Dashboard
-          </button>
+          <div class="stat">
 
-          <button
-            class="side-link"
-            data-section="requests"
-          >
-            ◇ Solicitações
-          </button>
+            <div class="stat-top">
+              Solicitações
+              <span class="stat-icon">✦</span>
+            </div>
 
-          <button
-            class="side-link"
-            data-section="vacancies"
-          >
-            ♢ Vagas
-          </button>
-
-          <button
-            class="side-link"
-            data-section="members"
-          >
-            ♧ Membros
-          </button>
-
-          <button
-            class="side-link"
-            data-section="chat"
-          >
-            ◌ Chat ADM
-          </button>
-
-          <button
-            class="side-link"
-            data-section="logs"
-          >
-            ◍ Registros
-          </button>
-
-        </nav>
-
-
-        <div class="sidebar-bottom">
-
-          <div class="logged-user">
-
-            <strong id="loggedAdminName">
-              Administração
+            <strong
+              class="stat-number"
+              id="statRequests"
+            >
+              0
             </strong>
 
-            <span id="loggedAdminRole">
-              Admin
-            </span>
+          </div>
+
+
+          <div class="stat">
+
+            <div class="stat-top">
+              Vagas abertas
+              <span class="stat-icon">◇</span>
+            </div>
+
+            <strong
+              class="stat-number"
+              id="statOpen"
+            >
+              0
+            </strong>
 
           </div>
 
-          <button
-            class="button danger full"
-            id="logoutButton"
-          >
-            Sair
-          </button>
+
+          <div class="stat">
+
+            <div class="stat-top">
+              Vagas fechadas
+              <span class="stat-icon">◆</span>
+            </div>
+
+            <strong
+              class="stat-number"
+              id="statClosed"
+            >
+              0
+            </strong>
+
+          </div>
+
+
+          <div class="stat">
+
+            <div class="stat-top">
+              Membros
+              <span class="stat-icon">♧</span>
+            </div>
+
+            <strong
+              class="stat-number"
+              id="statMembers"
+            >
+              8
+            </strong>
+
+          </div>
 
         </div>
 
-      </aside>
 
+        <div class="panel">
 
-      <!-- MAIN -->
+          <div class="panel-header">
 
-      <main class="admin-main">
+            <div>
+              <h2>Solicitações recentes</h2>
 
-        <header class="admin-topbar">
-
-          <div>
-
-            <h1 id="pageTitle">
-              Dashboard
-            </h1>
-
-            <p id="pageDescription">
-              Visão geral da House WIE.
-            </p>
-
-          </div>
-
-          <div class="button-group">
+              <p>
+                Fichas aguardando análise.
+              </p>
+            </div>
 
             <button
-              class="button secondary small"
-              onclick="loadAllData()"
+              class="btn"
+              onclick="openPage('requests')"
             >
-              ↻ Atualizar
+              Ver todas
             </button>
 
           </div>
 
-        </header>
+          <div
+            class="request-list"
+            id="homeRequests"
+          ></div>
+
+        </div>
 
 
-        <!-- =========================
-             DASHBOARD
-        ========================= -->
+      </section>
 
-        <section
-          id="dashboard"
-          class="admin-section active"
-        >
 
-          <div class="stats-grid">
+      <!-- =================================================
+           REQUESTS
+      ================================================= -->
 
-            <div class="stat-card">
-              <span>Solicitações</span>
-              <strong id="statRequests">0</strong>
-            </div>
+      <section
+        class="page"
+        id="page-requests"
+      >
 
-            <div class="stat-card">
-              <span>Vagas abertas</span>
-              <strong id="statOpen">0</strong>
-            </div>
+        <div class="page-header">
 
-            <div class="stat-card">
-              <span>Vagas fechadas</span>
-              <strong id="statClosed">0</strong>
-            </div>
+          <div>
+            <h1>Solicitações</h1>
 
-            <div class="stat-card">
-              <span>Membros</span>
-              <strong id="statMembers">0</strong>
-            </div>
-
+            <p>
+              Analise as fichas recebidas pela recepção.
+            </p>
           </div>
 
+          <button
+            class="btn"
+            onclick="loadRequests()"
+          >
+            Atualizar
+          </button>
 
-          <div class="panel-card">
-
-            <div class="panel-title">
-
-              <div>
-                <h2>Solicitações recentes</h2>
-                <span>Últimas fichas recebidas</span>
-              </div>
-
-            </div>
-
-            <div
-              id="dashboardRequests"
-              class="request-list"
-            ></div>
-
-          </div>
+        </div>
 
 
-          <div class="panel-card">
+        <div class="panel">
 
-            <div class="panel-title">
+          <div class="toolbar">
 
-              <div>
-                <h2>Vagas da House</h2>
-                <span>Personagens cadastrados</span>
-              </div>
-
-            </div>
-
-            <div
-              id="dashboardVacancies"
-              class="vacancy-list"
-            ></div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =========================
-             REQUESTS
-        ========================= -->
-
-        <section
-          id="requests"
-          class="admin-section"
-        >
-
-          <div class="panel-card">
-
-            <div class="panel-title">
-
-              <div>
-                <h2>Solicitações</h2>
-                <span>Gerencie as fichas recebidas pela recepção.</span>
-              </div>
-
-              <button
-                class="button secondary small"
-                onclick="loadRequests()"
-              >
-                Atualizar
-              </button>
-
-            </div>
-
-            <div
-              id="requestsList"
-              class="request-list"
-            ></div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =========================
-             VACANCIES
-        ========================= -->
-
-        <section
-          id="vacancies"
-          class="admin-section"
-        >
-
-          <div class="panel-card">
-
-            <div class="panel-title">
-
-              <div>
-                <h2>Vagas</h2>
-                <span>Controle todos os personagens da House.</span>
-              </div>
-
-              <button
-                class="button primary small"
-                onclick="openVacancyModal()"
-              >
-                + Adicionar vaga
-              </button>
-
-            </div>
-
-            <div
-              id="vacanciesList"
-              class="vacancy-list"
-            ></div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =========================
-             MEMBERS
-        ========================= -->
-
-        <section
-          id="members"
-          class="admin-section"
-        >
-
-          <div class="panel-card">
-
-            <div class="panel-title">
-
-              <div>
-                <h2>Membros</h2>
-                <span>Membros atualmente registrados.</span>
-              </div>
-
-            </div>
-
-            <div
-              id="membersList"
-              class="member-list"
-            ></div>
-
-          </div>
-
-
-          <!-- MEMBROS FIXOS -->
-
-          <div class="panel-card">
-
-            <div class="panel-title">
-
-              <div>
-                <h2>Personagens cadastrados</h2>
-                <span>
-                  Lista inicial da House WIE.
-                </span>
-              </div>
-
-            </div>
-
-            <div
-              id="fixedMembersList"
-              class="member-list"
-            ></div>
-
-          </div>
-
-        </section>
-
-
-        <!-- =========================
-             CHAT
-        ========================= -->
-
-        <section
-          id="chat"
-          class="admin-section"
-        >
-
-          <div class="panel-card chat-card">
-
-            <div class="panel-title">
-
-              <div>
-                <h2>Chat da Administração</h2>
-                <span>Comunicação interna entre administradores.</span>
-              </div>
-
-            </div>
-
-            <div
-              id="chatMessages"
-              class="chat-messages"
-            ></div>
-
-            <form
-              id="chatForm"
-              class="chat-form"
+            <input
+              class="search"
+              id="requestSearch"
+              placeholder="Pesquisar personagem, obra, usuário..."
+              oninput="renderRequests()"
             >
 
-              <input
-                id="chatInput"
-                type="text"
-                placeholder="Digite uma mensagem..."
-                autocomplete="off"
-                required
-              >
+          </div>
 
-              <button
-                class="button primary"
-                type="submit"
-              >
-                Enviar
-              </button>
+          <div
+            class="request-list"
+            id="requestList"
+          ></div>
 
-            </form>
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           VACANCIES
+      ================================================= -->
+
+      <section
+        class="page"
+        id="page-vacancies"
+      >
+
+        <div class="page-header">
+
+          <div>
+            <h1>Vagas</h1>
+
+            <p>
+              Controle personagens ocupados e disponíveis.
+            </p>
+          </div>
+
+          <button
+            class="btn btn-primary"
+            onclick="openVacancyModal()"
+          >
+            + Nova vaga
+          </button>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="toolbar">
+
+            <input
+              class="search"
+              id="vacancySearch"
+              placeholder="Pesquisar personagem ou obra..."
+              oninput="renderVacancies()"
+            >
 
           </div>
 
-        </section>
+
+          <div
+            class="vacancy-grid"
+            id="vacancyGrid"
+          ></div>
+
+        </div>
+
+      </section>
 
 
-        <!-- =========================
-             LOGS
-        ========================= -->
+      <!-- =================================================
+           MEMBERS
+      ================================================= -->
 
-        <section
-          id="logs"
-          class="admin-section"
-        >
+      <section
+        class="page"
+        id="page-members"
+      >
 
-          <div class="panel-card">
+        <div class="page-header">
 
-            <div class="panel-title">
+          <div>
+            <h1>Membros</h1>
 
-              <div>
-                <h2>Registros</h2>
-                <span>Histórico das ações administrativas.</span>
-              </div>
+            <p>
+              Membros atuais da House WIE.
+            </p>
+          </div>
 
-            </div>
+          <button
+            class="btn"
+            onclick="loadMembers()"
+          >
+            Atualizar
+          </button>
 
-            <div
-              id="logsList"
-              class="log-list"
-            ></div>
+        </div>
+
+
+        <div class="panel">
+
+          <div class="toolbar">
+
+            <input
+              class="search"
+              id="memberSearch"
+              placeholder="Pesquisar membro ou personagem..."
+              oninput="renderMembers()"
+            >
 
           </div>
 
-        </section>
 
-      </main>
+          <div
+            class="member-grid"
+            id="memberGrid"
+          ></div>
 
-    </div>
+        </div>
 
-  </section>
+      </section>
 
 
-  <!-- =========================
-       MODAL VAGA
-  ========================= -->
+      <!-- =================================================
+           CHAT
+      ================================================= -->
+
+      <section
+        class="page"
+        id="page-chat"
+      >
+
+        <div class="page-header">
+
+          <div>
+            <h1>Chat ADM</h1>
+
+            <p>
+              Espaço interno para comunicação da administração.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="panel chat">
+
+          <div
+            class="chat-messages"
+            id="chatMessages"
+          ></div>
+
+
+          <form
+            class="chat-form"
+            id="chatForm"
+          >
+
+            <input
+              id="chatInput"
+              type="text"
+              maxlength="500"
+              placeholder="Digite uma mensagem..."
+              autocomplete="off"
+              required
+            >
+
+            <button
+              class="btn btn-primary"
+              type="submit"
+            >
+              Enviar
+            </button>
+
+          </form>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           LOGS
+      ================================================= -->
+
+      <section
+        class="page"
+        id="page-logs"
+      >
+
+        <div class="page-header">
+
+          <div>
+            <h1>Logs</h1>
+
+            <p>
+              Histórico de ações realizadas no painel.
+            </p>
+          </div>
+
+          <button
+            class="btn"
+            onclick="loadLogs()"
+          >
+            Atualizar
+          </button>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div
+            class="log-list"
+            id="logList"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       VACANCY MODAL
+  ===================================================== -->
 
   <div
-    id="vacancyModal"
     class="modal"
+    id="vacancyModal"
   >
 
-    <div class="modal-box">
+    <div class="modal-card">
 
       <div class="modal-header">
 
         <h2 id="vacancyModalTitle">
-          Adicionar vaga
+          Nova vaga
         </h2>
 
         <button
-          class="close-modal"
+          class="close"
           onclick="closeVacancyModal()"
         >
           ×
@@ -1360,99 +1900,92 @@
 
       <form id="vacancyForm">
 
-        <input
-          id="vacancyId"
-          type="hidden"
-        >
+        <div class="form-grid">
 
-        <div class="field">
+          <div class="form-field">
 
-          <label>
-            Personagem
-          </label>
+            <label>
+              Personagem
+            </label>
 
-          <input
-            id="vacancyCharacter"
-            type="text"
-            required
-            placeholder="Ex.: Gojo"
-          >
+            <input
+              id="vacancyCharacter"
+              required
+            >
 
-        </div>
+          </div>
 
 
-        <div class="field">
+          <div class="form-field">
 
-          <label>
-            Obra / Fandom
-          </label>
+            <label>
+              Obra
+            </label>
 
-          <input
-            id="vacancyWork"
-            type="text"
-            required
-            placeholder="Ex.: Jujutsu Kaisen"
-          >
+            <input
+              id="vacancyWork"
+              required
+            >
 
-        </div>
+          </div>
 
 
-        <div class="field">
+          <div class="form-field">
 
-          <label>
-            Usuário
-          </label>
+            <label>
+              Usuário
+            </label>
 
-          <input
-            id="vacancyUsername"
-            type="text"
-            placeholder="Usuário do membro"
-          >
+            <input
+              id="vacancyUsername"
+              placeholder="@usuario"
+            >
 
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Foto do personagem
-          </label>
-
-          <input
-            id="vacancyPhoto"
-            type="url"
-            placeholder="https://..."
-          >
-
-        </div>
+          </div>
 
 
-        <div class="field">
+          <div class="form-field">
 
-          <label>
-            Status
-          </label>
+            <label>
+              Status
+            </label>
 
-          <select id="vacancyStatus">
+            <select id="vacancyStatus">
 
-            <option value="aberta">
-              Vaga aberta
-            </option>
+              <option value="aberta">
+                Aberta
+              </option>
 
-            <option value="fechada">
-              Vaga fechada
-            </option>
+              <option value="fechada">
+                Fechada
+              </option>
 
-          </select>
+            </select>
+
+          </div>
+
+
+          <div class="form-field full">
+
+            <label>
+              URL da foto
+            </label>
+
+            <input
+              id="vacancyPhoto"
+              placeholder="https://..."
+            >
+
+          </div>
 
         </div>
 
 
-        <div class="button-group">
+        <div class="modal-actions">
 
           <button
             type="button"
-            class="button secondary"
+            class="btn"
             onclick="closeVacancyModal()"
           >
             Cancelar
@@ -1460,7 +1993,7 @@
 
           <button
             type="submit"
-            class="button primary"
+            class="btn btn-primary"
           >
             Salvar vaga
           </button>
@@ -1474,41 +2007,84 @@
   </div>
 
 
-  <div id="toastContainer"></div>
+  <!-- =====================================================
+       REQUEST DETAILS MODAL
+  ===================================================== -->
+
+  <div
+    class="modal"
+    id="requestModal"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-header">
+
+        <h2>
+          Detalhes da ficha
+        </h2>
+
+        <button
+          class="close"
+          onclick="closeRequestModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div id="requestDetails"></div>
+
+    </div>
+
+  </div>
 
 
-  <!-- =========================
+  <!-- TOAST -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <!-- =====================================================
        FIREBASE
-  ========================= -->
+  ===================================================== -->
 
   <script type="module">
 
     import {
       initializeApp
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
 
     import {
       getFirestore,
       collection,
+      addDoc,
       getDocs,
       getDoc,
-      addDoc,
+      doc,
       updateDoc,
       deleteDoc,
-      doc,
       query,
+      where,
       orderBy,
       serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
     /* =====================================================
-       CONFIGURAÇÃO FIREBASE
+       FIREBASE — HOUSE WIE
     ===================================================== */
 
     const firebaseConfig = {
 
-      apiKey: "COLOQUE_SUA_API_KEY",
+      apiKey:
+        "AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
 
       authDomain:
         "house-wie-6c8f9.firebaseapp.com",
@@ -1517,47 +2093,46 @@
         "house-wie-6c8f9",
 
       storageBucket:
-        "COLOQUE_SEU_STORAGE_BUCKET",
+        "house-wie-6c8f9.firebasestorage.app",
 
       messagingSenderId:
-        "COLOQUE_SEU_MESSAGING_SENDER_ID",
+        "241202380170",
 
       appId:
-        "COLOQUE_SEU_APP_ID"
+        "1:241202380170:web:b7df00f3faa8ae7afedc73"
 
     };
 
 
-    const app = initializeApp(firebaseConfig);
+    const app =
+      initializeApp(firebaseConfig);
 
-    const db = getFirestore(app);
+
+    const db =
+      getFirestore(app);
 
 
     /* =====================================================
-       ADMINISTRADORES
-       
-       COLOQUE AQUI OS CÓDIGOS REAIS DO WIE.
-       
-       NÃO USE OS CÓDIGOS DA LTD.
+       CLOUDINARY
     ===================================================== */
 
-    const ADMINS = {
+    const CLOUDINARY_CLOUD_NAME =
+      "fpas1zce";
 
-      /*
-      Exemplo:
-
-      "Aiko": {
-        code: "SEU_CODIGO",
-        role: "Dono"
-      },
-
-      */
-
-    };
+    const CLOUDINARY_UPLOAD_PRESET =
+      "House WIE";
 
 
     /* =====================================================
-       PERSONAGENS / MEMBROS INICIAIS DA HOUSE WIE
+       ADMIN ATUAL
+    ===================================================== */
+
+    const CURRENT_ADMIN =
+      "Administração WIE";
+
+
+    /* =====================================================
+       MEMBROS JÁ EXISTENTES
     ===================================================== */
 
     const FIXED_MEMBERS = [
@@ -1609,638 +2184,222 @@
        ESTADO
     ===================================================== */
 
-    let currentAdmin = null;
+    let requests = [];
 
-    let allRequests = [];
-    let allVacancies = [];
-    let allMembers = [];
-    let allLogs = [];
-    let allChat = [];
+    let vacancies = [];
 
+    let members = [];
 
-    /* =====================================================
-       ELEMENTOS
-    ===================================================== */
+    let chatMessages = [];
 
-    const loginScreen =
-      document.getElementById("loginScreen");
+    let logs = [];
 
-    const adminApp =
-      document.getElementById("adminApp");
-
-    const adminCode =
-      document.getElementById("adminCode");
-
-    const loginButton =
-      document.getElementById("loginButton");
-
-    const loginError =
-      document.getElementById("loginError");
+    let editingVacancyId = null;
 
 
     /* =====================================================
-       LOGIN
+       HELPERS
     ===================================================== */
 
-    loginButton.addEventListener("click", login);
+    function escapeHTML(value) {
 
-    adminCode.addEventListener("keydown", event => {
-
-      if (event.key === "Enter") {
-        login();
+      if (value === null || value === undefined) {
+        return "";
       }
 
-    });
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
 
 
-    function login() {
+    function getDate(value) {
 
-      const code =
-        adminCode.value.trim();
-
-      if (!code) {
-        showLoginError();
-        return;
+      if (!value) {
+        return "—";
       }
 
+      try {
 
-      let foundAdmin = null;
+        const date =
+          value.toDate
+            ? value.toDate()
+            : new Date(value);
 
+        return date.toLocaleString(
+          "pt-BR",
+          {
+            dateStyle: "short",
+            timeStyle: "short"
+          }
+        );
 
-      for (const [name, data] of Object.entries(ADMINS)) {
+      } catch {
 
-        if (data.code === code) {
-
-          foundAdmin = {
-            name,
-            role: data.role,
-            code
-          };
-
-          break;
-
-        }
-
-      }
-
-
-      if (!foundAdmin) {
-
-        showLoginError();
-
-        return;
+        return "—";
 
       }
-
-
-      currentAdmin = foundAdmin;
-
-      sessionStorage.setItem(
-        "wieAdmin",
-        JSON.stringify(foundAdmin)
-      );
-
-
-      loginScreen.classList.add("hidden");
-
-      adminApp.classList.remove("hidden");
-
-
-      document.getElementById(
-        "loggedAdminName"
-      ).textContent = foundAdmin.name;
-
-
-      document.getElementById(
-        "loggedAdminRole"
-      ).textContent = foundAdmin.role;
-
-
-      loadAllData();
-
-      registerLog(
-        "login",
-        `Administrador ${foundAdmin.name} entrou no painel.`
-      );
 
     }
 
 
-    function showLoginError() {
+    function toast(message) {
 
-      loginError.classList.remove("hidden");
+      const element =
+        document.getElementById("toast");
+
+      element.textContent =
+        message;
+
+      element.classList.add("show");
 
       setTimeout(() => {
 
-        loginError.classList.add("hidden");
+        element.classList.remove("show");
 
       }, 3000);
 
     }
 
 
-    function restoreSession() {
+    function imageOrPlaceholder(url) {
 
-      const saved =
-        sessionStorage.getItem("wieAdmin");
-
-      if (!saved) return;
-
-
-      try {
-
-        currentAdmin =
-          JSON.parse(saved);
-
-
-        loginScreen.classList.add("hidden");
-
-        adminApp.classList.remove("hidden");
-
-
-        document.getElementById(
-          "loggedAdminName"
-        ).textContent =
-          currentAdmin.name;
-
-
-        document.getElementById(
-          "loggedAdminRole"
-        ).textContent =
-          currentAdmin.role;
-
-
-        loadAllData();
-
+      if (url) {
+        return escapeHTML(url);
       }
 
-      catch {
-
-        sessionStorage.removeItem("wieAdmin");
-
-      }
-
+      return "https://placehold.co/400x500/220b18/ff8fbd?text=WIE";
     }
-
-
-    document
-      .getElementById("logoutButton")
-      .addEventListener("click", () => {
-
-        sessionStorage.removeItem("wieAdmin");
-
-        currentAdmin = null;
-
-        adminApp.classList.add("hidden");
-
-        loginScreen.classList.remove("hidden");
-
-        adminCode.value = "";
-
-      });
 
 
     /* =====================================================
        NAVEGAÇÃO
     ===================================================== */
 
-    const sectionTitles = {
-
-      dashboard: [
-        "Dashboard",
-        "Visão geral da House WIE."
-      ],
-
-      requests: [
-        "Solicitações",
-        "Gerencie as fichas recebidas pela recepção."
-      ],
-
-      vacancies: [
-        "Vagas",
-        "Controle os personagens da House."
-      ],
-
-      members: [
-        "Membros",
-        "Membros registrados na House WIE."
-      ],
-
-      chat: [
-        "Chat ADM",
-        "Comunicação interna da administração."
-      ],
-
-      logs: [
-        "Registros",
-        "Histórico das ações administrativas."
-      ]
-
-    };
-
-
     document
-      .querySelectorAll(".side-link")
+      .querySelectorAll(".nav button")
       .forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener(
+          "click",
+          () => {
 
-          const section =
-            button.dataset.section;
-
-
-          document
-            .querySelectorAll(".side-link")
-            .forEach(item =>
-              item.classList.remove("active")
+            openPage(
+              button.dataset.page
             );
 
-
-          button.classList.add("active");
-
-
-          document
-            .querySelectorAll(".admin-section")
-            .forEach(item =>
-              item.classList.remove("active")
-            );
-
-
-          document
-            .getElementById(section)
-            .classList.add("active");
-
-
-          document.getElementById(
-            "pageTitle"
-          ).textContent =
-            sectionTitles[section][0];
-
-
-          document.getElementById(
-            "pageDescription"
-          ).textContent =
-            sectionTitles[section][1];
-
-        });
+          }
+        );
 
       });
 
 
-    /* =====================================================
-       CARREGAR TUDO
-    ===================================================== */
+    window.openPage =
+      function(page) {
 
-    window.loadAllData = async function() {
+        document
+          .querySelectorAll(".nav button")
+          .forEach(button => {
 
-      try {
+            button.classList.toggle(
+              "active",
+              button.dataset.page === page
+            );
 
-        await Promise.all([
+          });
 
-          loadRequests(),
 
-          loadVacancies(),
+        document
+          .querySelectorAll(".page")
+          .forEach(section => {
 
-          loadMembers(),
+            section.classList.toggle(
+              "active",
+              section.id ===
+                "page-" + page
+            );
 
-          loadChat(),
+          });
 
-          loadLogs()
 
-        ]);
+        if (page === "requests") {
+          renderRequests();
+        }
 
+        if (page === "vacancies") {
+          renderVacancies();
+        }
 
-        updateStats();
+        if (page === "members") {
+          renderMembers();
+        }
 
-        renderDashboard();
+        if (page === "chat") {
+          loadChat();
+        }
 
-        renderFixedMembers();
+        if (page === "logs") {
+          loadLogs();
+        }
 
-      }
-
-      catch (error) {
-
-        console.error(error);
-
-        toast(
-          "Erro ao carregar os dados do Firebase.",
-          "error"
-        );
-
-      }
-
-    };
-
-
-    /* =====================================================
-       REQUESTS
-    ===================================================== */
-
-    async function loadRequests() {
-
-      try {
-
-        const snapshot =
-          await getDocs(
-            collection(db, "requests")
-          );
-
-
-        allRequests =
-          snapshot.docs.map(item => ({
-
-            id: item.id,
-
-            ...item.data()
-
-          }));
-
-
-        allRequests.sort(
-          (a, b) =>
-            getTime(b.createdAt) -
-            getTime(a.createdAt)
-        );
-
-
-        renderRequests();
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Erro requests:",
-          error
-        );
-
-        allRequests = [];
-
-        renderRequests();
-
-      }
-
-    }
-
-
-    function renderRequests() {
-
-      const container =
-        document.getElementById(
-          "requestsList"
-        );
-
-
-      const dashboardContainer =
-        document.getElementById(
-          "dashboardRequests"
-        );
-
-
-      const pending =
-        allRequests.filter(
-          request =>
-            !request.status ||
-            request.status === "pendente"
-        );
-
-
-      if (!pending.length) {
-
-        container.innerHTML =
-          emptyState(
-            "Nenhuma solicitação pendente.",
-            "Quando uma ficha chegar, ela aparecerá aqui."
-          );
-
-        dashboardContainer.innerHTML =
-          emptyState(
-            "Tudo tranquilo por aqui.",
-            "Não existem solicitações pendentes."
-          );
-
-        return;
-
-      }
-
-
-      container.innerHTML =
-        pending
-          .map(request =>
-            requestCard(request)
-          )
-          .join("");
-
-
-      dashboardContainer.innerHTML =
-        pending
-          .slice(0, 4)
-          .map(request =>
-            requestCard(request)
-          )
-          .join("");
-
-    }
-
-
-    function requestCard(request) {
-
-      const isExchange =
-        request.type === "troca";
-
-
-      const character =
-        isExchange
-          ? request.newCharacter
-          : request.character;
-
-
-      const work =
-        isExchange
-          ? request.newWork
-          : request.work;
-
-
-      return `
-
-        <div class="request-card">
-
-          <div class="request-head">
-
-            <div>
-
-              <h3>
-                ${escapeHTML(character || "Personagem")}
-              </h3>
-
-              <div class="muted">
-                ${escapeHTML(work || "Obra não informada")}
-              </div>
-
-            </div>
-
-            <span class="status pending">
-              PENDENTE
-            </span>
-
-          </div>
-
-
-          <div class="request-info">
-
-            <div class="info-item">
-              Nome:
-              <strong>
-                ${escapeHTML(request.name || "Não informado")}
-              </strong>
-            </div>
-
-            <div class="info-item">
-              Idade:
-              <strong>
-                ${escapeHTML(String(request.age || "—"))}
-              </strong>
-            </div>
-
-            <div class="info-item">
-              Usuário / últimos dígitos:
-              <strong>
-                ${escapeHTML(request.phoneLast4 || "—")}
-              </strong>
-            </div>
-
-            <div class="info-item">
-              Tipo:
-              <strong>
-                ${isExchange ? "Troca" : "Nova ficha"}
-              </strong>
-            </div>
-
-          </div>
-
-
-          ${
-            isExchange
-              ? `
-                <div class="info-item" style="margin-bottom:12px;">
-                  Personagem anterior:
-                  <strong>
-                    ${escapeHTML(request.oldCharacter || "—")}
-                  </strong>
-                  ·
-                  ${escapeHTML(request.oldWork || "—")}
-                </div>
-              `
-              : ""
-          }
-
-
-          ${
-            request.photo
-              ? `
-                <div style="margin-bottom:12px;">
-                  <img
-                    src="${escapeAttribute(request.photo)}"
-                    class="character-image"
-                    alt="Foto do personagem"
-                  >
-                </div>
-              `
-              : ""
-          }
-
-
-          <div class="button-group">
-
-            <button
-              class="button success small"
-              onclick="approveRequest('${request.id}')"
-            >
-              ✓ Aprovar
-            </button>
-
-            <button
-              class="button danger small"
-              onclick="rejectRequest('${request.id}')"
-            >
-              × Recusar
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }
+      };
 
 
     /* =====================================================
-       APROVAR REQUEST
+       LOAD REQUESTS
     ===================================================== */
 
-    window.approveRequest =
-      async function(requestId) {
-
-        const request =
-          allRequests.find(
-            item => item.id === requestId
-          );
-
-
-        if (!request) return;
-
+    window.loadRequests =
+      async function() {
 
         try {
 
-          if (request.type === "troca") {
-
-            await processExchange(request);
-
-          }
-
-          else {
-
-            await processNewMember(request);
-
-          }
+          const snapshot =
+            await getDocs(
+              collection(
+                db,
+                "requests"
+              )
+            );
 
 
-          await updateDoc(
-            doc(db, "requests", requestId),
-            {
-              status: "aprovada",
-              approvedBy:
-                currentAdmin?.name || "Admin",
-              approvedAt:
-                serverTimestamp()
+          requests =
+            snapshot.docs.map(
+              item => ({
+                id: item.id,
+                ...item.data()
+              })
+            );
+
+
+          requests.sort(
+            (a, b) => {
+
+              const dateA =
+                a.createdAt?.seconds || 0;
+
+              const dateB =
+                b.createdAt?.seconds || 0;
+
+              return dateB - dateA;
+
             }
           );
 
 
-          await registerLog(
-            "approve_request",
-            `Solicitação de ${request.name || "membro"} aprovada.`
-          );
+          renderRequests();
 
+          updateStats();
 
-          toast(
-            "Solicitação aprovada!",
-            "success"
-          );
-
-
-          await loadAllData();
-
-        }
-
-        catch (error) {
+        } catch (error) {
 
           console.error(error);
 
           toast(
-            "Não foi possível aprovar a solicitação.",
-            "error"
+            "Erro ao carregar solicitações."
           );
 
         }
@@ -2248,231 +2407,749 @@
       };
 
 
-    async function processNewMember(request) {
+    /* =====================================================
+       RENDER REQUESTS
+    ===================================================== */
 
-      const existing =
-        allVacancies.find(
-          vacancy =>
-            normalize(vacancy.character) ===
-              normalize(request.character) &&
-            normalize(vacancy.work) ===
-              normalize(request.work) &&
-            vacancy.status === "fechada"
-        );
+    window.renderRequests =
+      function() {
 
+        const container =
+          document.getElementById(
+            "requestList"
+          );
 
-      if (existing) {
+        const homeContainer =
+          document.getElementById(
+            "homeRequests"
+          );
 
-        throw new Error(
-          "Essa vaga já está fechada."
-        );
-
-      }
-
-
-      await addDoc(
-        collection(db, "vacancies"),
-        {
-
-          character:
-            request.character || "",
-
-          work:
-            request.work || "",
-
-          username:
-            request.username || "",
-
-          photo:
-            request.photo || "",
-
-          status:
-            "fechada",
-
-          memberName:
-            request.name || "",
-
-          phoneLast4:
-            request.phoneLast4 || "",
-
-          createdAt:
-            serverTimestamp(),
-
-          updatedAt:
-            serverTimestamp()
-
-        }
-      );
+        const search =
+          (
+            document.getElementById(
+              "requestSearch"
+            )?.value || ""
+          )
+          .toLowerCase()
+          .trim();
 
 
-      await addDoc(
-        collection(db, "members"),
-        {
+        const pending =
+          requests.filter(
+            item =>
+              item.status === "pendente"
+          );
 
-          name:
-            request.name || "",
 
-          age:
-            request.age || "",
+        const filtered =
+          pending.filter(item => {
 
-          phoneLast4:
-            request.phoneLast4 || "",
+            const text = [
 
-          character:
-            request.character || "",
+              item.name,
+              item.username,
+              item.character,
+              item.work,
+              item.gender
 
-          work:
-            request.work || "",
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
 
-          username:
-            request.username || "",
+            return text.includes(search);
 
-          photo:
-            request.photo || "",
+          });
 
-          createdAt:
-            serverTimestamp(),
 
-          updatedAt:
-            serverTimestamp()
+        document.getElementById(
+          "statRequests"
+        ).textContent =
+          pending.length;
+
+
+        const badge =
+          document.getElementById(
+            "requestBadge"
+          );
+
+
+        if (pending.length > 0) {
+
+          badge.textContent =
+            pending.length;
+
+          badge.classList.add("show");
+
+        } else {
+
+          badge.classList.remove("show");
 
         }
-      );
-
-    }
 
 
-    async function processExchange(request) {
+        if (
+          filtered.length === 0
+        ) {
 
-      const oldVacancy =
-        allVacancies.find(
-          vacancy =>
-            normalize(vacancy.character) ===
-              normalize(request.oldCharacter) &&
-            normalize(vacancy.work) ===
-              normalize(request.oldWork)
-        );
+          container.innerHTML = `
+            <div class="empty">
+              Nenhuma solicitação pendente.
+            </div>
+          `;
 
+        } else {
 
-      if (oldVacancy) {
-
-        await updateDoc(
-          doc(
-            db,
-            "vacancies",
-            oldVacancy.id
-          ),
-          {
-
-            status: "aberta",
-
-            memberName: "",
-
-            username: "",
-
-            phoneLast4: "",
-
-            updatedAt:
-              serverTimestamp()
-
-          }
-        );
-
-      }
-
-
-      await addDoc(
-        collection(db, "vacancies"),
-        {
-
-          character:
-            request.newCharacter || "",
-
-          work:
-            request.newWork || "",
-
-          username:
-            request.username || "",
-
-          photo:
-            request.photo || "",
-
-          status:
-            "fechada",
-
-          memberName:
-            request.name || "",
-
-          phoneLast4:
-            request.phoneLast4 || "",
-
-          createdAt:
-            serverTimestamp(),
-
-          updatedAt:
-            serverTimestamp()
+          container.innerHTML =
+            filtered
+              .map(
+                requestCard
+              )
+              .join("");
 
         }
-      );
 
 
-      const member =
-        allMembers.find(
-          item =>
-            String(item.phoneLast4 || "") ===
-            String(request.phoneLast4 || "")
-        );
+        const recent =
+          pending.slice(0, 4);
 
 
-      if (member) {
+        if (recent.length === 0) {
 
-        await updateDoc(
-          doc(db, "members", member.id),
-          {
+          homeContainer.innerHTML = `
+            <div class="empty">
+              Não há fichas aguardando análise.
+            </div>
+          `;
 
-            name:
-              request.name || member.name || "",
+        } else {
 
-            age:
-              request.age || member.age || "",
+          homeContainer.innerHTML =
+            recent
+              .map(
+                requestCard
+              )
+              .join("");
 
-            character:
-              request.newCharacter || "",
+        }
 
-            work:
-              request.newWork || "",
+      };
 
-            username:
-              request.username || member.username || "",
 
-            photo:
-              request.photo || "",
+    function requestCard(item) {
 
-            updatedAt:
-              serverTimestamp()
+      return `
 
-          }
-        );
+        <article class="request-card">
 
-      }
+          <img
+            class="request-photo"
+            src="${imageOrPlaceholder(item.photo)}"
+            alt=""
+            onerror="this.src='https://placehold.co/400x500/220b18/ff8fbd?text=WIE'"
+          >
+
+          <div class="request-info">
+
+            <h3>
+              ${escapeHTML(
+                item.character || "Sem personagem"
+              )}
+            </h3>
+
+            <p>
+
+              <strong>Obra:</strong>
+              ${escapeHTML(item.work || "—")}
+
+              <br>
+
+              <strong>Nome:</strong>
+              ${escapeHTML(item.name || "Não informado")}
+
+              <br>
+
+              <strong>Idade:</strong>
+              ${escapeHTML(item.age || "—")}
+
+              •
+              <strong>Gênero:</strong>
+              ${escapeHTML(item.gender || "—")}
+
+              <br>
+
+              <strong>Usuário:</strong>
+              ${escapeHTML(item.username || "—")}
+
+              •
+              <strong>Final:</strong>
+              ${escapeHTML(item.phoneLast4 || "—")}
+
+            </p>
+
+          </div>
+
+
+          <div class="request-actions">
+
+            <button
+              class="btn btn-blue"
+              onclick="viewRequest('${item.id}')"
+            >
+              Ver
+            </button>
+
+            <button
+              class="btn btn-success"
+              onclick="approveRequest('${item.id}')"
+            >
+              Aprovar
+            </button>
+
+            <button
+              class="btn btn-danger"
+              onclick="rejectRequest('${item.id}')"
+            >
+              Recusar
+            </button>
+
+          </div>
+
+        </article>
+
+      `;
 
     }
 
 
     /* =====================================================
-       RECUSAR
+       VIEW REQUEST
     ===================================================== */
 
-    window.rejectRequest =
-      async function(requestId) {
+    window.viewRequest =
+      function(id) {
 
-        const request =
-          allRequests.find(
-            item => item.id === requestId
+        const item =
+          requests.find(
+            request =>
+              request.id === id
           );
 
 
-        if (!request) return;
+        if (!item) {
+          return;
+        }
+
+
+        const details =
+          document.getElementById(
+            "requestDetails"
+          );
+
+
+        details.innerHTML = `
+
+          <div style="
+            display:flex;
+            gap:15px;
+            align-items:flex-start;
+          ">
+
+            <img
+              src="${imageOrPlaceholder(item.photo)}"
+              style="
+                width:110px;
+                height:140px;
+                object-fit:cover;
+                border-radius:15px;
+                border:1px solid rgba(255,143,189,.18);
+              "
+              onerror="this.src='https://placehold.co/400x500/220b18/ff8fbd?text=WIE'"
+            >
+
+            <div style="
+              flex:1;
+              font-size:11px;
+              line-height:2;
+              color:#c9a7b7;
+            ">
+
+              <strong style="color:white;">
+                ${escapeHTML(item.character)}
+              </strong>
+
+              <br>
+
+              Obra:
+              ${escapeHTML(item.work || "—")}
+
+              <br>
+
+              Nome:
+              ${escapeHTML(item.name || "—")}
+
+              <br>
+
+              Idade:
+              ${escapeHTML(item.age || "—")}
+
+              <br>
+
+              Gênero:
+              ${escapeHTML(item.gender || "—")}
+
+              <br>
+
+              Usuário:
+              ${escapeHTML(item.username || "—")}
+
+              <br>
+
+              Últimos 4:
+              ${escapeHTML(item.phoneLast4 || "—")}
+
+              <br>
+
+              Tipo:
+              ${escapeHTML(item.type || "ficha")}
+
+              <br>
+
+              Enviada:
+              ${getDate(item.createdAt)}
+
+            </div>
+
+          </div>
+
+
+          <div class="modal-actions">
+
+            <button
+              class="btn btn-danger"
+              onclick="rejectRequest('${item.id}'); closeRequestModal();"
+            >
+              Recusar
+            </button>
+
+            <button
+              class="btn btn-success"
+              onclick="approveRequest('${item.id}'); closeRequestModal();"
+            >
+              Aprovar
+            </button>
+
+          </div>
+
+        `;
+
+
+        document
+          .getElementById(
+            "requestModal"
+          )
+          .classList.add("show");
+
+      };
+
+
+    window.closeRequestModal =
+      function() {
+
+        document
+          .getElementById(
+            "requestModal"
+          )
+          .classList.remove("show");
+
+      };
+
+
+    /* =====================================================
+       APPROVE REQUEST
+    ===================================================== */
+
+    window.approveRequest =
+      async function(id) {
+
+        const request =
+          requests.find(
+            item => item.id === id
+          );
+
+
+        if (!request) {
+          return;
+        }
+
+
+        const confirmed =
+          confirm(
+            `Aprovar ${request.character} como membro da House WIE?`
+          );
+
+
+        if (!confirmed) {
+          return;
+        }
+
+
+        try {
+
+          /* -----------------------------------------------
+             FICHA NORMAL
+          ------------------------------------------------ */
+
+          if (
+            !request.type ||
+            request.type === "ficha"
+          ) {
+
+            const vacancyQuery =
+              query(
+                collection(
+                  db,
+                  "vacancies"
+                ),
+
+                where(
+                  "character",
+                  "==",
+                  request.character
+                ),
+
+                where(
+                  "work",
+                  "==",
+                  request.work
+                ),
+
+                where(
+                  "status",
+                  "==",
+                  "fechada"
+                )
+              );
+
+
+            const existing =
+              await getDocs(
+                vacancyQuery
+              );
+
+
+            if (!existing.empty) {
+
+              toast(
+                "Esse personagem já está ocupado."
+              );
+
+              return;
+            }
+
+
+            await addDoc(
+              collection(
+                db,
+                "members"
+              ),
+              {
+
+                name:
+                  request.name || "",
+
+                age:
+                  Number(request.age) || 0,
+
+                gender:
+                  request.gender || "",
+
+                phoneLast4:
+                  request.phoneLast4 || "",
+
+                username:
+                  request.username || "",
+
+                character:
+                  request.character,
+
+                work:
+                  request.work,
+
+                photo:
+                  request.photo || "",
+
+                createdAt:
+                  serverTimestamp()
+
+              }
+            );
+
+
+            await addDoc(
+              collection(
+                db,
+                "vacancies"
+              ),
+              {
+
+                character:
+                  request.character,
+
+                work:
+                  request.work,
+
+                username:
+                  request.username || "",
+
+                photo:
+                  request.photo || "",
+
+                status:
+                  "fechada",
+
+                memberName:
+                  request.name || "",
+
+                phoneLast4:
+                  request.phoneLast4 || "",
+
+                createdAt:
+                  serverTimestamp(),
+
+                updatedAt:
+                  serverTimestamp()
+
+              }
+            );
+
+          }
+
+
+          /* -----------------------------------------------
+             TROCA
+          ------------------------------------------------ */
+
+          if (
+            request.type === "troca"
+          ) {
+
+            if (
+              request.oldCharacter &&
+              request.oldWork
+            ) {
+
+              const oldQuery =
+                query(
+                  collection(
+                    db,
+                    "vacancies"
+                  ),
+
+                  where(
+                    "character",
+                    "==",
+                    request.oldCharacter
+                  ),
+
+                  where(
+                    "work",
+                    "==",
+                    request.oldWork
+                  )
+                );
+
+
+              const oldSnapshot =
+                await getDocs(
+                  oldQuery
+                );
+
+
+              for (
+                const oldDoc
+                of oldSnapshot.docs
+              ) {
+
+                await updateDoc(
+                  oldDoc.ref,
+                  {
+                    status: "aberta",
+                    updatedAt:
+                      serverTimestamp()
+                  }
+                );
+
+              }
+
+            }
+
+
+            await addDoc(
+              collection(
+                db,
+                "vacancies"
+              ),
+              {
+
+                character:
+                  request.newCharacter,
+
+                work:
+                  request.newWork,
+
+                username:
+                  request.username || "",
+
+                photo:
+                  request.photo || "",
+
+                status:
+                  "fechada",
+
+                memberName:
+                  request.name || "",
+
+                phoneLast4:
+                  request.phoneLast4 || "",
+
+                createdAt:
+                  serverTimestamp(),
+
+                updatedAt:
+                  serverTimestamp()
+
+              }
+            );
+
+
+            const membersQuery =
+              query(
+                collection(
+                  db,
+                  "members"
+                ),
+
+                where(
+                  "phoneLast4",
+                  "==",
+                  request.phoneLast4
+                )
+              );
+
+
+            const memberSnapshot =
+              await getDocs(
+                membersQuery
+              );
+
+
+            for (
+              const member
+              of memberSnapshot.docs
+            ) {
+
+              await updateDoc(
+                member.ref,
+                {
+
+                  character:
+                    request.newCharacter,
+
+                  work:
+                    request.newWork,
+
+                  photo:
+                    request.photo || "",
+
+                  updatedAt:
+                    serverTimestamp()
+
+                }
+              );
+
+            }
+
+          }
+
+
+          await updateDoc(
+            doc(
+              db,
+              "requests",
+              id
+            ),
+            {
+
+              status:
+                "aprovado",
+
+              approvedAt:
+                serverTimestamp(),
+
+              approvedBy:
+                CURRENT_ADMIN
+
+            }
+          );
+
+
+          await createLog(
+            "APROVAÇÃO",
+            `Solicitação de ${request.character} aprovada.`
+          );
+
+
+          toast(
+            "Ficha aprovada com sucesso!"
+          );
+
+
+          await loadRequests();
+          await loadVacancies();
+          await loadMembers();
+          updateStats();
+
+        } catch (error) {
+
+          console.error(error);
+
+          toast(
+            "Erro ao aprovar a ficha."
+          );
+
+        }
+
+      };
+
+
+    /* =====================================================
+       REJECT REQUEST
+    ===================================================== */
+
+    window.rejectRequest =
+      async function(id) {
+
+        const request =
+          requests.find(
+            item => item.id === id
+          );
+
+
+        if (!request) {
+          return;
+        }
+
+
+        const confirmed =
+          confirm(
+            `Recusar a ficha de ${request.character}?`
+          );
+
+
+        if (!confirmed) {
+          return;
+        }
 
 
         try {
@@ -2481,45 +3158,42 @@
             doc(
               db,
               "requests",
-              requestId
+              id
             ),
             {
 
-              status: "rejeitada",
-
-              rejectedBy:
-                currentAdmin?.name || "Admin",
+              status:
+                "recusado",
 
               rejectedAt:
-                serverTimestamp()
+                serverTimestamp(),
+
+              rejectedBy:
+                CURRENT_ADMIN
 
             }
           );
 
 
-          await registerLog(
-            "reject_request",
-            `Solicitação de ${request.name || "membro"} recusada.`
+          await createLog(
+            "RECUSA",
+            `Solicitação de ${request.character} recusada.`
           );
 
 
           toast(
-            "Solicitação recusada.",
-            "success"
+            "Ficha recusada."
           );
 
 
-          await loadAllData();
+          await loadRequests();
 
-        }
-
-        catch (error) {
+        } catch (error) {
 
           console.error(error);
 
           toast(
-            "Erro ao recusar solicitação.",
-            "error"
+            "Erro ao recusar a ficha."
           );
 
         }
@@ -2528,188 +3202,223 @@
 
 
     /* =====================================================
-       VACANCIES
+       LOAD VACANCIES
     ===================================================== */
 
-    async function loadVacancies() {
+    window.loadVacancies =
+      async function() {
 
-      try {
+        try {
 
-        const snapshot =
-          await getDocs(
-            collection(db, "vacancies")
+          const snapshot =
+            await getDocs(
+              collection(
+                db,
+                "vacancies"
+              )
+            );
+
+
+          vacancies =
+            snapshot.docs.map(
+              item => ({
+                id: item.id,
+                ...item.data()
+              })
+            );
+
+
+          vacancies.sort(
+            (a,b) => {
+
+              const A =
+                a.character?.toLowerCase() || "";
+
+              const B =
+                b.character?.toLowerCase() || "";
+
+              return A.localeCompare(B);
+
+            }
           );
 
 
-        allVacancies =
-          snapshot.docs.map(item => ({
+          renderVacancies();
 
-            id: item.id,
+          updateStats();
 
-            ...item.data()
+        } catch (error) {
 
-          }));
+          console.error(error);
 
+          toast(
+            "Erro ao carregar vagas."
+          );
 
-        renderVacancies();
+        }
 
-      }
-
-      catch (error) {
-
-        console.error(
-          "Erro vacancies:",
-          error
-        );
-
-        allVacancies = [];
-
-        renderVacancies();
-
-      }
-
-    }
+      };
 
 
-    function renderVacancies() {
+    /* =====================================================
+       RENDER VACANCIES
+    ===================================================== */
 
-      const container =
-        document.getElementById(
-          "vacanciesList"
-        );
+    window.renderVacancies =
+      function() {
+
+        const container =
+          document.getElementById(
+            "vacancyGrid"
+          );
 
 
-      if (!allVacancies.length) {
+        const search =
+          (
+            document.getElementById(
+              "vacancySearch"
+            )?.value || ""
+          )
+          .toLowerCase()
+          .trim();
+
+
+        const filtered =
+          vacancies.filter(item => {
+
+            const text = [
+
+              item.character,
+              item.work,
+              item.username,
+              item.memberName
+
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
+
+            return text.includes(search);
+
+          });
+
+
+        if (
+          filtered.length === 0
+        ) {
+
+          container.innerHTML = `
+            <div class="empty">
+              Nenhuma vaga cadastrada.
+            </div>
+          `;
+
+          return;
+        }
+
 
         container.innerHTML =
-          emptyState(
-            "Nenhuma vaga cadastrada.",
-            "Adicione uma vaga para começar."
-          );
+          filtered
+            .map(
+              vacancyCard
+            )
+            .join("");
 
-        return;
-
-      }
-
-
-      container.innerHTML =
-        allVacancies
-          .map(vacancy =>
-            vacancyCard(vacancy)
-          )
-          .join("");
+      };
 
 
-      document.getElementById(
-        "dashboardVacancies"
-      ).innerHTML =
-        allVacancies
-          .slice(0, 8)
-          .map(vacancy =>
-            vacancyCard(vacancy)
-          )
-          .join("");
+    function vacancyCard(item) {
 
-    }
-
-
-    function vacancyCard(vacancy) {
-
-      const open =
-        vacancy.status === "aberta";
+      const closed =
+        item.status === "fechada";
 
 
       return `
 
-        <div class="admin-vacancy-card">
+        <article class="vacancy-card">
 
-          <div class="vacancy-head">
+          <img
+            class="vacancy-image"
+            src="${imageOrPlaceholder(item.photo)}"
+            alt=""
+            onerror="this.src='https://placehold.co/400x500/220b18/ff8fbd?text=WIE'"
+          >
 
-            <div class="vacancy-character">
+          <div class="vacancy-body">
 
+            <span class="badge ${
+              closed
+                ? "badge-closed"
+                : "badge-open"
+            }">
               ${
-                vacancy.photo
-                  ? `
-                    <img
-                      class="character-image"
-                      src="${escapeAttribute(vacancy.photo)}"
-                      alt=""
-                    >
-                  `
-                  : `
-                    <div class="character-image"></div>
-                  `
+                closed
+                  ? "FECHADA"
+                  : "ABERTA"
               }
-
-              <div>
-
-                <h3>
-                  ${escapeHTML(vacancy.character || "Sem personagem")}
-                </h3>
-
-                <div class="muted">
-                  ${escapeHTML(vacancy.work || "Sem obra")}
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <span
-              class="status ${open ? "open" : "closed"}"
-            >
-              ${open ? "ABERTA" : "FECHADA"}
             </span>
 
-          </div>
+            <h3>
+              ${escapeHTML(
+                item.character || "Sem nome"
+              )}
+            </h3>
 
+            <p>
+              ${escapeHTML(
+                item.work || "Sem obra"
+              )}
+            </p>
 
-          <div class="vacancy-info">
+            ${
+              item.username
+                ? `
+                  <p>
+                    @${escapeHTML(
+                      String(item.username)
+                        .replace(/^@/, "")
+                    )}
+                  </p>
+                `
+                : ""
+            }
 
-            <div class="info-item">
-              Usuário:
-              <strong>
-                ${escapeHTML(vacancy.username || "—")}
-              </strong>
+            <div class="vacancy-actions">
+
+              <button
+                class="btn btn-blue"
+                onclick="editVacancy('${item.id}')"
+              >
+                Editar
+              </button>
+
+              <button
+                class="btn ${
+                  closed
+                    ? "btn-success"
+                    : "btn-yellow"
+                }"
+                onclick="toggleVacancy('${item.id}')"
+              >
+                ${
+                  closed
+                    ? "Abrir"
+                    : "Fechar"
+                }
+              </button>
+
+              <button
+                class="btn btn-danger"
+                onclick="deleteVacancy('${item.id}')"
+              >
+                Excluir
+              </button>
+
             </div>
 
-            <div class="info-item">
-              Membro:
-              <strong>
-                ${escapeHTML(vacancy.memberName || "—")}
-              </strong>
-            </div>
-
           </div>
 
-
-          <div class="button-group">
-
-            <button
-              class="button secondary small"
-              onclick="editVacancy('${vacancy.id}')"
-            >
-              Editar
-            </button>
-
-            <button
-              class="button ${open ? "danger" : "success"} small"
-              onclick="toggleVacancy('${vacancy.id}')"
-            >
-              ${open ? "Fechar vaga" : "Abrir vaga"}
-            </button>
-
-            <button
-              class="button danger small"
-              onclick="deleteVacancy('${vacancy.id}')"
-            >
-              Excluir
-            </button>
-
-          </div>
-
-        </div>
+        </article>
 
       `;
 
@@ -2717,11 +3426,15 @@
 
 
     /* =====================================================
-       MODAL VAGA
+       OPEN VACANCY MODAL
     ===================================================== */
 
     window.openVacancyModal =
-      function(vacancy = null) {
+      function(id = null) {
+
+        editingVacancyId =
+          id;
+
 
         const modal =
           document.getElementById(
@@ -2729,48 +3442,82 @@
           );
 
 
-        document.getElementById(
-          "vacancyModalTitle"
-        ).textContent =
-          vacancy
-            ? "Editar vaga"
-            : "Adicionar vaga";
+        const title =
+          document.getElementById(
+            "vacancyModalTitle"
+          );
 
 
-        document.getElementById(
-          "vacancyId"
-        ).value =
-          vacancy?.id || "";
+        const character =
+          document.getElementById(
+            "vacancyCharacter"
+          );
+
+        const work =
+          document.getElementById(
+            "vacancyWork"
+          );
+
+        const username =
+          document.getElementById(
+            "vacancyUsername"
+          );
+
+        const photo =
+          document.getElementById(
+            "vacancyPhoto"
+          );
+
+        const status =
+          document.getElementById(
+            "vacancyStatus"
+          );
 
 
-        document.getElementById(
-          "vacancyCharacter"
-        ).value =
-          vacancy?.character || "";
+        if (id) {
+
+          const item =
+            vacancies.find(
+              vacancy =>
+                vacancy.id === id
+            );
 
 
-        document.getElementById(
-          "vacancyWork"
-        ).value =
-          vacancy?.work || "";
+          if (!item) {
+            return;
+          }
 
 
-        document.getElementById(
-          "vacancyUsername"
-        ).value =
-          vacancy?.username || "";
+          title.textContent =
+            "Editar vaga";
 
+          character.value =
+            item.character || "";
 
-        document.getElementById(
-          "vacancyPhoto"
-        ).value =
-          vacancy?.photo || "";
+          work.value =
+            item.work || "";
 
+          username.value =
+            item.username || "";
 
-        document.getElementById(
-          "vacancyStatus"
-        ).value =
-          vacancy?.status || "aberta";
+          photo.value =
+            item.photo || "";
+
+          status.value =
+            item.status || "aberta";
+
+        } else {
+
+          title.textContent =
+            "Nova vaga";
+
+          document
+            .getElementById(
+              "vacancyForm"
+            )
+            .reset();
+
+        }
 
 
         modal.classList.add("show");
@@ -2782,164 +3529,217 @@
       function() {
 
         document
-          .getElementById("vacancyModal")
+          .getElementById(
+            "vacancyModal"
+          )
           .classList.remove("show");
 
-      };
-
-
-    document
-      .getElementById("vacancyForm")
-      .addEventListener("submit", async event => {
-
-        event.preventDefault();
-
-
-        const id =
-          document.getElementById(
-            "vacancyId"
-          ).value;
-
-
-        const data = {
-
-          character:
-            document.getElementById(
-              "vacancyCharacter"
-            ).value.trim(),
-
-          work:
-            document.getElementById(
-              "vacancyWork"
-            ).value.trim(),
-
-          username:
-            document.getElementById(
-              "vacancyUsername"
-            ).value.trim(),
-
-          photo:
-            document.getElementById(
-              "vacancyPhoto"
-            ).value.trim(),
-
-          status:
-            document.getElementById(
-              "vacancyStatus"
-            ).value,
-
-          updatedAt:
-            serverTimestamp()
-
-        };
-
-
-        try {
-
-          if (id) {
-
-            await updateDoc(
-              doc(db, "vacancies", id),
-              data
-            );
-
-
-            await registerLog(
-              "edit_vacancy",
-              `Vaga ${data.character} editada.`
-            );
-
-
-            toast(
-              "Vaga atualizada!",
-              "success"
-            );
-
-          }
-
-          else {
-
-            data.createdAt =
-              serverTimestamp();
-
-
-            await addDoc(
-              collection(db, "vacancies"),
-              data
-            );
-
-
-            await registerLog(
-              "create_vacancy",
-              `Vaga ${data.character} criada.`
-            );
-
-
-            toast(
-              "Vaga criada!",
-              "success"
-            );
-
-          }
-
-
-          closeVacancyModal();
-
-          await loadAllData();
-
-        }
-
-        catch (error) {
-
-          console.error(error);
-
-          toast(
-            "Erro ao salvar vaga.",
-            "error"
-          );
-
-        }
-
-      });
-
-
-    window.editVacancy =
-      function(id) {
-
-        const vacancy =
-          allVacancies.find(
-            item => item.id === id
-          );
-
-
-        if (!vacancy) return;
-
-
-        openVacancyModal(vacancy);
+        editingVacancyId =
+          null;
 
       };
 
 
     /* =====================================================
-       ABRIR / FECHAR VAGA
+       EDIT VACANCY
+    ===================================================== */
+
+    window.editVacancy =
+      function(id) {
+
+        openVacancyModal(id);
+
+      };
+
+
+    /* =====================================================
+       SAVE VACANCY
+    ===================================================== */
+
+    document
+      .getElementById(
+        "vacancyForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+
+          const character =
+            document
+              .getElementById(
+                "vacancyCharacter"
+              )
+              .value
+              .trim();
+
+
+          const work =
+            document
+              .getElementById(
+                "vacancyWork"
+              )
+              .value
+              .trim();
+
+
+          const username =
+            document
+              .getElementById(
+                "vacancyUsername"
+              )
+              .value
+              .trim();
+
+
+          const photo =
+            document
+              .getElementById(
+                "vacancyPhoto"
+              )
+              .value
+              .trim();
+
+
+          const status =
+            document
+              .getElementById(
+                "vacancyStatus"
+              )
+              .value;
+
+
+          if (
+            !character ||
+            !work
+          ) {
+
+            toast(
+              "Preencha personagem e obra."
+            );
+
+            return;
+          }
+
+
+          try {
+
+            if (editingVacancyId) {
+
+              await updateDoc(
+                doc(
+                  db,
+                  "vacancies",
+                  editingVacancyId
+                ),
+                {
+
+                  character,
+                  work,
+                  username,
+                  photo,
+                  status,
+
+                  updatedAt:
+                    serverTimestamp()
+
+                }
+              );
+
+
+              await createLog(
+                "EDIÇÃO",
+                `Vaga ${character} editada.`
+              );
+
+
+              toast(
+                "Vaga atualizada."
+              );
+
+            } else {
+
+              await addDoc(
+                collection(
+                  db,
+                  "vacancies"
+                ),
+                {
+
+                  character,
+                  work,
+                  username,
+                  photo,
+                  status,
+
+                  createdAt:
+                    serverTimestamp(),
+
+                  updatedAt:
+                    serverTimestamp()
+
+                }
+              );
+
+
+              await createLog(
+                "CRIAÇÃO",
+                `Vaga ${character} criada.`
+              );
+
+
+              toast(
+                "Vaga criada."
+              );
+
+            }
+
+
+            closeVacancyModal();
+
+            await loadVacancies();
+
+            updateStats();
+
+          } catch (error) {
+
+            console.error(error);
+
+            toast(
+              "Erro ao salvar vaga."
+            );
+
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       TOGGLE VACANCY
     ===================================================== */
 
     window.toggleVacancy =
       async function(id) {
 
-        const vacancy =
-          allVacancies.find(
-            item => item.id === id
+        const item =
+          vacancies.find(
+            vacancy =>
+              vacancy.id === id
           );
 
 
-        if (!vacancy) return;
+        if (!item) {
+          return;
+        }
 
 
         const newStatus =
-          vacancy.status === "aberta"
-            ? "fechada"
-            : "aberta";
+          item.status === "fechada"
+            ? "aberta"
+            : "fechada";
 
 
         try {
@@ -2962,31 +3762,36 @@
           );
 
 
-          await registerLog(
-            "toggle_vacancy",
-            `${vacancy.character}: vaga ${newStatus}.`
+          await createLog(
+            newStatus === "aberta"
+              ? "ABERTURA"
+              : "FECHAMENTO",
+
+            `Vaga ${item.character} ${
+              newStatus === "aberta"
+                ? "aberta"
+                : "fechada"
+            }.`
           );
 
 
           toast(
             newStatus === "aberta"
-              ? "Vaga aberta!"
-              : "Vaga fechada!",
-            "success"
+              ? "Vaga aberta."
+              : "Vaga fechada."
           );
 
 
-          await loadAllData();
+          await loadVacancies();
 
-        }
+          updateStats();
 
-        catch (error) {
+        } catch (error) {
 
           console.error(error);
 
           toast(
-            "Erro ao alterar vaga.",
-            "error"
+            "Erro ao alterar vaga."
           );
 
         }
@@ -2995,28 +3800,33 @@
 
 
     /* =====================================================
-       EXCLUIR VAGA
+       DELETE VACANCY
     ===================================================== */
 
     window.deleteVacancy =
       async function(id) {
 
-        const vacancy =
-          allVacancies.find(
-            item => item.id === id
+        const item =
+          vacancies.find(
+            vacancy =>
+              vacancy.id === id
           );
 
 
-        if (!vacancy) return;
+        if (!item) {
+          return;
+        }
 
 
         const confirmed =
           confirm(
-            `Excluir a vaga de ${vacancy.character}?`
+            `Excluir permanentemente a vaga "${item.character}"?`
           );
 
 
-        if (!confirmed) return;
+        if (!confirmed) {
+          return;
+        }
 
 
         try {
@@ -3030,29 +3840,27 @@
           );
 
 
-          await registerLog(
-            "delete_vacancy",
-            `Vaga ${vacancy.character} excluída.`
+          await createLog(
+            "EXCLUSÃO",
+            `Vaga ${item.character} excluída.`
           );
 
 
           toast(
-            "Vaga excluída.",
-            "success"
+            "Vaga excluída."
           );
 
 
-          await loadAllData();
+          await loadVacancies();
 
-        }
+          updateStats();
 
-        catch (error) {
+        } catch (error) {
 
           console.error(error);
 
           toast(
-            "Erro ao excluir vaga.",
-            "error"
+            "Erro ao excluir vaga."
           );
 
         }
@@ -3061,227 +3869,334 @@
 
 
     /* =====================================================
-       MEMBERS
+       LOAD MEMBERS
     ===================================================== */
 
-    async function loadMembers() {
+    window.loadMembers =
+      async function() {
 
-      try {
+        try {
 
-        const snapshot =
-          await getDocs(
-            collection(db, "members")
+          const snapshot =
+            await getDocs(
+              collection(
+                db,
+                "members"
+              )
+            );
+
+
+          const firebaseMembers =
+            snapshot.docs.map(
+              item => ({
+                id: item.id,
+                ...item.data()
+              })
+            );
+
+
+          /*
+             Os 8 membros fornecidos por você
+             aparecem sempre no painel.
+          */
+
+          const fixed =
+            FIXED_MEMBERS.map(
+              item => ({
+
+                ...item,
+
+                fixed: true
+
+              })
+            );
+
+
+          /*
+             Evita duplicar os membros
+             caso eles também estejam
+             cadastrados no Firestore.
+          */
+
+          const firestoreWithoutDuplicates =
+            firebaseMembers.filter(
+              member => {
+
+                return !fixed.some(
+                  fixedMember =>
+
+                    fixedMember.character
+                      .toLowerCase() ===
+                    String(
+                      member.character || ""
+                    ).toLowerCase()
+
+                    &&
+
+                    fixedMember.username
+                      .toLowerCase() ===
+                    String(
+                      member.username || ""
+                    )
+                      .replace(/^@/, "")
+                      .toLowerCase()
+
+                );
+
+              }
+            );
+
+
+          members = [
+            ...fixed,
+            ...firestoreWithoutDuplicates
+          ];
+
+
+          renderMembers();
+
+          updateStats();
+
+        } catch (error) {
+
+          console.error(error);
+
+          toast(
+            "Erro ao carregar membros."
+          );
+
+        }
+
+      };
+
+
+    /* =====================================================
+       RENDER MEMBERS
+    ===================================================== */
+
+    window.renderMembers =
+      function() {
+
+        const container =
+          document.getElementById(
+            "memberGrid"
           );
 
 
-        allMembers =
-          snapshot.docs.map(item => ({
-
-            id: item.id,
-
-            ...item.data()
-
-          }));
-
-
-        renderMembers();
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Erro members:",
-          error
-        );
-
-        allMembers = [];
-
-        renderMembers();
-
-      }
-
-    }
+        const search =
+          (
+            document.getElementById(
+              "memberSearch"
+            )?.value || ""
+          )
+          .toLowerCase()
+          .trim();
 
 
-    function renderMembers() {
+        const filtered =
+          members.filter(
+            member => {
 
-      const container =
-        document.getElementById(
-          "membersList"
-        );
+              const text = [
+
+                member.name,
+                member.character,
+                member.work,
+                member.username
+
+              ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase();
 
 
-      if (!allMembers.length) {
+              return text.includes(
+                search
+              );
+
+            }
+          );
+
+
+        if (
+          filtered.length === 0
+        ) {
+
+          container.innerHTML = `
+            <div class="empty">
+              Nenhum membro encontrado.
+            </div>
+          `;
+
+          return;
+
+        }
+
 
         container.innerHTML =
-          emptyState(
-            "Nenhum membro registrado.",
-            "Os membros aprovados aparecerão aqui."
-          );
+          filtered
+            .map(
+              memberCard
+            )
+            .join("");
 
-        return;
-
-      }
-
-
-      container.innerHTML =
-        allMembers
-          .map(member => `
-
-            <div class="member-card">
-
-              <div class="member-head">
-
-                <div>
-
-                  <h3>
-                    ${escapeHTML(member.name || "Sem nome")}
-                  </h3>
-
-                  <div class="muted">
-                    ${escapeHTML(member.character || "Sem personagem")}
-                    ·
-                    ${escapeHTML(member.work || "Sem obra")}
-                  </div>
-
-                </div>
-
-                <span class="status closed">
-                  MEMBRO
-                </span>
-
-              </div>
+      };
 
 
-              <div class="member-info">
+    function memberCard(member) {
 
-                <div class="info-item">
+      const username =
+        String(
+          member.username || ""
+        )
+        .replace(/^@/, "");
+
+
+      return `
+
+        <article class="member-card">
+
+          <div class="member-top">
+
+            <img
+              class="member-photo"
+              src="${imageOrPlaceholder(member.photo)}"
+              alt=""
+              onerror="this.src='https://placehold.co/400x500/220b18/ff8fbd?text=WIE'"
+            >
+
+            <div class="member-info">
+
+              <h3>
+                ${escapeHTML(
+                  member.character || "Sem personagem"
+                )}
+              </h3>
+
+              <p>
+                @${escapeHTML(username || "—")}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="member-details">
+
+            ${
+              member.name
+                ? `
+                  Nome:
+                  ${escapeHTML(member.name)}
+                  <br>
+                `
+                : ""
+            }
+
+            ${
+              member.work
+                ? `
+                  Obra:
+                  ${escapeHTML(member.work)}
+                  <br>
+                `
+                : ""
+            }
+
+            ${
+              member.age
+                ? `
                   Idade:
-                  <strong>
-                    ${escapeHTML(String(member.age || "—"))}
-                  </strong>
-                </div>
+                  ${escapeHTML(member.age)}
+                  <br>
+                `
+                : ""
+            }
 
-                <div class="info-item">
-                  Usuário:
-                  <strong>
-                    ${escapeHTML(member.username || "—")}
-                  </strong>
-                </div>
+            ${
+              member.gender
+                ? `
+                  Gênero:
+                  ${escapeHTML(member.gender)}
+                  <br>
+                `
+                : ""
+            }
 
-                <div class="info-item">
-                  Últimos dígitos:
-                  <strong>
-                    ${escapeHTML(member.phoneLast4 || "—")}
-                  </strong>
-                </div>
+            ${
+              member.phoneLast4
+                ? `
+                  Final do telefone:
+                  ${escapeHTML(member.phoneLast4)}
+                `
+                : ""
+            }
 
-              </div>
+          </div>
 
-            </div>
+        </article>
 
-          `)
-          .join("");
-
-    }
-
-
-    /* =====================================================
-       MEMBROS FIXOS
-    ===================================================== */
-
-    function renderFixedMembers() {
-
-      const container =
-        document.getElementById(
-          "fixedMembersList"
-        );
-
-
-      container.innerHTML =
-        FIXED_MEMBERS
-          .map(member => `
-
-            <div class="member-card">
-
-              <div class="member-head">
-
-                <div>
-
-                  <h3>
-                    ${escapeHTML(member.character)}
-                  </h3>
-
-                  <div class="muted">
-                    @${escapeHTML(member.username)}
-                  </div>
-
-                </div>
-
-                <span class="status approved">
-                  CADASTRADO
-                </span>
-
-              </div>
-
-            </div>
-
-          `)
-          .join("");
+      `;
 
     }
 
 
     /* =====================================================
-       CHAT
+       LOAD CHAT
     ===================================================== */
 
-    async function loadChat() {
+    window.loadChat =
+      async function() {
 
-      try {
+        try {
 
-        const snapshot =
-          await getDocs(
-            collection(db, "chat")
+          const snapshot =
+            await getDocs(
+              collection(
+                db,
+                "chat"
+              )
+            );
+
+
+          chatMessages =
+            snapshot.docs.map(
+              item => ({
+                id: item.id,
+                ...item.data()
+              })
+            );
+
+
+          chatMessages.sort(
+            (a,b) => {
+
+              const A =
+                a.createdAt?.seconds || 0;
+
+              const B =
+                b.createdAt?.seconds || 0;
+
+              return A - B;
+
+            }
           );
 
 
-        allChat =
-          snapshot.docs.map(item => ({
+          renderChat();
 
-            id: item.id,
+        } catch (error) {
 
-            ...item.data()
+          console.error(error);
 
-          }));
+          toast(
+            "Erro ao carregar chat."
+          );
 
+        }
 
-        allChat.sort(
-          (a, b) =>
-            getTime(a.createdAt) -
-            getTime(b.createdAt)
-        );
-
-
-        renderChat();
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Erro chat:",
-          error
-        );
-
-        allChat = [];
-
-        renderChat();
-
-      }
-
-    }
+      };
 
 
     function renderChat() {
@@ -3292,50 +4207,60 @@
         );
 
 
-      if (!allChat.length) {
+      if (
+        chatMessages.length === 0
+      ) {
 
         container.innerHTML = `
-
-          <div class="empty-state">
-            <strong>Chat vazio</strong>
-            Nenhuma mensagem foi enviada ainda.
+          <div class="empty">
+            Nenhuma mensagem ainda.
           </div>
-
         `;
 
         return;
-
       }
 
 
       container.innerHTML =
-        allChat
-          .map(message => `
+        chatMessages
+          .map(message => {
 
-            <div class="chat-message">
+            const me =
+              message.adminName ===
+              CURRENT_ADMIN;
 
-              <strong>
-                ${escapeHTML(
-                  message.adminName ||
-                  "Admin"
-                )}
-              </strong>
 
-              <p>
-                ${escapeHTML(
-                  message.message || ""
-                )}
-              </p>
+            return `
 
-              <small>
-                ${formatDate(
-                  message.createdAt
-                )}
-              </small>
+              <div
+                class="message ${
+                  me ? "me" : ""
+                }"
+              >
 
-            </div>
+                <strong>
+                  ${escapeHTML(
+                    message.adminName || "ADM"
+                  )}
+                </strong>
 
-          `)
+                <p>
+                  ${escapeHTML(
+                    message.message || ""
+                  )}
+                </p>
+
+                <small>
+                  ${getDate(
+                    message.createdAt
+                  )}
+                </small>
+
+              </div>
+
+            `;
+
+          })
           .join("");
 
 
@@ -3345,117 +4270,80 @@
     }
 
 
+    /* =====================================================
+       SEND CHAT
+    ===================================================== */
+
     document
-      .getElementById("chatForm")
-      .addEventListener("submit", async event => {
+      .getElementById(
+        "chatForm"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
 
-        event.preventDefault();
-
-
-        const input =
-          document.getElementById(
-            "chatInput"
-          );
+          event.preventDefault();
 
 
-        const message =
-          input.value.trim();
+          const input =
+            document.getElementById(
+              "chatInput"
+            );
 
 
-        if (!message) return;
+          const message =
+            input.value.trim();
 
 
-        try {
-
-          await addDoc(
-            collection(db, "chat"),
-            {
-
-              adminName:
-                currentAdmin?.name ||
-                "Admin",
-
-              message,
-
-              createdAt:
-                serverTimestamp()
-
-            }
-          );
+          if (!message) {
+            return;
+          }
 
 
-          input.value = "";
+          try {
 
-          await loadChat();
+            await addDoc(
+              collection(
+                db,
+                "chat"
+              ),
+              {
+
+                adminName:
+                  CURRENT_ADMIN,
+
+                message,
+
+                createdAt:
+                  serverTimestamp()
+
+              }
+            );
+
+
+            input.value = "";
+
+            await loadChat();
+
+          } catch (error) {
+
+            console.error(error);
+
+            toast(
+              "Erro ao enviar mensagem."
+            );
+
+          }
 
         }
-
-        catch (error) {
-
-          console.error(error);
-
-          toast(
-            "Não foi possível enviar a mensagem.",
-            "error"
-          );
-
-        }
-
-      });
+      );
 
 
     /* =====================================================
        LOGS
     ===================================================== */
 
-    async function loadLogs() {
-
-      try {
-
-        const snapshot =
-          await getDocs(
-            collection(db, "logs")
-          );
-
-
-        allLogs =
-          snapshot.docs.map(item => ({
-
-            id: item.id,
-
-            ...item.data()
-
-          }));
-
-
-        allLogs.sort(
-          (a, b) =>
-            getTime(b.createdAt) -
-            getTime(a.createdAt)
-        );
-
-
-        renderLogs();
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Erro logs:",
-          error
-        );
-
-        allLogs = [];
-
-        renderLogs();
-
-      }
-
-    }
-
-
-    async function registerLog(
+    async function createLog(
       type,
       description
     ) {
@@ -3463,7 +4351,10 @@
       try {
 
         await addDoc(
-          collection(db, "logs"),
+          collection(
+            db,
+            "logs"
+          ),
           {
 
             type,
@@ -3471,8 +4362,7 @@
             description,
 
             adminName:
-              currentAdmin?.name ||
-              "Sistema",
+              CURRENT_ADMIN,
 
             createdAt:
               serverTimestamp()
@@ -3480,12 +4370,10 @@
           }
         );
 
-      }
-
-      catch (error) {
+      } catch (error) {
 
         console.error(
-          "Erro ao registrar log:",
+          "Erro ao criar log:",
           error
         );
 
@@ -3494,21 +4382,76 @@
     }
 
 
+    window.loadLogs =
+      async function() {
+
+        try {
+
+          const snapshot =
+            await getDocs(
+              collection(
+                db,
+                "logs"
+              )
+            );
+
+
+          logs =
+            snapshot.docs.map(
+              item => ({
+                id: item.id,
+                ...item.data()
+              })
+            );
+
+
+          logs.sort(
+            (a,b) => {
+
+              const A =
+                a.createdAt?.seconds || 0;
+
+              const B =
+                b.createdAt?.seconds || 0;
+
+              return B - A;
+
+            }
+          );
+
+
+          renderLogs();
+
+        } catch (error) {
+
+          console.error(error);
+
+          toast(
+            "Erro ao carregar logs."
+          );
+
+        }
+
+      };
+
+
     function renderLogs() {
 
       const container =
         document.getElementById(
-          "logsList"
+          "logList"
         );
 
 
-      if (!allLogs.length) {
+      if (
+        logs.length === 0
+      ) {
 
-        container.innerHTML =
-          emptyState(
-            "Nenhum registro.",
-            "As ações administrativas aparecerão aqui."
-          );
+        container.innerHTML = `
+          <div class="empty">
+            Nenhum registro encontrado.
+          </div>
+        `;
 
         return;
 
@@ -3516,280 +4459,188 @@
 
 
       container.innerHTML =
-        allLogs
-          .map(log => `
+        logs
+          .map(
+            log => `
 
-            <div class="log-card">
+              <div class="log-item">
 
-              <strong>
-                ${escapeHTML(
-                  log.adminName || "Sistema"
-                )}
-              </strong>
+                <strong>
+                  ${escapeHTML(
+                    log.type || "AÇÃO"
+                  )}
+                </strong>
 
-              <div
-                class="muted"
-                style="margin-top:5px;"
-              >
-                ${escapeHTML(
-                  log.description || ""
-                )}
+                <p>
+                  ${escapeHTML(
+                    log.description || ""
+                  )}
+                </p>
+
+                <small>
+                  ${escapeHTML(
+                    log.adminName || "ADM"
+                  )}
+                  •
+                  ${getDate(
+                    log.createdAt
+                  )}
+                </small>
+
               </div>
 
-              <div
-                class="muted"
-                style="margin-top:7px;"
-              >
-                ${formatDate(log.createdAt)}
-              </div>
-
-            </div>
-
-          `)
+            `
+          )
           .join("");
 
     }
 
 
     /* =====================================================
-       DASHBOARD
+       STATS
     ===================================================== */
-
-    function renderDashboard() {
-
-      renderRequests();
-
-      renderVacancies();
-
-      renderMembers();
-
-      renderFixedMembers();
-
-    }
-
 
     function updateStats() {
 
       const pending =
-        allRequests.filter(
+        requests.filter(
           item =>
-            !item.status ||
             item.status === "pendente"
-        );
+        ).length;
 
 
       const open =
-        allVacancies.filter(
+        vacancies.filter(
           item =>
             item.status === "aberta"
-        );
+        ).length;
 
 
       const closed =
-        allVacancies.filter(
+        vacancies.filter(
           item =>
             item.status === "fechada"
-        );
+        ).length;
 
 
       document.getElementById(
         "statRequests"
       ).textContent =
-        pending.length;
+        pending;
 
 
       document.getElementById(
         "statOpen"
       ).textContent =
-        open.length;
+        open;
 
 
       document.getElementById(
         "statClosed"
       ).textContent =
-        closed.length;
+        closed;
 
 
       document.getElementById(
         "statMembers"
       ).textContent =
-        allMembers.length ||
-        FIXED_MEMBERS.length;
+        members.length;
+
+
+      const badge =
+        document.getElementById(
+          "requestBadge"
+        );
+
+
+      if (pending > 0) {
+
+        badge.textContent =
+          pending;
+
+        badge.classList.add("show");
+
+      } else {
+
+        badge.classList.remove("show");
+
+      }
 
     }
 
 
     /* =====================================================
-       HELPERS
+       INITIALIZE
     ===================================================== */
 
-    function normalize(value) {
+    async function initializePanel() {
 
-      return String(value || "")
-        .trim()
-        .toLowerCase();
+      try {
 
-    }
+        await Promise.all([
+          loadRequests(),
+          loadVacancies(),
+          loadMembers()
+        ]);
 
+        await loadChat();
 
-    function getTime(timestamp) {
+      } catch (error) {
 
-      if (!timestamp) return 0;
-
-      if (
-        typeof timestamp.toMillis ===
-        "function"
-      ) {
-
-        return timestamp.toMillis();
+        console.error(error);
 
       }
 
-
-      if (
-        timestamp.seconds
-      ) {
-
-        return timestamp.seconds * 1000;
-
-      }
-
-
-      return new Date(timestamp).getTime() || 0;
-
     }
 
 
-    function formatDate(timestamp) {
-
-      const time =
-        getTime(timestamp);
-
-
-      if (!time) {
-        return "Agora";
-      }
-
-
-      return new Date(time)
-        .toLocaleString(
-          "pt-BR",
-          {
-            dateStyle: "short",
-            timeStyle: "short"
-          }
-        );
-
-    }
-
-
-    function escapeHTML(value) {
-
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-    }
-
-
-    function escapeAttribute(value) {
-
-      return escapeHTML(value);
-
-    }
-
-
-    function emptyState(
-      title,
-      description
-    ) {
-
-      return `
-
-        <div class="empty-state">
-
-          <strong>
-            ${escapeHTML(title)}
-          </strong>
-
-          ${escapeHTML(description)}
-
-        </div>
-
-      `;
-
-    }
-
-
-    function toast(
-      message,
-      type = "success"
-    ) {
-
-      const container =
-        document.getElementById(
-          "toastContainer"
-        );
-
-
-      const item =
-        document.createElement("div");
-
-
-      item.className = "toast";
-
-
-      item.style.borderColor =
-        type === "error"
-          ? "rgba(232,91,104,.35)"
-          : "rgba(114,212,154,.25)";
-
-
-      item.textContent = message;
-
-
-      container.appendChild(item);
-
-
-      setTimeout(() => {
-
-        item.remove();
-
-      }, 3500);
-
-    }
+    initializePanel();
 
 
     /* =====================================================
-       FECHAR MODAL CLICANDO FORA
+       MODAL FECHAR AO CLICAR FORA
     ===================================================== */
 
     document
-      .getElementById("vacancyModal")
-      .addEventListener("click", event => {
+      .getElementById(
+        "vacancyModal"
+      )
+      .addEventListener(
+        "click",
+        event => {
 
-        if (
-          event.target.id ===
-          "vacancyModal"
-        ) {
+          if (
+            event.target.id ===
+            "vacancyModal"
+          ) {
 
-          closeVacancyModal();
+            closeVacancyModal();
+
+          }
 
         }
+      );
 
-      });
 
+    document
+      .getElementById(
+        "requestModal"
+      )
+      .addEventListener(
+        "click",
+        event => {
 
-    /* =====================================================
-       INICIALIZAÇÃO
-    ===================================================== */
+          if (
+            event.target.id ===
+            "requestModal"
+          ) {
 
-    renderFixedMembers();
+            closeRequestModal();
 
-    restoreSession();
+          }
+
+        }
+      );
 
   </script>
 
