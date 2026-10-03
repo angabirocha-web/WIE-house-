@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>House WIE • Administração</title>
+<style>
+:root{--blue:#3f86ff;--blue2:#75b6ff;--deep:#050b14;--side:#081525;--panel:#0d1b2d;--line:#23496f;--white:#f4f8ff;--muted:#9fb3ca;--danger:#ff6277;--ok:#63e6a4}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 60% 0,#12345c,transparent 35%),#050b14;color:var(--white);font-family:Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+#login{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 50% 20%,#164d8a,transparent 40%),#03070d}
+.login{width:min(430px,100%);padding:34px;border:1px solid var(--line);border-radius:24px;background:rgba(8,21,37,.94);box-shadow:0 30px 90px #0008;text-align:center}
+.logo{font-size:28px;font-weight:1000;letter-spacing:2px}.logo span{color:var(--blue2)}.sub{color:var(--muted);margin:10px 0 24px}
+label{display:block;text-align:left;font-weight:bold;margin:13px 0 6px}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#06111f;color:#fff;outline:none}
+.btn{width:100%;border:0;border-radius:11px;padding:13px;background:var(--blue);color:#fff;font-weight:900;margin-top:12px}.error{color:var(--danger);min-height:20px;margin-top:10px}
+#app{display:none;min-height:100vh}.side{position:fixed;left:0;top:0;bottom:0;width:245px;background:rgba(5,16,29,.97);border-right:1px solid var(--line);padding:20px 14px;z-index:5}.brand{font-weight:1000;font-size:21px;padding:5px 10px 25px}.brand span{color:var(--blue2)}.brand small{display:block;color:#6f8da9;font-size:10px;margin-top:4px}
+.nav{display:block;width:100%;text-align:left;background:transparent;color:#cfe0f2;border:0;padding:12px;border-radius:10px;margin:4px 0;font-weight:bold}.nav:hover,.nav.active{background:#17467a;color:#fff}.logout{margin-top:22px!important;color:#ff9aaa!important}
+.main{margin-left:245px;padding:28px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}.top h1{margin:0}.role{padding:9px 12px;border:1px solid var(--line);border-radius:10px;color:var(--blue2);font-weight:bold}
+.page{display:none}.page.active{display:block}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:25px 0}.stat,.panel{background:rgba(13,27,45,.9);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 15px 45px #0004}.stat b{display:block;color:var(--blue2);font-size:29px;margin-top:8px}.muted{color:var(--muted)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.toolbar input{max-width:300px}.toolbar button,.action{padding:10px 13px;border:0;border-radius:9px;background:var(--blue);color:#fff;font-weight:bold}.danger{background:#4b1722!important;color:#ffb5c0!important}.ok{background:#103d2d!important;color:#8ff0bd!important}.neutral{background:#17314e!important}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;background:#091625}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:13px;border-bottom:1px solid #17314b;text-align:left}th{color:#a9c7e6}td{color:#d9e6f4}.actions{display:flex;gap:5px;flex-wrap:wrap}.mini{padding:7px 9px;border:0;border-radius:8px;background:#15385d;color:#fff}.badge{font-size:11px;font-weight:bold;padding:5px 8px;border-radius:999px;background:#16395e;color:#a9d0ff}.badge.ok{color:#8ff0bd}.badge.no{color:#ff9eaa}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:30;place-items:center;padding:18px}.modal.show{display:grid}.modalbox{width:min(560px,100%);max-height:92vh;overflow:auto;background:#0b192a;border:1px solid var(--line);border-radius:20px;padding:23px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.modal-actions button{padding:10px 14px;border:0;border-radius:9px}
+.preview{width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin-top:10px}.small-note{font-size:12px;color:var(--muted)}
+@media(max-width:850px){.side{width:72px}.brand{font-size:0}.brand:after{content:"W";font-size:25px}.brand small{display:none}.nav{font-size:0;text-align:center}.nav:before{content:"•";font-size:23px}.logout{font-size:0}.logout:before{content:"↪";font-size:22px}.main{margin-left:72px;padding:18px}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.stats{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div id="login">
+  <div class="login">
+    <div class="logo">HOUSE <span>WIE</span></div>
+    <div class="sub">PAINEL DA ADMINISTRAÇÃO • NIGHT SHIFT</div>
+    <label>ADM</label><input id="loginName" placeholder="Nome do ADM">
+    <label>Código</label><input id="loginPass" type="password" placeholder="Código de acesso">
+    <button class="btn" id="loginBtn">ENTRAR</button>
+    <div class="error" id="loginError"></div>
+  </div>
+</div>
+
+<div id="app">
+<aside class="side">
+  <div class="brand">HOUSE <span>WIE</span><small>ADMINISTRAÇÃO</small></div>
+  <button class="nav active" data-page="home">🏠 &nbsp; Dashboard</button>
+  <button class="nav" data-page="requests">📋 &nbsp; Solicitações</button>
+  <button class="nav" data-page="vagas">🎭 &nbsp; Vagas</button>
+  <button class="nav" data-page="members">👥 &nbsp; Membros</button>
+  <button class="nav" data-page="admins">🛡️ &nbsp; ADMs</button>
+  <button class="nav" data-page="logs">📜 &nbsp; Logs</button>
+  <button class="logout nav" id="logout">↪ &nbsp; Sair</button>
+</aside>
+
+<main class="main">
+<div class="top"><h1 id="title">Dashboard</h1><div class="role" id="who"></div></div>
+
+<section id="home" class="page active">
+  <div class="stats">
+    <div class="stat">Membros<b id="sMembers">0</b></div>
+    <div class="stat">Vagas abertas<b id="sOpen">0</b></div>
+    <div class="stat">Pendentes<b id="sReq">0</b></div>
+    <div class="stat">ADMs<b id="sAdmins">8</b></div>
+  </div>
+  <div class="panel"><h2>Central WIE</h2><p class="muted">As coleções desta versão usam o prefixo <b>wie_</b>, então o histórico antigo não é carregado aqui. Cadastre as novas vagas nesta instalação.</p></div>
+</section>
+
+<section id="requests" class="page">
+  <div class="toolbar"><input id="reqSearch" placeholder="Pesquisar nome, personagem ou obra..."></div>
+  <div class="table-wrap"><table><thead><tr><th>Nome</th><th>Idade</th><th>Gênero</th><th>Personagem</th><th>Obra</th><th>Número</th><th>Status</th><th>Ações</th></tr></thead><tbody id="reqTable"></tbody></table></div>
+</section>
+
+<section id="vagas" class="page">
+  <div class="toolbar"><button id="newVaga">+ Nova vaga</button><input id="vagaSearch" placeholder="Pesquisar vaga..."></div>
+  <div class="table-wrap"><table><thead><tr><th>Personagem</th><th>Obra</th><th>Status</th><th>Ações</th></tr></thead><tbody id="vagaTable"></tbody></table></div>
+</section>
+
+<section id="members" class="page">
+  <div class="toolbar"><input id="memSearch" placeholder="Pesquisar membro..."></div>
+  <div class="table-wrap"><table><thead><tr><th>Nome</th><th>Idade</th><th>Gênero</th><th>Personagem</th><th>Obra</th><th>Número</th><th>Ação</th></tr></thead><tbody id="memTable"></tbody></table></div>
+</section>
+
+<section id="admins" class="page"><div class="panel"><h2>Equipe WIE</h2><div id="adminList"></div></div></section>
+<section id="logs" class="page"><div class="table-wrap"><table><thead><tr><th>Data</th><th>ADM</th><th>Ação</th></tr></thead><tbody id="logTable"></tbody></table></div></section>
+</main></div>
+
+<div class="modal" id="vagaModal"><div class="modalbox">
+<h2 id="modalTitle">Nova vaga</h2>
+<label>Personagem</label><input id="vPersonagem" required>
+<label>Obra</label><input id="vObra" required>
+<label>Foto (URL opcional)</label><input id="vFoto" placeholder="https://...">
+<label>Status</label><select id="vStatus"><option value="aberta">Aberta</option><option value="fechada">Fechada</option></select>
+<div class="modal-actions"><button class="neutral" id="cancelVaga">Cancelar</button><button class="btn" id="saveVaga">Salvar</button></div>
+</div></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig={
+ apiKey:"AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
+ authDomain:"house-wie-6c8f9.firebaseapp.com",
+ projectId:"house-wie-6c8f9",
+ storageBucket:"house-wie-6c8f9.firebasestorage.app",
+ messagingSenderId:"241202380170",
+ appId:"1:241202380170:web:b7df00f3faa8ae7afedc73"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+
+const ADMINS=[
+ {nome:"Gojo",codigo:"alexguloso",cargo:"Dono"},
+ {nome:"Tamsy",codigo:"m4kin",cargo:"Sub-dono"},
+ {nome:"Oliver",codigo:"wtf123",cargo:"ADM"},
+ {nome:"Chuuya",codigo:"bitc1",cargo:"ADM"},
+ {nome:"Ayko",codigo:"aykoarruda",cargo:"ADM"},
+ {nome:"Yohan",codigo:"yohanzinh67",cargo:"ADM"},
+ {nome:"Yasuho",codigo:"yamet7",cargo:"ADM"},
+ {nome:"Michael",codigo:"mich56k",cargo:"ADM"}
+];
+
+let current=null,requests=[],vagas=[],members=[],editing=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const adminHTML=a=>`<div class="panel" style="margin:10px 0;padding:14px"><b>${esc(a.nome)}</b><br><span class="muted">${esc(a.cargo)}</span></div>`;
+
+function login(){
+ const n=$("loginName").value.trim().toLowerCase(),p=$("loginPass").value;
+ const a=ADMINS.find(x=>x.nome.toLowerCase()===n&&x.codigo===p);
+ if(!a){$("loginError").textContent="ADM ou código incorreto.";return}
+ current=a;sessionStorage.setItem("wieAdmin",JSON.stringify(a));
+ $("login").style.display="none";$("app").style.display="block";$("who").textContent=`${a.nome} • ${a.cargo}`;
+ $("adminList").innerHTML=ADMINS.map(adminHTML).join("");loadAll();addLog("Entrou no painel");
+}
+function logout(){sessionStorage.removeItem("wieAdmin");location.reload()}
+function addLog(acao){if(!current)return;db.collection("wie_logs").add({adm:current.nome,cargo:current.cargo,acao,criadoEm:firebase.firestore.FieldValue.serverTimestamp()}).catch(console.error)}
+
+function loadAll(){
+ db.collection("wie_requests").orderBy("criadoEm","desc").onSnapshot(s=>{requests=s.docs;renderRequests();updateStats()},e=>console.error(e));
+ db.collection("wie_vagas").orderBy("personagem").onSnapshot(s=>{vagas=s.docs;renderVagas();updateStats()},e=>console.error(e));
+ db.collection("wie_members").orderBy("criadoEm","desc").onSnapshot(s=>{members=s.docs;renderMembers();updateStats()},e=>console.error(e));
+ db.collection("wie_logs").orderBy("criadoEm","desc").limit(100).onSnapshot(s=>{
+   $("logTable").innerHTML=s.docs.map(d=>{const x=d.data();return `<tr><td>${x.criadoEm?.toDate?.().toLocaleString("pt-BR")||"—"}</td><td>${esc(x.adm)}</td><td>${esc(x.acao)}</td></tr>`}).join("");
+ },e=>console.error(e));
+}
+function updateStats(){
+ $("sMembers").textContent=members.length;
+ $("sOpen").textContent=vagas.filter(d=>d.data().status==="aberta").length;
+ $("sReq").textContent=requests.filter(d=>d.data().status==="pendente").length;
+}
+
+function renderRequests(){
+ const q=($("reqSearch").value||"").toLowerCase();
+ const arr=requests.filter(d=>{const x=d.data();return `${x.nome||""} ${x.personagem||""} ${x.obra||""}`.toLowerCase().includes(q)});
+ $("reqTable").innerHTML=arr.length?arr.map(d=>{
+  const x=d.data(),st=x.status||"pendente";
+  return `<tr><td>${esc(x.nome)}</td><td>${esc(x.idade)}</td><td>${esc(x.genero)}</td><td>${esc(x.personagem)}</td><td>${esc(x.obra)}</td><td>${esc(x.numero)}</td>
+  <td><span class="badge ${st==="aprovada"?"ok":st==="recusada"?"no":""}">${esc(st)}</span></td>
+  <td class="actions">${st==="pendente"?`<button class="mini ok" onclick="approve('${d.id}')">Aprovar</button><button class="mini danger" onclick="rejectReq('${d.id}')">Recusar</button>`:"—"}</td></tr>`;
+ }).join(""):'<tr><td colspan="8">Nenhuma solicitação encontrada.</td></tr>';
+}
+async function approve(id){
+ try{
+  const d=requests.find(x=>x.id===id);if(!d)return;const x=d.data();
+  await db.collection("wie_requests").doc(id).update({status:"aprovada",analisadoPor:current.nome,analisadoEm:firebase.firestore.FieldValue.serverTimestamp()});
+  await db.collection("wie_members").add({
+    nome:x.nome||"",idade:x.idade||"",genero:x.genero||"",numero:x.numero||"",
+    personagem:x.personagem||"",obra:x.obra||"",foto:x.foto||"",
+    criadoEm:firebase.firestore.FieldValue.serverTimestamp()
+  });
+  const vaga=vagas.find(d=>String(d.data().personagem||"").toLowerCase()===String(x.personagem||"").toLowerCase());
+  if(vaga) await db.collection("wie_vagas").doc(vaga.id).update({status:"fechada",ocupadoPor:x.nome||"",ocupadoEm:firebase.firestore.FieldValue.serverTimestamp()});
+  await addLog("Aprovou a ficha de "+(x.nome||"membro"));
+ }catch(e){console.error(e);alert("Não foi possível aprovar. Confira as regras do Firestore.")}
+}
+async function rejectReq(id){
+ try{await db.collection("wie_requests").doc(id).update({status:"recusada",analisadoPor:current.nome,analisadoEm:firebase.firestore.FieldValue.serverTimestamp()});await addLog("Recusou uma ficha")}catch(e){console.error(e);alert("Não foi possível recusar.")}
+}
+
+function renderVagas(){
+ const q=($("vagaSearch").value||"").toLowerCase();
+ const arr=vagas.filter(d=>{const x=d.data();return `${x.personagem||""} ${x.obra||""}`.toLowerCase().includes(q)});
+ $("vagaTable").innerHTML=arr.length?arr.map(d=>{const x=d.data();return `<tr><td>${esc(x.personagem)}</td><td>${esc(x.obra)}</td><td><span class="badge ${x.status==="aberta"?"ok":"no"}">${esc(x.status)}</span></td><td class="actions"><button class="mini" onclick="editVaga('${d.id}')">Editar</button><button class="mini danger" onclick="deleteVaga('${d.id}')">Excluir</button></td></tr>`}).join(""):'<tr><td colspan="4">Nenhuma vaga cadastrada.</td></tr>';
+}
+function openVaga(){
+ editing=null;$("modalTitle").textContent="Nova vaga";$("vPersonagem").value="";$("vObra").value="";$("vFoto").value="";$("vStatus").value="aberta";$("vagaModal").classList.add("show");
+}
+function editVaga(id){
+ const d=vagas.find(x=>x.id===id);if(!d)return;const x=d.data();editing=id;
+ $("modalTitle").textContent="Editar vaga";$("vPersonagem").value=x.personagem||"";$("vObra").value=x.obra||"";$("vFoto").value=x.foto||"";$("vStatus").value=x.status||"aberta";$("vagaModal").classList.add("show");
+}
+function closeVaga(){$("vagaModal").classList.remove("show")}
+async function saveVaga(){
+ const personagem=$("vPersonagem").value.trim(),obra=$("vObra").value.trim();if(!personagem||!obra){alert("Preencha personagem e obra.");return}
+ try{
+  const data={personagem,obra,foto:$("vFoto").value.trim(),status:$("vStatus").value,atualizadoEm:firebase.firestore.FieldValue.serverTimestamp()};
+  if(editing)await db.collection("wie_vagas").doc(editing).update(data);else await db.collection("wie_vagas").add({...data,criadoEm:firebase.firestore.FieldValue.serverTimestamp()});
+  await addLog(`${editing?"Editou":"Criou"} a vaga ${personagem}`);closeVaga();
+ }catch(e){console.error(e);alert("Não foi possível salvar a vaga.")}
+}
+async function deleteVaga(id){if(!confirm("Excluir esta vaga?"))return;try{await db.collection("wie_vagas").doc(id).delete();await addLog("Excluiu uma vaga")}catch(e){console.error(e);alert("Não foi possível excluir.")}}
+
+function renderMembers(){
+ const q=($("memSearch").value||"").toLowerCase();
+ const arr=members.filter(d=>{const x=d.data();return `${x.nome||""} ${x.personagem||""} ${x.obra||""}`.toLowerCase().includes(q)});
+ $("memTable").innerHTML=arr.length?arr.map(d=>{const x=d.data();return `<tr><td>${esc(x.nome)}</td><td>${esc(x.idade)}</td><td>${esc(x.genero)}</td><td>${esc(x.personagem)}</td><td>${esc(x.obra)}</td><td>${esc(x.numero)}</td><td><button class="mini danger" onclick="deleteMember('${d.id}')">Excluir</button></td></tr>`}).join(""):'<tr><td colspan="7">Nenhum membro.</td></tr>';
+}
+async function deleteMember(id){if(!confirm("Excluir este membro?"))return;try{await db.collection("wie_members").doc(id).delete();await addLog("Excluiu um membro")}catch(e){console.error(e);alert("Não foi possível excluir.")}}
+
+document.querySelectorAll(".nav[data-page]").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));$(b.dataset.page).classList.add("active");
+ $("title").textContent=b.textContent.replace(/[^\p{L}\p{N}\s]/gu,"").trim();
+}));
+$("loginBtn").addEventListener("click",login);$("loginPass").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+$("logout").addEventListener("click",logout);$("reqSearch").addEventListener("input",renderRequests);$("vagaSearch").addEventListener("input",renderVagas);$("memSearch").addEventListener("input",renderMembers);
+$("newVaga").addEventListener("click",openVaga);$("cancelVaga").addEventListener("click",closeVaga);$("saveVaga").addEventListener("click",saveVaga);
+
+const saved=sessionStorage.getItem("wieAdmin");
+if(saved){try{const s=JSON.parse(saved);const a=ADMINS.find(x=>x.nome===s.nome&&x.codigo===s.codigo&&x.cargo===s.cargo);if(a){current=a;$("login").style.display="none";$("app").style.display="block";$("who").textContent=`${a.nome} • ${a.cargo}`;$("adminList").innerHTML=ADMINS.map(adminHTML).join("");loadAll()}else sessionStorage.removeItem("wieAdmin")}catch{sessionStorage.removeItem("wieAdmin")}}
+</script>
+</body>
+</html>

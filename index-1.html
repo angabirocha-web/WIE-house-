@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>House WIE • Recepção</title>
+<style>
+:root{
+  --blue:#3f86ff;--blue2:#75b6ff;--deep:#07101f;--deep2:#0d1b30;
+  --panel:rgba(10,22,40,.88);--white:#f5f9ff;--muted:#aebed3;
+  --line:rgba(117,182,255,.25);--danger:#ff5d72;--ok:#67e8a5
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--white);font-family:Arial,sans-serif;background:
+radial-gradient(circle at 15% 15%,#17355e 0,transparent 28%),
+radial-gradient(circle at 85% 75%,#123c70 0,transparent 30%),
+linear-gradient(135deg,#03070d,#07101f 55%,#0b1930);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background:
+repeating-linear-gradient(90deg,transparent 0 6px,rgba(255,255,255,.035) 7px 8px),
+repeating-linear-gradient(0deg,transparent 0 8px,rgba(0,0,0,.08) 9px 10px);mix-blend-mode:screen}
+nav{position:sticky;top:0;z-index:20;padding:14px 6%;display:flex;justify-content:space-between;align-items:center;background:rgba(3,8,15,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:1000;letter-spacing:2px}.logo span{color:var(--blue2)}
+nav a{color:#dceaff;text-decoration:none;margin-left:18px;font-size:14px}nav a:hover{color:#fff}
+.hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:70px 20px;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(45px);opacity:.3}
+.hero:before{width:330px;height:330px;background:#2176ff;left:-120px;top:40px}.hero:after{width:280px;height:280px;background:#7dbbff;right:-100px;bottom:0}
+.scan{position:absolute;inset:0;background:linear-gradient(transparent 0 48%,rgba(120,190,255,.08) 50%,transparent 52%);background-size:100% 12px;animation:scan 5s linear infinite;opacity:.45}
+@keyframes scan{to{background-position:0 120px}}
+.hero-content{position:relative;z-index:2;max-width:820px}
+.badge{display:inline-block;border:1px solid var(--line);background:rgba(20,48,83,.7);padding:8px 14px;border-radius:999px;color:var(--blue2);font-size:12px;font-weight:bold;letter-spacing:1px}
+h1{font-size:clamp(48px,11vw,96px);margin:18px 0 5px;text-shadow:0 0 35px #3f86ff55}h1 span{color:var(--blue2)}
+.hero p{color:var(--muted);font-size:18px;line-height:1.65}
+.btn{display:inline-block;padding:13px 20px;border-radius:12px;text-decoration:none;font-weight:900;margin:6px}.primary{background:var(--blue);color:#fff;box-shadow:0 10px 30px #3f86ff44}.secondary{border:1px solid var(--line);background:#0b1b31;color:#fff}
+section{max-width:1150px;margin:auto;padding:65px 6%}.title{text-align:center;margin-bottom:28px}.title h2{margin:0 0 8px;color:var(--blue2);font-size:30px}.title p{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card,.form{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:23px;box-shadow:0 20px 60px #0005}
+.card h3{margin-top:0}.card p{color:var(--muted);line-height:1.55}
+form{display:grid;gap:8px}label{font-weight:bold;margin-top:9px}input,select{width:100%;padding:13px;border-radius:11px;border:1px solid var(--line);background:#071321;color:#fff;outline:none}input:focus,select:focus{border-color:var(--blue2);box-shadow:0 0 0 3px #3f86ff18}
+button{cursor:pointer}.form-btn{border:0;padding:14px;border-radius:12px;background:var(--blue);color:#fff;font-weight:900;margin-top:12px}
+#msg{text-align:center;min-height:20px;font-weight:bold;color:var(--blue2)}
+.list-card{padding:0;overflow:hidden}.list-card img{width:100%;height:190px;object-fit:cover;background:#09172a}.list-content{padding:18px}.status{font-size:11px;font-weight:900;color:var(--blue2);letter-spacing:1px}
+.notice{border-left:3px solid var(--blue);padding:12px 15px;background:#0a1b30;color:var(--muted);border-radius:8px;margin-top:15px}
+footer{text-align:center;padding:35px 15px;color:#8fa4bd;border-top:1px solid var(--line)}
+@media(max-width:650px){nav{flex-direction:column;gap:12px}nav a{margin:0 7px}.hero{min-height:68vh}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">HOUSE <span>WIE</span> ◉</div>
+  <div><a href="#inicio">Início</a><a href="#recepcao">Recepção</a><a href="#vagas">Vagas</a><a href="#regras">Regras</a></div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="scan"></div>
+  <div class="hero-content">
+    <div class="badge">HOUSE WIE • NIGHT SHIFT</div>
+    <h1>HOUSE <span>WIE</span></h1>
+    <p>Uma recepção com atmosfera inspirada no terror animatrônico de FNAF: escura, misteriosa e interativa. Escolha seu personagem e envie sua ficha.</p>
+    <a class="btn primary" href="#recepcao">ENTRAR NA RECEPÇÃO</a>
+    <a class="btn secondary" href="#vagas">VER VAGAS</a>
+  </div>
+</header>
+
+<section>
+  <div class="title"><h2>Central da House</h2><p>O básico para entrar sem complicação.</p></div>
+  <div class="grid">
+    <div class="card"><h3>🎭 Personagem</h3><p>Escolha uma vaga aberta e informe o personagem desejado na ficha.</p></div>
+    <div class="card"><h3>📡 Solicitação</h3><p>Depois do envio, a administração analisa a ficha pelo painel privado.</p></div>
+    <div class="card"><h3>🔒 Privacidade</h3><p>O número informado na ficha não aparece na área pública do site.</p></div>
+  </div>
+</section>
+
+<section id="recepcao">
+  <div class="title"><h2>Recepção</h2><p>Preencha todos os campos para enviar sua solicitação.</p></div>
+  <div class="form">
+    <form id="receptionForm">
+      <label for="nome">Nome / apelido</label>
+      <input id="nome" maxlength="60" required placeholder="Como você quer ser chamado?">
+
+      <label for="idade">Idade</label>
+      <input id="idade" type="number" min="1" max="120" required placeholder="Sua idade">
+
+      <label for="genero">Gênero</label>
+      <select id="genero" required>
+        <option value="">Selecione...</option>
+        <option>Feminino</option><option>Masculino</option><option>Não-binário</option>
+        <option>Outro</option><option>Prefiro não informar</option>
+      </select>
+
+      <label for="numero">Número de telefone</label>
+      <input id="numero" type="tel" maxlength="30" required placeholder="Seu número">
+
+      <label for="personagem">Personagem</label>
+      <input id="personagem" maxlength="80" required placeholder="Personagem que deseja">
+
+      <label for="obra">Obra</label>
+      <input id="obra" maxlength="100" required placeholder="Anime, jogo, série etc.">
+
+      <label for="foto">Foto do personagem</label>
+      <input id="foto" type="file" accept="image/png,image/jpeg,image/webp">
+
+      <button class="form-btn" type="submit">ENVIAR FICHA</button>
+      <div id="msg"></div>
+    </form>
+    <div class="notice">Se a ficha for aprovada, a administração fará a atualização da vaga. Seus dados pessoais ficam restritos à administração.</div>
+  </div>
+</section>
+
+<section id="vagas">
+  <div class="title"><h2>Vagas atuais</h2><p>O histórico antigo foi deixado de lado. Esta instalação começa com as vagas cadastradas daqui para frente.</p></div>
+  <div class="grid" id="vagasList"><div class="card">Carregando...</div></div>
+</section>
+
+<section id="regras">
+  <div class="title"><h2>Regras</h2><p>Para manter a comunidade organizada.</p></div>
+  <div class="card">
+    <p>• Respeite os membros e a administração.</p>
+    <p>• Não compartilhe dados pessoais de outras pessoas.</p>
+    <p>• Evite brigas, perseguições e provocações.</p>
+    <p>• Siga as orientações da equipe.</p>
+    <p>• Em caso de problema, procure um administrador.</p>
+  </div>
+</section>
+
+<footer>HOUSE WIE • NIGHT SHIFT</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig={
+  apiKey:"AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
+  authDomain:"house-wie-6c8f9.firebaseapp.com",
+  projectId:"house-wie-6c8f9",
+  storageBucket:"house-wie-6c8f9.firebasestorage.app",
+  messagingSenderId:"241202380170",
+  appId:"1:241202380170:web:b7df00f3faa8ae7afedc73"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+
+const cloudName="fpas1zce";
+const uploadPreset="House WIE";
+
+async function uploadCloudinary(file){
+  if(!file) return "";
+  const data=new FormData();
+  data.append("file",file);
+  data.append("upload_preset",uploadPreset);
+  const r=await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,{method:"POST",body:data});
+  if(!r.ok) throw new Error("Falha no upload");
+  const j=await r.json();
+  return j.secure_url||"";
+}
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+$("receptionForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const msg=$("msg"); msg.textContent="ENVIANDO...";
+  try{
+    const foto=await uploadCloudinary($("foto").files[0]);
+    await db.collection("wie_requests").add({
+      nome:$("nome").value.trim(),
+      idade:Number($("idade").value),
+      genero:$("genero").value,
+      numero:$("numero").value.trim(),
+      personagem:$("personagem").value.trim(),
+      obra:$("obra").value.trim(),
+      foto,
+      status:"pendente",
+      criadoEm:firebase.firestore.FieldValue.serverTimestamp()
+    });
+    e.target.reset();
+    msg.textContent="FICHA ENVIADA! A administração vai analisar. ✓";
+  }catch(err){
+    console.error(err);
+    msg.textContent="Não foi possível enviar a ficha. Tente novamente.";
+  }
+});
+
+db.collection("wie_vagas").orderBy("personagem").onSnapshot(s=>{
+  $("vagasList").innerHTML=s.empty
+    ? '<div class="card">Nenhuma vaga cadastrada ainda.</div>'
+    : s.docs.map(d=>{
+      const x=d.data();
+      const aberta=x.status==="aberta";
+      return `<div class="card list-card">
+        ${x.foto?`<img src="${esc(x.foto)}" alt="">`:""}
+        <div class="list-content">
+          <div class="status">${aberta?"VAGA ABERTA":"VAGA FECHADA"}</div>
+          <h3>${esc(x.personagem||"Personagem")}</h3>
+          <p>${esc(x.obra||"")}</p>
+          <p>${aberta?"Disponível para solicitação.":"Esta vaga está ocupada."}</p>
+        </div>
+      </div>`;
+    }).join("");
+},err=>{console.error(err);$("vagasList").innerHTML='<div class="card">Não foi possível carregar as vagas.</div>';});
+</script>
+</body>
+</html>
