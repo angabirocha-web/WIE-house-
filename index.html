@@ -1,999 +1,679 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <title>House WIE • Recepção</title>
 
-  <meta
-    name="description"
-    content="House WIE — House para todos os fandoms."
-  >
-
-  <title>House WIE • House para todos os fandoms</title>
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  <style>
+    :root {
+      --bg: #10070e;
+      --bg2: #190a14;
+      --panel: rgba(39, 12, 27, .88);
+      --panel2: rgba(57, 16, 37, .75);
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+      --pink: #ff5d9e;
+      --pink2: #ff8fbd;
+      --red: #d52f61;
+
+      --white: #fff4f8;
+      --muted: #cba9b8;
+      --border: rgba(255, 143, 189, .20);
+
+      --success: #75e6a2;
+      --danger: #ff6f86;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "DM Sans", sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 93, 158, .16), transparent 30%),
+        radial-gradient(circle at 85% 85%, rgba(213, 47, 97, .13), transparent 32%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 70%, rgba(255, 93, 158, .07), transparent 18%),
+        radial-gradient(circle at 80% 20%, rgba(255, 143, 189, .05), transparent 20%);
+      animation: bgMove 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgMove {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.08);
+      }
+    }
+
+    .topbar {
+      width: 100%;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--pink), var(--red));
+      box-shadow: 0 10px 30px rgba(255, 93, 158, .22);
+      font-size: 20px;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: "Playfair Display", serif;
+      font-size: 21px;
+      letter-spacing: .3px;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .admin-btn {
+      text-decoration: none;
+      color: var(--white);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      padding: 11px 16px;
+      border-radius: 13px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .25s;
+      backdrop-filter: blur(10px);
+    }
+
+    .admin-btn:hover {
+      background: rgba(255, 93, 158, .13);
+      border-color: rgba(255, 143, 189, .45);
+      transform: translateY(-2px);
+    }
+
+    .container {
+      width: min(940px, calc(100% - 30px));
+      margin: 20px auto 70px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 36px 20px 30px;
+    }
+
+    .hero .mini {
+      display: inline-block;
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--pink2);
+      background: rgba(255, 93, 158, .07);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(38px, 8vw, 68px);
+      line-height: .95;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #fff, #ffb4d0 55%, #ff6fa8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .form-card {
+      background: linear-gradient(
+        145deg,
+        rgba(50, 13, 34, .94),
+        rgba(24, 8, 18, .95)
+      );
+      border: 1px solid var(--border);
+      border-radius: 27px;
+      padding: clamp(20px, 5vw, 38px);
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.03);
+      backdrop-filter: blur(20px);
+    }
+
+    .section-title {
+      margin-bottom: 22px;
+    }
+
+    .section-title h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #f8d9e6;
+    }
+
+    label span {
+      color: var(--pink);
+    }
+
+    input,
+    select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.09);
+      outline: none;
+      border-radius: 13px;
+      padding: 13px 14px;
+      color: var(--white);
+      background: rgba(255,255,255,.045);
+      font: inherit;
+      font-size: 13px;
+      transition: .2s;
+    }
+
+    input::placeholder {
+      color: #947382;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: rgba(255, 93, 158, .65);
+      background: rgba(255, 93, 158, .055);
+      box-shadow: 0 0 0 3px rgba(255, 93, 158, .08);
+    }
+
+    select option {
+      background: #260d1b;
+      color: white;
+    }
+
+    .help {
+      color: #9e7e8d;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .upload-box {
+      border: 1px dashed rgba(255, 143, 189, .35);
+      border-radius: 16px;
+      padding: 18px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .upload-box input {
+      border: none;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .preview-wrap {
+      display: none;
+      margin-top: 14px;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .preview-wrap.show {
+      display: flex;
+    }
+
+    .preview {
+      width: 68px;
+      height: 68px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      background: #160811;
+    }
+
+    .preview-info strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .preview-info span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .terms {
+      margin-top: 22px;
+      padding: 15px 16px;
+      border-radius: 15px;
+      background: rgba(255, 93, 158, .055);
+      border: 1px solid rgba(255, 143, 189, .13);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .terms strong {
+      color: var(--pink2);
+    }
+
+    .submit {
+      width: 100%;
+      margin-top: 21px;
+      border: none;
+      border-radius: 15px;
+      padding: 15px 20px;
+      cursor: pointer;
+      color: white;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--pink), var(--red));
+      box-shadow: 0 13px 35px rgba(213, 47, 97, .25);
+      transition: .25s;
+    }
+
+    .submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 17px 42px rgba(213, 47, 97, .35);
+    }
+
+    .submit:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status {
+      display: none;
+      margin-top: 15px;
+      padding: 13px 15px;
+      border-radius: 13px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.success {
+      color: #bfffd3;
+      background: rgba(74, 210, 130, .08);
+      border: 1px solid rgba(74, 210, 130, .2);
+    }
+
+    .status.error {
+      color: #ffc2cc;
+      background: rgba(255, 82, 110, .08);
+      border: 1px solid rgba(255, 82, 110, .2);
+    }
+
+    .footer {
+      text-align: center;
+      color: #806471;
+      font-size: 10px;
+      margin-top: 25px;
+    }
+
+    .loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spinner {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.25);
+      border-top-color: white;
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .topbar {
+        padding: 17px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .hero {
+        padding-top: 25px;
+      }
+
+      .form-card {
+        border-radius: 21px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- =====================================================
-       EFEITOS DO FUNDO
-  ====================================================== -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">W</div>
 
-  <div class="background-effects">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
-
-  <header
-    style="
-      width:100%;
-      border-bottom:1px solid var(--border-color);
-      background:rgba(10,10,15,.92);
-      backdrop-filter:blur(12px);
-      position:sticky;
-      top:0;
-      z-index:100;
-    "
-  >
-
-    <div
-      style="
-        max-width:1200px;
-        margin:auto;
-        padding:16px 20px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:20px;
-      "
-    >
-
-      <!-- Logo -->
-
-      <a
-        href="#inicio"
-        style="
-          font-size:25px;
-          font-weight:800;
-          color:var(--fnaf-gold);
-          text-decoration:none;
-        "
-      >
-        HOUSE <span style="color:var(--text-primary);">WIE</span>
-      </a>
-
-
-      <!-- Navegação -->
-
-      <nav
-        style="
-          display:flex;
-          align-items:center;
-          gap:8px;
-          flex-wrap:wrap;
-        "
-      >
-
-        <a
-          href="#inicio"
-          style="
-            color:var(--text-secondary);
-            font-size:13px;
-            padding:7px 10px;
-          "
-        >
-          Início
-        </a>
-
-        <a
-          href="#vagas"
-          style="
-            color:var(--text-secondary);
-            font-size:13px;
-            padding:7px 10px;
-          "
-        >
-          Vagas
-        </a>
-
-        <a
-          href="#ficha"
-          style="
-            color:var(--text-secondary);
-            font-size:13px;
-            padding:7px 10px;
-          "
-        >
-          Ficha
-        </a>
-
-        <a
-          href="#troca"
-          style="
-            color:var(--text-secondary);
-            font-size:13px;
-            padding:7px 10px;
-          "
-        >
-          Troca
-        </a>
-
-        <a
-          href="admin.html"
-          class="button secondary small"
-          style="text-decoration:none;"
-        >
-          Administração
-        </a>
-
-      </nav>
-
+      <div class="brand-text">
+        <strong>House WIE</strong>
+        <span>Recepção oficial</span>
+      </div>
     </div>
 
+    <a href="admin.html" class="admin-btn">
+      Administração
+    </a>
   </header>
 
+  <main class="container">
 
-  <!-- =====================================================
-       INÍCIO
-  ====================================================== -->
+    <section class="hero">
+      <div class="mini">WELCOME TO WIE</div>
 
-  <main id="inicio">
+      <h1>House WIE</h1>
 
-    <section
-      style="
-        max-width:1200px;
-        margin:auto;
-        padding:85px 20px 60px;
-      "
-    >
-
-      <div
-        style="
-          display:grid;
-          grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);
-          gap:35px;
-          align-items:center;
-        "
-      >
-
-        <!-- Texto -->
-
-        <div>
-
-          <div class="small-label">
-            HOUSE • WIE
-          </div>
-
-          <h1
-            style="
-              font-size:clamp(40px,7vw,76px);
-              line-height:1;
-              margin:12px 0 18px;
-              font-weight:800;
-            "
-          >
-            HOUSE
-            <span style="color:var(--fnaf-gold);">
-              WIE
-            </span>
-          </h1>
-
-          <h2
-            style="
-              font-size:clamp(20px,3vw,30px);
-              margin-bottom:15px;
-              color:var(--text-primary);
-            "
-          >
-            Uma House para todos os fandoms.
-          </h2>
-
-          <p
-            style="
-              max-width:650px;
-              color:var(--text-secondary);
-              line-height:1.8;
-              font-size:15px;
-            "
-          >
-            Escolha seu personagem, participe da comunidade
-            e faça parte da House WIE. Aqui você pode enviar
-            sua ficha, consultar personagens disponíveis e
-            solicitar uma troca quando precisar.
-          </p>
-
-
-          <!-- Botões -->
-
-          <div class="button-group">
-
-            <a
-              href="#ficha"
-              class="button primary"
-              style="text-decoration:none;"
-            >
-              Entrar na House
-            </a>
-
-            <a
-              href="#vagas"
-              class="button secondary"
-              style="text-decoration:none;"
-            >
-              Ver vagas
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <!-- Card lateral -->
-
-        <div class="panel-card" style="padding:30px;">
-
-          <div class="small-label">
-            HOUSE WIE
-          </div>
-
-          <h3
-            style="
-              font-size:28px;
-              margin:10px 0;
-              color:var(--fnaf-gold);
-            "
-          >
-            Seu personagem.
-          </h3>
-
-          <p
-            style="
-              color:var(--text-secondary);
-              line-height:1.7;
-              font-size:13px;
-            "
-          >
-            Anime, mangá, jogos, séries, filmes,
-            livros ou qualquer outro fandom.
-            A House WIE foi criada para reunir
-            diferentes universos em um só lugar.
-          </p>
-
-          <div
-            style="
-              margin-top:20px;
-              padding-top:15px;
-              border-top:1px solid var(--border-color);
-              display:grid;
-              grid-template-columns:1fr 1fr;
-              gap:10px;
-            "
-          >
-
-            <div>
-              <span
-                style="
-                  display:block;
-                  color:var(--text-muted);
-                  font-size:10px;
-                  text-transform:uppercase;
-                "
-              >
-                Vagas abertas
-              </span>
-
-              <strong
-                id="heroOpenCount"
-                style="
-                  color:var(--fnaf-gold);
-                  font-size:25px;
-                "
-              >
-                0
-              </strong>
-            </div>
-
-
-            <div>
-              <span
-                style="
-                  display:block;
-                  color:var(--text-muted);
-                  font-size:10px;
-                  text-transform:uppercase;
-                "
-              >
-                Ocupadas
-              </span>
-
-              <strong
-                id="heroClosedCount"
-                style="
-                  color:var(--fnaf-gold);
-                  font-size:25px;
-                "
-              >
-                0
-              </strong>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
+      <p>
+        Preencha sua ficha para solicitar uma vaga na House WIE.
+        Após o envio, a administração irá analisar sua solicitação.
+      </p>
     </section>
 
+    <section class="form-card">
 
-    <!-- ===================================================
-         VAGAS
-    ==================================================== -->
-
-    <section
-      id="vagas"
-      style="
-        max-width:1200px;
-        margin:auto;
-        padding:50px 20px;
-      "
-    >
-
-      <div
-        style="
-          display:flex;
-          justify-content:space-between;
-          align-items:flex-end;
-          gap:20px;
-          margin-bottom:25px;
-          flex-wrap:wrap;
-        "
-      >
-
-        <div>
-
-          <div class="small-label">
-            PERSONAGENS
-          </div>
-
-          <h2
-            style="
-              font-size:32px;
-              margin-top:7px;
-            "
-          >
-            Vagas disponíveis
-          </h2>
-
-          <p
-            style="
-              color:var(--text-secondary);
-              margin-top:6px;
-              font-size:13px;
-            "
-          >
-            Encontre seu personagem e faça sua ficha.
-          </p>
-
-        </div>
-
-
-        <!-- Busca -->
-
-        <div style="width:min(320px,100%);">
-
-          <input
-            type="search"
-            id="searchVacancy"
-            placeholder="Pesquisar personagem ou obra..."
-          >
-
-        </div>
-
+      <div class="section-title">
+        <h2>Ficha de entrada</h2>
+        <p>Preencha os campos abaixo com as informações solicitadas.</p>
       </div>
 
+      <form id="fichaForm">
 
-      <!-- Vagas abertas -->
+        <div class="grid">
 
-      <div
-        id="openVacancies"
-        class="grid"
-      >
-
-        <div class="empty-state">
-          <span>⌛</span>
-          <p>Carregando vagas...</p>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         VAGAS FECHADAS
-    ==================================================== -->
-
-    <section
-      style="
-        max-width:1200px;
-        margin:auto;
-        padding:25px 20px 60px;
-      "
-    >
-
-      <div style="margin-bottom:20px;">
-
-        <div class="small-label">
-          OCUPADOS
-        </div>
-
-        <h2
-          style="
-            font-size:28px;
-            margin-top:7px;
-          "
-        >
-          Vagas fechadas
-        </h2>
-
-        <p
-          style="
-            color:var(--text-secondary);
-            margin-top:6px;
-            font-size:13px;
-          "
-        >
-          Personagens que já estão ocupados na House.
-        </p>
-
-      </div>
-
-
-      <div
-        id="closedVacancies"
-        class="grid"
-      >
-
-        <div class="empty-state">
-          <span>⌛</span>
-          <p>Carregando...</p>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         FICHA
-    ==================================================== -->
-
-    <section
-      id="ficha"
-      style="
-        max-width:900px;
-        margin:auto;
-        padding:70px 20px;
-      "
-    >
-
-      <div style="text-align:center;margin-bottom:25px;">
-
-        <div class="small-label">
-          RECEPÇÃO
-        </div>
-
-        <h2
-          style="
-            font-size:34px;
-            margin-top:8px;
-          "
-        >
-          Faça sua ficha
-        </h2>
-
-        <p
-          style="
-            color:var(--text-secondary);
-            max-width:650px;
-            margin:8px auto 0;
-            line-height:1.7;
-            font-size:13px;
-          "
-        >
-          Preencha seus dados e escolha um personagem
-          que esteja disponível.
-        </p>
-
-      </div>
-
-
-      <form
-        id="receptionForm"
-        class="panel-card"
-        style="padding:30px;"
-      >
-
-        <div id="formMessage"></div>
-
-
-        <div
-          style="
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:18px;
-          "
-        >
-
-          <!-- Nome -->
-
-          <div class="form-group">
-
+          <div class="field">
             <label for="name">
               Nome ou apelido
             </label>
 
             <input
               id="name"
-              name="name"
               type="text"
               placeholder="Opcional"
-              maxlength="40"
+              maxlength="60"
             >
-
           </div>
 
-
-          <!-- Idade -->
-
-          <div class="form-group">
-
+          <div class="field">
             <label for="age">
-              Idade *
+              Idade <span>*</span>
             </label>
 
             <input
               id="age"
-              name="age"
               type="number"
               min="1"
-              max="100"
-              placeholder="Sua idade"
+              max="120"
+              placeholder="Ex.: 16"
               required
             >
-
           </div>
 
+          <div class="field">
+            <label for="gender">
+              Gênero <span>*</span>
+            </label>
 
-          <!-- Últimos 4 dígitos -->
+            <select id="gender" required>
+              <option value="">Selecione...</option>
+              <option value="Feminino">Feminino</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Não-binário">Não-binário</option>
+              <option value="Outro">Outro</option>
+              <option value="Prefiro não informar">
+                Prefiro não informar
+              </option>
+            </select>
+          </div>
 
-          <div class="form-group">
-
+          <div class="field">
             <label for="phoneLast4">
-              Últimos 4 dígitos do telefone *
+              Últimos 4 números do telefone <span>*</span>
             </label>
 
             <input
               id="phoneLast4"
-              name="phoneLast4"
               type="text"
               inputmode="numeric"
               maxlength="4"
               pattern="[0-9]{4}"
-              placeholder="0000"
+              placeholder="Ex.: 4821"
               required
             >
 
+            <div class="help">
+              Usado pela administração para identificar sua ficha.
+            </div>
           </div>
 
+          <div class="field">
+            <label for="username">
+              @ / Usuário
+            </label>
 
-          <!-- Personagem -->
+            <input
+              id="username"
+              type="text"
+              placeholder="@seuusuario"
+              maxlength="50"
+            >
+          </div>
 
-          <div class="form-group">
-
+          <div class="field">
             <label for="character">
-              Personagem *
+              Personagem <span>*</span>
             </label>
 
             <input
               id="character"
-              name="character"
               type="text"
               placeholder="Nome do personagem"
-              required
               maxlength="80"
+              required
             >
-
           </div>
 
-
-          <!-- Obra -->
-
-          <div
-            class="form-group"
-            style="grid-column:1/-1;"
-          >
-
+          <div class="field full">
             <label for="work">
-              Obra / Fandom *
+              Obra <span>*</span>
             </label>
 
             <input
               id="work"
-              name="work"
               type="text"
-              placeholder="Ex.: Naruto, MHA, Genshin, Marvel..."
-              required
+              placeholder="Anime, mangá, jogo, série..."
               maxlength="100"
+              required
             >
-
           </div>
 
+          <div class="field full">
 
-          <!-- Foto -->
-
-          <div
-            class="form-group"
-            style="grid-column:1/-1;"
-          >
-
-            <label for="characterPhoto">
-              Foto do personagem *
+            <label for="photo">
+              Foto do personagem <span>*</span>
             </label>
 
-            <input
-              id="characterPhoto"
-              name="characterPhoto"
-              type="file"
-              accept="image/*"
-              required
-            >
+            <div class="upload-box">
 
-            <p
-              style="
-                color:var(--text-muted);
-                font-size:11px;
-                margin-top:7px;
-              "
-            >
-              Escolha uma imagem do personagem.
-            </p>
+              <input
+                id="photo"
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                required
+              >
 
-            <img
-              id="photoPreview"
-              class="preview"
-              alt="Prévia da foto"
-              style="margin-top:12px;"
-            >
+              <div class="help" style="margin-top:8px;">
+                Envie uma imagem do personagem. PNG, JPG, WEBP ou GIF.
+              </div>
 
+              <div class="preview-wrap" id="previewWrap">
+
+                <img
+                  id="preview"
+                  class="preview"
+                  alt="Prévia da foto"
+                >
+
+                <div class="preview-info">
+                  <strong id="previewName">
+                    Imagem selecionada
+                  </strong>
+
+                  <span id="previewSize">
+                    Aguardando upload...
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
           </div>
 
         </div>
 
-
-        <div
-          class="notice"
-          style="margin:10px 0 18px;"
-        >
-          Ao enviar a ficha, você confirma que os dados
-          informados estão corretos e que deseja participar
-          da House WIE.
+        <div class="terms">
+          <strong>Importante:</strong>
+          ao enviar a ficha, você confirma que as informações fornecidas
+          são verdadeiras. A vaga só será considerada ocupada após a
+          aprovação da administração.
+          Seus dados pessoais não serão exibidos publicamente nas vagas.
         </div>
 
-
         <button
+          class="submit"
+          id="submitBtn"
           type="submit"
-          id="submitReception"
-          class="button primary full"
         >
           Enviar ficha
         </button>
 
+        <div
+          id="status"
+          class="status"
+        ></div>
+
       </form>
 
     </section>
 
-
-    <!-- ===================================================
-         TROCA
-    ==================================================== -->
-
-    <section
-      id="troca"
-      style="
-        max-width:900px;
-        margin:auto;
-        padding:40px 20px 80px;
-      "
-    >
-
-      <div style="text-align:center;margin-bottom:25px;">
-
-        <div class="small-label">
-          TROCA DE PERSONAGEM
-        </div>
-
-        <h2
-          style="
-            font-size:34px;
-            margin-top:8px;
-          "
-        >
-          Solicitar troca
-        </h2>
-
-        <p
-          style="
-            color:var(--text-secondary);
-            max-width:650px;
-            margin:8px auto;
-            line-height:1.7;
-            font-size:13px;
-          "
-        >
-          Informe seu personagem atual e o novo personagem
-          que deseja solicitar.
-        </p>
-
-      </div>
-
-
-      <form
-        id="exchangeForm"
-        class="panel-card"
-        style="padding:30px;"
-      >
-
-        <div id="exchangeMessage"></div>
-
-
-        <div
-          style="
-            display:grid;
-            grid-template-columns:1fr 1fr;
-            gap:18px;
-          "
-        >
-
-          <!-- Identificação -->
-
-          <div class="form-group">
-
-            <label for="exchangeName">
-              Nome ou apelido
-            </label>
-
-            <input
-              id="exchangeName"
-              type="text"
-              maxlength="40"
-              placeholder="Opcional"
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="exchangePhone">
-              Últimos 4 dígitos *
-            </label>
-
-            <input
-              id="exchangePhone"
-              type="text"
-              inputmode="numeric"
-              maxlength="4"
-              pattern="[0-9]{4}"
-              placeholder="0000"
-              required
-            >
-
-          </div>
-
-
-          <!-- Personagem atual -->
-
-          <div class="form-group">
-
-            <label for="oldCharacter">
-              Personagem atual *
-            </label>
-
-            <input
-              id="oldCharacter"
-              type="text"
-              required
-              maxlength="80"
-              placeholder="Personagem atual"
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="oldWork">
-              Obra atual *
-            </label>
-
-            <input
-              id="oldWork"
-              type="text"
-              required
-              maxlength="100"
-              placeholder="Obra / fandom"
-            >
-
-          </div>
-
-
-          <!-- Novo personagem -->
-
-          <div class="form-group">
-
-            <label for="newCharacter">
-              Novo personagem *
-            </label>
-
-            <input
-              id="newCharacter"
-              type="text"
-              required
-              maxlength="80"
-              placeholder="Novo personagem"
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="newWork">
-              Nova obra *
-            </label>
-
-            <input
-              id="newWork"
-              type="text"
-              required
-              maxlength="100"
-              placeholder="Obra / fandom"
-            >
-
-          </div>
-
-
-          <!-- Foto nova -->
-
-          <div
-            class="form-group"
-            style="grid-column:1/-1;"
-          >
-
-            <label for="newCharacterPhoto">
-              Foto do novo personagem *
-            </label>
-
-            <input
-              id="newCharacterPhoto"
-              type="file"
-              accept="image/*"
-              required
-            >
-
-            <img
-              id="newPhotoPreview"
-              class="preview"
-              alt="Prévia"
-              style="margin-top:12px;"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div
-          class="notice"
-          style="margin:10px 0 18px;"
-        >
-          A troca será enviada para análise da administração.
-          O personagem atual só será liberado quando a
-          solicitação for aprovada.
-        </div>
-
-
-        <button
-          type="submit"
-          id="submitExchange"
-          class="button secondary full"
-        >
-          Solicitar troca
-        </button>
-
-      </form>
-
-    </section>
+    <div class="footer">
+      House WIE • Sistema de recepção
+    </div>
 
   </main>
 
 
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-
-  <footer class="footer">
-
-    <p>
-      © <span id="currentYear"></span> House WIE.
-    </p>
-
-    <p style="margin-top:6px;">
-      House para todos os fandoms.
-    </p>
-
-  </footer>
-
-
-  <!-- =====================================================
-       FIREBASE
-  ====================================================== -->
-
+  <!-- Firebase -->
   <script type="module">
 
-    /*
-     * =====================================================
-     * CONFIGURAÇÃO DO FIREBASE
-     * =====================================================
-     *
-     * COLOQUE AQUI O CONFIG REAL DO SEU PROJETO HOUSE WIE.
-     *
-     * Projeto mencionado anteriormente:
-     * house-wie-6c8f9
-     */
-
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
     import {
       getFirestore,
       collection,
       addDoc,
-      getDocs,
       query,
-      orderBy,
+      where,
+      getDocs,
       serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
+    /* =====================================================
+       FIREBASE — HOUSE WIE
+    ===================================================== */
 
     const firebaseConfig = {
 
-      apiKey: "COLOQUE_SUA_API_KEY",
+      apiKey:
+        "AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
 
       authDomain:
         "house-wie-6c8f9.firebaseapp.com",
@@ -1002,1365 +682,687 @@
         "house-wie-6c8f9",
 
       storageBucket:
-        "COLOQUE_SEU_STORAGE_BUCKET",
+        "house-wie-6c8f9.firebasestorage.app",
 
       messagingSenderId:
-        "COLOQUE_SEU_MESSAGING_SENDER_ID",
+        "241202380170",
 
       appId:
-        "COLOQUE_SEU_APP_ID"
-
+        "1:241202380170:web:b7df00f3faa8ae7afedc73"
     };
 
 
-    const app =
-      initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
 
-    const db =
-      getFirestore(app);
+    const db = getFirestore(app);
+
+
+    /* =====================================================
+       CLOUDINARY — HOUSE WIE
+    ===================================================== */
+
+    const CLOUDINARY_CLOUD_NAME =
+      "fpas1zce";
+
+    const CLOUDINARY_UPLOAD_PRESET =
+      "House WIE";
 
 
     /* =====================================================
        ELEMENTOS
-    ====================================================== */
+    ===================================================== */
 
-    const openVacancies =
-      document.getElementById("openVacancies");
+    const form =
+      document.getElementById("fichaForm");
 
-    const closedVacancies =
-      document.getElementById("closedVacancies");
+    const photoInput =
+      document.getElementById("photo");
 
-    const searchVacancy =
-      document.getElementById("searchVacancy");
+    const previewWrap =
+      document.getElementById("previewWrap");
 
-    const heroOpenCount =
-      document.getElementById("heroOpenCount");
+    const preview =
+      document.getElementById("preview");
 
-    const heroClosedCount =
-      document.getElementById("heroClosedCount");
+    const previewName =
+      document.getElementById("previewName");
 
+    const previewSize =
+      document.getElementById("previewSize");
 
-    let allVacancies = [];
+    const submitBtn =
+      document.getElementById("submitBtn");
+
+    const statusBox =
+      document.getElementById("status");
 
 
     /* =====================================================
-       UTILITÁRIOS
-    ====================================================== */
+       STATUS
+    ===================================================== */
 
-    function escapeHTML(value) {
+    function showStatus(message, type) {
 
-      if (value === null || value === undefined) {
-        return "";
+      statusBox.textContent = message;
+
+      statusBox.className =
+        "status show " + type;
+    }
+
+
+    function clearStatus() {
+
+      statusBox.textContent = "";
+
+      statusBox.className = "status";
+    }
+
+
+    function setLoading(loading) {
+
+      submitBtn.disabled = loading;
+
+      if (loading) {
+
+        submitBtn.innerHTML = `
+          <span class="loading">
+            <span class="spinner"></span>
+            Enviando ficha...
+          </span>
+        `;
+
+      } else {
+
+        submitBtn.textContent =
+          "Enviar ficha";
+      }
+    }
+
+
+    /* =====================================================
+       PREVIEW DA IMAGEM
+    ===================================================== */
+
+    photoInput.addEventListener("change", () => {
+
+      const file =
+        photoInput.files[0];
+
+      if (!file) {
+
+        previewWrap.classList.remove("show");
+
+        return;
       }
 
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
 
-    }
-
-
-    function normalize(value) {
-
-      return String(value || "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .trim();
-
-    }
+      const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif"
+      ];
 
 
-    function showMessage(
-      element,
-      type,
-      text
-    ) {
+      if (!allowedTypes.includes(file.type)) {
 
-      element.innerHTML = `
-        <div class="message ${type}">
-          ${escapeHTML(text)}
-        </div>
-      `;
+        photoInput.value = "";
 
+        previewWrap.classList.remove("show");
+
+        showStatus(
+          "Escolha uma imagem PNG, JPG, WEBP ou GIF.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      const maxSize =
+        10 * 1024 * 1024;
+
+
+      if (file.size > maxSize) {
+
+        photoInput.value = "";
+
+        previewWrap.classList.remove("show");
+
+        showStatus(
+          "A imagem deve ter no máximo 10 MB.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload = event => {
+
+        preview.src =
+          event.target.result;
+
+        previewName.textContent =
+          file.name;
+
+        previewSize.textContent =
+          formatFileSize(file.size);
+
+        previewWrap.classList.add("show");
+
+        clearStatus();
+      };
+
+
+      reader.readAsDataURL(file);
+
+    });
+
+
+    function formatFileSize(bytes) {
+
+      if (bytes < 1024) {
+
+        return bytes + " B";
+      }
+
+      if (bytes < 1024 * 1024) {
+
+        return (
+          (bytes / 1024).toFixed(1) +
+          " KB"
+        );
+      }
+
+      return (
+        (bytes / (1024 * 1024)).toFixed(1) +
+        " MB"
+      );
     }
 
 
     /* =====================================================
-       COMPRESSÃO DA IMAGEM
-       Evita mandar imagens gigantes para o Firestore.
-    ====================================================== */
+       ÚLTIMOS 4 NÚMEROS
+    ===================================================== */
 
-    function compressImage(
-      file,
-      maxWidth = 900,
-      quality = 0.78
+    document
+      .getElementById("phoneLast4")
+      .addEventListener("input", event => {
+
+        event.target.value =
+          event.target.value
+            .replace(/\D/g, "")
+            .slice(0, 4);
+
+      });
+
+
+    /* =====================================================
+       UPLOAD CLOUDINARY
+    ===================================================== */
+
+    async function uploadToCloudinary(file) {
+
+      const url =
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+
+
+      const data =
+        new FormData();
+
+
+      data.append(
+        "file",
+        file
+      );
+
+
+      data.append(
+        "upload_preset",
+        CLOUDINARY_UPLOAD_PRESET
+      );
+
+
+      const response =
+        await fetch(url, {
+
+          method: "POST",
+
+          body: data
+        });
+
+
+      const result =
+        await response.json();
+
+
+      if (!response.ok) {
+
+        console.error(
+          "Cloudinary:",
+          result
+        );
+
+        throw new Error(
+          result?.error?.message ||
+          "Não foi possível enviar a imagem."
+        );
+      }
+
+
+      if (!result.secure_url) {
+
+        throw new Error(
+          "O Cloudinary não retornou a URL da imagem."
+        );
+      }
+
+
+      return result.secure_url;
+    }
+
+
+    /* =====================================================
+       VERIFICAR VAGA FECHADA
+    ===================================================== */
+
+    async function characterIsOccupied(
+      character,
+      work
     ) {
 
-      return new Promise((resolve, reject) => {
+      const vacanciesRef =
+        collection(
+          db,
+          "vacancies"
+        );
 
-        if (!file) {
-          reject(
-            new Error("Nenhuma imagem selecionada.")
+
+      const q =
+        query(
+          vacanciesRef,
+
+          where(
+            "character",
+            "==",
+            character
+          ),
+
+          where(
+            "work",
+            "==",
+            work
+          ),
+
+          where(
+            "status",
+            "==",
+            "fechada"
+          )
+        );
+
+
+      const snapshot =
+        await getDocs(q);
+
+
+      return !snapshot.empty;
+    }
+
+
+    /* =====================================================
+       VERIFICAR SOLICITAÇÃO PENDENTE
+    ===================================================== */
+
+    async function hasPendingRequest(
+      character,
+      work
+    ) {
+
+      const requestsRef =
+        collection(
+          db,
+          "requests"
+        );
+
+
+      const q =
+        query(
+          requestsRef,
+
+          where(
+            "character",
+            "==",
+            character
+          ),
+
+          where(
+            "work",
+            "==",
+            work
+          ),
+
+          where(
+            "status",
+            "==",
+            "pendente"
+          )
+        );
+
+
+      const snapshot =
+        await getDocs(q);
+
+
+      return !snapshot.empty;
+    }
+
+
+    /* =====================================================
+       ENVIO DA FICHA
+    ===================================================== */
+
+    form.addEventListener(
+      "submit",
+      async event => {
+
+        event.preventDefault();
+
+        clearStatus();
+
+
+        const name =
+          document
+            .getElementById("name")
+            .value
+            .trim();
+
+
+        const age =
+          Number(
+            document
+              .getElementById("age")
+              .value
+          );
+
+
+        const gender =
+          document
+            .getElementById("gender")
+            .value;
+
+
+        const phoneLast4 =
+          document
+            .getElementById("phoneLast4")
+            .value
+            .trim();
+
+
+        const username =
+          document
+            .getElementById("username")
+            .value
+            .trim();
+
+
+        const character =
+          document
+            .getElementById("character")
+            .value
+            .trim();
+
+
+        const work =
+          document
+            .getElementById("work")
+            .value
+            .trim();
+
+
+        const file =
+          photoInput.files[0];
+
+
+        /* -----------------------------
+           VALIDAÇÕES
+        ----------------------------- */
+
+        if (!age || age < 1 || age > 120) {
+
+          showStatus(
+            "Digite uma idade válida.",
+            "error"
           );
 
           return;
         }
 
 
-        const reader =
-          new FileReader();
+        if (!gender) {
 
-
-        reader.onload = event => {
-
-          const img =
-            new Image();
-
-
-          img.onload = () => {
-
-            let width =
-              img.width;
-
-            let height =
-              img.height;
-
-
-            if (width > maxWidth) {
-
-              const ratio =
-                maxWidth / width;
-
-              width =
-                maxWidth;
-
-              height =
-                height * ratio;
-
-            }
-
-
-            const canvas =
-              document.createElement("canvas");
-
-            canvas.width =
-              width;
-
-            canvas.height =
-              height;
-
-
-            const ctx =
-              canvas.getContext("2d");
-
-
-            ctx.drawImage(
-              img,
-              0,
-              0,
-              width,
-              height
-            );
-
-
-            const result =
-              canvas.toDataURL(
-                "image/jpeg",
-                quality
-              );
-
-
-            resolve(result);
-
-          };
-
-
-          img.onerror = () => {
-
-            reject(
-              new Error(
-                "Não foi possível carregar a imagem."
-              )
-            );
-
-          };
-
-
-          img.src =
-            event.target.result;
-
-        };
-
-
-        reader.onerror = () => {
-
-          reject(
-            new Error(
-              "Não foi possível ler a imagem."
-            )
+          showStatus(
+            "Selecione seu gênero.",
+            "error"
           );
 
-        };
-
-
-        reader.readAsDataURL(file);
-
-      });
-
-    }
-
-
-    /* =====================================================
-       PRÉVIA DAS FOTOS
-    ====================================================== */
-
-    function setupPreview(
-      input,
-      preview
-    ) {
-
-      input.addEventListener(
-        "change",
-        () => {
-
-          const file =
-            input.files?.[0];
-
-          if (!file) {
-
-            preview.style.display =
-              "none";
-
-            return;
-
-          }
-
-
-          const reader =
-            new FileReader();
-
-
-          reader.onload =
-            event => {
-
-              preview.src =
-                event.target.result;
-
-              preview.style.display =
-                "block";
-
-            };
-
-
-          reader.readAsDataURL(file);
-
+          return;
         }
-      );
-
-    }
 
 
-    setupPreview(
-      document.getElementById(
-        "characterPhoto"
-      ),
-      document.getElementById(
-        "photoPreview"
-      )
-    );
+        if (!/^\d{4}$/.test(phoneLast4)) {
 
-
-    setupPreview(
-      document.getElementById(
-        "newCharacterPhoto"
-      ),
-      document.getElementById(
-        "newPhotoPreview"
-      )
-    );
-
-
-    /* =====================================================
-       CARREGAR VAGAS
-    ====================================================== */
-
-    async function loadVacancies() {
-
-      try {
-
-        const vacancyQuery =
-          query(
-            collection(
-              db,
-              "vacancies"
-            ),
-            orderBy(
-              "character",
-              "asc"
-            )
+          showStatus(
+            "Digite exatamente os 4 últimos números do telefone.",
+            "error"
           );
 
+          return;
+        }
 
-        const snapshot =
-          await getDocs(
-            vacancyQuery
+
+        if (!character) {
+
+          showStatus(
+            "Digite o personagem.",
+            "error"
           );
 
+          return;
+        }
 
-        allVacancies =
-          snapshot.docs.map(
-            doc => ({
 
-              id: doc.id,
+        if (!work) {
 
-              ...doc.data()
-
-            })
+          showStatus(
+            "Digite a obra.",
+            "error"
           );
 
-
-        renderVacancies(
-          allVacancies
-        );
+          return;
+        }
 
 
-      } catch (error) {
+        if (!file) {
 
-        console.error(
-          "Erro ao carregar vagas:",
-          error
-        );
+          showStatus(
+            "Envie uma foto do personagem.",
+            "error"
+          );
 
+          return;
+        }
 
-        /*
-         * Fallback caso a coleção ainda não
-         * tenha índice para orderBy.
-         */
 
         try {
 
-          const snapshot =
-            await getDocs(
-              collection(
-                db,
-                "vacancies"
-              )
+          setLoading(true);
+
+
+          /* -----------------------------
+             VERIFICAR VAGA
+          ----------------------------- */
+
+          const occupied =
+            await characterIsOccupied(
+              character,
+              work
             );
 
 
-          allVacancies =
-            snapshot.docs.map(
-              doc => ({
+          if (occupied) {
 
-                id: doc.id,
+            showStatus(
+              "Esse personagem já está ocupado na House WIE.",
+              "error"
+            );
 
-                ...doc.data()
+            setLoading(false);
 
-              })
+            return;
+          }
+
+
+          /* -----------------------------
+             VERIFICAR OUTRA FICHA
+          ----------------------------- */
+
+          const pending =
+            await hasPendingRequest(
+              character,
+              work
             );
 
 
-          renderVacancies(
-            allVacancies
+          if (pending) {
+
+            showStatus(
+              "Já existe uma ficha pendente para esse personagem.",
+              "error"
+            );
+
+            setLoading(false);
+
+            return;
+          }
+
+
+          /* -----------------------------
+             CLOUDINARY
+          ----------------------------- */
+
+          showStatus(
+            "Enviando a foto...",
+            "success"
           );
 
 
-        } catch (secondError) {
+          const photoUrl =
+            await uploadToCloudinary(file);
+
+
+          /* -----------------------------
+             FIRESTORE
+          ----------------------------- */
+
+          showStatus(
+            "Salvando sua ficha...",
+            "success"
+          );
+
+
+          await addDoc(
+            collection(
+              db,
+              "requests"
+            ),
+            {
+
+              name:
+                name || "",
+
+              age:
+                age,
+
+              gender:
+                gender,
+
+              phoneLast4:
+                phoneLast4,
+
+              username:
+                username || "",
+
+              character:
+                character,
+
+              work:
+                work,
+
+              photo:
+                photoUrl,
+
+              type:
+                "ficha",
+
+              status:
+                "pendente",
+
+              createdAt:
+                serverTimestamp()
+            }
+          );
+
+
+          /* -----------------------------
+             SUCESSO
+          ----------------------------- */
+
+          form.reset();
+
+          previewWrap.classList.remove(
+            "show"
+          );
+
+          preview.src = "";
+
+
+          showStatus(
+            "Sua ficha foi enviada com sucesso! Aguarde a análise da administração. 💗",
+            "success"
+          );
+
+
+        } catch (error) {
 
           console.error(
-            secondError
+            "Erro ao enviar ficha:",
+            error
           );
 
 
-          openVacancies.innerHTML = `
-            <div class="empty-state">
-              <span>!</span>
-              <p>
-                Não foi possível carregar as vagas.
-              </p>
-            </div>
-          `;
+          showStatus(
+            "Não foi possível enviar sua ficha. " +
+            (error.message || "Tente novamente."),
+            "error"
+          );
+
+
+        } finally {
+
+          setLoading(false);
 
         }
-
-      }
-
-    }
-
-
-    /* =====================================================
-       RENDERIZAR VAGAS
-    ====================================================== */
-
-    function renderVacancies(
-      vacancies
-    ) {
-
-      const search =
-        normalize(
-          searchVacancy.value
-        );
-
-
-      const filtered =
-        vacancies.filter(
-          vacancy => {
-
-            const character =
-              normalize(
-                vacancy.character
-              );
-
-            const work =
-              normalize(
-                vacancy.work
-              );
-
-            return (
-              !search ||
-              character.includes(search) ||
-              work.includes(search)
-            );
-
-          }
-        );
-
-
-      const open =
-        filtered.filter(
-          vacancy =>
-            normalize(
-              vacancy.status
-            ) === "aberta" ||
-            normalize(
-              vacancy.status
-            ) === "open" ||
-            vacancy.status === true
-        );
-
-
-      const closed =
-        filtered.filter(
-          vacancy =>
-            normalize(
-              vacancy.status
-            ) === "fechada" ||
-            normalize(
-              vacancy.status
-            ) === "closed" ||
-            normalize(
-              vacancy.status
-            ) === "ocupada" ||
-            vacancy.status === false
-        );
-
-
-      heroOpenCount.textContent =
-        allVacancies.filter(
-          vacancy =>
-            normalize(
-              vacancy.status
-            ) === "aberta" ||
-            normalize(
-              vacancy.status
-            ) === "open" ||
-            vacancy.status === true
-        ).length;
-
-
-      heroClosedCount.textContent =
-        allVacancies.filter(
-          vacancy =>
-            normalize(
-              vacancy.status
-            ) === "fechada" ||
-            normalize(
-              vacancy.status
-            ) === "closed" ||
-            normalize(
-              vacancy.status
-            ) === "ocupada" ||
-            vacancy.status === false
-        ).length;
-
-
-      renderOpen(
-        open
-      );
-
-
-      renderClosed(
-        closed
-      );
-
-    }
-
-
-    /* =====================================================
-       VAGAS ABERTAS
-    ====================================================== */
-
-    function renderOpen(
-      vacancies
-    ) {
-
-      if (!vacancies.length) {
-
-        openVacancies.innerHTML = `
-          <div class="empty-state"
-               style="grid-column:1/-1;">
-            <span>♡</span>
-            <p>
-              Nenhuma vaga encontrada.
-            </p>
-          </div>
-        `;
-
-        return;
-
-      }
-
-
-      openVacancies.innerHTML =
-        vacancies.map(
-          vacancy => {
-
-            const character =
-              escapeHTML(
-                vacancy.character ||
-                "Personagem"
-              );
-
-            const work =
-              escapeHTML(
-                vacancy.work ||
-                "Fandom não informado"
-              );
-
-            const photo =
-              escapeHTML(
-                vacancy.photo ||
-                vacancy.image ||
-                ""
-              );
-
-
-            return `
-              <article class="panel-card"
-                       style="
-                         overflow:hidden;
-                         transition:.3s;
-                       ">
-
-                ${
-                  photo
-
-                  ? `
-                    <img
-                      src="${photo}"
-                      alt="${character}"
-                      style="
-                        width:100%;
-                        height:230px;
-                        object-fit:cover;
-                        display:block;
-                      "
-                    >
-                  `
-
-                  : `
-                    <div class="no-image">
-                      ✦
-                    </div>
-                  `
-                }
-
-                <div style="padding:18px;">
-
-                  <div
-                    class="small-label"
-                    style="margin-bottom:5px;"
-                  >
-                    DISPONÍVEL
-                  </div>
-
-                  <h3
-                    style="
-                      color:var(--fnaf-gold);
-                      font-size:19px;
-                    "
-                  >
-                    ${character}
-                  </h3>
-
-                  <p
-                    style="
-                      color:var(--text-secondary);
-                      font-size:12px;
-                      margin-top:5px;
-                    "
-                  >
-                    ${work}
-                  </p>
-
-                  <button
-                    class="button primary small"
-                    style="
-                      width:100%;
-                      margin-top:14px;
-                    "
-                    data-character="${character}"
-                    data-work="${work}"
-                    onclick="chooseCharacter(this)"
-                  >
-                    Escolher personagem
-                  </button>
-
-                </div>
-
-              </article>
-            `;
-
-          }
-        ).join("");
-
-    }
-
-
-    /* =====================================================
-       VAGAS FECHADAS
-    ====================================================== */
-
-    function renderClosed(
-      vacancies
-    ) {
-
-      if (!vacancies.length) {
-
-        closedVacancies.innerHTML = `
-          <div class="empty-state"
-               style="grid-column:1/-1;">
-            <span>◇</span>
-            <p>
-              Nenhum personagem ocupado.
-            </p>
-          </div>
-        `;
-
-        return;
-
-      }
-
-
-      closedVacancies.innerHTML =
-        vacancies.map(
-          vacancy => {
-
-            const character =
-              escapeHTML(
-                vacancy.character ||
-                "Personagem"
-              );
-
-            const work =
-              escapeHTML(
-                vacancy.work ||
-                "Fandom não informado"
-              );
-
-            const photo =
-              escapeHTML(
-                vacancy.photo ||
-                vacancy.image ||
-                ""
-              );
-
-
-            return `
-              <article class="panel-card"
-                       style="
-                         overflow:hidden;
-                         opacity:.8;
-                       ">
-
-                ${
-                  photo
-
-                  ? `
-                    <img
-                      src="${photo}"
-                      alt="${character}"
-                      style="
-                        width:100%;
-                        height:210px;
-                        object-fit:cover;
-                        display:block;
-                        filter:saturate(.65);
-                      "
-                    >
-                  `
-
-                  : `
-                    <div class="no-image">
-                      ◆
-                    </div>
-                  `
-                }
-
-                <div style="padding:17px;">
-
-                  <div
-                    class="small-label"
-                    style="color:var(--text-muted);"
-                  >
-                    OCUPADO
-                  </div>
-
-                  <h3
-                    style="
-                      margin-top:5px;
-                      color:var(--text-primary);
-                    "
-                  >
-                    ${character}
-                  </h3>
-
-                  <p
-                    style="
-                      color:var(--text-secondary);
-                      font-size:12px;
-                      margin-top:4px;
-                    "
-                  >
-                    ${work}
-                  </p>
-
-                </div>
-
-              </article>
-            `;
-
-          }
-        ).join("");
-
-    }
-
-
-    /* =====================================================
-       ESCOLHER PERSONAGEM
-    ====================================================== */
-
-    window.chooseCharacter =
-      function(button) {
-
-        const character =
-          button.dataset.character;
-
-        const work =
-          button.dataset.work;
-
-
-        document.getElementById(
-          "character"
-        ).value =
-          character;
-
-
-        document.getElementById(
-          "work"
-        ).value =
-          work;
-
-
-        document.getElementById(
-          "ficha"
-        ).scrollIntoView({
-          behavior:"smooth"
-        });
-
-
-        setTimeout(
-          () => {
-
-            document.getElementById(
-              "character"
-            ).focus();
-
-          },
-          600
-        );
-
-      };
-
-
-    /* =====================================================
-       BUSCA
-    ====================================================== */
-
-    searchVacancy.addEventListener(
-      "input",
-      () => {
-
-        renderVacancies(
-          allVacancies
-        );
 
       }
     );
 
-
-    /* =====================================================
-       ENVIO DA FICHA
-    ====================================================== */
-
-    document
-      .getElementById(
-        "receptionForm"
-      )
-      .addEventListener(
-        "submit",
-        async event => {
-
-          event.preventDefault();
-
-
-          const button =
-            document.getElementById(
-              "submitReception"
-            );
-
-
-          const message =
-            document.getElementById(
-              "formMessage"
-            );
-
-
-          const name =
-            document.getElementById(
-              "name"
-            ).value.trim();
-
-
-          const age =
-            Number(
-              document.getElementById(
-                "age"
-              ).value
-            );
-
-
-          const phoneLast4 =
-            document.getElementById(
-              "phoneLast4"
-            ).value.trim();
-
-
-          const character =
-            document.getElementById(
-              "character"
-            ).value.trim();
-
-
-          const work =
-            document.getElementById(
-              "work"
-            ).value.trim();
-
-
-          const file =
-            document.getElementById(
-              "characterPhoto"
-            ).files?.[0];
-
-
-          if (
-            !age ||
-            !character ||
-            !work ||
-            !file ||
-            !/^[0-9]{4}$/.test(
-              phoneLast4
-            )
-          ) {
-
-            showMessage(
-              message,
-              "error",
-              "Preencha todos os campos obrigatórios corretamente."
-            );
-
-            return;
-
-          }
-
-
-          /*
-           * Verifica se o personagem já está
-           * fechado.
-           */
-
-          const alreadyOccupied =
-            allVacancies.some(
-              vacancy => {
-
-                const sameCharacter =
-                  normalize(
-                    vacancy.character
-                  ) ===
-                  normalize(
-                    character
-                  );
-
-                const sameWork =
-                  normalize(
-                    vacancy.work
-                  ) ===
-                  normalize(
-                    work
-                  );
-
-                const closed =
-                  normalize(
-                    vacancy.status
-                  ) === "fechada" ||
-                  normalize(
-                    vacancy.status
-                  ) === "closed" ||
-                  normalize(
-                    vacancy.status
-                  ) === "ocupada" ||
-                  vacancy.status === false;
-
-                return (
-                  sameCharacter &&
-                  sameWork &&
-                  closed
-                );
-
-              }
-            );
-
-
-          if (alreadyOccupied) {
-
-            showMessage(
-              message,
-              "error",
-              "Esse personagem já está ocupado."
-            );
-
-            return;
-
-          }
-
-
-          try {
-
-            button.disabled =
-              true;
-
-            button.textContent =
-              "Enviando...";
-
-
-            const photo =
-              await compressImage(
-                file
-              );
-
-
-            await addDoc(
-              collection(
-                db,
-                "requests"
-              ),
-              {
-
-                type:
-                  "ficha",
-
-                name:
-                  name || "Não informado",
-
-                age:
-                  age,
-
-                phoneLast4:
-                  phoneLast4,
-
-                character:
-                  character,
-
-                work:
-                  work,
-
-                photo:
-                  photo,
-
-                status:
-                  "pendente",
-
-                createdAt:
-                  serverTimestamp()
-
-              }
-            );
-
-
-            showMessage(
-              message,
-              "success",
-              "Sua ficha foi enviada! Aguarde a análise da administração."
-            );
-
-
-            event.target.reset();
-
-
-            document.getElementById(
-              "photoPreview"
-            ).style.display =
-              "none";
-
-
-          } catch (error) {
-
-            console.error(
-              error
-            );
-
-
-            showMessage(
-              message,
-              "error",
-              "Não foi possível enviar sua ficha. Verifique o Firebase e tente novamente."
-            );
-
-          } finally {
-
-            button.disabled =
-              false;
-
-            button.textContent =
-              "Enviar ficha";
-
-          }
-
-        }
-      );
-
-
-    /* =====================================================
-       ENVIO DA TROCA
-    ====================================================== */
-
-    document
-      .getElementById(
-        "exchangeForm"
-      )
-      .addEventListener(
-        "submit",
-        async event => {
-
-          event.preventDefault();
-
-
-          const button =
-            document.getElementById(
-              "submitExchange"
-            );
-
-
-          const message =
-            document.getElementById(
-              "exchangeMessage"
-            );
-
-
-          const name =
-            document.getElementById(
-              "exchangeName"
-            ).value.trim();
-
-
-          const phoneLast4 =
-            document.getElementById(
-              "exchangePhone"
-            ).value.trim();
-
-
-          const oldCharacter =
-            document.getElementById(
-              "oldCharacter"
-            ).value.trim();
-
-
-          const oldWork =
-            document.getElementById(
-              "oldWork"
-            ).value.trim();
-
-
-          const newCharacter =
-            document.getElementById(
-              "newCharacter"
-            ).value.trim();
-
-
-          const newWork =
-            document.getElementById(
-              "newWork"
-            ).value.trim();
-
-
-          const file =
-            document.getElementById(
-              "newCharacterPhoto"
-            ).files?.[0];
-
-
-          if (
-            !phoneLast4 ||
-            !oldCharacter ||
-            !oldWork ||
-            !newCharacter ||
-            !newWork ||
-            !file ||
-            !/^[0-9]{4}$/.test(
-              phoneLast4
-            )
-          ) {
-
-            showMessage(
-              message,
-              "error",
-              "Preencha todos os campos obrigatórios."
-            );
-
-            return;
-
-          }
-
-
-          /*
-           * Verifica se o novo personagem
-           * está ocupado.
-           */
-
-          const alreadyOccupied =
-            allVacancies.some(
-              vacancy => {
-
-                const sameCharacter =
-                  normalize(
-                    vacancy.character
-                  ) ===
-                  normalize(
-                    newCharacter
-                  );
-
-                const sameWork =
-                  normalize(
-                    vacancy.work
-                  ) ===
-                  normalize(
-                    newWork
-                  );
-
-                const closed =
-                  normalize(
-                    vacancy.status
-                  ) === "fechada" ||
-                  normalize(
-                    vacancy.status
-                  ) === "closed" ||
-                  normalize(
-                    vacancy.status
-                  ) === "ocupada" ||
-                  vacancy.status === false;
-
-                return (
-                  sameCharacter &&
-                  sameWork &&
-                  closed
-                );
-
-              }
-            );
-
-
-          if (alreadyOccupied) {
-
-            showMessage(
-              message,
-              "error",
-              "O novo personagem escolhido já está ocupado."
-            );
-
-            return;
-
-          }
-
-
-          try {
-
-            button.disabled =
-              true;
-
-            button.textContent =
-              "Enviando...";
-
-
-            const photo =
-              await compressImage(
-                file
-              );
-
-
-            await addDoc(
-              collection(
-                db,
-                "requests"
-              ),
-              {
-
-                type:
-                  "troca",
-
-                name:
-                  name || "Não informado",
-
-                phoneLast4:
-                  phoneLast4,
-
-                oldCharacter:
-                  oldCharacter,
-
-                oldWork:
-                  oldWork,
-
-                newCharacter:
-                  newCharacter,
-
-                newWork:
-                  newWork,
-
-                photo:
-                  photo,
-
-                status:
-                  "pendente",
-
-                createdAt:
-                  serverTimestamp()
-
-              }
-            );
-
-
-            showMessage(
-              message,
-              "success",
-              "Sua solicitação de troca foi enviada para a administração."
-            );
-
-
-            event.target.reset();
-
-
-            document.getElementById(
-              "newPhotoPreview"
-            ).style.display =
-              "none";
-
-
-          } catch (error) {
-
-            console.error(
-              error
-            );
-
-
-            showMessage(
-              message,
-              "error",
-              "Não foi possível enviar a troca. Verifique o Firebase e tente novamente."
-            );
-
-          } finally {
-
-            button.disabled =
-              false;
-
-            button.textContent =
-              "Solicitar troca";
-
-          }
-
-        }
-      );
-
-
-    /* =====================================================
-       ANO
-    ====================================================== */
-
-    document.getElementById(
-      "currentYear"
-    ).textContent =
-      new Date().getFullYear();
-
-
-    /* =====================================================
-       CARREGAR TUDO
-    ====================================================== */
-
-    loadVacancies();
-
   </script>
-
-
-  <!-- =====================================================
-       RESPONSIVIDADE EXTRA DO INDEX
-  ====================================================== -->
-
-  <style>
-
-    @media (max-width: 768px) {
-
-      header nav {
-        display: none !important;
-      }
-
-      header > div {
-        justify-content: center !important;
-      }
-
-      main > section > div {
-        grid-template-columns: 1fr !important;
-      }
-
-      #ficha form > div,
-      #troca form > div {
-        grid-template-columns: 1fr !important;
-      }
-
-      .button-group {
-        flex-direction: column;
-      }
-
-      .button-group .button {
-        width: 100%;
-      }
-
-    }
-
-  </style>
 
 </body>
   </html>
