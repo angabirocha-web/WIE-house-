@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07172e">
+  <title>Administração • House Zoldyck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-wrap{width:min(1100px,calc(100% - 28px));margin:35px auto 60px;position:relative;z-index:2}
+    .login-card,.panel-card{background:linear-gradient(145deg,rgba(13,39,69,.96),rgba(5,19,37,.97));border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow);padding:25px}
+    .login-card{width:min(420px,100%);margin:8vh auto;text-align:center}
+    .login-symbol{font-size:38px;color:var(--blue-bright);margin-bottom:12px}
+    .login-card h1,.admin-title{font-family:"Playfair Display",serif}
+    .login-card p{color:var(--muted);font-size:12px;line-height:1.6;margin:8px 0 20px}
+    .login-card input{width:100%;padding:13px;border-radius:11px;background:#06172b;border:1px solid var(--border);color:white;outline:none;margin-bottom:12px}
+    .admin-btn{width:100%;padding:13px;border:0;border-radius:11px;background:linear-gradient(110deg,#287db8,#14517f);color:white;font-weight:800;cursor:pointer}
+    .login-error{color:var(--danger);font-size:12px;min-height:18px;margin-top:10px}
+    .admin-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}
+    .admin-head p{color:var(--muted);font-size:12px;margin-top:5px}
+    .logout{padding:9px 13px;border-radius:10px;background:transparent;border:1px solid var(--border);color:var(--ice);cursor:pointer}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+    .tab{padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,.035);color:var(--muted);cursor:pointer;font-weight:700;font-size:12px}
+    .tab.active{background:rgba(105,185,244,.15);color:var(--ice);border-color:rgba(105,185,244,.4)}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+    .stat{padding:17px;border:1px solid var(--border);border-radius:14px;background:rgba(105,185,244,.055)}
+    .stat small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+    .stat strong{display:block;color:var(--blue-bright);font-size:27px;margin-top:6px}
+    .section-title{font-size:18px;margin-bottom:14px}
+    .request-card,.data-card{padding:16px;border:1px solid var(--border);border-radius:14px;background:rgba(2,13,27,.35);margin-bottom:11px}
+    .request-card h3,.data-card h3{font-size:15px;margin-bottom:8px;color:var(--ice)}
+    .details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+    .details p,.data-card p{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+    .details b{color:#d7edfc}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+    .action{padding:8px 12px;border-radius:9px;border:1px solid var(--border);background:rgba(105,185,244,.1);color:var(--ice);font-weight:700;font-size:11px;cursor:pointer}
+    .action.reject{background:rgba(240,90,115,.08);color:#ffc0ca;border-color:rgba(240,90,115,.25)}
+    .empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:13px;font-size:12px}
+    .hidden{display:none!important}
+    .admin-status{font-size:12px;color:var(--muted);margin:10px 0}
+    @media(max-width:620px){.stats{grid-template-columns:1fr}.admin-head{align-items:flex-start}.details{grid-template-columns:1fr}.login-card,.panel-card{padding:19px}}
+  </style>
+</head>
+<body>
+  <div class="snow-layer" id="snowLayer" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-symbol">❄</span><span><strong>HOUSE ZOLDYCK</strong><small>PAINEL ADMINISTRATIVO</small></span></a>
+    <a class="admin-link" href="index.html">Voltar à recepção ↗</a>
+  </header>
+
+  <main class="admin-wrap">
+    <section class="login-card" id="loginScreen">
+      <div class="login-symbol">❄</div>
+      <h1>Área administrativa</h1>
+      <p>Digite a senha de acesso para gerenciar as fichas da House Zoldyck.</p>
+      <form id="loginForm">
+        <input id="password" type="password" placeholder="Senha de acesso" autocomplete="current-password" required>
+        <button class="admin-btn" type="submit">Entrar</button>
+      </form>
+      <div class="login-error" id="loginError" role="alert"></div>
+    </section>
+
+    <section id="adminPanel" class="hidden">
+      <div class="admin-head">
+        <div><h1 class="admin-title">Painel da recepção</h1><p>Gerencie as solicitações e os membros.</p></div>
+        <button class="logout" id="logoutBtn">Sair</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><small>Fichas pendentes</small><strong id="pendingCount">—</strong></div>
+        <div class="stat"><small>Vagas cadastradas</small><strong id="vacancyCount">—</strong></div>
+        <div class="stat"><small>Membros</small><strong id="memberCount">—</strong></div>
+      </div>
+      <nav class="tabs">
+        <button class="tab active" data-view="requestsView">Solicitações</button>
+        <button class="tab" data-view="vacanciesView">Vagas</button>
+        <button class="tab" data-view="membersView">Membros</button>
+      </nav>
+      <div class="panel-card">
+        <section id="requestsView"><h2 class="section-title">Solicitações recebidas</h2><div id="requestsList" class="admin-status">Carregando...</div></section>
+        <section id="vacanciesView" class="hidden"><h2 class="section-title">Personagens / vagas</h2><div id="vacanciesList" class="admin-status">Carregando...</div></section>
+        <section id="membersView" class="hidden"><h2 class="section-title">Membros aprovados</h2><div id="membersList" class="admin-status">Carregando...</div></section>
+      </div>
+      <p class="admin-status" id="panelStatus" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import {
+      getFirestore, collection, getDocs, doc, updateDoc, addDoc, deleteDoc, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    // Senha única solicitada pela responsável. Como está no navegador, não é autenticação segura.
+    const ADMIN_PASSWORD = "M4kin07";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
+      authDomain: "house-wie-6c8f9.firebaseapp.com",
+      projectId: "house-wie-6c8f9",
+      storageBucket: "house-wie-6c8f9.firebasestorage.app",
+      messagingSenderId: "241202380170",
+      appId: "1:241202380170:web:b7df00f3faa8ae7afedc73"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const loginScreen = document.getElementById("loginScreen");
+    const adminPanel = document.getElementById("adminPanel");
+    const loginForm = document.getElementById("loginForm");
+    const loginError = document.getElementById("loginError");
+    const panelStatus = document.getElementById("panelStatus");
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (document.getElementById("password").value === ADMIN_PASSWORD) {
+        loginScreen.classList.add("hidden");
+        adminPanel.classList.remove("hidden");
+        await refreshAll();
+      } else {
+        loginError.textContent = "Senha incorreta. Tente novamente.";
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      adminPanel.classList.add("hidden");
+      loginScreen.classList.remove("hidden");
+      document.getElementById("password").value = "";
+      loginError.textContent = "";
+    });
+
+    document.querySelectorAll(".tab").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+        button.classList.add("active");
+        ["requestsView","vacanciesView","membersView"].forEach(id =>
+          document.getElementById(id).classList.toggle("hidden", id !== button.dataset.view)
+        );
+      });
+    });
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[char]));
+    }
+
+    async function refreshAll() {
+      panelStatus.textContent = "Atualizando informações...";
+      try {
+        const [requestSnap, vacancySnap, memberSnap] = await Promise.all([
+          getDocs(collection(db, "requests")),
+          getDocs(collection(db, "vacancies")),
+          getDocs(collection(db, "members"))
+        ]);
+        const requests = requestSnap.docs.map(d => ({id:d.id,...d.data()}));
+        const vacancies = vacancySnap.docs.map(d => ({id:d.id,...d.data()}));
+        const members = memberSnap.docs.map(d => ({id:d.id,...d.data()}));
+
+        const pending = requests.filter(item => item.status === "pendente");
+        document.getElementById("pendingCount").textContent = pending.length;
+        document.getElementById("vacancyCount").textContent = vacancies.length;
+        document.getElementById("memberCount").textContent = members.length;
+
+        renderRequests(pending);
+        renderVacancies(vacancies);
+        renderMembers(members);
+        panelStatus.textContent = "Dados atualizados.";
+      } catch (error) {
+        console.error(error);
+        panelStatus.textContent = "Erro ao carregar. Verifique as regras e a conexão do Firebase.";
+      }
+    }
+
+    function renderRequests(items) {
+      const root = document.getElementById("requestsList");
+      if (!items.length) { root.innerHTML = '<div class="empty">Nenhuma ficha pendente no momento. ❄</div>'; return; }
+      root.innerHTML = items.map(item => `
+        <article class="request-card">
+          <h3>${escapeHTML(item.name)} — ${escapeHTML(item.character)}</h3>
+          <div class="details">
+            <p><b>Idade:</b> ${escapeHTML(item.age)}</p>
+            <p><b>Pronomes:</b> ${escapeHTML(item.pronouns)}</p>
+            <p><b>Gênero:</b> ${escapeHTML(item.gender)}</p>
+            <p><b>Sexualidade:</b> ${escapeHTML(item.sexuality)}</p>
+            <p><b>Estado civil:</b> ${escapeHTML(item.civilStatus)}</p>
+            <p><b>Obra:</b> ${escapeHTML(item.work)}</p>
+          </div>
+          <div class="actions">
+            <button class="action" data-action="approve" data-id="${item.id}">Aprovar</button>
+            <button class="action reject" data-action="reject" data-id="${item.id}">Recusar</button>
+          </div>
+        </article>`).join("");
+      root.querySelectorAll("button[data-action]").forEach(button => {
+        button.addEventListener("click", () => handleRequest(button.dataset.id, button.dataset.action));
+      });
+    }
+
+    function renderVacancies(items) {
+      const root = document.getElementById("vacanciesList");
+      if (!items.length) { root.innerHTML = '<div class="empty">Nenhuma vaga cadastrada.</div>'; return; }
+      root.innerHTML = items.map(item => `
+        <article class="data-card">
+          <h3>${escapeHTML(item.character)}</h3>
+          <p>Obra: ${escapeHTML(item.work)}</p>
+          <p>Status: ${escapeHTML(item.status || "não definido")}</p>
+          <div class="actions"><button class="action reject" data-delete-vacancy="${item.id}">Excluir registro</button></div>
+        </article>`).join("");
+      root.querySelectorAll("[data-delete-vacancy]").forEach(button => {
+        button.addEventListener("click", async () => {
+          if (!confirm("Excluir este registro de vaga?")) return;
+          try { await deleteDoc(doc(db,"vacancies",button.dataset.deleteVacancy)); await refreshAll(); }
+          catch(e) { console.error(e); panelStatus.textContent = "Não foi possível excluir a vaga."; }
+        });
+      });
+    }
+
+    function renderMembers(items) {
+      const root = document.getElementById("membersList");
+      if (!items.length) { root.innerHTML = '<div class="empty">Nenhum membro cadastrado ainda.</div>'; return; }
+      root.innerHTML = items.map(item => `
+        <article class="data-card">
+          <h3>${escapeHTML(item.name)}</h3>
+          <p>Personagem: ${escapeHTML(item.character)}</p>
+          <p>Obra: ${escapeHTML(item.work)}</p>
+        </article>`).join("");
+    }
+
+    async function handleRequest(id, action) {
+      const item = window.__requestCache?.[id];
+      try {
+        const requestSnap = await getDocs(collection(db, "requests"));
+        const requestDoc = requestSnap.docs.find(d => d.id === id);
+        if (!requestDoc) throw new Error("Ficha não encontrada.");
+        const data = requestDoc.data();
+
+        if (action === "approve") {
+          await addDoc(collection(db, "vacancies"), {
+            character: data.character, work: data.work, status: "fechada",
+            createdAt: serverTimestamp()
+          });
+          await addDoc(collection(db, "members"), {
+            name: data.name, age: data.age, pronouns: data.pronouns,
+            gender: data.gender, sexuality: data.sexuality, civilStatus: data.civilStatus,
+            character: data.character, work: data.work, createdAt: serverTimestamp()
+          });
+          await updateDoc(doc(db, "requests", id), {
+            status: "aprovado", approvedAt: serverTimestamp()
+          });
+          panelStatus.textContent = "Ficha aprovada e membro cadastrado.";
+        } else {
+          await updateDoc(doc(db, "requests", id), {
+            status: "recusado", rejectedAt: serverTimestamp()
+          });
+          panelStatus.textContent = "Ficha recusada.";
+        }
+        await refreshAll();
+      } catch (error) {
+        console.error(error);
+        panelStatus.textContent = "Não foi possível concluir a ação. Verifique as regras do Firebase.";
+      }
+    }
+
+    // Neve contínua e econômica.
+    const snowLayer = document.getElementById("snowLayer");
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const count = window.innerWidth < 600 ? 20 : 36;
+      for (let i=0;i<count;i++) {
+        const flake=document.createElement("i");
+        flake.className="snowflake";
+        flake.textContent=Math.random()>.5?"❄":"•";
+        flake.style.left=Math.random()*100+"%";
+        flake.style.animationDuration=(9+Math.random()*13)+"s";
+        flake.style.animationDelay=(-Math.random()*18)+"s";
+        flake.style.fontSize=(5+Math.random()*11)+"px";
+        snowLayer.appendChild(flake);
+      }
+    }
+  </script>
+</body>
+</html>

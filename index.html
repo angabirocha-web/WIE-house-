@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07172e">
+  <title>Recepção House Zoldyck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="snow-layer" id="snowLayer" aria-hidden="true"></div>
+
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+      <div class="snowflake-mark">❄</div>
+      <p class="loading-kicker">BEM-VINDO À</p>
+      <h1>HOUSE ZOLDYCK</h1>
+      <p class="loading-caption">Preparando sua recepção...</p>
+      <div class="loading-track"><span></span></div>
+      <p class="loading-small">Um novo começo começa aqui</p>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Recepção House Zoldyck">
+      <span class="brand-symbol">❄</span>
+      <span><strong>HOUSE ZOLDYCK</strong><small>RECEPÇÃO OFICIAL</small></span>
+    </a>
+    <a class="admin-link" href="admin.html">Administração <span>↗</span></a>
+  </header>
+
+  <main class="main-wrap">
+    <section class="hero">
+      <span class="eyebrow">✦ SEJA BEM-VINDO(A) ✦</span>
+      <h1>Recepção <span>House Zoldyck</span></h1>
+      <p>Preencha sua ficha para solicitar sua entrada. A administração irá analisar suas informações e retornar assim que possível.</p>
+    </section>
+
+    <section class="form-card">
+      <div class="form-heading">
+        <div class="heading-icon">❄</div>
+        <div>
+          <h2>Ficha de entrada</h2>
+          <p>Preencha os campos abaixo com atenção.</p>
+        </div>
+      </div>
+
+      <form id="entryForm">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Nome</label>
+            <input id="name" name="name" type="text" maxlength="60" placeholder="Como podemos chamar você?" required>
+          </div>
+          <div class="field">
+            <label for="age">Idade</label>
+            <input id="age" name="age" type="number" min="1" max="120" placeholder="Sua idade" required>
+          </div>
+          <div class="field">
+            <label for="pronouns">Pronomes</label>
+            <input id="pronouns" name="pronouns" type="text" maxlength="40" placeholder="Ex.: ela/dela" required>
+          </div>
+          <div class="field">
+            <label for="gender">Gênero</label>
+            <input id="gender" name="gender" type="text" maxlength="60" placeholder="Informe seu gênero" required>
+          </div>
+          <div class="field">
+            <label for="sexuality">Sexualidade</label>
+            <input id="sexuality" name="sexuality" type="text" maxlength="60" placeholder="Informe sua sexualidade" required>
+          </div>
+          <div class="field">
+            <label for="civilStatus">Estado civil</label>
+            <select id="civilStatus" name="civilStatus" required>
+              <option value="">Selecione...</option>
+              <option>Solteiro(a)</option>
+              <option>Namorando</option>
+              <option>Casado(a)</option>
+              <option>Noivo(a)</option>
+              <option>Complicado</option>
+              <option>Prefiro não informar</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="character">Personagem</label>
+            <input id="character" name="character" type="text" maxlength="80" placeholder="Nome do personagem" required>
+          </div>
+          <div class="field">
+            <label for="work">Obra</label>
+            <input id="work" name="work" type="text" maxlength="100" placeholder="Anime, série, jogo, livro..." required>
+          </div>
+        </div>
+
+        <div class="notice">
+          <span class="notice-icon">ⓘ</span>
+          <p>Ao enviar sua ficha, você confirma que as informações estão corretas. O personagem só será considerado ocupado após a aprovação da administração.</p>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" type="submit">
+          <span>Enviar ficha</span><span aria-hidden="true">→</span>
+        </button>
+        <div class="status-message" id="statusMessage" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+    <footer class="footer">RECEPÇÃO HOUSE ZOLDYCK <span>✦</span> SISTEMA DE ENTRADA</footer>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    // Projeto Firebase reaproveitado da antiga House WIE.
+    // Confirme com a responsável se este projeto deve ser mantido antes de publicar.
+    const firebaseConfig = {
+      apiKey: "AIzaSyD08FRkhJVvqvSr3FR4AuYfPL4Pr6vO0qk",
+      authDomain: "house-wie-6c8f9.firebaseapp.com",
+      projectId: "house-wie-6c8f9",
+      storageBucket: "house-wie-6c8f9.firebasestorage.app",
+      messagingSenderId: "241202380170",
+      appId: "1:241202380170:web:b7df00f3faa8ae7afedc73"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("entryForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("statusMessage");
+
+    function showStatus(message, type) {
+      statusBox.textContent = message;
+      statusBox.className = "status-message show " + type;
+    }
+
+    function normalize(value) {
+      return value.trim().replace(/\s+/g, " ");
+    }
+
+    async function characterIsOccupied(character, work) {
+      const q = query(
+        collection(db, "vacancies"),
+        where("character", "==", character),
+        where("work", "==", work),
+        where("status", "==", "fechada")
+      );
+      const snap = await getDocs(q);
+      return !snap.empty;
+    }
+
+    async function hasPendingRequest(character, work) {
+      const q = query(
+        collection(db, "requests"),
+        where("character", "==", character),
+        where("work", "==", work),
+        where("status", "==", "pendente")
+      );
+      const snap = await getDocs(q);
+      return !snap.empty;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      statusBox.className = "status-message";
+
+      const data = {
+        name: normalize(document.getElementById("name").value),
+        age: Number(document.getElementById("age").value),
+        pronouns: normalize(document.getElementById("pronouns").value),
+        gender: normalize(document.getElementById("gender").value),
+        sexuality: normalize(document.getElementById("sexuality").value),
+        civilStatus: document.getElementById("civilStatus").value,
+        character: normalize(document.getElementById("character").value),
+        work: normalize(document.getElementById("work").value)
+      };
+
+      if (!Number.isInteger(data.age) || data.age < 1 || data.age > 120) {
+        showStatus("Digite uma idade válida.", "error");
+        return;
+      }
+
+      if (Object.values(data).some(value => value === "" || value === null)) {
+        showStatus("Preencha todos os campos da ficha.", "error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="button-spinner"></span> Enviando...';
+
+      try {
+        if (await characterIsOccupied(data.character, data.work)) {
+          showStatus("Esse personagem já está ocupado na House Zoldyck.", "error");
+          return;
+        }
+
+        if (await hasPendingRequest(data.character, data.work)) {
+          showStatus("Já existe uma ficha pendente para esse personagem e obra.", "error");
+          return;
+        }
+
+        await addDoc(collection(db, "requests"), {
+          ...data,
+          type: "ficha",
+          status: "pendente",
+          createdAt: serverTimestamp()
+        });
+
+        form.reset();
+        showStatus("Ficha enviada com sucesso! Aguarde a análise da administração. ❄", "success");
+      } catch (error) {
+        console.error(error);
+        showStatus("Não foi possível enviar sua ficha. Verifique a conexão e as regras do Firebase e tente novamente.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "<span>Enviar ficha</span><span aria-hidden=\"true\">→</span>";
+      }
+    });
+
+    // Neve: partículas leves, criadas por código e sem arquivos de vídeo.
+    const snowLayer = document.getElementById("snowLayer");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reducedMotion) {
+      const count = window.innerWidth < 600 ? 24 : 42;
+      for (let i = 0; i < count; i++) {
+        const flake = document.createElement("i");
+        flake.className = "snowflake";
+        flake.textContent = Math.random() > 0.5 ? "❄" : "•";
+        flake.style.left = Math.random() * 100 + "%";
+        flake.style.animationDuration = (8 + Math.random() * 13) + "s";
+        flake.style.animationDelay = (-Math.random() * 18) + "s";
+        flake.style.fontSize = (5 + Math.random() * 12) + "px";
+        flake.style.opacity = (0.25 + Math.random() * 0.65).toFixed(2);
+        snowLayer.appendChild(flake);
+      }
+    }
+
+    // A tela de carregamento fecha mesmo se a conexão estiver lenta.
+    window.addEventListener("load", () => {
+      setTimeout(() => document.getElementById("loadingScreen").classList.add("is-hidden"), 2300);
+    });
+    setTimeout(() => document.getElementById("loadingScreen").classList.add("is-hidden"), 5000);
+  </script>
+</body>
+</html>
